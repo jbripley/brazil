@@ -3,6 +3,7 @@ class AppsController < ApplicationController
   
   # GET /apps
   # GET /apps.xml
+  # GET /apps.atom
   def index
     @apps = App.find(:all)
     @app = App.new
@@ -10,6 +11,7 @@ class AppsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @apps }
+      format.atom # index.atom.builder
     end
   end
 
