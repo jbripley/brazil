@@ -1,0 +1,21 @@
+.box.change {
+  background:#F4F4F4;
+  border: 2px solid #888;
+}
+
+.box.change.suggested h4 {
+  border: 3px solid #AB3E1D;
+  background:#D14D25;
+  color:#FFF;
+}
+
+.box.change.saved h4 {
+  border: 3px solid #AD8C3E;
+  background:#FFCE5B;
+}
+
+.box.change.executed h4 {
+  border: 3px solid #6D924B;
+  background:#86B35C;
+  color:#FFF;
+}

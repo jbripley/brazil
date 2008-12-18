@@ -1,0 +1,13 @@
+<fieldset id="edit_activity_fieldset" class="span-10">
+  <legend>Editing <%= activity %></legend>
+  <% form_for(activity, :url => app_activity_path(activity.app, activity)) do |f| %>
+    <%= render :partial => "form", :locals => {:f => f, :activity => activity} %>
+    <p>
+      <%= f.submit "Save" %>
+      <%= f.submit "Cancel", :id => 'activity_edit_cancel_button' %>
+    </p>
+  <% end %>
+  <div class="info">
+    <span class="state"><strong>State</strong> <%=h activity.state %></span>
+  </div>
+</fieldset>

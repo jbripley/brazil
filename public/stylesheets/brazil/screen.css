@@ -1,0 +1,163 @@
+body {
+  font-family: "Myriad Pro", "Lucida Grande", Helvetica, Tahoma, Arial, Sans-serif;
+}
+
+.box {
+  position:relative;
+}
+
+a:hover {
+  text-decoration:underline;
+  color:#000;
+  background:none;
+}
+
+.container {
+  width: 910px;
+}
+
+#top-navigation ul {
+  list-style:none;
+  padding:0 0 10px 0;
+  margin:0;
+}
+
+#top-navigation ul li {
+  display:inline;
+}
+
+#top-navigation ul li a {
+  padding:4px 12px;
+  border:1px solid #ccc;
+  text-decoration:none;
+  -moz-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#top-navigation ul li a:hover {
+  background-color:#fcfcfc;
+  text-decoration:none;
+}
+
+#breadcrumbs {
+  padding:0 0 10px 0;
+}
+
+.people {
+  color:#888;
+}
+
+.people span {
+  display: block;
+}
+
+.info {
+  color:#333;
+}
+
+.info span {
+  display:block;
+}
+
+.actions {
+  list-style:none;
+  margin:0;
+  padding:5px;
+  text-align:right;
+}
+
+.actions li {
+  float:right;
+}
+
+.actions li.destroy {
+  float:left;
+}
+
+.actions li.destroy a {
+  background:#FBE3E4;
+  color:#8a1f11;
+  border-color:#FBC2C4;
+}
+
+.actions li a {
+  display:block;
+  padding:2px 18px;
+  border:1px solid #C6D880;
+  background:#E6EFC2;color:#264409;
+  margin:0 5px;
+  -moz-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  text-decoration:none;
+}
+
+textarea {
+  height: 150px;
+}
+
+td {
+  vertical-align: top;
+}
+
+.box h4 {
+  position:absolute;
+  top:-8px;
+  right:-4px;
+  padding:8px;
+
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+
+  font-size: 100%;
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.496094) 2px 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.496094) 2px 2px 2px;
+}
+
+#brazil-release {
+  float: right;
+}
+
+.box hr {
+  background-color: #888;
+}
+
+.box.activity {
+  border: 2px solid #BCC2CC;
+}
+
+.box.activity.development h4 {
+  border: 3px solid #AB3E1D;
+  background:#D14D25;
+  color:#FFF;
+}
+
+.box.activity.versioned h4 {
+  border: 3px solid #AD8C3E;
+  background:#FFCE5B;
+}
+
+.box.activity.deployed h4 {
+  border: 3px solid #6D924B;
+  background:#86B35C;
+  color: #FFF;
+}
+
+.head {
+  margin-bottom: 0.4em;
+}
+
+.head h3 {
+  display: inline;
+  margin-right: 0.4em;
+}
+
+.head a {
+  font-size: 1.1em;
+}

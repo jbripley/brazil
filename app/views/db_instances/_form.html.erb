@@ -1,0 +1,22 @@
+<%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+<p>
+  <%= f.label :db_alias, 'Alias' %><br />
+  <%= f.text_field :db_alias %>
+</p>
+<p>
+  <%= f.label :host %><br />
+  <%= f.text_field :host %>
+</p>
+<p>
+  <%= f.label :port %><br />
+  <%= f.text_field :port %>
+</p>
+<p>
+  <%= f.label :db_env, 'Environment' %><br />
+  <%= f.select :db_env, db_environments %>
+</p>
+
+<p>
+  <%= f.label :db_type, 'Type' %><br />
+  <%= f.select :db_type, db_types %>
+</p>

@@ -1,0 +1,5 @@
+<tr class="<%= "activity #{activity.state}" %> <%= cycle 'odd', 'even', :name => 'activity_cycle' %>">
+  <td><%= activity_link_to activity %></td>
+  <td><%=h activity.description %></td>
+  <td><%=h activity.state %> <%= activity_actionable_count(activity) %></td>
+</tr>

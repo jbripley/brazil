@@ -1,0 +1,4 @@
+<%= stylesheet_link_tag "syntaxhighlighter", :media => "screen, projection" %>
+<%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
+
+<%= render :partial => 'change', :locals => {:change => @change} %>

@@ -1,0 +1,103 @@
+# App 1
+app-1-dev:
+    id: 1
+    name: "Activity 1 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 1
+
+app-1-versioned:
+    id: 2
+    name: "Activity 2 Versioned"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'versioned'
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-12 00:00:00'
+    app_id: 1
+
+app-1-deployed:
+    id: 3
+    name: "Activity 3 Deployed"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'deployed'
+    created_at: '2008-12-01 00:00:00'
+    updated_at: '2008-12-03 00:00:00'
+    app_id: 1
+    
+app-1-dev-2:
+    id: 7
+    name: "Actvity 7 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 1
+
+app-1-dev-3:
+    id: 8
+    name: "Activity 8 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 1
+
+# App 2
+app-2-dev:
+    id: 4
+    name: "Activity 4 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 2
+
+app-2-versioned:
+    id: 5
+    name: "Activity 5 Versioned"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'versioned'
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-12 00:00:00'
+    app_id: 2
+
+app-2-deployed:
+    id: 6
+    name: "Activity 6 Deployed"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'deployed'
+    created_at: '2008-12-01 00:00:00'
+    updated_at: '2008-12-03 00:00:00'
+    app_id: 2
+
+app-2-dev-2:
+    id: 9
+    name: "Activity 9 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 2
+
+# App 3
+app-3-dev:
+    id: 10
+    name: "Activity 10 Development"
+    description: "Test case for brazil"
+    schema: 'brazil_test'
+    state: 'development'
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-10 00:00:00'
+    app_id: 3
+

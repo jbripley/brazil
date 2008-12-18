@@ -1,0 +1,89 @@
+change-1-activity-1:
+    id: 1
+    sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL,\nstupid_name VARCHAR(24) NOT NULL default ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 1
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-09 00:00:00'
+
+change-2-activity-1:
+    id: 2
+    state: saved
+    sql: "ALTER TABLE already_existing_table DROP COLUMN name;\nALTER TABLE new_weird_table ADD COLUMN some_type CHAR(2) NOT NULL DEFAULT '', ADD PRIMARY KEY (weird_id);"
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 1
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-11 00:00:00'
+
+change-3-activity-1:
+    id: 3
+    sql: "ALTER TABLE already_existing_table DROP COLUMN name;\nALTER TABLE new_weird_table ADD COLUMN some_type CHAR(2) NOT NULL DEFAULT '', ADD PRIMARY KEY (weird_id);"
+    state: suggested
+    developer: "developer1@example.com"
+    activity_id: 1
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-11 00:00:00'
+
+change-5-activity-2:
+    id: 5
+    sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL,\nstupid_name VARCHAR(24) NOT NULL default ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 2
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-09 00:00:00'
+
+change-6-activity-2:
+    id: 6
+    sql: "ALTER TABLE already_existing_table DROP COLUMN name;\nALTER TABLE new_weird_table ADD COLUMN some_type CHAR(2) NOT NULL DEFAULT '', ADD PRIMARY KEY (weird_id);"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 2
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-11 00:00:00'
+
+change-7-activity-3:
+    id: 7
+    sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL,\nstupid_name VARCHAR(24) NOT NULL default ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 3
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-09 00:00:00'
+
+change-8-activity-3:
+    id: 8
+    sql: "ALTER TABLE already_existing_table DROP COLUMN name;\nALTER TABLE new_weird_table ADD COLUMN some_type CHAR(2) NOT NULL DEFAULT '', ADD PRIMARY KEY (weird_id);"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 3
+    created_at: '2008-11-11 00:00:00'
+    updated_at: '2008-11-11 00:00:00'
+
+change-9-activity-7:
+    id: 9
+    sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL,\nstupid_name VARCHAR(24) NOT NULL default ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 7
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-09 00:00:00'
+
+change-10-activity-8:
+    id: 10
+    sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL,\nstupid_name VARCHAR(24) NOT NULL default ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    state: executed
+    dba: "dba1@example.com"
+    developer: "developer1@example.com"
+    activity_id: 8
+    created_at: '2008-11-09 00:00:00'
+    updated_at: '2008-11-09 00:00:00'
+

@@ -1,0 +1,48 @@
+<div class="box version <%= version.state %>">
+  <h3><%= link_to version, app_activity_version_path(version.activity.app, version.activity, version) %></h3>
+  <h4>Version</h4>
+  <span>Last changed <%=h time_ago_in_words(version.updated_at) %> ago</span>
+  
+  <hr />
+  
+  <div class="info clearfix">
+    <div class="span-10">
+      <div class="span-5">
+      	<span><strong>State</strong> <%=h version.state %></span>
+      	<span><strong>Schema</strong> <%=h version.schema %></span>
+      </div>
+      <div class="span-5 last">
+        <% for db_instance in version.db_instances %>
+      	  <span class="db"><strong><%= db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
+      	<% end %>
+      </div>
+    </div>
+    <% if version.deploy_note %>
+    <hr />
+    <div class="span-10">
+    	<span><strong>Deploy Note</strong> <%=h version.deploy_note %></span>
+    </div>
+    <% end %>
+  </div>
+  
+  <% if version_created(version) %>
+  <hr />
+  <ul class="actions clearfix">
+  	  <li><%= link_to 'Edit', edit_app_activity_version_path(version.activity.app, version.activity, version) %></li>
+  </ul>
+  <% end %>
+  
+  <% if version_tested(version) %>
+  <hr />
+	<fieldset>
+    <legend>Mark as deployed</legend>
+    <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version), :method => :put) do |f| %>
+    <p>
+	    <%= f.label :deploy_note, 'Deploy Note' %><br />
+	    <%= f.text_area :deploy_note, :class => 'span-9' %>
+	  </p>
+	    <%= f.submit 'Deployed' %>
+	  <% end %>
+	</fieldset>
+	<% end %>
+</div>

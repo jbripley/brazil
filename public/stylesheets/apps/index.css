@@ -1,0 +1,9 @@
+@import url('/stylesheets/activities/index.css');
+
+table {
+  border-bottom: 1px solid #C3D9FF;
+}
+
+#view-all-activites > td {
+  text-align:center;
+}

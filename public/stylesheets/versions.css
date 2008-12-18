@@ -1,0 +1,41 @@
+.box.version {
+  border:2px solid #ddd;
+  background:#EAF2E4;
+  border-color:#989E94;
+}
+
+/*.box.created {
+  background:#EAF2E4;
+  border-color:#989E94;
+}
+
+.box.tested {
+  background:#8EA696;
+  border-color:#465052;
+}
+
+.box.deployed {
+  background:#D6BA87;
+  border-color:#827151;
+}*/
+
+.box.version.created h4 {
+  border: 3px solid #AB3E1D;
+  background:#D14D25;
+  color:#FFF;
+}
+
+.box.version.tested h4 {
+  border: 3px solid #AD8C3E;
+  background:#FFCE5B;
+}
+
+.box.version.deployed h4 {
+  border: 3px solid #6D924B;
+  background:#86B35C;
+  color:#FFF;
+}
+
+textarea.sql {
+  height: 20em;
+}

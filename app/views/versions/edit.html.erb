@@ -1,0 +1,9 @@
+<fieldset>
+	<legend>Update version for <%=h @version.activity %></legend>
+	<% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
+	  <%= render :partial => 'form', :locals => {:f => f} %>
+    <p>
+      <%= f.submit "Update Version" %>
+    </p>
+	<% end %>
+</fieldset>

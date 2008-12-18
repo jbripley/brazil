@@ -1,0 +1,13 @@
+<div class="clearfix span-23">
+	<div class="span-12 border">
+		<div id="activity" class="box activity <%= @version.activity.state %>">
+			<%= render :partial => "activity", :locals => {:activity => @version.activity} %>	
+		</div>
+		<div id="versions">
+  		<%= render :partial => "version", :collection => @version_activities_actionable %>
+  	</div>
+  </div>
+  <div class="span-11 last">
+  	<%= render :partial => "version", :collection => @version_activities_archived %>
+  </div>
+</div>

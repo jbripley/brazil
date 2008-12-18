@@ -1,0 +1,9 @@
+<fieldset>
+  <legend>Update Database Instance <%=  %></legend>
+
+<% form_for(@db_instance) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <p>
+    <%= f.submit "Update Database Instance" %>
+  </p>
+<% end %>

@@ -1,0 +1,12 @@
+activity-1:
+    activity_id: 1
+    db_instance_id: 1
+
+activity-2:
+    activity_id: 2
+    db_instance_id: 1
+
+activity-3:
+    activity_id: 3
+    db_instance_id: 1
+

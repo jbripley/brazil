@@ -1,0 +1,11 @@
+tr.db_instance.dev {
+  color: #AB3E1D;
+}
+
+tr.db_instance.test {
+  color: #AD8C3E;
+}
+
+tr.db_instance.prod {
+  color: #6D924B;
+}

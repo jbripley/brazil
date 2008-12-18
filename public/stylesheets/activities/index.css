@@ -1,0 +1,11 @@
+tr.activity.development, tr.activity.development a {
+  color: #AB3E1D;
+}
+
+tr.activity.versioned, tr.activity.versioned a {
+  color: #AD8C3E;
+}
+
+tr.activity.deployed, tr.activity.deployed a {
+  color: #6D924B;
+}

@@ -1,0 +1,15 @@
+<%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+<p>
+  <%= f.label :sql, 'SQL' %><br />
+  <%= f.text_area :sql, :class => 'span-10' %>
+</p>
+<p>
+  <%= f.label :dba, 'DBA (email)' %><br />
+  <%= f.text_field :dba, :class => 'span-10' %>
+</p>
+<p>
+  <%= f.label :developer, 'Developer (email)' %><br />
+  <%= f.text_field :developer, :class => 'span-10' %>
+</p>
+<hr />
+<%= render :partial => 'shared/db_credentials_form' %>

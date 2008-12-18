@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag "db_instances/index", :media => "screen, projection" %>
+
+<table>
+  <tr>
+    <th>Alias</th>
+    <th>Host</th>
+    <th>Port</th>
+    <th>Environment</th>
+    <th>Type</th>
+  </tr>
+
+<% for db_instance in @db_instances %>
+  <tr class="db_instance <%= db_instance.db_env %> <%= cycle 'odd', 'even' %>">
+    <td><%=h db_instance.db_alias %></td>
+    <td><%=h db_instance.host %></td>
+    <td><%=h db_instance.port %></td>
+    <td><%=h db_instance.db_env %></td>
+    <td><%=h db_instance.db_type %></td>
+    <td><%= link_to 'Show', db_instance, :class => 'action' %></td>
+    <td><%= link_to 'Edit', edit_db_instance_path(db_instance), :class => 'action' %></td>
+    <td><%= link_to 'Destroy', db_instance, {:confirm => 'Are you sure?', :method => :delete, :class => 'action'} %></td>
+  </tr>
+<% end %>
+</table>
+
+<ul class="actions clearfix">	
+	<li><%= link_to 'New database instance', new_db_instance_path %></li>
+</ul>

@@ -1,0 +1,21 @@
+<div class="clearfix">
+  <div class="span-12 border">
+    <div class="head">
+      <h3><%=h @activity.app %></h3><%= link_to 'edit', edit_app_path(@activity.app), :id => 'app_edit_button' %>
+    </div
+    <table id="activity-list">
+      <tr>
+        <th>Activity</th>
+        <th>Activity Description</th>
+        <th>Activity State</th>
+      </tr>
+
+    <% for activity in @activities %>
+    <%= render :partial => 'shared/activity_index', :locals => {:activity => activity} %>
+    <% end %>
+    </table>
+  </div>
+  <div class="span-11 last">
+    <%= render :partial => 'new', :locals => {:activity => @activity} %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<fieldset id="new_activity_fieldset">
+  <legend>Create new Activity</legend>
+  <% form_for(activity, :url => app_activities_path(activity.app)) do |f| %>
+    <%= render :partial => "form", :locals => {:f => f, :activity => activity} %>
+    <p>
+      <%= f.submit "Create Activity" %>
+    </p>
+  <% end %>
+</fieldset>

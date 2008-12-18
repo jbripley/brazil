@@ -1,0 +1,13 @@
+<a name="change-<%= change.id %>"></a>
+<div class="box change <%= change.state %>">
+  <h3><%=h change.created_at.to_s(:long) %> (<%=h time_ago_in_words(change.created_at) %> ago)</h3>
+  <h4>Change</h4>
+  <textarea class="sql:nogutter" name="code"><%=h change.sql %></textarea>
+  <div class="people">
+    <span class="dba"><strong>DBA</strong> <%=h change.dba %></span>
+    <span class="developer"><strong>Developer</strong> <%=h change.developer %></span>
+  </div>       
+  <ul class="actions clearfix">
+    <li><%= change_action_link(change) %></li>
+  </ul>
+</div>

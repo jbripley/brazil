@@ -1,0 +1,23 @@
+<%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+<p>
+  <span><strong>App</strong> <%=h activity.app %></span>
+</p>
+<p>
+  <%= f.label :name, 'Activity (CR, Project, etc.)' %><br />
+  <%= f.text_field :name, :class => 'span-10' %>
+</p>
+<p>
+  <%= f.label :description %><br />
+  <%= f.text_area :description, :class => 'span-10' %>
+</p>
+<div class="span-10 last">
+  <div class="span-4">
+    <%= f.label "db_instance_ids", "Dev Database" %><br />
+    <%= f.collection_select :db_instance_ids, db_instances_of_environment('dev'), :id, :to_s, {:include_blank => '-- Select --'}, {:class => 'span-4'} %>
+  </div>
+  <div class="span-5 last">
+    <%= f.label :schema, 'Dev Database Schema' %><br />
+    <%= f.text_field :schema, :class => 'span-5' %>
+  </div>
+</div>
+<hr class="space" />

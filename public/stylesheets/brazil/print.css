@@ -1,0 +1,36 @@
+fieldset, #top-navigation, .actions, hr, .tools, a:link:after, a:visited:after, td a.action, #brazil-release {
+  display: none;
+}
+
+a {
+  color: #000;
+}
+
+.breadcrumbs {
+  margin-bottom:1em;
+}
+
+.box {
+  position:relative;
+  border-bottom: 1px solid #000;
+  margin-bottom:1.5em;
+}
+
+.box h4 {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:2px;
+  font-size: 100%;
+  border-bottom: 1px solid #000;
+}
+
+th {
+  font-weight: bold;
+  
+}
+th, td {
+  padding: 4px 10px 4px 5px;
+  text-align: left;
+  vertical-align: middle;
+}

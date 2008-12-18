@@ -1,0 +1,10 @@
+<fieldset id="edit_change_fieldset" class="span-10">
+	<legend>Edit database change for <%=h change.activity %></legend>
+	<% form_for(change, :url => app_activity_change_path(change.activity.app, change.activity)) do |f| %>
+    <%= render :partial => "changes/form", :locals => {:f => f} %>
+    <p>
+      <%= f.submit "Save & Execute", :disabled => !change.activity.development? %>
+      <%= f.submit "Only Save", :disabled => !change.activity.development?, :id => 'save_submit', :name => 'save_submit' %>
+    </p>
+	<% end %>
+</fieldset>

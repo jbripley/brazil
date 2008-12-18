@@ -1,0 +1,59 @@
+<%= stylesheet_link_tag "syntaxhighlighter", :media => "screen, projection" %>
+<%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
+
+<div class="clearfix span-23 last">
+  <div id="activity" class="box activity <%= @version.activity.state %> span-11">
+		<%= render :partial => "activity", :locals => {:activity => @version.activity} %>
+	</div>
+	<div class="span-11 last">
+    <%= render :partial => 'version', :locals => {:version => @version} %>
+  </div>
+</div>
+
+<div class="clearfix box span-22 last">
+  <h3>Update SQL</h3>
+  <textarea class="sql:nogutter" name="code"><%=h @versioned_update_sql %></textarea>
+  
+  <% if version_testable(@version) %>
+  <fieldset class="span-10">
+    <legend>Execute on <%= @version.db_instance_test %></legend>
+    <% form_for(@version, :url => tested_app_activity_version_path(@version.activity.app, @version.activity, @version), :method => :put) do |f| %>
+      <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+      <%= render :partial => 'shared/db_credentials_form' %>
+      <p>
+        <%= submit_tag 'Execute on ' + @version.db_instance_test.to_s %>
+      </p>
+    <% end %>
+  </fieldset>  <% end %>
+</div>
+
+<div class="box span-22 last">
+  <h3>Rollback SQL</h3>
+  <textarea class="sql:nogutter" name="code"><%=h @versioned_rollback_sql %></textarea>
+  
+  <% if version_rollbackable(@version) %>
+  <fieldset class="span-10">
+    <legend>Rollback on <%= @version.db_instance_test %></legend>
+    <% form_for(@version, :url => rollback_app_activity_version_path(@version.activity.app, @version.activity, @version), :method => :put) do |f| %>
+      <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+      <div class="clearfix">
+        <div class="span-5">
+          <p>
+            <%= label_tag 'db_username', 'Database Username' %><br />
+            <%= text_field_tag 'db_username' %>
+          </p>
+        </div>
+        <div class="span-5 last">
+          <p>
+            <%= label_tag 'db_password', 'Database Password' %><br />
+            <%= password_field_tag 'db_password' %>
+          </p>
+        </div>
+      </div>
+      <p>
+        <%= submit_tag 'Rollback from Test' %>
+      </p>
+    <% end %>
+  </fieldset>
+  <% end %>
+</div>

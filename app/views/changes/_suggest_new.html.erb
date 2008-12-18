@@ -1,0 +1,19 @@
+<fieldset id="suggest_change_fieldset" class="span-10">
+  <legend>Suggest change for <%=h change.activity %></legend>
+  <% form_for(change, :url => suggest_app_activity_changes_path(change.activity.app, change.activity), :html => {:id => 'suggest_change_form', :class => 'suggest_change'}) do |f| %>
+    <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+    <p>
+      <%= f.label :sql, 'SQL' %><br />
+      <%= f.text_area :sql, :class => 'span-10' %>
+    </p>
+    <p>
+      <%= f.label :developer, 'Developer (email)' %><br />
+      <%= f.text_field :developer, :class => 'span-10' %>
+    </p>
+    <hr />
+    <p>
+      <%= f.submit "Suggest", :id => 'suggest_change_submit_button', :disabled => !change.activity.development? %>
+      <%= f.submit "Cancel", :id => 'suggest_change_cancel_button' %>
+    </p>
+  <% end %>
+</fieldset>
