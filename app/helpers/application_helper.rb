@@ -31,6 +31,8 @@ module ApplicationHelper
   
   def atom_feed_tag
     case "#{controller.controller_name}-#{controller.action_name}"
+    when 'apps-index'
+      auto_discovery_link_tag :atom, formatted_apps_path(:id => params[:id], :format => 'atom'), {:title => "Apps"}    
     when 'activities-index'
       auto_discovery_link_tag :atom, formatted_app_activities_path(:app_id => params[:app_id], :format => 'atom'), {:title => "Activities"}
     when 'activities-show'
