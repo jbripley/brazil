@@ -1,5 +1,5 @@
 
-log
 tmp
- 
+log/*.log
+
 db/*.sqlite3
