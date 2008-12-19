@@ -14,6 +14,7 @@ atom_feed do |feed|
             tr.th 'Activity'
             tr.th 'Description'
             tr.th 'State'
+            tr.th 'Updated'
           end
           for activity in app.activities
             xhtml.tr do |tr|
@@ -24,6 +25,7 @@ atom_feed do |feed|
               end
               tr.td activity.description
               tr.td activity.state
+              tr.td activity.updated_at.to_s(:short)
             end
           end
         end
