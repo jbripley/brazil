@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :apps do |apps|
     apps.resources :activities do |activities|
       activities.resources :changes, :collection => {:suggest_new => :get, :suggest => :post}
-      activities.resources :versions, :member => {:tested => :put, :rollback => :put, :deployed => :put}
+      activities.resources :versions
     end
   end
   

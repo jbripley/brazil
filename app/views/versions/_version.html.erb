@@ -36,11 +36,12 @@
   <hr />
 	<fieldset>
     <legend>Mark as deployed</legend>
-    <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version), :method => :put) do |f| %>
-    <p>
-	    <%= f.label :deploy_note, 'Deploy Note' %><br />
-	    <%= f.text_area :deploy_note, :class => 'span-9' %>
-	  </p>
+    <% form_for(version, :url => app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
+      <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
+      <p>
+        <%= f.label :deploy_note, 'Deploy Note' %><br />
+        <%= f.text_area :deploy_note, :class => 'span-9' %>
+      </p>
 	    <%= f.submit 'Deployed' %>
 	  <% end %>
 	</fieldset>

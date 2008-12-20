@@ -1,3 +1,5 @@
+@import url('/stylesheets/syntaxhighlighter.css');
+
 .box.version {
   border:2px solid #ddd;
   background:#EAF2E4;
