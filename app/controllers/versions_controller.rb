@@ -118,7 +118,6 @@ class VersionsController < ApplicationController
 
     case "#{@version.state}-#{@version.state_was}"
     when "#{Version::STATE_CREATED}-#{Version::STATE_CREATED}" # update
-      logger.debug('update')
       begin
         @version.schema_version = find_schema_version(@version, params[:db_username], params[:db_password]).version.next
         flash[:notice] = 'Version was successfully updated.'
@@ -127,7 +126,6 @@ class VersionsController < ApplicationController
         @version.errors.add_to_base("Could not lookup '#{@version.schema}' schema version (#{exception.to_s})")
       end
     when "#{Version::STATE_TESTED}-#{Version::STATE_CREATED}" # tested
-      logger.debug('tested')
       begin
         @version.db_instance_test.execute_sql(create_update_sql(@version), params[:db_username], params[:db_password], @version.schema)
         flash[:notice] = "Executed Update SQL on #{@version.db_instance_test}"
@@ -137,7 +135,6 @@ class VersionsController < ApplicationController
       end
       error_action = 'show'
     when "#{Version::STATE_CREATED}-#{Version::STATE_TESTED}" # rollback
-      logger.debug('rollback')
       begin
         @version.db_instance_test.execute_sql(create_rollback_sql(@version), params[:db_username], params[:db_password], @version.schema)
         flash[:notice] = "Executed Rollback SQL on #{@version.db_instance_test}"
@@ -148,7 +145,6 @@ class VersionsController < ApplicationController
         @version.errors.add_to_base("Failed to execute Rollback SQL (#{exception.to_s})")
       end
     when "#{Version::STATE_DEPLOYED}-#{Version::STATE_TESTED}" # deployed
-      logger.debug('deployed')
       @version.state = Version::STATE_DEPLOYED
       unless @version.activity.state == Activity::STATE_DEPLOYED
         @version.activity.state = Activity::STATE_DEPLOYED
@@ -158,8 +154,7 @@ class VersionsController < ApplicationController
       flash[:notice] = "Version '#{@version}' is now set as deployed"
       version_redirect_path = app_activity_versions_path(@version.activity.app, @version.activity)
     else
-      logger.warn("Version update default case chosen, version: #{@version}")
-      flash[:notice] = "Version update default case chosen, version: #{@version.state_was}"
+      logger.warn("versions_controller#update default case chosen, version: #{@version}")
     end
 
     respond_to do |format|
