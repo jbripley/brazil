@@ -1,4 +1,4 @@
-<div class="box version <%= version.state %>">
+<div class="box version <%=h version.state %>">
   <h3><%= link_to version, app_activity_version_path(version.activity.app, version.activity, version) %></h3>
   <h4>Version</h4>
   <span>Last changed <%=h time_ago_in_words(version.updated_at) %> ago</span>
@@ -13,7 +13,7 @@
       </div>
       <div class="span-5 last">
         <% for db_instance in version.db_instances %>
-      	  <span class="db"><strong><%= db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
+        <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
       	<% end %>
       </div>
     </div>

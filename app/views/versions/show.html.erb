@@ -1,7 +1,7 @@
 <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
 
 <div class="clearfix span-23 last">
-  <div id="activity" class="box activity <%= @version.activity.state %> span-11">
+  <div id="activity" class="box activity <%=h @version.activity.state %> span-11">
 		<%= render :partial => "activity", :locals => {:activity => @version.activity} %>
 	</div>
 	<div class="span-11 last">
@@ -15,13 +15,13 @@
   
   <% if version_testable(@version) %>
   <fieldset class="span-10">
-    <legend>Execute on <%= @version.db_instance_test %></legend>
+    <legend>Deploy on <%=h @version.db_instance_test %></legend>
     <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
       <%= render :partial => 'shared/db_credentials_form' %>
       <p>
-        <%= submit_tag "Execute on #{@version.db_instance_test}" %>
+        <%= submit_tag 'Deploy' %>
       </p>
     <% end %>
   </fieldset>  <% end %>
@@ -33,13 +33,13 @@
   
   <% if version_rollbackable(@version) %>
   <fieldset class="span-10">
-    <legend>Rollback on <%= @version.db_instance_test %></legend>
+    <legend>Rollback from <%= @version.db_instance_test %></legend>
     <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
       <%= render :partial => 'shared/db_credentials_form' %>
       <p>
-        <%= submit_tag "Rollback from #{@version.db_instance_test}" %>
+        <%= submit_tag 'Rollback' %>
       </p>
     <% end %>
   </fieldset>

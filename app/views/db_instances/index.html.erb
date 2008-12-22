@@ -10,7 +10,7 @@
   </tr>
 
 <% for db_instance in @db_instances %>
-  <tr class="db_instance <%= db_instance.db_env %> <%= cycle 'odd', 'even' %>">
+  <tr class="db_instance <%=h db_instance.db_env %> <%= cycle 'odd', 'even' %>">
     <td><%=h db_instance.db_alias %></td>
     <td><%=h db_instance.host %></td>
     <td><%=h db_instance.port %></td>

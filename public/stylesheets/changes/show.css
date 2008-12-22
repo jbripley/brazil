@@ -1,3 +1,5 @@
+@import url('/stylesheets/syntaxhighlighter.css');
+
 .box.change {
   background:#F4F4F4;
   border: 2px solid #888;
