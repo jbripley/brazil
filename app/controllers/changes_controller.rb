@@ -94,7 +94,7 @@ class ChangesController < ApplicationController
     @change.activity_id = params[:activity_id]
     @change.state = Change::STATE_SUGGESTED
     
-    if params[:commit] == 'Cancel'
+    if params[:suggest_change_cancel_button]
       redirect_to app_activity_path(@change.activity.app, @change.activity)
       return
     end

@@ -86,10 +86,22 @@ class ActivitiesController < ApplicationController
     respond_to do |format|
       if @activity.save
         flash[:notice] = 'Activity was successfully created.'
-        format.html { redirect_to app_activity_path(@activity.app, @activity) }
+        format.html do
+          if request.xhr?
+            render :partial => 'shared/activity_index', :collection => @activity.app.activities, :as => 'activity'
+          else
+            redirect_to app_activity_path(@activity.app, @activity)
+          end
+        end
         format.xml  { render :xml => @activity, :status => :created, :location => @activity }
       else
-        format.html { render :action => "new" }
+        format.html do
+          if request.xhr?
+            render :partial => 'new', :locals => {:activity => @activity}, :status => :unprocessable_entity
+          else
+            render :action => "new"
+          end
+        end
         format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
       end
     end
@@ -100,8 +112,8 @@ class ActivitiesController < ApplicationController
   def update
     @activity = Activity.find(params[:id])
     
-    if params[:commit] == 'Cancel'
-      redirect_to app_activity_app(@activity.app, @activity)
+    if params[:activity_edit_cancel_button]
+      redirect_to app_activity_path(@activity.app, @activity)
       return
     end
       
