@@ -1,5 +1,5 @@
 class App < ActiveRecord::Base
-  has_many :activities
+  has_many :activities, :order => 'updated_at DESC'
   
   validates_presence_of :name
   
