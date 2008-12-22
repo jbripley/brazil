@@ -148,6 +148,11 @@ class ChangesController < ApplicationController
     @change = Change.find(params[:id ])
     @change.activity_id = params[:activity_id]
     @change.attributes = params[:change]
+    
+    if params[:edit_change_cancel_button]
+      redirect_to app_activity_path(@change.activity.app, @change.activity)
+      return
+    end
 
     @change.activity.updated_at = Time.now    
     @change.activity.save
