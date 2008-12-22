@@ -79,6 +79,9 @@ class ChangesController < ApplicationController
       format.html do # suggest_new.html.erb
         if request.xhr?
           render :partial => "suggest_new", :locals => {:change => @change}
+        else
+          add_app_crumbs(@change.activity)
+          add_crumb 'Suggest New'
         end          
       end
       format.xml  { render :xml => @change }
@@ -108,7 +111,13 @@ class ChangesController < ApplicationController
         end
       else
         format.html do
-          render :action => "suggest_new"
+          if request.xhr?
+            render :partial => "suggest_new", :locals => {:change => @change}, :status => :unprocessable_entity
+          else
+            add_app_crumbs(@change.activity)
+            add_crumb 'Suggest New'
+            render :action => "suggest_new"
+          end
         end
       end
     end

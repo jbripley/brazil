@@ -13,7 +13,7 @@
     <hr />
     <p>
       <%= f.submit "Suggest", :id => 'suggest_change_submit_button', :disabled => !change.activity.development? %>
-      <%= f.submit "Cancel", :id => 'suggest_change_cancel_button' %>
+      <%= f.submit "Cancel", :id => 'suggest_change_cancel_button', :class => 'form_cancel' %>
     </p>
   <% end %>
 </fieldset>

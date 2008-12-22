@@ -24,7 +24,7 @@
     <tr>
       <td colspan="3">
         <ul class="actions">	
-          <li><%= link_to 'New Activity', new_app_activity_path(app), :id => 'add_activities_button' %></li>
+          <li><%= link_to 'New Activity', new_app_activity_path(app), :class => 'add_activities_button' %></li>
         </ul>
       </td>
     </tr>
@@ -32,6 +32,6 @@
 <% end %>
 </div>
 
-<div class="span-11 last">
+<div id="app_forms" class="span-11 last">
   <%= render :partial => 'new', :locals => {:app => @app} %>
 </div>

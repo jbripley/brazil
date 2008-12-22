@@ -4,7 +4,7 @@
     <%= render :partial => "form", :locals => {:f => f, :activity => activity} %>
     <p>
       <%= f.submit "Save" %>
-      <%= f.submit "Cancel", :id => 'activity_edit_cancel_button' %>
+      <%= f.submit "Cancel", :id => 'activity_edit_cancel_button', :class => 'form_cancel' %>
     </p>
   <% end %>
   <div class="info">

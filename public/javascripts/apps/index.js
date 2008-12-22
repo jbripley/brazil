@@ -1,37 +1,26 @@
-function bind_edit_app() {
-  $(".edit_app_button").click(function() {
-    var me = this;
-    $.get(this.href, function(response) {
-      var edit_app_div = $(me).parent('.head');
-      edit_app_div.empty().append(response);
-      
-      edit_app_div.children('form').ajaxForm({
-        beforeSubmit: function(formData, jqForm, options) {
-          $('input[type="submit"]', jqForm).attr('disabled', 'disabled');
-        },
-        success: function(responseText, statusText) {
-          edit_app_div.empty().append(responseText);
-          bind_edit_app();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          edit_app_div.replaceWith(XMLHttpRequest.responseText);
-          bind_edit_app();
-        }
-      });
-      
-      edit_app_div.find('#cancel_edit_app_button').click(function() {
-        $.get(edit_app_div.children('form').attr('action'), function(response) {
-          edit_app_div.empty().append(response);
-          bind_edit_app();
-        });
-        return false;
-      });
-    });
-    
-    return false;
+function bind_buttons() {
+  // Edit App name
+  jQuery.brazil.form.inline({
+    show_button: '.edit_app_button',
+    form_container: '.head',
+    done: function(){
+      bind_buttons();
+    }
   });
+  
+  // Add Activity
+  // jQuery.brazil.form.insert({
+  //   show_button: '.add_activities_button',
+  //   form_container: '#app_forms',
+  //   inserted_fieldset: '#new_activity_fieldset',
+  //   response_container: '#app-list',
+  //   done: function(){
+  //     bind_buttons();
+  //   }
+  // });
 }
 
 $(document).ready(function() {
-  bind_edit_app();
+  jQuery.brazil.move.scrollable('#app_forms');
+  bind_buttons();
 });
