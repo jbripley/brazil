@@ -1,4 +1,4 @@
-<fieldset id="edit_change_fieldset" class="span-10">
+<fieldset id="edit_change_fieldset">
 	<legend>Edit database change for <%=h change.activity %></legend>
 	<% form_for(change, :url => app_activity_change_path(change.activity.app, change.activity)) do |f| %>
     <%= render :partial => "changes/form", :locals => {:f => f} %>

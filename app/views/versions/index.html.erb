@@ -1,13 +1,4 @@
-<div class="span-12 border">
-	<div id="activity" class="box activity <%=h @version.activity.state %>">
-		<%= render :partial => "activity", :locals => {:activity => @version.activity} %>	
-	</div>
-	<div id="versions">
-		    <%= render :partial => "version", :collection => @version_activities_actionable %>
-		</div>
-	</div>
-</div>
-
-<div class="span-11 last">
-	<%= render :partial => "version", :collection => @version_activities_archived %>
+<%= render :partial => "shared/activity", :locals => {:activity => @version.activity} %>
+<div id="versions">
+	<%= render :partial => "version", :collection => @versions %>
 </div>

@@ -44,11 +44,29 @@ jQuery.brazil = {
     }
   },
   form: {
-    insert: function(options) {
-      var defaults = { show_button: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+    simple: function(options) {
+      var defaults = { show_form: '', success: function(){}, error: function(){}, done: function(){} };
       var settings = jQuery.extend(defaults, options);
 
-      $(settings.show_button).click(function() {
+      $(settings.show_form).click(function() {
+        settings.before_display_form();
+
+        $.get(this.href, function(response) {
+          settings.display_form();
+
+          settings.setup_form();
+          
+          settings.form_hide();
+        });
+
+        return false;
+      });
+    },
+    insert: function(options) {
+      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+      var settings = jQuery.extend(defaults, options);
+
+      $(settings.show_form).click(function() {
         $(this).hide();
 
         $.get(this.href, function(response) {
@@ -70,7 +88,7 @@ jQuery.brazil = {
 
               settings.done();
 
-              $(settings.show_button).show();
+              $(settings.show_form).show();
               $(settings.response_container).show();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -84,7 +102,7 @@ jQuery.brazil = {
 
           $(settings.inserted_fieldset).find('.form_cancel').click(function() {
             $(settings.inserted_fieldset).remove();
-            $(settings.show_button).show();
+            $(settings.show_form).show();
             
             settings.done();
             
@@ -96,13 +114,13 @@ jQuery.brazil = {
       });
     },
     inline: function(options) {
-      var defaults = { show_button: '', form_container: '', success: function(){}, error: function(){}, done: function(){} };
+      var defaults = { show_form: '', form_container: '', success: function(){}, error: function(){}, done: function(){} };
       var settings = jQuery.extend(defaults, options);
       
-      $(settings.show_button).click(function() {
-        var show_button = this;
+      $(settings.show_form).click(function() {
+        var show_form = this;
         $.get(this.href, function(response) {
-          var form_container = $(show_button).parents(settings.form_container);
+          var form_container = $(show_form).parents(settings.form_container);
           form_container.empty().append(response);
 
           form_container.find('form').ajaxForm({
@@ -110,7 +128,7 @@ jQuery.brazil = {
               $('input[type="submit"]', jqForm).attr('disabled', 'disabled');
             },
             success: function(responseText, statusText) {
-              form_container.empty().append(responseText);
+              form_container.replaceWith(responseText);
               
               settings.success();
               
@@ -127,7 +145,7 @@ jQuery.brazil = {
 
           form_container.find('.form_cancel').click(function() {
             $.get(form_container.children('form').attr('action'), function(response) {
-              form_container.empty().append(response);
+              form_container.replaceWith(response);
               
               settings.done();
             });

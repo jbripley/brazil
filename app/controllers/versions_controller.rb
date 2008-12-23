@@ -8,9 +8,7 @@ class VersionsController < ApplicationController
   # GET /apps/:app_id/activities/:activity_id/versions.xml
   # GET /apps/:app_id/activities/:activity_id/versions.atom
   def index
-    @version_activities_actionable = Version.find_all_by_activity_id(params[:activity_id], :conditions => {:state => [Version::STATE_CREATED, Version::STATE_TESTED]})
-    @version_activities_archived = Version.find_all_by_activity_id(params[:activity_id], :conditions => {:state => Version::STATE_DEPLOYED})
-    
+    @versions = Version.find_all_by_activity_id(params[:activity_id])
     @version = Version.new(:activity_id => params[:activity_id])
 
     respond_to do |format|
@@ -18,9 +16,7 @@ class VersionsController < ApplicationController
         add_app_crumbs(@version.activity)
       end
       format.xml  { render :xml => @versions }
-      format.atom do # index.atom.builder
-        @versions = @version_activities_actionable + @version_activities_archived
-      end
+      format.atom # index.atom.builder
     end
   end
 

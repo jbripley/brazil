@@ -1,4 +1,4 @@
-<fieldset id="edit_activity_fieldset" class="span-10">
+<fieldset id="edit_activity_fieldset">
   <legend>Editing <%= activity %></legend>
   <% form_for(activity, :url => app_activity_path(activity.app, activity)) do |f| %>
     <%= render :partial => "form", :locals => {:f => f, :activity => activity} %>

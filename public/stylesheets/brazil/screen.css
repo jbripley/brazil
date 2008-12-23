@@ -3,17 +3,13 @@ body {
 }
 
 .box {
-  position:relative;
+  position: relative;
 }
 
 a:hover {
   text-decoration:underline;
   color:#000;
   background:none;
-}
-
-.container {
-  width: 910px;
 }
 
 #top-navigation ul {
@@ -87,7 +83,6 @@ a:hover {
   padding:2px 18px;
   border:1px solid #C6D880;
   background:#E6EFC2;color:#264409;
-  margin:0 5px;
   -moz-border-radius: 4px;
   -khtml-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -103,11 +98,11 @@ td {
   vertical-align: top;
 }
 
-.box h4 {
+.box h2 {
   position:absolute;
-  top:-8px;
-  right:-4px;
-  padding:8px;
+  top:-10px;
+  right:-5px;
+  padding:5px;
 
   -moz-border-radius: 10px;
   -khtml-border-radius: 10px;
@@ -132,18 +127,18 @@ td {
   border: 2px solid #BCC2CC;
 }
 
-.box.activity.development h4 {
+.box.activity.development h2 {
   border: 3px solid #AB3E1D;
   background:#D14D25;
   color:#FFF;
 }
 
-.box.activity.versioned h4 {
+.box.activity.versioned h2 {
   border: 3px solid #AD8C3E;
   background:#FFCE5B;
 }
 
-.box.activity.deployed h4 {
+.box.activity.deployed h2 {
   border: 3px solid #6D924B;
   background:#86B35C;
   color: #FFF;

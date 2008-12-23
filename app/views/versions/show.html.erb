@@ -1,15 +1,11 @@
 <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
 
-<div class="clearfix span-23 last">
-  <div id="activity" class="box activity <%=h @version.activity.state %> span-11">
-		<%= render :partial => "activity", :locals => {:activity => @version.activity} %>
-	</div>
-	<div class="span-11 last">
-    <%= render :partial => 'version', :locals => {:version => @version} %>
-  </div>
+<%= render :partial => "shared/activity", :locals => {:activity => @version.activity} %>
+<div class="clearfix">
+  <%= render :partial => 'version', :locals => {:version => @version} %>
 </div>
 
-<div class="clearfix box span-22 last">
+<div class="box">
   <h3>Update SQL</h3>
   <textarea class="sql:nogutter" name="code"><%=h @versioned_update_sql %></textarea>
   
@@ -27,7 +23,7 @@
   </fieldset>  <% end %>
 </div>
 
-<div class="box span-22 last">
+<div class="box">
   <h3>Rollback SQL</h3>
   <textarea class="sql:nogutter" name="code"><%=h @versioned_rollback_sql %></textarea>
   

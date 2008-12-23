@@ -1,21 +1,27 @@
-<div class="head">
-  <h3><%=h activity %></h3><% if activity_show_dev_actions(activity) %><%= link_to 'edit', edit_app_activity_path(activity.app, activity), :id => 'activity_edit_button' %><% end %>
-</div>
-<h4>Activity</h4>
-<span>Last changed <%=h time_ago_in_words(activity.updated_at) %> ago</span>
-
-<hr />
-
-<div class="info clearfix">
-  <span class="description"><strong>Description</strong> <%=h activity.description %></span>
-  <span class="state"><strong>State</strong> <%=h activity.state %></span>
-</div>
-
-<hr />
-
-<div class="info clearfix">
-  <span class="schema"><strong>Schema</strong> <%=h activity.schema %></span>
-  <% for db_instance in activity.db_instances %>
+<div id="activity" class="box activity <%=h activity.state %> showgrid clearfix">
+  <h2>Activity</h2>
+  
+  <div class="span-6">
+    <div class="head">
+      <h3><%=h activity %></h3><% if activity_show_dev_actions(activity) %><%= link_to 'edit', edit_app_activity_path(activity.app, activity), :id => 'activity_edit_button' %><% end %>
+    </div>
+  
+    <span>Last changed <%=h time_ago_in_words(activity.updated_at) %> ago</span>
+  </div>
+  
+  <div class="info span-3">
+    <span><strong>App</strong> <%=h activity.app %></span>
+    <span class="state"><strong>State</strong> <%=h activity.state %></span>
+  </div>
+  
+  <div class="info span-4">
+    <% for db_instance in activity.db_instances %>
     <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
-  <% end %>
+    <% end %>
+    <span class="schema"><strong>Schema</strong> <%=h activity.schema %></span>
+  </div>
+  
+  <div class="append-1">
+    <%= render :partial => "activity", :locals => {:activity => activity} %>
+  </div>
 </div>

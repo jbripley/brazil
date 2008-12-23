@@ -21,18 +21,18 @@
   border-color:#827151;
 }*/
 
-.box.version.created h4 {
+.box.version.created h2 {
   border: 3px solid #AB3E1D;
   background:#D14D25;
   color:#FFF;
 }
 
-.box.version.tested h4 {
+.box.version.tested h2 {
   border: 3px solid #AD8C3E;
   background:#FFCE5B;
 }
 
-.box.version.deployed h4 {
+.box.version.deployed h2   {
   border: 3px solid #6D924B;
   background:#86B35C;
   color:#FFF;

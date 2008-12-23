@@ -1,7 +1,7 @@
 function bind_buttons() {
   // Edit Activity
   jQuery.brazil.form.inline({
-    show_button: '#activity_edit_button',
+    show_form: '#activity_edit_button',
     form_container: '#activity',
     success: function() {
       jQuery.brazil.flash.notice();
@@ -26,7 +26,7 @@ function bind_buttons() {
   
   // Suggest Change
   jQuery.brazil.form.insert({
-    show_button: '#suggest_change_button',
+    show_form: '#suggest_change_button',
     form_container: '#activity_forms',
     inserted_fieldset: '#suggest_change_fieldset',
     response_container: '#changes',
@@ -42,7 +42,7 @@ function bind_buttons() {
   
   // Edit / Approve Change
   jQuery.brazil.form.insert({
-    show_button: '.edit_change_button',
+    show_form: '.edit_change_button',
     form_container: '#activity_forms',
     inserted_fieldset: '#edit_change_fieldset',
     response_container: '#changes',

@@ -1,9 +1,7 @@
 <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
 
-<div id="activity_info" class="span-12 border">
-  <div id="activity" class="box activity <%=h @activity.state %>">
-    <%= render :partial => "show", :locals => {:activity => @activity} %>		
-  </div>
+<%= render :partial => "shared/activity", :locals => {:activity => @activity} %>
+<div id="activity_info" class="span-13 border">
   <div id="changes">
     <%= render :partial => "changes/change", :collection => @activity.changes %>
   </div>

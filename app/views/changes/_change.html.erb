@@ -1,7 +1,7 @@
 <a name="change-<%=h change.id %>"></a>
 <div class="box change <%=h change.state %>">
+  <h2>Change</h2>
   <h3><%=h change.created_at.to_s(:long) %> (<%=h time_ago_in_words(change.created_at) %> ago)</h3>
-  <h4>Change</h4>
   <textarea class="sql:nogutter" name="code"><%=h change.sql %></textarea>
   <div class="people">
     <span class="dba"><strong>DBA</strong> <%=h change.dba %></span>

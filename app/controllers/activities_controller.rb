@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
           add_app_crumbs(@activity.app, @activity)
           add_crumb @activity.to_s
         else
-          render :partial => "show", :locals => {:activity => @activity}
+          render :partial => "shared/activity", :locals => {:activity => @activity}
         end
       end
       format.xml  { render :xml => @activity }
@@ -122,7 +122,7 @@ class ActivitiesController < ApplicationController
         flash[:notice] = 'Activity was successfully updated.'
         format.html do
           if request.xhr?
-            render :partial => "show", :locals => {:activity => @activity}
+            render :partial => "shared/activity", :locals => {:activity => @activity}
           else
             redirect_to app_activity_path(@activity.app, @activity)
           end
