@@ -10,6 +10,6 @@ function bind_buttons() {
 }
 
 $(document).ready(function() {
-  jQuery.brazil.move.scrollable('#activity_forms');
+  // jQuery.brazil.move.scrollable('#activity_forms');
   bind_buttons();
 });

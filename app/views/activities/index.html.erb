@@ -1,7 +1,5 @@
 <div class="span-13 border">
-  <div class="head">
-    <h3><%=h @activity.app %></h3><%= link_to 'edit', edit_app_path(@activity.app), :id => 'app_edit_button' %>
-  </div
+  <%= render :partial => 'apps/app', :locals => {:app => @activity.app} %>
   <table id="activity-list">
     <tr>
       <th>Activity</th>
@@ -15,6 +13,6 @@
   </table>
 </div>
 
-<div class="span-11 last">
+<div id="activity_forms" class="span-11 last">
   <%= render :partial => 'new', :locals => {:activity => @activity} %>
 </div>

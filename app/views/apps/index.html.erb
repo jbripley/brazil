@@ -1,8 +1,6 @@
 <div id="app-list" class="span-12 border">
 <% for app in @apps %>
-  <div class="head">
-    <%= render :partial => 'app', :locals => {:app => app} %>
-  </div>
+  <%= render :partial => 'app', :locals => {:app => app} %>
   <table id="activity-list">
     <tr>
       <th>Activity</th>
