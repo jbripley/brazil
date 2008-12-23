@@ -15,7 +15,7 @@ Brazil requires Ruby on Rails 2.2.2, mysql-ruby and sqlite3-ruby. Mongrel is rec
 Brazil is a standard Ruby on Rails application. After following the installation steps, start it by running, for example, the server script: `./script/server`
 
 ## Current limitations
-Brazil requires a version table in the format _VERSION_SCHEMA_NAME_X_Y_Z, to exist in any database schema that you want to deploy changes to.  
+Brazil requires a version table in the format `_VERSION_SCHEMA_NAME_X_Y_Z`, to exist in any database schema that you want to deploy changes to.  
 
 ## Example database
 You can setup a example database with some example Database Instances, Apps, Activities, Changes and Versions. This will reset the database, so please make a copy of **db/development.sqlite3** if there is something you want to keep. Run `rake brazil:reset` to setup the example db.
