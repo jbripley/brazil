@@ -123,6 +123,12 @@ td {
   background-color: #888;
 }
 
+.box.error h2 {
+  background:#FBE3E4;
+  color:#8a1f11;
+  border: 3px solid #FBC2C4;
+}
+
 .box.activity {
   border: 2px solid #BCC2CC;
 }
