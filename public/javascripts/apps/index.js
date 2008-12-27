@@ -9,11 +9,10 @@ function bind_buttons() {
   });
   
   // Add Activity
-  jQuery.brazil.form.insert({
+  jQuery.brazil.form.insert_only({
     show_form: '.add_activities_button',
     form_container: '#app_forms',
     inserted_fieldset: '#new_activity_fieldset',
-    response_container: '#app-list',
     done: function(){
       bind_buttons();
     }

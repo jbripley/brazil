@@ -12,6 +12,7 @@
 
   <%= javascript_include_tag "jquery/jquery-1.2.6.min", "jquery/jquery.dimensions.min", "jquery/jquery.form" %>
   <%= javascript_include_tag "jquery.ui/ui.core.min", "jquery.ui/effects.core.min", "jquery.ui/effects.drop.min" %>
+  <%= yield :view_external_js %>
   <%= javascripts %>
 
   <%= atom_feed_tag %>

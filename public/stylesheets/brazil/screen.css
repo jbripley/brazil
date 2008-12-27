@@ -98,6 +98,20 @@ td {
   vertical-align: top;
 }
 
+fieldset {
+  position: relative;
+}
+
+fieldset > a.form_close {
+  position:absolute;
+  top:3px;
+  right:-5px;
+}
+
+input[type=submit] {
+  float: right;
+}
+
 .box h2 {
   position:absolute;
   top:-10px;
@@ -124,9 +138,7 @@ td {
 }
 
 .box.error h2 {
-  background:#FBE3E4;
-  color:#8a1f11;
-  border: 3px solid #FBC2C4;
+  display: none;
 }
 
 .box.activity {

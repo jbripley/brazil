@@ -78,12 +78,9 @@ class ChangesController < ApplicationController
     
     respond_to do |format|
       format.html do # suggest_new.html.erb
-        if request.xhr?
-          render :partial => "suggest_new", :locals => {:change => @change}
-        else
-          add_app_crumbs(@change.activity)
-          add_crumb 'Suggest New'
-        end          
+        add_app_crumbs(@change.activity)
+        add_crumb 'Suggest New'
+        render :layout => false if request.xhr?
       end
       format.xml  { render :xml => @change }
     end
@@ -94,12 +91,7 @@ class ChangesController < ApplicationController
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
     @change.suggested!
-    
-    if params[:suggest_change_cancel_button]
-      redirect_to app_activity_path(@change.activity.app, @change.activity)
-      return
-    end
-   
+       
     respond_to do |format|
       if @change.save
         flash[:notice] = 'Change suggestion was successfully created.'
@@ -113,7 +105,7 @@ class ChangesController < ApplicationController
       else
         format.html do
           if request.xhr?
-            render :partial => "suggest_new", :locals => {:change => @change}, :status => :unprocessable_entity
+            render :action => "suggest_new", :layout => false, :status => :unprocessable_entity
           else
             add_app_crumbs(@change.activity)
             add_crumb 'Suggest New'
@@ -132,12 +124,9 @@ class ChangesController < ApplicationController
     
     respond_to do |format|
       format.html do # edit.html.erb
-        if request.xhr?
-          render :partial => 'edit', :locals => {:change => @change}
-        else
-          add_app_crumbs(@change.activity)
-          add_crumb 'Edit'
-        end          
+        add_app_crumbs(@change.activity)
+        add_crumb 'Edit'
+        render :layout => false if request.xhr?
       end
       format.xml  { render :xml => @change }
     end
@@ -150,11 +139,6 @@ class ChangesController < ApplicationController
     @change.activity_id = params[:activity_id]
     @change.attributes = params[:change]
     
-    if params[:edit_change_cancel_button]
-      redirect_to app_activity_path(@change.activity.app, @change.activity)
-      return
-    end
-
     if params[:edit_change_execute_button]
       @change.executed!
     else

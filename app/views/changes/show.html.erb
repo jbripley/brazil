@@ -1,3 +1,5 @@
-<%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
+<% content_for :view_external_js do %>
+  <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
+<% end %>
 
 <%= render :partial => 'change', :locals => {:change => @change} %>

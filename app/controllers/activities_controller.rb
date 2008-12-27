@@ -52,12 +52,9 @@ class ActivitiesController < ApplicationController
     
     respond_to do |format|
       format.html do # new.html.erb
-        if request.xhr?
-          render :partial => "new", :locals => {:activity => @activity}
-        else
-          add_app_crumbs(@activity.app, @activity)
-          add_crumb 'New'
-        end
+        add_app_crumbs(@activity.app, @activity)
+        add_crumb 'New'
+        render :layout => false if request.xhr?
       end
       format.xml  { render :xml => @activity }
     end
@@ -67,13 +64,10 @@ class ActivitiesController < ApplicationController
   def edit
     @activity = Activity.find(params[:id])
     
-    if request.xhr?
-      render :partial => "edit", :locals => {:activity => @activity}
-    else
-      add_app_crumbs(@activity.app, @activity)
-      add_crumb @activity.to_s, app_activity_path(@activity.app, @activity)
-      add_crumb "Edit"
-    end
+    add_app_crumbs(@activity.app, @activity)
+    add_crumb @activity.to_s, app_activity_path(@activity.app, @activity)
+    add_crumb "Edit"
+    render :layout => false if request.xhr?
   end
 
   # POST /apps/:app_id/activities
@@ -112,11 +106,6 @@ class ActivitiesController < ApplicationController
   def update
     @activity = Activity.find(params[:id])
     
-    if params[:activity_edit_cancel_button]
-      redirect_to app_activity_path(@activity.app, @activity)
-      return
-    end
-      
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
         flash[:notice] = 'Activity was successfully updated.'

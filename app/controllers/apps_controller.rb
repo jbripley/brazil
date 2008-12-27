@@ -48,7 +48,7 @@ class AppsController < ApplicationController
     respond_to do |format|
       format.html do
         if request.xhr?
-          render :partial => 'edit_min', :locals => {:app => @app}
+          render :partial => 'edit_name', :locals => {:app => @app}
         end
       end
     end

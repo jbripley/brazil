@@ -1,1 +1,13 @@
-<%= render :partial => 'edit', :locals => {:activity => @activity} %>
+<fieldset id="edit_activity_fieldset">
+  <legend>Editing <%= @activity %></legend>
+  <a href="#" class="form_close" style="display: none;"><img src="/images/forms/x.gif" /></a>
+  <% form_for(@activity, :url => app_activity_path(@activity.app, @activity)) do |f| %>
+    <%= render :partial => "form", :locals => {:f => f, :activity => @activity} %>
+    <p>
+      <%= f.submit 'Save' %>
+    </p>
+  <% end %>
+  <div class="info">
+    <span class="state"><strong>State</strong> <%=h @activity.state %></span>
+  </div>
+</fieldset>

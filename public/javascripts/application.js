@@ -45,7 +45,7 @@ jQuery.brazil = {
   },
   form: {
     simple: function(options) {
-      var defaults = { show_form: '', success: function(){}, error: function(){}, done: function(){} };
+      var defaults = { show_form: '', before_display_form: function(){}, display_form: function(){}, setup_form: function(){}, form_hide: function(){} };
       var settings = jQuery.extend(defaults, options);
 
       $(settings.show_form).click(function() {
@@ -62,15 +62,39 @@ jQuery.brazil = {
         return false;
       });
     },
-    insert: function(options) {
-      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+    insert_only: function(options) {
+      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', done: function(){} };
       var settings = jQuery.extend(defaults, options);
-
+      
       $(settings.show_form).click(function() {
         $(this).hide();
 
         $.get(this.href, function(response) {
-          $(response).css("display", "none");
+          $(response).prependTo(settings.form_container);
+          $(settings.inserted_fieldset).show("drop", { direction: 'left' });
+
+          $(settings.inserted_fieldset).find('.form_close').show();
+          $(settings.inserted_fieldset).find('.form_close').click(function() {
+            $(settings.inserted_fieldset).remove();
+            $(settings.show_form).show();
+            
+            settings.done();
+            
+            return false;
+          });
+        });
+
+        return false;
+      });
+    },
+    insert: function(options) {
+      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+      var settings = jQuery.extend(defaults, options);
+      
+      $(settings.show_form).click(function() {
+        $(this).hide();
+
+        $.get(this.href, function(response) {
           $(response).prependTo(settings.form_container);
           $(settings.inserted_fieldset).show("drop", { direction: 'left' });
 
@@ -99,8 +123,9 @@ jQuery.brazil = {
               settings.done();
             }
           });
-
-          $(settings.inserted_fieldset).find('.form_cancel').click(function() {
+          
+          $(settings.inserted_fieldset).find('.form_close').show();
+          $(settings.inserted_fieldset).find('.form_close').click(function() {
             $(settings.inserted_fieldset).remove();
             $(settings.show_form).show();
             
@@ -143,7 +168,8 @@ jQuery.brazil = {
             }
           });
 
-          form_container.find('.form_cancel').click(function() {
+          $(settings.inserted_fieldset).find('.form_close').show();
+          $(settings.inserted_fieldset).find('.form_close').click(function() {
             $.get(form_container.children('form').attr('action'), function(response) {
               form_container.replaceWith(response);
               

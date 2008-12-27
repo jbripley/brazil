@@ -43,6 +43,10 @@ class Change < ActiveRecord::Base
     id.to_s
   end
   
+  def suggested?
+    (state == STATE_SUGGESTED)
+  end
+  
   def suggested!
     self.state = STATE_SUGGESTED
   end
