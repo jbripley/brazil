@@ -60,11 +60,11 @@ a:hover {
 .actions {
   list-style:none;
   margin:0;
-  padding:5px;
   text-align:right;
 }
 
 .actions li {
+  padding-left: 0.5em;
   float:right;
 }
 

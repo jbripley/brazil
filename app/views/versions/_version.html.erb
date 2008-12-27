@@ -7,36 +7,38 @@
   </div>
   
   <div class="info span-3">
+    <span><strong>Version</strong> <%=h version.schema_version %></span>
   	<span><strong>State</strong> <%=h version.state %></span>
-  	<span><strong>Schema</strong> <%=h version.schema %></span>
   </div>
   
   <div class="info span-4">
     <% for db_instance in version.db_instances %>
     <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
   	<% end %>
+  	<span><strong>Schema</strong> <%=h version.schema %></span>
   </div>
   
   <% if version.deploy_note %>
-  <div class="span-9">
+  <div class="span-7">
   	<span><strong>Deploy Note</strong> <%=h version.deploy_note %></span>
   </div>
-  <% end %>
-  
-  <% if version_created(version) %>
-  <div class="append-1">
-    <ul class="actions">
-    	  <li><%= link_to 'Edit', edit_app_activity_version_path(version.activity.app, version.activity, version) %></li>
-    </ul>
-  </div>
   <% elsif version_tested(version) %>
-  <div class="span-9">
+  <div class="span-7">
     <% form_for(version, :url => app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
       <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
       <%= f.label :deploy_note, 'Deploy Note' %><br />
-      <%= f.text_area :deploy_note, :style => 'height: 40px;', :class => 'span-9' %><br />
+      <%= f.text_area :deploy_note, :class => 'span-7' %><br />
 	    <%= f.submit 'Deployed' %>
 	  <% end %>
 	</div>
 	<% end %>
+	
+	<div class="append-1">
+    <ul class="actions">
+      <li><%= link_to 'Show', app_activity_version_path(version.activity.app, version.activity, version) %></li>
+      <% if version_created(version) %>
+      <li><%= link_to 'Edit', edit_app_activity_version_path(version.activity.app, version.activity, version) %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

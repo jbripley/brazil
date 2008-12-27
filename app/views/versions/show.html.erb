@@ -10,7 +10,7 @@
   <textarea class="sql:nogutter" name="code"><%= create_update_sql(@version) %></textarea>
   
   <% if version_testable(@version) %>
-  <fieldset class="span-10">
+  <fieldset class="span-8">
     <legend>Deploy on <%=h @version.db_instance_test %></legend>
     <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
@@ -28,7 +28,7 @@
   <textarea class="sql:nogutter" name="code"><%= create_rollback_sql(@version) %></textarea>
   
   <% if version_rollbackable(@version) %>
-  <fieldset class="span-10">
+  <fieldset class="span-8">
     <legend>Rollback from <%= @version.db_instance_test %></legend>
     <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>

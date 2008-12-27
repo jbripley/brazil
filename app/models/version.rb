@@ -92,7 +92,7 @@ class Version < ActiveRecord::Base
   end
   
   def to_s
-    "#{schema}@#{db_instance_test} v.#{schema_version}"
+    "#{schema}@#{db_instance_test}"
   end
   
   def db_instance_test

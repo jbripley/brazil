@@ -23,27 +23,16 @@
 <hr />
 
 <div>
-  <div class="span-6">
-    <% for db_env in ['prod', 'test'] %>
-    <div class="span-3 <%= 'last' if db_env == 'prod' %>">
-      <%= f.label "db_instances_#{db_env}", "#{db_env.capitalize} Database" %><br />
-      <%= f.collection_select :db_instance_ids, db_instances_of_environment(db_env), :id, :to_s, {:include_blank => '-- Select --'}, { :name => 'version[db_instance_ids][]', :class => 'span-3' } %>
-    </div>
-    <% end %>
+  <div class="span-3">
+    <%= f.label "db_instances_test", "Test Database" %><br />
+    <%= f.collection_select :db_instance_ids, db_instances_of_environment(DbInstance::ENV_TEST), :id, :to_s, {:include_blank => '-- Select --'}, { :name => 'version[db_instance_ids][]', :class => 'span-3' } %>
   </div>
   <div class="span-6">
     <%= f.label :schema, 'Test Database Schema' %><br />
     <%= f.text_field :schema, :class => "span-6" %>
   </div>
-  <div class="span-8 last">
-    <div class="span-4">
-      <%= label_tag 'db_username', 'Database Username' %><br />
-      <%= text_field_tag 'db_username', {}, :class => "span-4" %>
-    </div>
-    <div class="span-4 last">
-      <%= label_tag 'db_password', 'Database Password' %><br />
-      <%= password_field_tag 'db_password', {}, :class => "span-4" %>
-    </div>
+  <div class="span-10 last">
+    <%= render :partial => 'shared/db_credentials_form' %>
   </div>
 </div>
 
