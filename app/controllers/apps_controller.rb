@@ -93,16 +93,4 @@ class AppsController < ApplicationController
       end
     end
   end
-
-  # DELETE /apps/1
-  # DELETE /apps/1.xml
-  def destroy
-    @app = App.find(params[:id])
-    @app.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(apps_url) }
-      format.xml  { head :ok }
-    end
-  end
 end
