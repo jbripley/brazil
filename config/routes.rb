@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :db_instances
 
-  map.resources :apps do |apps|
-    apps.resources :activities do |activities|
-      activities.resources :changes, :collection => {:suggest_new => :get, :suggest => :post}
-      activities.resources :versions
+  map.resources :apps, :except => [:destroy] do |apps|
+    apps.resources :activities, :except => [:destroy] do |activities|
+      activities.resources :changes, :collection => {:suggest_new => :get, :suggest => :post}, :except => [:destroy]
+      activities.resources :versions, :except => [:destroy]
     end
   end
   
