@@ -1,4 +1,4 @@
-require 'schema_version'
+require 'brazil/schema_revision'
 
 class DbInstance < ActiveRecord::Base
   ENV_DEV = 'dev'
@@ -44,22 +44,22 @@ class DbInstance < ActiveRecord::Base
     end
   end
   
-  def find_schema_version(username, password, schema)
+  def find_next_schema_version(username, password, schema)
     schema_version = nil
     mysql_connection = nil
     begin
       mysql_connection = mysql_connection(username, password, schema)
       mysql_connection.list_tables.each do |table_name|
-        schema_version = SchemaVersion.from_string(table_name)
-        if schema_version
-          return schema_version
+        schema_revision = Brazil::SchemaRevision.from_string(table_name)
+        if schema_revision
+          return schema_revision.version.next
         end
       end
     ensure
       mysql_connection.close if mysql_connection
     end
     
-    raise "'#{schema}' has no version table, please create one"
+    raise Brazil::NoVersionTableException, "'#{schema}' has no version table, please create one"
   end
   
   def check_db_credentials(username, password, schema)
@@ -69,6 +69,7 @@ class DbInstance < ActiveRecord::Base
     ensure
       mysql_connection.close if mysql_connection
     end
+    return !mysql_connection.nil?
   end
   
   private

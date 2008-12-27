@@ -1,9 +1,9 @@
 USE <%= version.schema %>;
 
 -- Start version rollback
-RENAME TABLE <%= schema_version %> TO <%= schema_version.prev %>_ROLLBACK;
+RENAME TABLE <%= version.schema_revision %> TO <%= version.schema_revision.prev %>_ROLLBACK;
 
 <%= version.rollback_sql.strip %>
 
 -- End version rollback
-RENAME TABLE <%= schema_version.prev %>_ROLLBACK TO <%= schema_version.prev %>;
+RENAME TABLE <%= version.schema_revision.prev %>_ROLLBACK TO <%= version.schema_revision.prev %>;

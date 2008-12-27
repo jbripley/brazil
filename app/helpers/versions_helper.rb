@@ -8,5 +8,4 @@ module VersionsHelper
     (version.state == Version::STATE_TESTED)
   end
   alias :version_tested :version_rollbackable
-  
 end

@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
   # GET /apps/:app_id/activities.xml
   # GET /apps/:app_id/activities.atom  
   def index
-    @activities = Activity.find_all_by_app_id(params[:app_id], :order => 'updated_at desc')
+    @activities = Activity.find_all_by_app_id(params[:app_id], :order => 'updated_at DESC')
     @activity = Activity.new(:app_id => params[:app_id])
 
     respond_to do |format|
@@ -81,7 +81,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params[:activity])
     @activity.app_id = params[:app_id]
-    @activity.state = Activity::STATE_DEVELOPMENT
+    @activity.development!
     
     respond_to do |format|
       if @activity.save

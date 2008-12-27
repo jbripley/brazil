@@ -7,7 +7,7 @@
 
 <div class="box">
   <h3>Update SQL</h3>
-  <textarea class="sql:nogutter" name="code"><%=h @versioned_update_sql %></textarea>
+  <textarea class="sql:nogutter" name="code"><%= create_update_sql(@version) %></textarea>
   
   <% if version_testable(@version) %>
   <fieldset class="span-10">
@@ -25,7 +25,7 @@
 
 <div class="box">
   <h3>Rollback SQL</h3>
-  <textarea class="sql:nogutter" name="code"><%=h @versioned_rollback_sql %></textarea>
+  <textarea class="sql:nogutter" name="code"><%= create_rollback_sql(@version) %></textarea>
   
   <% if version_rollbackable(@version) %>
   <fieldset class="span-10">

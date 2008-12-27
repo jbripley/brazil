@@ -3,9 +3,9 @@ USE <%= version.schema %>;
 -- <%= preparation %>
 <% end %>
 -- Start version update
-RENAME TABLE <%= schema_version.prev %> TO <%= schema_version %>_UPDATE;
+RENAME TABLE <%= version.schema_revision.prev %> TO <%= version.schema_revision %>_UPDATE;
 
 <%= version.update_sql.strip %>
 
 -- End version update
-RENAME TABLE <%= schema_version %>_UPDATE TO <%= schema_version %>;
+RENAME TABLE <%= version.schema_revision %>_UPDATE TO <%= version.schema_revision %>;

@@ -38,14 +38,15 @@ class ChangesController < ApplicationController
   def create
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
+    
+    if params[:create_change_execute_button]
+      @change.executed!
+    else
+      @change.saved!
+    end
 
-    @change.activity.updated_at = Time.now
-    @change.activity.save
-    
-    proc_execute_change_sql = setup_change_execution(@change, params[:commit], params[:change][:sql], params[:db_username], params[:db_password])
-    
     respond_to do |format|
-      if @change.valid? && proc_execute_change_sql.call && @change.save
+      if @change.valid? && @change.use_sql(params[:change][:sql], params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Database change was successfully created.'
         format.html do
           if request.xhr?
@@ -92,7 +93,7 @@ class ChangesController < ApplicationController
   def suggest
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
-    @change.state = Change::STATE_SUGGESTED
+    @change.suggested!
     
     if params[:suggest_change_cancel_button]
       redirect_to app_activity_path(@change.activity.app, @change.activity)
@@ -154,13 +155,14 @@ class ChangesController < ApplicationController
       return
     end
 
-    @change.activity.updated_at = Time.now    
-    @change.activity.save
-    
-    proc_execute_change_sql = setup_change_execution(@change, params[:commit], params[:change][:sql], params[:db_username], params[:db_password])
+    if params[:edit_change_execute_button]
+      @change.executed!
+    else
+      @change.saved!
+    end
     
     respond_to do |format|
-      if @change.valid? && proc_execute_change_sql.call && @change.save
+      if @change.valid? && @change.use_sql(params[:change][:sql], params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Change was successfully updated.'
         format.html do
           if request.xhr?
@@ -186,49 +188,6 @@ class ChangesController < ApplicationController
   end
   
   private
-  
-  def setup_change_execution(change, execute_sql, sql, db_username, db_password)
-    if execute_sql
-      change.state = Change::STATE_EXECUTED
-      proc_execute_change_sql = Proc.new do
-        execute_change_sql(change, sql, db_username, db_password)
-      end
-    else
-      change.state = Change::STATE_SAVED
-      proc_execute_change_sql = Proc.new do
-        check_change_db_credentials(change, db_username, db_password)
-      end
-    end
-  end
-  
-  def execute_change_sql(change, sql, db_username, db_password)
-    db_instance_dev = change.activity.db_instance_dev
-    begin
-      if db_instance_dev
-        db_instance_dev.execute_sql(sql, db_username, db_password, change.activity.schema)
-        return true
-      else
-        raise "#{change.activity} has no #{DbInstance.KIND_DEV} database instance set. Use Edit Activity to set one."
-      end
-    rescue => exception
-      change.errors.add(:sql, "not executed: #{exception.to_s}")
-      return false
-    end
-  end
-  
-  def check_change_db_credentials(change, db_username, db_password)
-    db_instance_dev = change.activity.db_instance_dev
-    begin
-      if db_instance_dev
-        db_instance_dev.check_db_credentials(db_username, db_password, change.activity.schema)
-      else
-        raise "#{change.activity} has no #{DbInstance.KIND_DEV} database instance set. Use Edit Activity to set one."
-      end
-    rescue => exception
-      change.errors.add_to_base("You don't have the Database credentials to save this change")
-      return false
-    end
-  end
   
   def add_app_crumbs(activity, change=nil)
     add_crumb activity.app.to_s

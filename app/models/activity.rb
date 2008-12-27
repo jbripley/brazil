@@ -17,10 +17,24 @@ class Activity < ActiveRecord::Base
     (state == Activity::STATE_DEVELOPMENT)
   end
   
- def db_instance_dev
-    db_instances.each do |db_instance|
-      return db_instance if db_instance.dev?
-    end
+  def versioned?
+    (state == Activity::STATE_VERSIONED)
+  end
+  
+  def deployed?
+    (state == Activity::STATE_DEPLOYED)
+  end
+  
+  def development!
+    self.state = STATE_DEVELOPMENT
+  end
+  
+  def versioned!
+    self.state = STATE_VERSIONED
+  end
+  
+  def deployed!
+    self.state = STATE_DEPLOYED
   end
   
   def to_s

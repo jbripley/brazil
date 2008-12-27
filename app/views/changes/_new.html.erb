@@ -3,7 +3,7 @@
 	<% form_for(@change, :url => app_activity_changes_path(@change.activity.app, @change.activity)) do |f| %>
     <%= render :partial => "changes/form", :locals => {:f => f} %>
     <p>
-      <%= f.submit "Save & Execute", :disabled => !@change.activity.development? %>
+      <%= f.submit "Save & Execute",:name => 'create_change_execute_button', :disabled => !@change.activity.development? %>
       <%= f.submit "Only Save", :disabled => !@change.activity.development?, :id => 'save_submit', :name => 'save_submit' %>
     </p>
 	<% end %>

@@ -1,5 +1,3 @@
-require 'schema_version'
-
 class VersionsController < ApplicationController
   add_crumb('Apps') { |instance| instance.send :apps_path }
   helper_method :create_update_sql, :create_rollback_sql
@@ -26,9 +24,6 @@ class VersionsController < ApplicationController
     @version = Version.find(params[:id])
     @version.activity_id = params[:activity_id]
     
-    @versioned_update_sql = create_update_sql(@version)
-    @versioned_rollback_sql = create_rollback_sql(@version)
-    
     respond_to do |format|
       format.html do # show.html.erb
         add_app_crumbs(@version.activity, @version)
@@ -43,7 +38,7 @@ class VersionsController < ApplicationController
   def new
     @version = Version.new
     @version.activity_id = params[:activity_id]
-    @version.update_sql = merge_change_sql(@version.activity)
+    @version.update_sql = Change.activity_sql(params[:activity_id])
 
     respond_to do |format|
       format.html do # new.html.erb
@@ -71,23 +66,11 @@ class VersionsController < ApplicationController
   def create
     @version = Version.new(params[:version])
     @version.activity_id = params[:activity_id]
-    @version.state = Version::STATE_CREATED
-    
-    found_schema_version = true
-    begin
-      @version.schema_version = find_schema_version(@version, params[:db_username], params[:db_password]).version.next
-    rescue => exception
-      found_schema_version = false
-      @version.errors.add_to_base("Could not lookup '#{@version.schema}' schema version (#{exception.to_s})")
-    end
-    
-    if @version.activity.state != Activity::STATE_VERSIONED
-      @version.activity.state = Activity::STATE_VERSIONED
-      @version.activity.save
-    end
+    @version.created!
+    @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
     
     respond_to do |format|
-      if found_schema_version && @version.save
+      if @version.errors.empty? && @version.save
         flash[:notice] = 'Version was successfully created.'
         format.html { redirect_to app_activity_version_path(@version.activity.app, @version.activity, @version) }
         format.xml { render :xml => @version, :status => :created, :location => app_activity_version_path(@version.activity.app, @version.activity, @version) }
@@ -108,60 +91,17 @@ class VersionsController < ApplicationController
     @version = Version.find(params[:id])
     @version.attributes = params[:version]
 
-    no_errors = true
-    error_action = 'edit'
-    version_redirect_path = app_activity_version_path(@version.activity.app, @version.activity, @version)
-
-    case "#{@version.state}-#{@version.state_was}"
-    when "#{Version::STATE_CREATED}-#{Version::STATE_CREATED}" # update
-      begin
-        @version.schema_version = find_schema_version(@version, params[:db_username], params[:db_password]).version.next
-        flash[:notice] = 'Version was successfully updated.'
-      rescue => exception
-        found_schema_version = false
-        @version.errors.add_to_base("Could not lookup '#{@version.schema}' schema version (#{exception.to_s})")
-      end
-    when "#{Version::STATE_TESTED}-#{Version::STATE_CREATED}" # tested
-      begin
-        @version.db_instance_test.execute_sql(create_update_sql(@version), params[:db_username], params[:db_password], @version.schema)
-        flash[:notice] = "Executed Update SQL on #{@version.db_instance_test}"
-      rescue => exception
-        no_errors = false
-        @version.errors.add_to_base("Failed to execute Update SQL (#{exception.to_s})")
-      end
-      error_action = 'show'
-    when "#{Version::STATE_CREATED}-#{Version::STATE_TESTED}" # rollback
-      begin
-        @version.db_instance_test.execute_sql(create_rollback_sql(@version), params[:db_username], params[:db_password], @version.schema)
-        flash[:notice] = "Executed Rollback SQL on #{@version.db_instance_test}"
-      rescue => exception
-        no_errors = false
-        @versioned_update_sql = create_update_sql(@version)
-        @versioned_rollback_sql = create_rollback_sql(@version)
-        @version.errors.add_to_base("Failed to execute Rollback SQL (#{exception.to_s})")
-      end
-    when "#{Version::STATE_DEPLOYED}-#{Version::STATE_TESTED}" # deployed
-      @version.state = Version::STATE_DEPLOYED
-      unless @version.activity.state == Activity::STATE_DEPLOYED
-        @version.activity.state = Activity::STATE_DEPLOYED
-        @version.activity.save
-      end
-
-      flash[:notice] = "Version '#{@version}' is now set as deployed"
-      version_redirect_path = app_activity_versions_path(@version.activity.app, @version.activity)
-    else
-      logger.warn("versions_controller#update default case chosen, version: #{@version}")
-    end
+    flash[:notice] = @version.run_sql(create_update_sql(@version), create_rollback_sql(@version), params[:db_username], params[:db_password])
 
     respond_to do |format|
-      if no_errors && @version.save
-        format.html { redirect_to version_redirect_path }
+      if @version.errors.empty? && @version.save
+        format.html { redirect_to app_activity_version_path(@version.activity.app, @version.activity, @version) }
         format.xml  { head :ok }
       else
         format.html do
           add_app_crumbs(@version.activity, @version)
           add_crumb @version.to_s
-          render :action => error_action
+          render :action => 'edit'
         end
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
       end
@@ -170,30 +110,12 @@ class VersionsController < ApplicationController
 
   private
 
-  def find_schema_version(version, db_username, db_password)
-    if version.schema.empty?
-      raise 'Please enter a Schema to find a schema version for'
-    end
-    
-    version.db_instance_test.find_schema_version(db_username, db_password, version.schema)
-  end
-  
   def create_update_sql(version)
-    schema_version = SchemaVersion.new(version.schema, version.schema_version)
-    render_to_string :partial => 'update_sql', :locals => {:version => version, :schema_version => schema_version}
+    render_to_string :partial => 'update_sql', :locals => {:version => version}
   end
   
   def create_rollback_sql(version)
-    schema_version = SchemaVersion.new(version.schema, version.schema_version)
-    render_to_string :partial => 'rollback_sql', :locals => {:version => version, :schema_version => schema_version}
-  end
-  
-  def merge_change_sql(activity)
-    sql = ''
-    Change.find_all_by_activity_id(activity.id, :order => 'created_at').each do |change|
-      sql += "#{change.sql}\n"
-    end
-    sql
+    render_to_string :partial => 'rollback_sql', :locals => {:version => version}
   end
   
   def add_app_crumbs(activity, version=nil)
