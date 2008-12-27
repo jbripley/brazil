@@ -73,11 +73,3 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
-
-require 'ostruct'
-require 'yaml'
-
-config = OpenStruct.new(YAML.load_file("#{RAILS_ROOT}/config/config.yml"))
-env_config = config.send(RAILS_ENV)
-config.common.update(env_config) unless env_config.nil?
-::AppConfig = OpenStruct.new(config.common)
