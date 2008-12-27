@@ -33,6 +33,7 @@ Brazil uses the following third party libraries:
 * Styler, Javascripter
 * Crummy
 * Footnotes
+* Twotiny Icon Set
 
 # Contributors
 The following people have made contributions to Brazil. Please let me know if I've missed anyone.
