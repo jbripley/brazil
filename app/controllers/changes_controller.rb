@@ -70,52 +70,7 @@ class ChangesController < ApplicationController
       end
     end
   end
-  
-  # GET /apps/:app_id/activities/:activity_id/changes/suggest_new  
-  # GET /apps/:app_id/activities/:activity_id/changes/suggest_new.xml
-  def suggest_new
-    @change = Change.new(:activity_id => params[:activity_id])
     
-    respond_to do |format|
-      format.html do # suggest_new.html.erb
-        add_app_crumbs(@change.activity)
-        add_crumb 'Suggest New'
-        render :layout => false if request.xhr?
-      end
-      format.xml  { render :xml => @change }
-    end
-  end
-
-  # POST /apps/:app_id/activities/:activity_id/changes/suggest
-  def suggest
-    @change = Change.new(params[:change])
-    @change.activity_id = params[:activity_id]
-    @change.suggested!
-       
-    respond_to do |format|
-      if @change.save
-        flash[:notice] = 'Change suggestion was successfully created.'
-        format.html do
-          if request.xhr?
-            render :partial => "change", :collection => @change.activity.changes
-          else
-            redirect_to app_activity_path(@change.activity.app, @change.activity)
-          end
-        end
-      else
-        format.html do
-          if request.xhr?
-            render :action => "suggest_new", :layout => false, :status => :unprocessable_entity
-          else
-            add_app_crumbs(@change.activity)
-            add_crumb 'Suggest New'
-            render :action => "suggest_new"
-          end
-        end
-      end
-    end
-  end
-  
   # GET /apps/:app_id/activities/:activity_id/changes/:change_id/edit
   # GET /apps/:app_id/activities/:activity_id/changes/:change_id/edit.xml  
   def edit

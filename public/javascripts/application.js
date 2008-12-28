@@ -33,7 +33,7 @@ jQuery.brazil = {
       });
     },
     discard: function() {
-      $.get('/flash/notice', function(response) {
+      $.get('/flash/notice', function() {
       });
     }
   },
@@ -51,7 +51,7 @@ jQuery.brazil = {
       $(settings.show_form).click(function() {
         settings.before_display_form();
 
-        $.get(this.href, function(response) {
+        $.get(this.href, function() {
           settings.display_form();
 
           settings.setup_form();

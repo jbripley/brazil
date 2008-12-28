@@ -1,7 +1,7 @@
 <fieldset id="suggest_change_fieldset">
   <legend>Suggest change for <%=h @change.activity %></legend>
   <a href="#" class="form_close" style="display: none;"><img src="/images/forms/x.gif" /></a>
-  <% form_for(@change, :url => suggest_app_activity_changes_path(@change.activity.app, @change.activity), :html => {:id => 'suggest_change_form', :class => 'suggest_change'}) do |f| %>
+  <% form_for(@change, :url => app_activity_change_suggestions_path(@change.activity.app, @change.activity), :html => {:id => 'suggest_change_form', :class => 'suggest_change'}) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <p>
       <%= f.label :sql, 'SQL' %><br />
