@@ -1,5 +1,5 @@
 # Brazil
-Brazil is a tool to track changes to different database instances. It is implemented in Ruby on Rails and supports deployment of changes to MySQL databases.
+Brazil is a tool to track changes to different database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported database.
 
 # Install
 To setup Brazil you need to follow these steps:
