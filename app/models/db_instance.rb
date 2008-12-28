@@ -3,16 +3,21 @@ require 'brazil/schema_revision'
 class DbInstance < ActiveRecord::Base
   ENV_DEV = 'dev'
   ENV_TEST = 'test'
-  ENV_PROD = 'prod'
   
   TYPE_MYSQL = 'MySQL'
+  TYPE_ODBC = 'ODBC'
+  TYPE_ORACLE = 'Oracle8'
+  TYPE_POSTGRES = 'PostgreSQL'
+  TYPE_SQLITE = 'SQLite'
+  TYPE_SQLITE3 = 'SQLite3'
   
   def self.db_environments
-    [DbInstance::ENV_DEV, DbInstance::ENV_TEST, DbInstance::ENV_PROD]
+    [ENV_DEV, ENV_TEST]
   end
   
   def self.db_types
-    [DbInstance::TYPE_MYSQL]
+    [TYPE_MYSQL] # TODO: Only MySQL supported implemented for now
+    # [TYPE_MYSQL, TYPE_ODBC, TYPE_ORACLE, TYPE_POSTGRES, TYPE_SQLITE, TYPE_SQLITE3]
   end
   
   def dev?
@@ -28,65 +33,83 @@ class DbInstance < ActiveRecord::Base
   end
   
   def execute_sql(sql, username, password, schema)
-    mysql_connection = nil
+    db_connection = nil
     begin
-      mysql_connection = mysql_connection(username, password, schema)
-      mysql_connection.real_query('BEGIN')
-      sql.strip.split(/;[\n\r]/s).each do |sql_part|
-        mysql_connection.real_query(sql_part.strip)
+      db_connection = db_connection(username, password, schema)
+      db_connection['AutoCommit'] = false
+      db_connection.transaction do |dbh|
+        sql.strip.split(/;[\n\r]/s).each do |sql_part|
+          dbh.do(sql_part.strip)
+        end
       end
-      mysql_connection.real_query('COMMIT')
-    rescue => exception
-      mysql_connection.real_query('ROLLBACK') if mysql_connection
-      raise exception
+      db_connection['AutoCommit'] = true
+    rescue DBI::DatabaseError => exception
+      raise Brazil::DBExecuteSQLException, exception.errstr
     ensure
-      mysql_connection.close if mysql_connection
+      db_connection.disconnect if db_connection
     end
   end
   
   def find_next_schema_version(username, password, schema)
     schema_version = nil
-    mysql_connection = nil
+    db_connection = nil
     begin
-      mysql_connection = mysql_connection(username, password, schema)
-      mysql_connection.list_tables.each do |table_name|
+      db_connection = db_connection(username, password, schema)
+      db_connection.tables.each do |table_name|
         schema_revision = Brazil::SchemaRevision.from_string(table_name)
         if schema_revision
           return schema_revision.version.next
         end
       end
+    rescue DBI::DatabaseError => exception
+      raise DBException, exception.errstr
     ensure
-      mysql_connection.close if mysql_connection
+      db_connection.disconnect if db_connection
     end
     
     raise Brazil::NoVersionTableException, "'#{schema}' has no version table, please create one"
   end
   
   def check_db_credentials(username, password, schema)
-    mysql_connection = nil
+    db_connection = nil
     begin
-      mysql_connection = mysql_connection(username, password, schema)
+      db_connection = db_connection(username, password, schema)
+      return true
+    rescue DBI::DatabaseError => exception
+      logger.warn("DB Credentials were not correct, #{username}@#{schema}")
+      return false
     ensure
-      mysql_connection.close if mysql_connection
+      db_connection.disconnect if db_connection
     end
-    return !mysql_connection.nil?
   end
   
   private
   
-  def mysql_connection(username, password, schema)
+  def db_connection(username, password, schema)
     begin
-      require 'mysql'
+      require 'dbi'
     rescue LoadError
-      raise 'Failed to load mysql ruby extension, please install'
+      raise Brazil::LoadException, 'Failed to load the DBI module, please install.'
     end
     
-    mysql_connection = Mysql::new(host, username, password, schema, port)
-    mysql_connection.real_query('SET NAMES utf8')
-    if mysql_connection.nil?
-      raise "Failed to connect to MySQL DB (#{username}@#{host}:#{port}/#{schema})"
+    connection = nil
+    case db_type
+    when TYPE_MYSQL
+      connection = DBI.connect("DBI:Mysql:#{schema}:#{host}:#{port}", username, password)
+      connection.do('SET NAMES utf8')
+    # when TYPE_ODBC
+    # when TYPE_ORACLE
+    # when TYPE_POSTGRES
+    # when TYPE_SQLITE
+    # when TYPE_SQLITE3
     else
-      return mysql_connection
+      raise Brazil::UnknownDBTypeException, "Trying to create connection for unsupported DB Type: #{db_type}"
     end
-  end
+    
+    if connection.nil?
+      raise Brazil::DBConnectionException, "Failed to connect to DB (#{username}@#{host}:#{port}/#{schema})"
+    else
+      return connection
+    end
+  end  
 end

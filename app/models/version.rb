@@ -25,22 +25,22 @@ class Version < ActiveRecord::Base
       begin
         self.schema_version = db_instance_test.find_next_schema_version(db_username, db_password, schema)
         notice = 'Version was successfully updated.'
-      rescue Brazil::NoVersionTableException => exception
+      rescue Brazil::DBException => exception
         errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
       end
     when "#{STATE_TESTED}-#{STATE_CREATED}" # tested
       begin
         db_instance_test.execute_sql(update_sql, db_username, db_password, schema)
         notice = "Executed Update SQL on #{db_instance_test}"
-      rescue Mysql::Error => exception
-        errors.add_to_base("Failed to execute Update SQL (#{exception.to_s})")
+      rescue Brazil::DBException => exception
+        errors.add_to_base("Failed to execute Update SQL (#{exception})")
       end
     when "#{STATE_CREATED}-#{STATE_TESTED}" # rollback
       begin
         db_instance_test.execute_sql(rollback_sql, db_username, db_password, schema)
         notice = "Executed Rollback SQL on #{db_instance_test}"
-      rescue Mysql::Error => exception
-        errors.add_to_base("Failed to execute Rollback SQL (#{exception.to_s})")
+      rescue Brazil::DBException => exception
+        errors.add_to_base("Failed to execute Rollback SQL (#{exception})")
       end
     when "#{STATE_DEPLOYED}-#{STATE_TESTED}" # deployed
       notice = "Version '#{@version}' is now set as deployed"

@@ -1,7 +1,7 @@
 common:
-  release_version: 1.2.1.7
+  release_version: 1.2.2
   
-  release_name: Top Gun
+  release_name: 'The Aviator'
 
 production:
 

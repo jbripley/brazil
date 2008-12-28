@@ -23,7 +23,7 @@ class Change < ActiveRecord::Base
     when STATE_EXECUTED
       begin
         db_instance_dev.execute_sql(sql, db_username, db_password, activity.schema)
-      rescue Mysql::Error => exception
+      rescue Brazil::DBException => exception
         errors.add(:sql, "not executed: #{exception.to_s}")
         return false
       end
