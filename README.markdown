@@ -9,7 +9,11 @@ To setup Brazil you need to follow these steps:
 3. Run `rake tmp:create`
 
 ## Requirements
-Brazil requires Ruby on Rails 2.2.2, mysql-ruby and sqlite3-ruby. Mongrel is recommended for local development and Phusion Passenger is recommended for production deployment.
+Brazil requires Ruby on Rails 2.2.2 and Ruby DBI. Ruby DBI DBD drivers and their dependencies are required for any deploy database you want to use.
+
+Module sqlite3-ruby is required to use the default database configuration.
+
+Mongrel is recommended for local development and Phusion Passenger is recommended for production deployment.
 
 ## Running
 Brazil is a standard Ruby on Rails application. After following the installation steps, start it by running, for example, the server script: `./script/server`
