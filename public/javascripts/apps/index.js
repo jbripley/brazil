@@ -17,6 +17,12 @@ function bind_buttons() {
       bind_buttons();
     }
   });
+
+  // TODO: Come back to this later
+  // jQuery.brazil.manipulate.expand({
+  //   expand_button: '.view_all_activites',
+  //   expand_container: '.app'
+  // });
 }
 
 $(document).ready(function() {
