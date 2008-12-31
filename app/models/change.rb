@@ -11,11 +11,7 @@ class Change < ActiveRecord::Base
   before_save :check_correct_state, :mark_activity_updated
   
   def self.activity_sql(activity_id)
-    sql = ''
-    Change.find_all_by_activity_id(activity_id, :order => 'created_at').each do |change|
-      sql += "#{change.sql}\n"
-    end
-    sql
+    Change.find_all_by_activity_id(activity_id, :order => 'created_at ASC').collect {|change| change.sql}.join
   end
   
   def use_sql(sql, db_username, db_password)
@@ -46,19 +42,7 @@ class Change < ActiveRecord::Base
   def suggested?
     (state == STATE_SUGGESTED)
   end
-  
-  def suggested!
-    self.state = STATE_SUGGESTED
-  end
-  
-  def saved!
-    self.state = STATE_SAVED
-  end
-  
-  def executed!
-    self.state = STATE_EXECUTED
-  end
-      
+       
   def valid_email?(email)
     TMail::Address.parse(email) && /@/.match(email)
   rescue
@@ -93,7 +77,6 @@ class Change < ActiveRecord::Base
   end
   
   def mark_activity_updated
-    activity.updated_at = Time.now
-    activity.save
+    activity.update_attribute(:updated_at, Time.now)
   end
 end

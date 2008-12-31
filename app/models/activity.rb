@@ -12,6 +12,8 @@ class Activity < ActiveRecord::Base
   
   validates_associated :db_instances
   validates_presence_of :name
+
+  named_scope :latest, lambda { |limit| {:order => 'updated_at DESC', :limit => limit} }
   
   def development?
     (state == Activity::STATE_DEVELOPMENT)
@@ -20,23 +22,15 @@ class Activity < ActiveRecord::Base
   def versioned?
     (state == Activity::STATE_VERSIONED)
   end
-  
-  def deployed?
-    (state == Activity::STATE_DEPLOYED)
-  end
-  
-  def development!
-    self.state = STATE_DEVELOPMENT
-  end
-  
+   
   def versioned!
-    self.state = STATE_VERSIONED
+    update_attribute(:state, STATE_VERSIONED)
   end
-  
+
   def deployed!
-    self.state = STATE_DEPLOYED
+    update_attribute(:state, STATE_DEPLOYED)
   end
-  
+    
   def to_s
     name
   end

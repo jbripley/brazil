@@ -1,7 +1,6 @@
 <fieldset id="new_app_fieldset">
   <legend>Create new App</legend>
   <% form_for(app, :url => apps_path) do |f| %>
-    <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <%= render :partial => 'form', :locals => {:f => f} %>
     <p>
       <%= f.submit "Create App" %>

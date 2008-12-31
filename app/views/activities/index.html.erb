@@ -1,16 +1,5 @@
 <div class="span-13 border">
-  <%= render :partial => 'apps/app', :locals => {:app => @activity.app} %>
-  <table id="activity-list">
-    <tr>
-      <th>Activity</th>
-      <th>Description</th>
-      <th>State</th>
-    </tr>
-
-    <% for activity in @activities %>
-    <%= render :partial => 'shared/activity_index', :locals => {:activity => activity} %>
-    <% end %>
-  </table>
+  <%= render :partial => 'index', :locals => {:app => @activity.app, :activities => @activities} %>
 </div>
 
 <div id="activity_forms" class="span-11 last">

@@ -1,0 +1,25 @@
+<%= render :partial => 'app', :locals => {:app => app} %>
+<table class="activity-list">
+  <tr>
+    <th>Activity</th>
+    <th>Description</th>
+    <th>State</th>
+  </tr>
+
+  <%= render :partial => 'shared/activity_row', :collection => app.activities.latest(2), :as => :activity %>
+  <% reset_cycle('activity_cycle') %>
+
+  <% if app.activities.size > 2 %>
+  <tr>
+    <td class="view_all_activites_row" colspan="3">+ <%= link_to "View all (#{app.activities.size})", app_activities_path(app), :class => 'view_all_activites' %></td>
+  </tr>
+  <% end %>
+
+  <tr>
+    <td colspan="3">
+      <ul class="actions">
+        <li><%= link_to 'New Activity', new_app_activity_path(app), :class => 'add_activities_button' %></li>
+      </ul>
+    </td>
+  </tr>
+</table>

@@ -48,7 +48,7 @@ class Version < ActiveRecord::Base
       logger.warn("Version#run_sql default case chosen (#{self})")
     end
     
-    notice
+    return notice
   end
   
   def next_schema_version(db_username, db_password)
@@ -74,19 +74,7 @@ class Version < ActiveRecord::Base
   def deployed?
     (state == STATE_DEPLOYED)
   end
-  
-  def created!
-    self.state == STATE_CREATED
-  end
-  
-  def tested!
-    self.state == STATE_TESTED
-  end
-  
-  def deployed!
-    self.state == STATE_DEPLOYED
-  end
-  
+   
   def states
     ['created', 'tested', 'deployed']
   end
@@ -96,11 +84,11 @@ class Version < ActiveRecord::Base
   end
   
   def db_instance_test
-    db_instances.each do |db_instance|
-      return db_instance if db_instance.test?
+    if db_instances.env_test.first
+      db_instances.env_test.first
+    else
+      raise Brazil::NoDbInstanceException, "Please select a Test Database for Version"
     end
-    
-    raise Brazil::NoDbInstanceException, "Please select a Test Database for Version"
   end
   
   private
@@ -116,10 +104,8 @@ class Version < ActiveRecord::Base
   def update_activity_state
     if activity.development?
       activity.versioned!
-      activity.save
     elsif activity.versioned?
       activity.deployed!
-      activity.save
     end
   end
 end

@@ -13,10 +13,10 @@
 </p>
 <p>
   <%= f.label :db_env, 'Environment' %><br />
-  <%= f.select :db_env, db_environments %>
+  <%= f.select :db_env, DbInstance.db_environments %>
 </p>
 
 <p>
   <%= f.label :db_type, 'Type' %><br />
-  <%= f.select :db_type, db_types %>
+  <%= f.select :db_type, DbInstance.db_types %>
 </p>

@@ -40,9 +40,9 @@ class ChangesController < ApplicationController
     @change.activity_id = params[:activity_id]
     
     if params[:create_change_execute_button]
-      @change.executed!
+      @change.state = Change::STATE_EXECUTED
     else
-      @change.saved!
+      @change.state = Change::STATE_SAVED
     end
 
     respond_to do |format|
@@ -76,7 +76,7 @@ class ChangesController < ApplicationController
   def edit
     @change = Change.find(params[:id])
     @change.activity_id = params[:activity_id]
-    
+
     respond_to do |format|
       format.html do # edit.html.erb
         add_app_crumbs(@change.activity)
@@ -86,7 +86,7 @@ class ChangesController < ApplicationController
       format.xml  { render :xml => @change }
     end
   end
-  
+
   # PUT /apps/:app_id/activities/:activity_id/changes/:id
   # PUT /apps/:app_id/activities/:activity_id/changes/:id.xml
   def update
@@ -95,9 +95,9 @@ class ChangesController < ApplicationController
     @change.attributes = params[:change]
     
     if params[:edit_change_execute_button]
-      @change.executed!
+      @change.state = Change::STATE_EXECUTED
     else
-      @change.saved!
+      @change.state = Change::STATE_SAVED
     end
     
     respond_to do |format|

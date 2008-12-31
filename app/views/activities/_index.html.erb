@@ -1,0 +1,10 @@
+<%= render :partial => 'apps/app', :locals => {:app => app} %>
+<table id="activity-list">
+  <tr>
+    <th>Activity</th>
+    <th>Description</th>
+    <th>State</th>
+  </tr>
+
+  <%= render :partial => 'shared/activity_row', :collection => activities, :as => :activity %>
+</table>

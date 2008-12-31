@@ -1,5 +1,6 @@
 class FlashController < ApplicationController
+  layout false
+
   def notice
-    render :partial => 'notice'
   end
 end

@@ -1,32 +1,8 @@
 <div id="app-list" class="span-12 border">
 <% for app in @apps %>
-  <%= render :partial => 'app', :locals => {:app => app} %>
-  <table id="activity-list">
-    <tr>
-      <th>Activity</th>
-      <th>Description</th>
-      <th>State</th>
-    </tr>
-
-    <% for activity in latest_app_activites(app) %>
-    <%= render :partial => 'shared/activity_index', :locals => {:activity => activity} %>
-    <% end %>
-    <% reset_cycle('activity_cycle') %>
-  
-    <% if app.activities.size > 2 %>
-    <tr id="view-all-activites">
-      <td colspan="3">+ <%= link_to "View all (#{app.activities.size})", app_activities_path(app) %></td>
-    </tr>
-    <% end %>
-    
-    <tr>
-      <td colspan="3">
-        <ul class="actions">	
-          <li><%= link_to 'New Activity', new_app_activity_path(app), :class => 'add_activities_button' %></li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+  <div class="app">
+    <%= render :partial => 'index', :locals => {:app => app} %>
+  </div>
 <% end %>
 </div>
 

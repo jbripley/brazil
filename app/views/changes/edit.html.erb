@@ -4,8 +4,8 @@
 	<% form_for(@change, :url => app_activity_change_path(@change.activity.app, @change.activity)) do |f| %>
     <%= render :partial => "changes/form", :locals => {:f => f} %>
     <p>
-      <%= f.submit 'Save & Execute', :name => 'edit_change_execute_button', :disabled => !@change.activity.development? %>
-      <%= f.submit 'Only Save', :disabled => !@change.activity.development?, :id => 'save_submit', :name => 'save_submit' %>
+      <%= f.submit 'Save & Execute', :name => 'edit_change_execute_button' %>
+      <%= f.submit 'Only Save', :id => 'save_submit', :name => 'save_submit' %>
     </p>
 	<% end %>
 </fieldset>

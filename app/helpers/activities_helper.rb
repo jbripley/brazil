@@ -22,20 +22,21 @@ module ActivitiesHelper
     counts.each do |count|
       if count.last > 0
         output << '(' if count == counts.first
+        
         case format
           when :html
             output << content_tag(:abbr, :title => "#{count.last} #{count.first}") { count.last.to_s }
           when :atom
             output << count.last.to_s
         end
-        output << ', ' unless count == counts.last
-        output << ')' if count == counts.last
+
+        unless count == counts.last
+          output << ', '
+        else
+          output << ')'
+        end
       end
     end
     output
-  end
-  
-  def latest_app_activites(app)
-    Activity.find_all_by_app_id(app.id, :order => 'updated_at DESC', :limit => 2)
   end
 end

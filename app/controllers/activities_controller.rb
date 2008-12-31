@@ -10,7 +10,11 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       format.html do # index.html.erb
-        add_app_crumbs(@activity.app)
+        if request.xhr?
+          render :partial => 'index', :locals => {:app => @activity.app, :activities => @activities}
+        else
+          add_app_crumbs(@activity.app)
+        end
       end
       format.xml  { render :xml => @activities }
       format.atom # index.atom.builder
@@ -75,7 +79,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params[:activity])
     @activity.app_id = params[:app_id]
-    @activity.development!
+    @activity.state = Activity::STATE_DEVELOPMENT
     
     respond_to do |format|
       if @activity.save

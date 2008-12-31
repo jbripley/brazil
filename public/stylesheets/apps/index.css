@@ -4,6 +4,6 @@ table {
   border-bottom: 1px solid #C3D9FF;
 }
 
-#view-all-activites > td {
+.view_all_activites_row {
   text-align:center;
 }

@@ -10,6 +10,9 @@ class DbInstance < ActiveRecord::Base
   TYPE_POSTGRES = 'PostgreSQL'
   TYPE_SQLITE = 'SQLite'
   TYPE_SQLITE3 = 'SQLite3'
+
+  named_scope :env_test, :conditions => {:db_env => ENV_TEST}
+  named_scope :env_dev, :conditions => {:db_env => ENV_DEV}
   
   def self.db_environments
     [ENV_DEV, ENV_TEST]

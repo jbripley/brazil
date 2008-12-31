@@ -20,8 +20,8 @@ class ChangeSuggestionsController < ApplicationController
   def create
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
-    @change.suggested!
-       
+    @change.state = Change::STATE_SUGGESTED
+    
     respond_to do |format|
       if @change.save
         flash[:notice] = 'Change suggestion was successfully created.'

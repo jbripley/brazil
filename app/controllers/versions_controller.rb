@@ -66,7 +66,7 @@ class VersionsController < ApplicationController
   def create
     @version = Version.new(params[:version])
     @version.activity_id = params[:activity_id]
-    @version.created!
+    @version.state = Version::STATE_CREATED
     @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
     
     respond_to do |format|
