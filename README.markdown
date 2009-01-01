@@ -1,5 +1,5 @@
 # Brazil
-Brazil is a tool to track changes to different database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported database.
+Brazil is a tool to track schema changes to database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported databases (MySQL, ODBC, Oracle, Postgres, SQLite).
 
 # Install
 To setup Brazil you need to follow these steps:
@@ -38,6 +38,7 @@ Brazil uses the following third party libraries:
 * Crummy
 * Footnotes
 * Twotiny Icon Set
+* resource_controller
 
 # Contributors
 The following people have made contributions to Brazil. Please let me know if I've missed anyone.
