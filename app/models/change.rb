@@ -11,7 +11,7 @@ class Change < ActiveRecord::Base
   before_save :check_correct_state, :mark_activity_updated
   
   def self.activity_sql(activity_id)
-    Change.find_all_by_activity_id(activity_id, :order => 'created_at ASC').collect {|change| change.sql}.join
+    Change.find_all_by_activity_id(activity_id, :order => 'created_at ASC').collect {|change| change.sql}.join("\n")
   end
   
   def use_sql(sql, db_username, db_password)
@@ -29,7 +29,7 @@ class Change < ActiveRecord::Base
         return false
       end
     else
-      raise UnknowStateException, "Unknown state for Change when trying to execute SQL, #{self}"
+      raise Brazil::UnknowStateException, "Unknown state for Change when trying to execute SQL, #{self}"
     end
     
     return true

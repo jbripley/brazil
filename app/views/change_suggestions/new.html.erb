@@ -1,8 +1,9 @@
 <fieldset id="suggest_change_fieldset">
-  <legend>Suggest change for <%=h @change.activity %></legend>
+  <legend>Suggest change for <%=h @activity %></legend>
   <a href="#" class="form_close" style="display: none;"><img src="/images/forms/x.gif" /></a>
-  <% form_for(@change, :url => app_activity_change_suggestions_path(@change.activity.app, @change.activity), :html => {:id => 'suggest_change_form', :class => 'suggest_change'}) do |f| %>
+  <% form_for(@change, :url => app_activity_change_suggestions_path(@activity.app, @activity), :html => {:id => 'suggest_change_form', :class => 'suggest_change'}) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+    <%= f.hidden_field :state, :value => Change::STATE_SUGGESTED %>
     <p>
       <%= f.label :sql, 'SQL' %><br />
       <%= f.text_area :sql, :class => 'span-10' %>

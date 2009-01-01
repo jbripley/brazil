@@ -11,6 +11,8 @@ class DbInstance < ActiveRecord::Base
   TYPE_SQLITE = 'SQLite'
   TYPE_SQLITE3 = 'SQLite3'
 
+  validates_presence_of :db_alias, :host, :port, :db_env, :db_type
+
   named_scope :env_test, :conditions => {:db_env => ENV_TEST}
   named_scope :env_dev, :conditions => {:db_env => ENV_DEV}
   
@@ -65,7 +67,7 @@ class DbInstance < ActiveRecord::Base
         end
       end
     rescue DBI::DatabaseError => exception
-      raise DBException, exception.errstr
+      raise Brazil::DBException, exception.errstr
     ensure
       db_connection.disconnect if db_connection
     end

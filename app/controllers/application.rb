@@ -14,4 +14,23 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :db_password
   
   add_crumb 'Home', '/'
+  
+  before_filter :add_controller_crumbs, :except => :destroy
+  before_filter(:only => :new) { |controller| controller.add_crumb('New') }
+  before_filter(:only => :edit) { |controller| controller.add_crumb('Edit') }
+  
+  private
+
+  def add_app_controller_crumbs(app_model)
+    add_crumb 'Apps', apps_path
+    add_crumb app_model.to_s
+  end
+  
+  def add_activities_controller_crumbs(app_model, activity_model=nil)
+    add_crumb 'Activities', app_activities_path(app_model)
+    
+    if activity_model
+      add_crumb activity_model.to_s, app_activity_path(app_model, activity_model)
+    end
+  end
 end

@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   STATE_DEPLOYED = 'deployed'
   
   belongs_to :app
-  has_many :version
+  has_many :versions
   has_many :changes, :order => "created_at DESC"
   
   has_many :db_instance_activity

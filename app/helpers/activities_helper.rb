@@ -37,6 +37,7 @@ module ActivitiesHelper
         end
       end
     end
-    output
+    
+    return output
   end
 end

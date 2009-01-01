@@ -2,6 +2,7 @@
   <legend>Create new Activity</legend>
   <a href="#" class="form_close" style="display: none;"><img src="/images/forms/x.gif" /></a>
   <% form_for(activity, :url => app_activities_path(activity.app)) do |f| %>
+    <%= f.hidden_field :state, :value => Activity::STATE_DEVELOPMENT %>
     <%= render :partial => "form", :locals => {:f => f, :activity => activity} %>
     <p>
       <%= f.submit "Create Activity" %>

@@ -1,7 +1,7 @@
 common:
-  release_version: 1.2.2.1
+  release_version: 1.2.3
   
-  release_name: 'The Aviator'
+  release_name: 'Die Hard 2'
 
 production:
 

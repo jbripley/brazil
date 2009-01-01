@@ -1,6 +1,7 @@
 <fieldset id="new_version_fieldset">
 	<legend>New version for <%=h @version.activity %></legend>
 	<% form_for(@version, :url => app_activity_versions_path(@version.activity.app, @version.activity)) do |f| %>
+	  <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
 	  <%= render :partial => 'form', :locals => {:f => f} %>
     <p>
       <%= f.submit "Create Version" %>

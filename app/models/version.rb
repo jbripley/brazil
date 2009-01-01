@@ -59,6 +59,15 @@ class Version < ActiveRecord::Base
     end
   end
   
+  def db_instance_test
+    test_db_instances = DbInstance.find(db_instance_ids, :conditions => {:db_env => DbInstance::ENV_TEST})
+    if test_db_instances.first
+      test_db_instances.first
+    else
+      raise Brazil::NoDbInstanceException, "Please select a Test Database for Version"
+    end
+  end
+  
   def schema_revision
     Brazil::SchemaRevision.new(schema, schema_version)
   end
@@ -81,14 +90,6 @@ class Version < ActiveRecord::Base
   
   def to_s
     "#{schema}@#{db_instance_test}"
-  end
-  
-  def db_instance_test
-    if db_instances.env_test.first
-      db_instances.env_test.first
-    else
-      raise Brazil::NoDbInstanceException, "Please select a Test Database for Version"
-    end
   end
   
   private

@@ -1,40 +1,8 @@
 class ChangesController < ApplicationController
-  add_crumb('Apps') { |instance| instance.send :apps_path }
+  resource_controller
+  belongs_to :activity
   
-  # GET /apps/:app_id/activities/:activity_id/changes.xml
-  def index
-    @changes = Change.find_all_by_activity_id(params[:activity_id])
-
-    respond_to do |format|
-      format.xml  { render :xml => @changes }
-    end
-  end
-
-  # GET /apps/:app_id/activities/:activity_id/changes/1.xml
-  def show
-    @change = Change.find(params[:id])
-
-    respond_to do |format|
-      format.html do # show.html.erb
-        add_app_crumbs(@change.activity)
-        add_crumb @change.to_s
-      end
-      format.xml  { render :xml => @change }
-    end
-  end
-
-  # GET /apps/:app_id/activities/:activity_id/changes/new.xml
-  def new
-    @change = Change.new(:activity_id => params[:activity_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @change }
-    end
-  end
-
-  # POST /apps/:app_id/activities/:activity_id/changes
-  # POST /apps/:app_id/activities/:activity_id/changes.xml
+  # POST /apps/:app_id/activities/:activity_id/changes.format
   def create
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
@@ -44,7 +12,7 @@ class ChangesController < ApplicationController
     else
       @change.state = Change::STATE_SAVED
     end
-
+  
     respond_to do |format|
       if @change.valid? && @change.use_sql(params[:change][:sql], params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Database change was successfully created.'
@@ -56,39 +24,24 @@ class ChangesController < ApplicationController
           end
         end
         format.xml  { render :xml => @change, :status => :created, :location => app_activity_change_path(@change.activity.app, @change.activity, @change) }
+        format.json  { render :json => @change, :status => :created, :location => app_activity_change_path(@change.activity.app, @change.activity, @change) }
       else
         format.html do
           if request.xhr?
             render :partial => "changes/new", :locals => {:change => @change}, :status => :unprocessable_entity
           else
-            add_app_crumbs(@change.activity)
-            add_crumb 'New'
             render :action => "new"
           end
         end
         format.xml  { render :xml => @change.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @change.errors, :status => :unprocessable_entity }
       end
     end
   end
+  
+  edit.wants.html { render :layout => false if request.xhr? }
     
-  # GET /apps/:app_id/activities/:activity_id/changes/:change_id/edit
-  # GET /apps/:app_id/activities/:activity_id/changes/:change_id/edit.xml  
-  def edit
-    @change = Change.find(params[:id])
-    @change.activity_id = params[:activity_id]
-
-    respond_to do |format|
-      format.html do # edit.html.erb
-        add_app_crumbs(@change.activity)
-        add_crumb 'Edit'
-        render :layout => false if request.xhr?
-      end
-      format.xml  { render :xml => @change }
-    end
-  end
-
-  # PUT /apps/:app_id/activities/:activity_id/changes/:id
-  # PUT /apps/:app_id/activities/:activity_id/changes/:id.xml
+  # PUT /apps/:app_id/activities/:activity_id/changes/:id.format
   def update
     @change = Change.find(params[:id ])
     @change.activity_id = params[:activity_id]
@@ -111,10 +64,11 @@ class ChangesController < ApplicationController
           end
         end
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html do
           if request.xhr?
-            render :partial => "edit", :locals => {:change => @change}, :status => :unprocessable_entity
+            render :action => "edit", :layout => false, :status => :unprocessable_entity
           else
             add_app_crumbs(@change.activity, @change)
             add_crumb 'Edit'
@@ -122,21 +76,21 @@ class ChangesController < ApplicationController
           end
         end
         format.xml  { render :xml => @change.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @change.errors, :status => :unprocessable_entity }
       end
     end
   end
   
   private
   
-  def add_app_crumbs(activity, change=nil)
-    add_crumb activity.app.to_s
-    add_crumb 'Activities', app_activities_path(activity.app)
-    add_crumb "#{activity}", app_activity_path(activity.app, activity)
+  def add_controller_crumbs
+    add_app_controller_crumbs(parent_object.app)
+    add_activities_controller_crumbs(parent_object.app, parent_object)
     
-    if change.nil?
-      add_crumb 'Changes'
-    else
-      add_crumb 'Changes', app_activity_changes_path(activity.app, activity)
+    add_crumb 'Changes'
+    
+    if object
+      add_crumb object.to_s
     end
   end
 end
