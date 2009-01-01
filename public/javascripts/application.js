@@ -1,4 +1,7 @@
 // Brazil namespace
+
+jQuery.ajaxSetup({dataType: 'html'})
+
 jQuery.brazil = {
   move: {
     scrollable: function(id) {
