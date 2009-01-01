@@ -1,0 +1,27 @@
+ResouceControllerRespondTo
+==========================
+
+Extends ResourceController plugin for Rails to make it respond_to .xml and .json formats
+
+ResourceController URL: http://github.com/giraffesoft/resource_controller/
+This plugin URL:        http://github.com/jesperronn/resource_controller_respond_to/ 
+
+
+
+Example
+=======
+
+Just drop this in your plugins folder.                     
+Also, make sure this plugin is loaded AFTER ResourceController
+
+You may also want to add the following line to your environment.rb -- in case it's not working
+config.plugins = [ :resource_controller, :resource_controller_respond_to, :all ]
+
+
+
+
+Based on code by Florent Piteau and Joe Fiorini... Jesper merely provided the glue and packed as plugin. 
+See http://groups.google.com/group/resource_controller/browse_thread/thread/ec9100db655bc5a9  
+for the complete discussion
+
+Copyright (c) 2008 Jesper Rønn-Jensen (www.justaddwater.dk), released under the MIT license   
