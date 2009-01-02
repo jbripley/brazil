@@ -1,5 +1,5 @@
 # App 1
-app-1-dev:
+app_1_dev:
     id: 1
     name: "Activity 1 Development"
     description: "Test case for brazil"
@@ -9,7 +9,7 @@ app-1-dev:
     updated_at: '2008-11-10 00:00:00'
     app_id: 1
 
-app-1-versioned:
+app_1_versioned:
     id: 2
     name: "Activity 2 Versioned"
     description: "Test case for brazil"
@@ -19,7 +19,7 @@ app-1-versioned:
     updated_at: '2008-11-12 00:00:00'
     app_id: 1
 
-app-1-deployed:
+app_1_deployed:
     id: 3
     name: "Activity 3 Deployed"
     description: "Test case for brazil"
@@ -29,7 +29,7 @@ app-1-deployed:
     updated_at: '2008-12-03 00:00:00'
     app_id: 1
     
-app-1-dev-2:
+app_1_dev_2:
     id: 7
     name: "Actvity 7 Development"
     description: "Test case for brazil"
@@ -39,7 +39,7 @@ app-1-dev-2:
     updated_at: '2008-11-10 00:00:00'
     app_id: 1
 
-app-1-dev-3:
+app_1_dev_3:
     id: 8
     name: "Activity 8 Development"
     description: "Test case for brazil"
@@ -50,7 +50,7 @@ app-1-dev-3:
     app_id: 1
 
 # App 2
-app-2-dev:
+app_2_dev:
     id: 4
     name: "Activity 4 Development"
     description: "Test case for brazil"
@@ -60,7 +60,7 @@ app-2-dev:
     updated_at: '2008-11-10 00:00:00'
     app_id: 2
 
-app-2-versioned:
+app_2_versioned:
     id: 5
     name: "Activity 5 Versioned"
     description: "Test case for brazil"
@@ -70,7 +70,7 @@ app-2-versioned:
     updated_at: '2008-11-12 00:00:00'
     app_id: 2
 
-app-2-deployed:
+app_2_deployed:
     id: 6
     name: "Activity 6 Deployed"
     description: "Test case for brazil"
@@ -80,7 +80,7 @@ app-2-deployed:
     updated_at: '2008-12-03 00:00:00'
     app_id: 2
 
-app-2-dev-2:
+app_2_dev_2:
     id: 9
     name: "Activity 9 Development"
     description: "Test case for brazil"
@@ -91,7 +91,7 @@ app-2-dev-2:
     app_id: 2
 
 # App 3
-app-3-dev:
+app_3_dev:
     id: 10
     name: "Activity 10 Development"
     description: "Test case for brazil"

@@ -1,11 +1,11 @@
-app-1:
+app_1:
   id: 1
   name: 'App 1'
 
-app-2:
+app_2:
   id: 2
   name: 'App 2'
 
-app-3:
+app_3:
   id: 3
   name: 'App 3'
