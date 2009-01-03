@@ -1,6 +1,6 @@
 module ActivitiesHelper
   def activity_author(activity)
-    Change.find_by_activity_id(activity.id, :order => 'created_at DESC').dba
+    activity.changes(:order => 'created_at DESC').first.dba
   end
   
   def activity_show_dev_actions(activity)
@@ -11,9 +11,9 @@ module ActivitiesHelper
     counts = Array.new
     case activity.state
       when Activity::STATE_DEVELOPMENT
-         counts << ['Suggested', Change.count(:all, :conditions => {:activity_id => activity.id, :state => [Change::STATE_SUGGESTED]})]
+         counts << ['Suggested', activity.changes.count(:all, :conditions => {:state => [Change::STATE_SUGGESTED]})]
       when Activity::STATE_DEPLOYED
-        counts = Version.count(:state, :group => 'state', :conditions => {:activity_id => activity.id, :state => [Version::STATE_CREATED, Version::STATE_TESTED]}).collect do |count|
+        counts = activity.versions.count(:state, :group => 'state', :conditions => {:state => [Version::STATE_CREATED, Version::STATE_TESTED]}).collect do |count|
           [count.first.capitalize, count.last]
         end        
     end

@@ -11,8 +11,8 @@ class ActivitiesController < ApplicationController
   index.wants.atom
 
   show.before do
-    @change = Change.new(:activity_id => @activity.id)
-    latest_change = Change.find_by_activity_id_and_state(@activity.id, [Change::STATE_EXECUTED, Change::STATE_SAVED], :order => 'created_at DESC')
+    @change = Change.new(:activity_id => params[:activity_id])
+    latest_change = Change.find_by_activity_id_and_state(params[:activity_id], [Change::STATE_EXECUTED, Change::STATE_SAVED], :order => 'created_at DESC')
     if latest_change
       @change.dba = latest_change.dba
       @change.developer = latest_change.developer
