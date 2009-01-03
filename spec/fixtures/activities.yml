@@ -3,7 +3,7 @@ app_1_dev:
     id: 1
     name: "Activity 1 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'
@@ -33,7 +33,7 @@ app_1_dev_2:
     id: 7
     name: "Actvity 7 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'
@@ -43,7 +43,7 @@ app_1_dev_3:
     id: 8
     name: "Activity 8 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'
@@ -54,7 +54,7 @@ app_2_dev:
     id: 4
     name: "Activity 4 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'
@@ -84,7 +84,7 @@ app_2_dev_2:
     id: 9
     name: "Activity 9 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'
@@ -95,7 +95,7 @@ app_3_dev:
     id: 10
     name: "Activity 10 Development"
     description: "Test case for brazil"
-    schema: 'brazil_test'
+    schema: 'brazil_dev'
     state: 'development'
     created_at: '2008-11-09 00:00:00'
     updated_at: '2008-11-10 00:00:00'

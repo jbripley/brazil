@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-dev-1:
+dev_1:
   id: 1
   db_alias: 'Dev 1'
   host: dev1.db.example.com
@@ -8,7 +8,7 @@ dev-1:
   db_env: dev
   db_type: MySQL
 
-test-1:
+test_1:
   id: 2
   db_alias: 'Test 1'
   host: test1.db.example.com
@@ -16,15 +16,7 @@ test-1:
   db_env: test
   db_type: MySQL
 
-prod-1:
-  id: 3
-  db_alias: 'Prod 1'
-  host: prod1.db.example.com
-  port: 3306
-  db_env: prod
-  db_type: MySQL
-
-dev-2:
+dev_2:
   id: 4
   db_alias: 'Dev 2'
   host: dev2.db.example.com
@@ -32,19 +24,11 @@ dev-2:
   db_env: dev
   db_type: MySQL
 
-test-2:
+test_2:
   id: 5
   db_alias: 'Test 2'
   host: test2.db.example.com
   port: 3409
   db_env: test
-  db_type: MySQL
-
-prod-2:
-  id: 6
-  db_alias: 'Prod 2'
-  host: 10.0.30.68
-  port: 3258
-  db_env: prod
   db_type: MySQL
 
