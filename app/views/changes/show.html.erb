@@ -2,4 +2,4 @@
   <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
 <% end %>
 
-<%= render :partial => 'change', :locals => {:change => @change} %>
+<%= render :partial => 'change', :locals => {:change => @change, :activity => @activity} %>

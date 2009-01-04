@@ -14,7 +14,7 @@ class ChangesController < ApplicationController
     end
   
     respond_to do |format|
-      if @change.valid? && @change.use_sql(params[:change][:sql], params[:db_username], params[:db_password]) && @change.save
+      if @change.valid? && @change.use_sql(@change.sql, params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Database change was successfully created.'
         format.html do
           if request.xhr?
@@ -28,7 +28,7 @@ class ChangesController < ApplicationController
       else
         format.html do
           if request.xhr?
-            render :partial => "changes/new", :locals => {:change => @change}, :status => :unprocessable_entity
+            render :partial => "new", :locals => {:change => @change, :activity => @activity}, :status => :unprocessable_entity
           else
             render :action => "new"
           end
@@ -54,7 +54,7 @@ class ChangesController < ApplicationController
     end
     
     respond_to do |format|
-      if @change.valid? && @change.use_sql(params[:change][:sql], params[:db_username], params[:db_password]) && @change.save
+      if @change.valid? && @change.use_sql(@change.sql, params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Change was successfully updated.'
         format.html do
           if request.xhr?
@@ -70,8 +70,6 @@ class ChangesController < ApplicationController
           if request.xhr?
             render :action => "edit", :layout => false, :status => :unprocessable_entity
           else
-            add_app_crumbs(@change.activity, @change)
-            add_crumb 'Edit'
             render :action => "edit"
           end
         end

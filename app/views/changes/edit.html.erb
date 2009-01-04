@@ -1,7 +1,7 @@
 <fieldset id="edit_change_fieldset">
-	<legend>Edit database change for <%=h @change.activity %></legend>
+	<legend>Edit database change for <%=h @activity %></legend>
 	<a href="#" class="form_close" style="display: none;"><img src="/images/forms/x.gif" /></a>
-	<% form_for(@change, :url => app_activity_change_path(@change.activity.app, @change.activity)) do |f| %>
+	<% form_for(@change, :url => app_activity_change_path(@activity.app, @activity, @change)) do |f| %>
     <%= render :partial => "changes/form", :locals => {:f => f} %>
     <p>
       <%= f.submit 'Save & Execute', :name => 'edit_change_execute_button' %>
