@@ -6,7 +6,6 @@ describe "/flash/notice" do
     render 'flash/notice'
   end
   
-  #Delete this example and add some real ones or delete this file
   it "should display the flash notice" do
     response.should have_text(/Test\ Notice/)
   end
