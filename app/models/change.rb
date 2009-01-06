@@ -66,7 +66,7 @@ class Change < ActiveRecord::Base
       return db_instance if db_instance.dev?
     end
     
-    raise Brazil::NoDbInstanceException, "#{activity} has no #{DbInstance::ENV_DEV} database instance set. Use Edit Activity to set one."
+    raise Brazil::NoDBInstanceException, "#{activity} has no #{DbInstance::ENV_DEV} database instance set. Use Edit Activity to set one."
   end
   
   def check_correct_state

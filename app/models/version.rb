@@ -10,14 +10,11 @@ class Version < ActiveRecord::Base
   has_many :db_instance_version
   has_many :db_instances, :through => :db_instance_version
   
-  validates_associated :db_instances
-  validates_associated :activity
-  
   validates_presence_of :schema, :schema_version, :update_sql, :rollback_sql
   
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
-  def run_sql(update_sql, rollback_sql, db_username, db_password)
+  def run_sql(generate_update_sql, generate_rollback_sql, db_username, db_password)
     notice = nil
     
     case "#{state}-#{state_was}"
@@ -30,14 +27,14 @@ class Version < ActiveRecord::Base
       end
     when "#{STATE_TESTED}-#{STATE_CREATED}" # tested
       begin
-        db_instance_test.execute_sql(update_sql, db_username, db_password, schema)
+        db_instance_test.execute_sql(generate_update_sql.call, db_username, db_password, schema)
         notice = "Executed Update SQL on #{db_instance_test}"
       rescue Brazil::DBException => exception
         errors.add_to_base("Failed to execute Update SQL (#{exception})")
       end
     when "#{STATE_CREATED}-#{STATE_TESTED}" # rollback
       begin
-        db_instance_test.execute_sql(rollback_sql, db_username, db_password, schema)
+        db_instance_test.execute_sql(generate_rollback_sql.call, db_username, db_password, schema)
         notice = "Executed Rollback SQL on #{db_instance_test}"
       rescue Brazil::DBException => exception
         errors.add_to_base("Failed to execute Rollback SQL (#{exception})")
@@ -60,11 +57,11 @@ class Version < ActiveRecord::Base
   end
   
   def db_instance_test
-    test_db_instances = DbInstance.find(db_instance_ids, :conditions => {:db_env => DbInstance::ENV_TEST})
-    if test_db_instances.first
-      test_db_instances.first
+    test_db_instance = DbInstance.find(db_instance_ids, :conditions => {:db_env => DbInstance::ENV_TEST}).first
+    if test_db_instance
+      test_db_instance
     else
-      raise Brazil::NoDbInstanceException, "Please select a Test Database for Version"
+      raise Brazil::NoDBInstanceException, "Please select a Test Database for Version"
     end
   end
   

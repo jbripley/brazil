@@ -1,4 +1,4 @@
-version-1-activity-2:
+version_1_activity_2:
   id: 1
   schema: brazil_test
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
@@ -8,7 +8,7 @@ version-1-activity-2:
   state: 'created'
   activity_id: 2
 
-version-2-activity-2:
+version_2_activity_2:
   id: 2
   schema: brazil_test
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
@@ -18,7 +18,7 @@ version-2-activity-2:
   state: 'tested'
   activity_id: 2
 
-version-3-activity-3:
+version_3_activity_3:
   id: 3
   schema: foo_test
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
@@ -29,7 +29,7 @@ version-3-activity-3:
   deploy_note: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   activity_id: 3
   
-version-4-activity-3:
+version_4_activity_3:
   id: 4
   schema: foo_test
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"

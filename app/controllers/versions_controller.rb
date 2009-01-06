@@ -10,6 +10,8 @@ class VersionsController < ApplicationController
   
   # POST /apps/:app_id/activities/:activity_id/versions.format
   def create
+    @activity = Activity.find(params[:activity_id])
+    
     @version = Version.new(params[:version])
     @version.activity_id = params[:activity_id]
     @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
@@ -17,9 +19,9 @@ class VersionsController < ApplicationController
     respond_to do |format|
       if @version.errors.empty? && @version.save
         flash[:notice] = 'Version was successfully created.'
-        format.html { redirect_to app_activity_version_path(@version.activity.app, @version.activity, @version) }
-        format.xml { render :xml => @version, :status => :created, :location => app_activity_version_path(@version.activity.app, @version.activity, @version) }
-        format.json { render :json => @version, :status => :created, :location => app_activity_version_path(@version.activity.app, @version.activity, @version) }
+        format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
+        format.xml { render :xml => @version, :status => :created, :location => app_activity_version_path(@activity.app, @activity, @version) }
+        format.json { render :json => @version, :status => :created, :location => app_activity_version_path(@activity.app, @activity, @version) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
@@ -30,14 +32,18 @@ class VersionsController < ApplicationController
   
   # PUT /apps/:app_id/activities/:activity_id/versions/1.format
   def update
-    @version = Version.find(params[:id])
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions(:activity_id => params[:id])
     @version.attributes = params[:version]
-  
-    flash[:notice] = @version.run_sql(create_update_sql(@version), create_rollback_sql(@version), params[:db_username], params[:db_password])
+
+    generate_update_sql = Proc.new {create_update_sql(@version)}
+    generate_rollback_sql = Proc.new {create_rollback_sql(@version)}
+
+    flash[:notice] = @version.run_sql(generate_update_sql, generate_rollback_sql, params[:db_username], params[:db_password])
   
     respond_to do |format|
       if @version.errors.empty? && @version.save
-        format.html { redirect_to app_activity_version_path(@version.activity.app, @version.activity, @version) }
+        format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
       else

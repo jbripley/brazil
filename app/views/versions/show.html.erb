@@ -2,7 +2,7 @@
   <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
 <% end %>
 
-<%= render :partial => "shared/activity", :locals => {:activity => @version.activity} %>
+<%= render :partial => "shared/activity", :locals => {:activity => @activity} %>
 <div class="clearfix">
   <%= render :partial => 'version', :locals => {:version => @version} %>
 </div>
@@ -14,7 +14,7 @@
   <% if version_testable(@version) %>
   <fieldset class="span-8">
     <legend>Deploy on <%=h @version.db_instance_test %></legend>
-    <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
+    <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
       <%= render :partial => 'shared/db_credentials_form' %>
@@ -32,7 +32,7 @@
   <% if version_rollbackable(@version) %>
   <fieldset class="span-8">
     <legend>Rollback from <%= @version.db_instance_test %></legend>
-    <% form_for(@version, :url => app_activity_version_path(@version.activity.app, @version.activity, @version)) do |f| %>
+    <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
       <%= render :partial => 'shared/db_credentials_form' %>
