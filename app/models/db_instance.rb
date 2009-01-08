@@ -21,8 +21,8 @@ class DbInstance < ActiveRecord::Base
   end
   
   def self.db_types
-    [TYPE_MYSQL] # TODO: Only MySQL supported implemented for now
-    # [TYPE_MYSQL, TYPE_ODBC, TYPE_ORACLE, TYPE_POSTGRES, TYPE_SQLITE, TYPE_SQLITE3]
+    # TODO: Only MySQL and Oracle support implemented for now
+    [TYPE_MYSQL, TYPE_ORACLE] #, TYPE_ODBC, TYPE_POSTGRES, TYPE_SQLITE, TYPE_SQLITE3]
   end
   
   def dev?
@@ -103,7 +103,9 @@ class DbInstance < ActiveRecord::Base
       connection = DBI.connect("DBI:Mysql:#{schema}:#{host}:#{port}", username, password)
       connection.do('SET NAMES utf8')
     # when TYPE_ODBC
-    # when TYPE_ORACLE
+    when TYPE_ORACLE
+      oracle_host, oracle_instance = host.split('/')
+      connection = DBI.connect("DBI:Mysql:#{oracle_host}:#{port}:#{oracle_instance}", username, password)
     # when TYPE_POSTGRES
     # when TYPE_SQLITE
     # when TYPE_SQLITE3
