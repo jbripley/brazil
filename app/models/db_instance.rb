@@ -100,7 +100,7 @@ class DbInstance < ActiveRecord::Base
     connection = nil
     case db_type
     when TYPE_MYSQL
-      connection = DBI.connect("DBI:Mysql:#{schema}:#{host}:#{port}", username, password)
+      connection = DBI.connect("DBI:Mysql:database=#{schema};host=#{host};port=#{port}", username, password)
       connection.do('SET NAMES utf8')
     # when TYPE_ODBC
     when TYPE_ORACLE
