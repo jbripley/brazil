@@ -105,7 +105,7 @@ class DbInstance < ActiveRecord::Base
     # when TYPE_ODBC
     when TYPE_ORACLE
       oracle_host, oracle_instance = host.split('/')
-      connection = DBI.connect("DBI:OCI8:#{oracle_host}:#{port}:#{oracle_instance}", username, password)
+      connection = DBI.connect("DBI:OCI8://#{oracle_host}:#{port}/#{oracle_instance}", username, password)
     # when TYPE_POSTGRES
     # when TYPE_SQLITE
     # when TYPE_SQLITE3
