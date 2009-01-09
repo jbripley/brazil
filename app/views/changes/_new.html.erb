@@ -1,10 +1,10 @@
 <fieldset id="new_change_fieldset">
-	<legend>New database change for <%=h @activity %></legend>
-	<% form_for(@change, :url => app_activity_changes_path(@activity.app, @activity)) do |f| %>
+	<legend>New database change for <%=h activity %></legend>
+	<% form_for(change, :url => app_activity_changes_path(activity.app, activity)) do |f| %>
     <%= render :partial => "changes/form", :locals => {:f => f} %>
     <p>
-      <%= f.submit "Save & Execute",:name => 'create_change_execute_button', :disabled => !@activity.development? %>
-      <%= f.submit "Only Save", :disabled => !@activity.development?, :id => 'save_submit', :name => 'save_submit' %>
+      <%= f.submit "Save & Execute",:name => 'create_change_execute_button', :disabled => !activity.development? %>
+      <%= f.submit "Only Save", :disabled => !activity.development?, :id => 'save_submit', :name => 'save_submit' %>
     </p>
 	<% end %>
 </fieldset>
