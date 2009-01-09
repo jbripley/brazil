@@ -4,6 +4,7 @@ class ChangesController < ApplicationController
   
   # POST /apps/:app_id/activities/:activity_id/changes.format
   def create
+    @activity = Activity.find(params[:activity_id])
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
     
@@ -18,13 +19,13 @@ class ChangesController < ApplicationController
         flash[:notice] = 'Database change was successfully created.'
         format.html do
           if request.xhr?
-            render :partial => "change", :collection => @change.activity.changes
+            render :partial => "change", :collection => @activity.changes
           else
-            redirect_to app_activity_path(@change.activity.app, @change.activity)
+            redirect_to app_activity_path(@activity.app, @activity)
           end
         end
-        format.xml  { render :xml => @change, :status => :created, :location => app_activity_change_path(@change.activity.app, @change.activity, @change) }
-        format.json  { render :json => @change, :status => :created, :location => app_activity_change_path(@change.activity.app, @change.activity, @change) }
+        format.xml  { render :xml => @change, :status => :created, :location => app_activity_change_path(@activity.app, @activity, @change) }
+        format.json  { render :json => @change, :status => :created, :location => app_activity_change_path(@activity.app, @activity, @change) }
       else
         format.html do
           if request.xhr?
