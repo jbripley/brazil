@@ -27,7 +27,7 @@ describe DbInstance do
     @db_instance.should be_valid
   end
 
-  describe "checks dev?" do
+  describe "when calling dev?" do
     it "should be true" do
       @db_instance.db_env = DbInstance::ENV_DEV
       @db_instance.dev?.should be_true
@@ -39,7 +39,7 @@ describe DbInstance do
     end
   end
 
-  describe "checks test?" do
+  describe "when calling test?" do
     it "should be true" do
       @db_instance.db_env = DbInstance::ENV_TEST
       @db_instance.test?.should be_true
@@ -51,13 +51,13 @@ describe DbInstance do
     end
   end
 
-  describe "executes a SQL statement" do
+  describe "when calling execute_sql" do
     before(:each) do
       @dbi_handle = mock(DBI::DatabaseHandle)
       @dbi_handle.stub!(:transaction).and_yield(@dbi_handle)
     end
 
-    it "should be a correct SQL statement" do
+    it "should execute correct SQL statement" do
       sql = 'create table foo(bar int, baz varchar(20)'
 
       @dbi_handle.stub!(:do).with(sql)
@@ -66,7 +66,7 @@ describe DbInstance do
       @db_instance.execute_sql(sql, @username, @password, @schema)
     end
 
-    it "should be a faulty SQL statement" do
+    it "should execute a faulty SQL statement" do
       sql = 'creat tabl foo(bar int, baz varchar(20'
 
       @dbi_handle.stub!(:do).with(sql).and_raise(DBI::DatabaseError)
@@ -76,7 +76,7 @@ describe DbInstance do
     end
   end
 
-  describe "when looking for the next schema version" do
+  describe "when calling find_next_schema_version" do
     before(:each) do
       @dbi_handle = mock(DBI::DatabaseHandle)
     end
@@ -107,7 +107,7 @@ describe DbInstance do
     end
   end
 
-  describe "when checking the DB credentials" do
+  describe "when calling check_db_credentials" do
     it "should approve them" do
       setup_handle(mock(DBI::DatabaseHandle))
       @db_instance.check_db_credentials(@username, @password, @schema).should be_true
@@ -119,7 +119,7 @@ describe DbInstance do
     end
   end
 
-  describe "when creating a DB connection" do
+  describe "when calling db_connection" do
     it "should fail to load DBI module" do
       @db_instance.stub!(:require).with('dbi').and_raise(LoadError)
       lambda { @db_instance.send :db_connection, @username, @password, @schema }.should raise_error(Brazil::LoadException)

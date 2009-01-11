@@ -82,7 +82,7 @@ class Version < ActiveRecord::Base
   end
    
   def states
-    ['created', 'tested', 'deployed']
+    [STATE_CREATED, STATE_TESTED, STATE_DEPLOYED]
   end
   
   def to_s
