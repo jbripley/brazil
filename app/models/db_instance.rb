@@ -41,13 +41,11 @@ class DbInstance < ActiveRecord::Base
     db_connection = nil
     begin
       db_connection = db_connection(username, password, schema)
-      db_connection['AutoCommit'] = false
       db_connection.transaction do |dbh|
         sql.strip.split(/;[\n\r]/s).each do |sql_part|
           dbh.do(sql_part.strip)
         end
       end
-      db_connection['AutoCommit'] = true
     rescue DBI::DatabaseError => exception
       raise Brazil::DBExecuteSQLException, exception.errstr
     ensure
@@ -101,7 +99,7 @@ class DbInstance < ActiveRecord::Base
     case db_type
     when TYPE_MYSQL
       connection = DBI.connect("DBI:Mysql:database=#{schema};host=#{host};port=#{port}", username, password)
-      connection.do('SET NAMES utf8')
+      connection.do('SET NAMES utf8') if connection
     # when TYPE_ODBC
     when TYPE_ORACLE
       oracle_host, oracle_instance = host.split('/')
