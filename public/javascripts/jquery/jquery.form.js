@@ -1,6 +1,6 @@
 /*
  * jQuery Form Plugin
- * version: 2.16 (17-OCT-2008)
+ * version: 2.18 (06-JAN-2009)
  * @requires jQuery v1.2.2 or later
  *
  * Examples and documentation at: http://malsup.com/jquery/form/
@@ -67,8 +67,14 @@ $.fn.ajaxSubmit = function(options) {
     if (veto.veto) {
         log('ajaxSubmit: submit vetoed via form-pre-serialize trigger');
         return this;
-   }
+    }
 
+    // provide opportunity to alter form data before it is serialized
+    if (options.beforeSerialize && options.beforeSerialize(this, options) === false) {
+        log('ajaxSubmit: submit aborted via beforeSerialize callback');
+        return this;
+    }    
+   
     var a = this.formToArray(options.semantic);
     if (options.data) {
         options.extraData = options.data;
@@ -151,7 +157,7 @@ $.fn.ajaxSubmit = function(options) {
     function fileUpload() {
         var form = $form[0];
         
-        if ($(':input[@name=submit]', form).length) {
+        if ($(':input[name=submit]', form).length) {
             alert('Error: Form elements must not be named "submit".');
             return;
         }

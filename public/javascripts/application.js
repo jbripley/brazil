@@ -161,7 +161,7 @@ jQuery.brazil = {
         var show_form = this;
         $.get(this.href, function(response) {
           var form_container = $(show_form).parents(settings.form_container);
-          form_container.empty().append(response);
+          form_container.empty().append(response).show('blind');
 
           form_container.find('form').ajaxForm({
             beforeSubmit: function(formData, jqForm, options) {
@@ -187,7 +187,7 @@ jQuery.brazil = {
           $(settings.inserted_fieldset).find('.form_close').click(function() {
             $.get(form_container.children('form').attr('action'), function(response) {
               form_container.replaceWith(response);
-              
+
               settings.done();
             });
             return false;
