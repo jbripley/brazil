@@ -41,6 +41,7 @@ class DbInstance < ActiveRecord::Base
     db_connection = nil
     begin
       db_connection = db_connection(username, password, schema)
+      db_connection['AutoCommit'] = false
       db_connection.transaction do |dbh|
         sql.strip.split(/;[\n\r]/s).each do |sql_part|
           dbh.do(sql_part.strip)
@@ -49,7 +50,10 @@ class DbInstance < ActiveRecord::Base
     rescue DBI::DatabaseError => exception
       raise Brazil::DBExecuteSQLException, exception.errstr
     ensure
-      db_connection.disconnect if db_connection
+      if db_connection
+        db_connection['AutoCommit'] = true
+        db_connection.disconnect
+      end
     end
   end
   

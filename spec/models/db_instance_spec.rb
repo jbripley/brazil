@@ -55,6 +55,8 @@ describe DbInstance do
     before(:each) do
       @dbi_handle = mock(DBI::DatabaseHandle)
       @dbi_handle.stub!(:transaction).and_yield(@dbi_handle)
+      @dbi_handle.stub!(:[]=).with('AutoCommit', false)
+      @dbi_handle.stub!(:[]=).with('AutoCommit', true)
     end
 
     it "should execute correct SQL statement" do
