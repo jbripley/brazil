@@ -1,6 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe AppsController do
+  fixtures :apps
+  
   describe "handling GET /apps" do
 
     before(:each) do
