@@ -33,7 +33,7 @@ class VersionsController < ApplicationController
   # PUT /apps/:app_id/activities/:activity_id/versions/1.format
   def update
     @activity = Activity.find(params[:activity_id])
-    @version = @activity.versions(:activity_id => params[:id])
+    @version = Version.find(params[:id])
     @version.attributes = params[:version]
 
     generate_update_sql = Proc.new {create_update_sql(@version)}
