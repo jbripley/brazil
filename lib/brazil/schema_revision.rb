@@ -40,14 +40,14 @@ module Brazil
   
     def prev
       numbers = to_a
-      numbers[-1] -= 1
+      numbers[-1] -= 1 if numbers[-1] > 0
       SchemaRevision.new(@schema, numbers.join('_'))
     end
 
     def to_s
       "_VERSION_#{@schema.upcase}_#{@version}"
     end
-  
+
     def <=>(other_version)
       if @version.respond_to?(:to_a)
         return to_a <=> other_version.to_a
@@ -56,11 +56,11 @@ module Brazil
         return 1
       end
     end
-  
+
     def include?(other_version)
       return (other_version.to_a.slice(0, to_a.length) <=> to_a) == 0
     end
-  
+
     def to_a
       if @version.respond_to?(:split)
         @version.split('_').collect { |version_number_string| version_number_string.to_i }
