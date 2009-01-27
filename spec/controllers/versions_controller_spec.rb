@@ -70,7 +70,7 @@ describe VersionsController do
     before(:each) do
       @version = mock_model(Version)
       @version.should_receive(:[]=).with('activity_id', 3)
-      @version.should_receive(:update_sql=).with('')
+      @version.should_receive(:update_sql=)
 
       Version.stub!(:new).and_return(@version)
     end
