@@ -207,6 +207,7 @@ describe VersionsController do
       @version.errors.should_receive(:empty?).and_return(true)
       @version.stub!(:run_sql)
 
+      Version.stub!(:find).with('1').and_return(@version)
       @version.stub!(:find).with('1').and_return(@version)
       @activity.stub!(:versions).and_return(@version)
     end
