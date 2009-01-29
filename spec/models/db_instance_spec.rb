@@ -98,7 +98,7 @@ describe DbInstance do
       @dbi_handle.stub!(:tables).and_return(tables)
       setup_handle(@dbi_handle)
 
-      lambda { @db_instance.find_next_schema_version(@username, @password, @schema) }.should raise_error(Brazil::NoVersionTableException)
+      @db_instance.find_next_schema_version(@username, @password, @schema).should be_nil
     end
 
     it "should raise a DB exception" do

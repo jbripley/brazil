@@ -1,11 +1,14 @@
-USE <%= version.schema %>;
 <% version.preparation.strip.split("\n").each do |preparation| %>
 -- <%= preparation %>
 <% end %>
 -- Start version update
+<% if version.schema_revision %>
 RENAME TABLE <%= version.schema_revision.prev %> TO <%= version.schema_revision %>_UPDATE;
+<% end %>
 
 <%= version.update_sql.strip %>
 
 -- End version update
+<% if version.schema_revision %>
 RENAME TABLE <%= version.schema_revision %>_UPDATE TO <%= version.schema_revision %>;
+<% end %>

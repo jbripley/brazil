@@ -207,18 +207,12 @@ describe Version do
       @version.next_schema_version(@db_username, @db_password).should eql(schema_version)
     end
 
-    it "should handle an DB exception" do
-      schema_version = '3_14'
+    it "should find no schema version" do
       db_instance_test = mock_model(DbInstance)
-      db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_raise(Brazil::NoVersionTableException)
-
+      db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_return(nil)
       @version.stub!(:db_instance_test).and_return(db_instance_test)
 
-      errors = mock(ActiveRecord::Errors, :null_object => true)
-      errors.should_receive(:add_to_base)
-      @version.stub!(:errors).and_return(errors)
-
-      @version.next_schema_version(@db_username, @db_password)
+      @version.next_schema_version(@db_username, @db_password).should be_nil
     end
   end
 
@@ -236,9 +230,17 @@ describe Version do
     end
   end
 
-  it "should return a Brazil::SchemaRevision when calling schema_revision" do
-    @version.schema_revision.should == Brazil::SchemaRevision.new(@version.schema, @version.schema_version)
+  describe "when calling schema_revision" do
+    it "should return a Brazil::SchemaRevision if there is a schema_version" do
+      @version.schema_revision.should == Brazil::SchemaRevision.new(@version.schema, @version.schema_version)
+    end
+
+    it "should return nil if there is no schema_version" do
+      @version.schema_version = nil
+      @version.schema_revision.should be_nil
+    end
   end
+
 
   describe "when calling created?" do
     it "should be true" do

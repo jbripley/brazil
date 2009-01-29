@@ -10,7 +10,7 @@ class Version < ActiveRecord::Base
   has_many :db_instance_version
   has_many :db_instances, :through => :db_instance_version
   
-  validates_presence_of :schema, :schema_version, :update_sql, :rollback_sql
+  validates_presence_of :schema, :update_sql, :rollback_sql
   
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
@@ -20,7 +20,7 @@ class Version < ActiveRecord::Base
     case "#{state}-#{state_was}"
     when "#{STATE_CREATED}-#{STATE_CREATED}" # update
       begin
-        self.schema_version = db_instance_test.find_next_schema_version(db_username, db_password, schema)
+        self.schema_version = next_schema_version(db_username, db_password)
         notice = 'Version was successfully updated.'
       rescue Brazil::DBException => exception
         errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
@@ -49,11 +49,7 @@ class Version < ActiveRecord::Base
   end
   
   def next_schema_version(db_username, db_password)
-    begin
-      db_instance_test.find_next_schema_version(db_username, db_password, schema)
-    rescue Brazil::NoVersionTableException => exception
-      errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
-    end
+     db_instance_test.find_next_schema_version(db_username, db_password, schema)  
   end
   
   def db_instance_test
@@ -66,7 +62,11 @@ class Version < ActiveRecord::Base
   end
   
   def schema_revision
-    Brazil::SchemaRevision.new(schema, schema_version)
+    if schema_version
+      Brazil::SchemaRevision.new(schema, schema_version)
+    else
+      nil
+    end
   end
   
   def created?

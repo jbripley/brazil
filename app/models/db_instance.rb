@@ -58,7 +58,6 @@ class DbInstance < ActiveRecord::Base
   end
   
   def find_next_schema_version(username, password, schema)
-    schema_version = nil
     db_connection = nil
     begin
       db_connection = db_connection(username, password, schema)
@@ -74,7 +73,7 @@ class DbInstance < ActiveRecord::Base
       db_connection.disconnect if db_connection
     end
     
-    raise Brazil::NoVersionTableException, "'#{schema}' has no version table, please create one"
+    return nil
   end
   
   def check_db_credentials(username, password, schema)
