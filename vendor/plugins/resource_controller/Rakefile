@@ -1,5 +1,21 @@
-Dir.chdir('test')
-load 'Rakefile'
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "resource_controller"
+    s.summary = "Rails RESTful controller abstraction plugin."
+    s.email = "james@giraffesoft.ca"
+    s.homepage = "http://jamesgolick.com/resource_controller"
+    s.description = ""
+    s.authors = ["James Golick"]
+    s.files = FileList["[A-Z]*.*", "{bin,generators,lib,test,spec,rails}/**/*"]
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
 
 desc 'Generate documentation for the ResourceController plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
@@ -8,6 +24,12 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('../README.rdoc')
   rdoc.rdoc_files.include('../lib/**/*.rb')
+end
+
+task :rc_test do
+  Dir.chdir('test')
+  load 'Rakefile'
+  Rake::Task['test'].execute
 end
 
 task :upload_docs => :rdoc do
@@ -20,3 +42,5 @@ task :upload_docs => :rdoc do
   puts "Deleting rdoc"
   `rm -Rf ../rdoc`
 end
+
+task :default => :rc_test
