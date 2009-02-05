@@ -43,7 +43,8 @@ class DbInstance < ActiveRecord::Base
       db_connection = db_connection(username, password, schema)
       db_connection['AutoCommit'] = false
       db_connection.transaction do |dbh|
-        sql.strip.split(/;[\n\r]/s).each do |sql_part|
+        sql_no_comments = sql.gsub(/\-\-\s.*?[\n\r]/, '')
+        sql_no_comments.strip.split(/;(?:[\n\r])?/s).each do |sql_part|
           dbh.do(sql_part.strip)
         end
       end
