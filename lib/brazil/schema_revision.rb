@@ -26,39 +26,19 @@ module Brazil
     end
     
     def to_s
-      if(@major && @minor && @patch)
-        "#{@major}_#{@minor}_#{@patch}" 
-      elsif(@major && @minor)
-        "#{@major}_#{@minor}" 
-      elsif @major
-        "#{@major}"
-      end
+      to_a.join('_')
     end
 
     def <=>(other_version)
-      if other_version.respond_to?(:to_a)
-        return to_a <=> other_version.to_a
-      else
-        super
-      end
+      to_a <=> other_version.to_a
     end
 
     def include?(other_version)
-      if other_version.respond_to?(:to_a)
-        (other_version.to_a.slice(0, to_a.length) <=> to_a) == 0
-      else
-        super
-      end
+      (other_version.to_a.slice(0, to_a.length) <=> to_a) == 0
     end
 
     def to_a
-      if(@major && @minor && @patch)
-        [@major, @minor, @patch] 
-      elsif(@major && @minor)
-        [@major, @minor]
-      elsif @major
-        [@major]
-      end
+      [@major, @minor, @patch].compact
     end
     
     def major

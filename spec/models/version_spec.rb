@@ -75,7 +75,7 @@ describe Version do
       end
 
       it "should find the next schema version" do
-        schema_version = '3_14'
+        schema_version = '3_14_2'
         db_instance_test = mock_model(DbInstance)
         db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_return(schema_version)
 
@@ -199,7 +199,7 @@ describe Version do
     end
 
     it "should return the next schema version" do
-      schema_version = '3_14'
+      schema_version = '3_14_2'
       db_instance_test = mock_model(DbInstance)
       db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_return(schema_version)
       @version.stub!(:db_instance_test).and_return(db_instance_test)
