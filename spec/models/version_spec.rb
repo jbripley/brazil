@@ -173,9 +173,16 @@ describe Version do
       end
     end
 
-    it "should note that version is deployed" do
+    it "should note that the tested version is deployed" do
       @version.stub!(:state).and_return(Version::STATE_DEPLOYED)
       @version.stub!(:state_was).and_return(Version::STATE_TESTED)
+
+      @version.run_sql(nil, nil, @db_username, @db_password).should_not be_nil
+    end
+    
+    it "should note that the created version is deployed" do
+      @version.stub!(:state).and_return(Version::STATE_DEPLOYED)
+      @version.stub!(:state_was).and_return(Version::STATE_CREATED)
 
       @version.run_sql(nil, nil, @db_username, @db_password).should_not be_nil
     end
