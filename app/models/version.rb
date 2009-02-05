@@ -49,7 +49,7 @@ class Version < ActiveRecord::Base
   end
   
   def next_schema_version(db_username, db_password)
-     db_instance_test.find_next_schema_version(db_username, db_password, schema)  
+    db_instance_test.find_next_schema_version(db_username, db_password, schema)
   end
   
   def db_instance_test
@@ -63,7 +63,7 @@ class Version < ActiveRecord::Base
   
   def schema_revision
     if schema_version
-      Brazil::SchemaRevision.new(schema, schema_version)
+      Brazil::SchemaRevision.from_string(schema_version)
     else
       nil
     end

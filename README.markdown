@@ -18,8 +18,17 @@ Mongrel is recommended for local development and Phusion Passenger is recommende
 ## Running
 Brazil is a standard Ruby on Rails application. After following the installation steps, start it by running, for example, the server script: `./script/server`
 
-## Current limitations
-Brazil requires a version table in the format `_VERSION_SCHEMA_NAME_X_Y_Z`, to exist in any database schema that you want to deploy changes to.  
+## Schema Version Table
+Brazil requires a `schema_versions` table as specified below to function correctly. If it does not exist, it will try to create it when deploying a version for the first time.
+
+    CREATE TABLE schema_versions (
+    major int NOT NULL,
+    minor int NOT NULL,
+    patch int NOT NULL,
+    created int NOT NULL,
+    description varchar(255),
+    PRIMARY KEY (major, minor, patch)
+    );
 
 ## Example database
 You can setup a example database with some example Database Instances, Apps, Activities, Changes and Versions. This will reset the database, so please make a copy of **db/development.sqlite3** if there is something you want to keep. Run `rake brazil:reset` to setup the example db.

@@ -18,20 +18,12 @@
   	<span><strong>Schema</strong> <%=h version.schema %></span>
   </div>
   
-  <% if version.deploy_note %>
-  <div class="span-7">
-  	<span><strong>Deploy Note</strong> <%=h version.deploy_note %></span>
-  </div>
-  <% elsif version_tested(version) %>
-  <div class="span-7">
+  <div class="span-2">
     <% form_for(version, :url => app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
       <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
-      <%= f.label :deploy_note, 'Deploy Note' %><br />
-      <%= f.text_area :deploy_note, :class => 'span-7' %><br />
 	    <%= f.submit 'Deployed' %>
 	  <% end %>
 	</div>
-	<% end %>
 	
 	<div class="append-1">
     <ul class="actions">

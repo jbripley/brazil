@@ -84,28 +84,22 @@ describe DbInstance do
     end
 
     it "should find a schema version" do
-      tables = mock(Array)
-      tables.stub!(:each).and_yield('foo_table').and_yield('baz_table').and_yield('_VERSION_FOO_3_14')
-      @dbi_handle.stub!(:tables).and_return(tables)
+      latest_version_row = mock(DBI::Row)
+      latest_version_row.stub!(:[]).with('major').and_return('3')
+      latest_version_row.stub!(:[]).with('minor').and_return('14')
+      latest_version_row.stub!(:[]).with('patch').and_return(nil)
+      
+      @dbi_handle.stub!(:select_one).with("SELECT * FROM #{@schema}.schema_versions ORDER BY major, minor, patch DESC").and_return(latest_version_row)
       setup_handle(@dbi_handle)
 
       @db_instance.find_next_schema_version(@username, @password, @schema).should eql('3_15')
     end
 
     it "should find no schema version" do
-      tables = mock(Array)
-      tables.stub!(:each).and_yield('foo_table').and_yield('baz_table')
-      @dbi_handle.stub!(:tables).and_return(tables)
+      @dbi_handle.stub!(:select_one).with("SELECT * FROM #{@schema}.schema_versions ORDER BY major, minor, patch DESC").and_return(nil)
       setup_handle(@dbi_handle)
 
       @db_instance.find_next_schema_version(@username, @password, @schema).should be_nil
-    end
-
-    it "should raise a DB exception" do
-      @dbi_handle.stub!(:tables).and_raise(DBI::DatabaseError)
-      setup_handle(@dbi_handle)
-
-      lambda { @db_instance.find_next_schema_version(@username, @password, @schema) }.should raise_error(Brazil::DBException)
     end
   end
 

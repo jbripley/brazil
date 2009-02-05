@@ -1,3 +1,5 @@
+require 'dbi'
+
 module VersionsHelper
   def version_testable(version)
     (version.state == Version::STATE_CREATED)
@@ -8,4 +10,13 @@ module VersionsHelper
     (version.state == Version::STATE_TESTED)
   end
   alias :version_tested :version_rollbackable
+  
+  def sql_escape(object)
+    escaped_object = DBI::TypeUtil.convert(nil, object)
+    if escaped_object
+      escaped_object
+    else
+      "NULL"
+    end
+  end
 end

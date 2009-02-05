@@ -17,7 +17,6 @@ describe "/versions/show.html.erb" do
     @version.should_receive(:state).at_least(:once).and_return("created")
     @version.should_receive(:schema).and_return("brazil_test")
     @version.should_receive(:schema_version).and_return("2_23")
-    @version.should_receive(:deploy_note).twice.and_return("DeployNote")
     @version.stub!(:updated_at).and_return(Time.zone.now)
     @version.stub!(:preparation).and_return("DoFooThenBar")
     @version.stub!(:update_sql).and_return("CreateTableFoo")
@@ -38,7 +37,6 @@ describe "/versions/show.html.erb" do
     response.should have_text(/created/)
     response.should have_text(/brazil_test/)
     response.should have_text(/2_23/)
-    response.should have_text(/DeployNote/)
     response.should have_text(/VersionedUpdateSQL/)
     response.should have_text(/VersionedRollbackSQL/)  
   end

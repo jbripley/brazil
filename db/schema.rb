@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081113161743) do
+ActiveRecord::Schema.define(:version => 20090204131813) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20081113161743) do
     t.string   "schema"
     t.string   "schema_version"
     t.string   "preparation"
-    t.string   "deploy_note"
     t.integer  "activity_id"
     t.text     "update_sql"
     t.text     "rollback_sql"

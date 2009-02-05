@@ -2,13 +2,19 @@
 -- <%= preparation %>
 <% end %>
 -- Start version update
-<% if version.schema_revision %>
-RENAME TABLE <%= version.schema_revision.prev %> TO <%= version.schema_revision %>_UPDATE;
-<% end %>
-
 <%= version.update_sql.strip %>
 
 -- End version update
-<% if version.schema_revision %>
-RENAME TABLE <%= version.schema_revision %>_UPDATE TO <%= version.schema_revision %>;
+<% if version.schema_revision.nil? %>
+CREATE TABLE schema_versions (
+major int NOT NULL,
+minor int NOT NULL,
+patch int NOT NULL,
+created int NOT NULL,
+description varchar(255),
+PRIMARY KEY (major, minor, patch)
+) /*! ENGINE = innodb DEFAULT CHARSET = utf8 */;
+INSERT INTO schema_versions(major, minor, patch, created, description) VALUES(1, 0, 0, <%= Time.now.to_i %>, <%= sql_escape(version.activity.description) %>);
+<% else %>
+INSERT INTO schema_versions(major, minor, patch, created, description) VALUES(<%= sql_escape(version.schema_revision.major) %>, <%= sql_escape(version.schema_revision.minor) %>, <%= sql_escape(version.schema_revision.patch) %>, <%= Time.now.to_i %>, <%= sql_escape(version.activity.description) %>);
 <% end %>

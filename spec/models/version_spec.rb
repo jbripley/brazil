@@ -232,7 +232,7 @@ describe Version do
 
   describe "when calling schema_revision" do
     it "should return a Brazil::SchemaRevision if there is a schema_version" do
-      @version.schema_revision.should == Brazil::SchemaRevision.new(@version.schema, @version.schema_version)
+      @version.schema_revision.should == Brazil::SchemaRevision.from_string(@version.schema_version)
     end
 
     it "should return nil if there is no schema_version" do

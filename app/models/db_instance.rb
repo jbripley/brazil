@@ -58,22 +58,21 @@ class DbInstance < ActiveRecord::Base
   end
   
   def find_next_schema_version(username, password, schema)
+    schema_version = nil
     db_connection = nil
     begin
       db_connection = db_connection(username, password, schema)
-      db_connection.tables.each do |table_name|
-        schema_revision = Brazil::SchemaRevision.from_string(table_name)
-        if schema_revision
-          return schema_revision.version.next
-        end
+      latest_version_row = db_connection.select_one("SELECT * FROM #{schema}.schema_versions ORDER BY major, minor, patch DESC")
+      if latest_version_row
+        schema_version = Brazil::SchemaRevision.new(latest_version_row['major'], latest_version_row['minor'], latest_version_row['patch']).next.to_s
       end
     rescue DBI::DatabaseError => exception
-      raise Brazil::DBException, exception.errstr
+      # No schema_versions table found, return no schema version
     ensure
       db_connection.disconnect if db_connection
     end
     
-    return nil
+    return schema_version
   end
   
   def check_db_credentials(username, password, schema)

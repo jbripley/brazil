@@ -16,7 +16,6 @@ describe "/versions/index.html.erb" do
     version_98.should_receive(:state).at_least(:once).and_return("created")
     version_98.should_receive(:schema).and_return("brazil_test")
     version_98.should_receive(:schema_version).and_return("2_23")
-    version_98.should_receive(:deploy_note).twice.and_return("DeployNote")  
     version_98.stub!(:updated_at).and_return(Time.zone.now)
     version_98.stub!(:db_instances).and_return([db_instances(:test_1)])
     version_98.stub!(:activity).and_return(@activity)
@@ -25,7 +24,6 @@ describe "/versions/index.html.erb" do
     version_99.should_receive(:state).at_least(:once).and_return("tested")
     version_99.should_receive(:schema).and_return("brazil_test")
     version_99.should_receive(:schema_version).and_return("3_1")  
-    version_99.should_receive(:deploy_note).twice.and_return("DeployNote")
     version_99.stub!(:updated_at).and_return(Time.zone.now)
     version_99.stub!(:db_instances).and_return([db_instances(:test_2)])
     version_99.stub!(:activity).and_return(@activity)
@@ -46,9 +44,6 @@ describe "/versions/index.html.erb" do
     # version
     response.should have_text(/2_23/)
     response.should have_text(/3_1/)
-
-    # deploynote
-    response.should have_text(/DeployNote/)
   end
 end
 
