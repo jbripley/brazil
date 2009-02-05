@@ -9,9 +9,15 @@ describe Activity do
       :state => "value for state",
       :app_id => "1"
     }
+    @activity = Activity.new(@valid_attributes)
   end
 
-  it "should create a new instance given valid attributes" do
-    Activity.create!(@valid_attributes)
+  it "should an activity instance given valid attributes" do
+    @activity.should be_valid
+  end
+  
+  it "should update the state to versioned" do
+    @activity.should_receive(:update_attribute).with(:state, Activity::STATE_VERSIONED)
+    @activity.versioned!
   end
 end
