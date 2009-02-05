@@ -18,12 +18,14 @@
   	<span><strong>Schema</strong> <%=h version.schema %></span>
   </div>
   
+  <% unless version_deployed(version) %>
   <div class="span-2">
     <% form_for(version, :url => app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
       <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
 	    <%= f.submit 'Deployed' %>
 	  <% end %>
 	</div>
+	<% end %>
 	
 	<div class="append-1">
     <ul class="actions">

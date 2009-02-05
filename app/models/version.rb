@@ -40,7 +40,9 @@ class Version < ActiveRecord::Base
         errors.add_to_base("Failed to execute Rollback SQL (#{exception})")
       end
     when "#{STATE_DEPLOYED}-#{STATE_TESTED}" # deployed
-      notice = "Version '#{@version}' is now set as deployed"
+      notice = "Version '#{self}' is now set as deployed"
+    when "#{STATE_DEPLOYED}-#{STATE_CREATED}" # deployed
+      notice = "Version '#{self}' is now set as deployed"
     else
       logger.warn("Version#run_sql default case chosen (#{self})")
     end
