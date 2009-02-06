@@ -11,10 +11,6 @@ module VersionsHelper
   end
   alias :version_tested :version_rollbackable
   
-  def version_deployed(version)
-    version.deployed?
-  end
-  
   def sql_escape(object)
     escaped_object = DBI::TypeUtil.convert(nil, object)
     if escaped_object
