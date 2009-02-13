@@ -15,9 +15,21 @@ describe Activity do
   it "should an activity instance given valid attributes" do
     @activity.should be_valid
   end
-  
+
   it "should update the state to versioned" do
     @activity.should_receive(:update_attribute).with(:state, Activity::STATE_VERSIONED)
     @activity.versioned!
+  end
+
+  describe "when calling versioned?" do
+    it "should be versioned" do
+      @activity.stub!(:state).and_return(Activity::STATE_VERSIONED)
+      @activity.versioned?.should be_true
+    end
+
+    it "should not be versioned" do
+      @activity.stub!(:state).and_return(Activity::STATE_DEVELOPMENT)
+      @activity.versioned?.should be_false
+    end
   end
 end
