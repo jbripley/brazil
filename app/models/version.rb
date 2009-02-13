@@ -4,19 +4,20 @@ class Version < ActiveRecord::Base
   STATE_CREATED = 'created'
   STATE_TESTED = 'tested'
   STATE_DEPLOYED = 'deployed'
-  
+
   belongs_to :activity
-  
+
   has_many :db_instance_version
   has_many :db_instances, :through => :db_instance_version
-  
+
   validates_presence_of :schema, :update_sql, :rollback_sql
-  
+
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
   def run_sql(generate_update_sql, generate_rollback_sql, db_username, db_password)
     notice = nil
-    
+    error_action = 'edit'
+
     case "#{state}-#{state_was}"
     when "#{STATE_CREATED}-#{STATE_CREATED}" # update
       begin
@@ -30,6 +31,7 @@ class Version < ActiveRecord::Base
         db_instance_test.execute_sql(generate_update_sql.call, db_username, db_password, schema)
         notice = "Executed Update SQL on #{db_instance_test}"
       rescue Brazil::DBException => exception
+        error_action = 'show'
         errors.add_to_base("Failed to execute Update SQL (#{exception})")
       end
     when "#{STATE_CREATED}-#{STATE_TESTED}" # rollback
@@ -37,23 +39,23 @@ class Version < ActiveRecord::Base
         db_instance_test.execute_sql(generate_rollback_sql.call, db_username, db_password, schema)
         notice = "Executed Rollback SQL on #{db_instance_test}"
       rescue Brazil::DBException => exception
+        error_action = 'show'
         errors.add_to_base("Failed to execute Rollback SQL (#{exception})")
       end
     when "#{STATE_DEPLOYED}-#{STATE_TESTED}" # deployed
-      notice = "Version '#{self}' is now set as deployed"
-    when "#{STATE_DEPLOYED}-#{STATE_CREATED}" # deployed
+      activity.deployed!
       notice = "Version '#{self}' is now set as deployed"
     else
       logger.warn("Version#run_sql default case chosen (#{self})")
     end
-    
-    return notice
+
+    return [notice, error_action]
   end
-  
+
   def next_schema_version(db_username, db_password)
     db_instance_test.find_next_schema_version(db_username, db_password, schema)
   end
-  
+
   def db_instance_test
     test_db_instance = DbInstance.find_all_by_id(db_instance_ids, :conditions => {:db_env => DbInstance::ENV_TEST}).first
     if test_db_instance
@@ -62,7 +64,7 @@ class Version < ActiveRecord::Base
       raise Brazil::NoDBInstanceException, "Please select a Test Database for Version"
     end
   end
-  
+
   def schema_revision
     if schema_version
       Brazil::SchemaRevision.from_string(schema_version)
@@ -70,29 +72,29 @@ class Version < ActiveRecord::Base
       nil
     end
   end
-  
+
   def created?
     (state == STATE_CREATED)
   end
-  
+
   def tested?
     (state == STATE_TESTED)
   end
-  
+
   def deployed?
     (state == STATE_DEPLOYED)
   end
-   
+
   def states
     [STATE_CREATED, STATE_TESTED, STATE_DEPLOYED]
   end
-  
+
   def to_s
     "#{schema}@#{db_instance_test}"
   end
-  
+
   private
-  
+
   def check_no_duplicate_schema_db
     match = DbInstanceVersion.find(:first, :joins => [:version, :db_instance], :conditions => ['versions.schema = ? AND db_instances.id = ? AND versions.activity_id = ?', schema, db_instance_test.id, activity.id])
     if match && match.version_id != id
@@ -100,12 +102,10 @@ class Version < ActiveRecord::Base
       false
     end
   end
-  
+
   def update_activity_state
     if activity.development?
       activity.versioned!
-    elsif activity.versioned?
-      activity.deployed!
     end
   end
 end

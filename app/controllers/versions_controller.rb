@@ -39,7 +39,7 @@ class VersionsController < ApplicationController
     generate_update_sql = Proc.new {create_update_sql(@version)}
     generate_rollback_sql = Proc.new {create_rollback_sql(@version)}
 
-    flash[:notice] = @version.run_sql(generate_update_sql, generate_rollback_sql, params[:db_username], params[:db_password])
+    flash[:notice], error_action = @version.run_sql(generate_update_sql, generate_rollback_sql, params[:db_username], params[:db_password])
   
     respond_to do |format|
       if @version.errors.empty? && @version.save
@@ -47,7 +47,7 @@ class VersionsController < ApplicationController
         format.xml  { head :ok }
         format.json  { head :ok }
       else
-        format.html { render :action => 'edit' }
+        format.html { render :action => error_action }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
       end

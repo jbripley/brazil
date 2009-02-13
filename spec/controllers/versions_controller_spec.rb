@@ -244,13 +244,14 @@ describe VersionsController do
     describe "with failed update" do
 
       def do_put
+        @version.stub!(:run_sql).and_return([nil, 'show'])
         @version.should_receive(:save).and_return(false)
         put :update, :id => "1", :app_id => '3', :activity_id => '3'
       end
 
-      it "should re-render 'edit'" do
+      it "should re-render 'show'" do
         do_put
-        response.should render_template('edit')
+        response.should render_template('show')
       end
 
     end

@@ -46,15 +46,6 @@ describe Version do
 
         @version.stub!(:activity).and_return(activity)
       end
-
-      it "should change activity state to deployed" do
-        activity = mock_model(Activity)
-        activity.should_receive(:development?).and_return(false)
-        activity.should_receive(:versioned?).and_return(true)
-        activity.should_receive(:deployed!)
-
-        @version.stub!(:activity).and_return(activity)
-      end
     end
 
     after(:each) do
@@ -132,7 +123,7 @@ describe Version do
         errors.should_receive(:add_to_base)
         @version.stub!(:errors).and_return(errors)
 
-        @version.run_sql(generate_update_sql, nil, @db_username, @db_password).should be_nil
+        @version.run_sql(generate_update_sql, nil, @db_username, @db_password).should eql([nil, "show"])
       end
     end
 
@@ -169,7 +160,7 @@ describe Version do
         errors.should_receive(:add_to_base)
         @version.stub!(:errors).and_return(errors)
 
-        @version.run_sql(nil, generate_rollback_sql, @db_username, @db_password).should be_nil
+        @version.run_sql(nil, generate_rollback_sql, @db_username, @db_password).should eql([nil, "show"])
       end
     end
 
@@ -195,7 +186,7 @@ describe Version do
       logger.should_receive(:warn)
       @version.stub!(:logger).and_return(logger)
 
-      @version.run_sql(nil, nil, @db_username, @db_password).should be_nil
+      @version.run_sql(nil, nil, @db_username, @db_password).should eql([nil, 'edit'])
     end
   end
 
