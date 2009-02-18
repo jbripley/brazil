@@ -20,7 +20,7 @@ module Brazil::VersionControl
             require 'brazil/version_control/svn_java'
             return Brazil::VersionControl::SVNJava.new(repository_uri, username, password)
           rescue LoadError
-            raise 'No required subversion binding installed'
+            raise Brazil::VersionControlException, 'No required subversion binding installed'
           end
         end
       else
