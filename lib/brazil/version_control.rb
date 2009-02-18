@@ -14,11 +14,11 @@ module Brazil::VersionControl
       when TYPE_SUBVERSION
         begin
           require 'brazil/version_control/svn_ruby'
-          return Brazil::VersionControl::SVNRuby.new(repository_uri)
+          return Brazil::VersionControl::SVNRuby.new(repository_uri, username, password)
         rescue LoadError
           begin
             require 'brazil/version_control/svn_java'
-            return Brazil::VersionControl::SVNJava.new(repository_uri)
+            return Brazil::VersionControl::SVNJava.new(repository_uri, username, password)
           rescue LoadError
             raise 'No required subversion binding installed'
           end
