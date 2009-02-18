@@ -1,6 +1,7 @@
 common:
   release_version: 1.2.4.1
   release_name: 'Cast Away'
+  vc_uri: ''
 
 production:
 
