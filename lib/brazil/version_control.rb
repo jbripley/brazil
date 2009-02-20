@@ -93,6 +93,14 @@ module VersionControl
       raise NotImplementedError
     end
 
+    def add(working_copy_path)
+      raise NotImplementedError
+    end
+
+    def commit(working_copy_path, commit_message)
+      raise NotImplementedError
+    end
+
     def valid_credentials?
       raise NotImplementedError
     end

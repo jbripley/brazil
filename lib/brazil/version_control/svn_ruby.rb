@@ -50,11 +50,29 @@ module Brazil::VersionControl
       end
     end
 
-    def mkdir(working_copy_path)
+    # TODO: Test implementation
+#    def mkdir(working_copy_path)
+#      begin
+#        vc_client.mkdir_p(working_copy_path)
+#      rescue Svn::Error => svn_exception
+#        raise Brazil::VersionControlException, "Could not create working copy dir: #{working_copy_path} (#{svn_exception})", caller
+#      end
+#    end
+
+    def add(working_copy_path)
       begin
-        vc_client.mkdir_p(working_copy_path)
+        vc_client.add(working_copy_path, true, true)
       rescue Svn::Error => svn_exception
-        raise Brazil::VersionControlException, "Could not create working copy dir: #{working_copy_path} (#{svn_exception})", caller 
+        raise Brazil::VersionControlException, "Could not add working copy path: #{working_copy_path} (#{svn_exception})", caller
+      end
+    end
+
+    def commit(working_copy_path, commit_message)
+      begin
+        set_commit_message(commit_message)
+        vc_client.commit(working_copy_path, false)
+      rescue Svn::Error => svn_exception
+        raise Brazil::VersionControlException, "Failed to commit working copy path: #{working_copy_path} (#{svn_exception})", caller
       end
     end
 
