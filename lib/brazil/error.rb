@@ -12,5 +12,5 @@ module Brazil
   class UnknownDBTypeException < DBException; end
   class NoVersionTableException < DBException; end
 
-  class VersionControlException; end 
+  class VersionControlException < Error; end 
 end
