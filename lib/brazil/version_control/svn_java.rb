@@ -45,6 +45,14 @@ module Brazil::VersionControl
       end
     end
 
+    def mkdir(working_copy_path)
+      begin
+        vc_client.mkdir([working_copy_path], '', true, nil)
+      rescue ClientException => svn_exception
+        raise Brazil::VersionControlException, "Could not create working copy dir: #{working_copy_path} (#{svn_exception})", caller
+      end
+    end
+
     def valid_credentials?
       begin
         vc_client.list(@repository_uri, nil, false)

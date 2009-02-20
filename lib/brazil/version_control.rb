@@ -1,4 +1,5 @@
-module Brazil::VersionControl
+module Brazil
+module VersionControl
   TYPE_SUBVERSION = :svn
 
   REVISION_TYPE_TAG = :tag
@@ -10,7 +11,7 @@ module Brazil::VersionControl
       raise Brazil::VersionControlException, 'You must supply a repository URI'
     end
 
-    case vc_type
+    case vc_type.to_sym
       when TYPE_SUBVERSION
         begin
           require 'brazil/version_control/svn_ruby'
@@ -88,9 +89,14 @@ module Brazil::VersionControl
       raise NotImplementedError
     end
 
+    def mkdir(working_copy_path)
+      raise NotImplementedError
+    end
+
     def valid_credentials?
       raise NotImplementedError
     end
 
   end
+end
 end
