@@ -1,9 +1,13 @@
 <div id="app-list" class="span-12 border">
-<% for app in @apps %>
-  <div class="app">
-    <%= render :partial => 'index', :locals => {:app => app} %>
-  </div>
-<% end %>
+  <% unless @apps.empty? %>
+    <% for app in @apps %>
+    <div class="app">
+      <%= render :partial => 'index', :locals => {:app => app} %>
+    </div>
+    <% end %>
+  <% else %>
+    &nbsp;
+  <% end %>
 </div>
 
 <div id="app_forms" class="span-12 last">
