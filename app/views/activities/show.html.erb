@@ -3,10 +3,12 @@
 <% end %>
 
 <%= render :partial => "shared/activity", :locals => {:activity => @activity} %>
-<div id="activity_info" class="span-13 border">
-  <div id="changes">
+<div id="changes" class="span-13 border">
+  <% unless @activity.changes.empty? %>
     <%= render :partial => "changes/change", :collection => @activity.changes %>
-  </div>
+  <% else %>
+    &nbsp;
+  <% end %>
 </div>
 
 <div id="activity_forms" class="span-11 last">
