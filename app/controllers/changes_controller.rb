@@ -1,19 +1,19 @@
 class ChangesController < ApplicationController
   resource_controller
   belongs_to :activity
-  
+
   # POST /apps/:app_id/activities/:activity_id/changes.format
   def create
     @activity = Activity.find(params[:activity_id])
     @change = Change.new(params[:change])
     @change.activity_id = params[:activity_id]
-    
+
     if params[:create_change_execute_button]
       @change.state = Change::STATE_EXECUTED
     else
       @change.state = Change::STATE_SAVED
     end
-  
+
     respond_to do |format|
       if @change.valid? && @change.use_sql(@change.sql, params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Database change was successfully created.'
@@ -39,29 +39,30 @@ class ChangesController < ApplicationController
       end
     end
   end
-  
+
   edit.wants.html { render :layout => false if request.xhr? }
-    
+
   # PUT /apps/:app_id/activities/:activity_id/changes/:id.format
   def update
+    @activity = Activity.find(params[:activity_id])
     @change = Change.find(params[:id ])
     @change.activity_id = params[:activity_id]
     @change.attributes = params[:change]
-    
+
     if params[:edit_change_execute_button]
       @change.state = Change::STATE_EXECUTED
     else
       @change.state = Change::STATE_SAVED
     end
-    
+
     respond_to do |format|
       if @change.valid? && @change.use_sql(@change.sql, params[:db_username], params[:db_password]) && @change.save
         flash[:notice] = 'Change was successfully updated.'
         format.html do
           if request.xhr?
-            render :partial => "change", :collection => @change.activity.changes
+            render :partial => "change", :collection => @activity.changes
           else
-            redirect_to app_activity_path(@change.activity.app, @change.activity)
+            redirect_to app_activity_path(@activity.app, @activity)
           end
         end
         format.xml  { head :ok }
@@ -79,15 +80,15 @@ class ChangesController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def add_controller_crumbs
     add_app_controller_crumbs(parent_object.app)
     add_activities_controller_crumbs(parent_object.app, parent_object)
-    
+
     add_crumb 'Changes'
-    
+
     if object
       add_crumb object.to_s
     end
