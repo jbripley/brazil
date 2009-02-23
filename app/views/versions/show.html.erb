@@ -10,11 +10,11 @@
 <div class="box">
   <h3>Update SQL</h3>
   <textarea class="sql:nogutter" name="code"><%= create_update_sql(@version) %></textarea>
-  
+
   <% if version_testable(@version) %>
   <fieldset class="span-8">
     <legend>Deploy on <%=h @version.db_instance_test %></legend>
-    <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
+    <% form_for(@version, :url => test_app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
       <%= render :partial => 'shared/db_credentials_form' %>
@@ -28,11 +28,11 @@
 <div class="box">
   <h3>Rollback SQL</h3>
   <textarea class="sql:nogutter" name="code"><%= create_rollback_sql(@version) %></textarea>
-  
+
   <% if version_rollbackable(@version) %>
   <fieldset class="span-8">
     <legend>Rollback from <%= @version.db_instance_test %></legend>
-    <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
+    <% form_for(@version, :url => rollback_app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
       <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
       <%= render :partial => 'shared/db_credentials_form' %>
