@@ -10,8 +10,8 @@
   <%= stylesheet_link_tag "blueprint/print", "brazil/print", :media => "print" %>
   <%= stylesheets %>
 
-  <%= javascript_include_tag "jquery/jquery-1.3.1.min", "jquery/jquery.form" %>
-  <%= javascript_include_tag "jquery.ui/ui.core.min", "jquery.ui/effects.core.min", "jquery.ui/effects.drop.min", "jquery.ui/effects.blind.min" %>
+  <%= javascript_include_tag "jquery/jquery-1.3.2.min", "jquery/jquery.form" %>
+  <%= javascript_include_tag "jquery.ui/jquery-ui-personalized-1.6rc6.min" %>
   <%= yield :view_external_js %>
   <%= javascripts %>
 
@@ -20,7 +20,7 @@
 <body>
   <div class="container">
     <div id="brazil-release">Brazil: <%=h brazil_release %></div>
-    
+
     <div id="top-navigation">
       <ul>
         <li><%= link_to 'Apps', apps_path %></li>
