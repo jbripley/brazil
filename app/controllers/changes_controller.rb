@@ -49,7 +49,7 @@ class ChangesController < ApplicationController
     @change.activity_id = params[:activity_id]
     @change.attributes = params[:change]
 
-    if params[:edit_change_execute_button]
+    if params[:edit_change_execute_submit]
       @change.state = Change::STATE_EXECUTED
     else
       @change.state = Change::STATE_SAVED
