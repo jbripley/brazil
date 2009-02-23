@@ -1,5 +1,5 @@
 common:
-  release_version: 1.2.4.1
+  release_version: 1.2.4.2
   release_name: 'Cast Away'
 
 production:
