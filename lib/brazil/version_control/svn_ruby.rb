@@ -70,7 +70,7 @@ module Brazil::VersionControl
     def commit(working_copy_path, commit_message)
       begin
         set_commit_message(commit_message)
-        vc_client.commit(working_copy_path, false)
+        vc_client.commit(working_copy_path)
       rescue Svn::Error => svn_exception
         raise Brazil::VersionControlException, "Failed to commit working copy path: #{working_copy_path} (#{svn_exception})", caller
       end
