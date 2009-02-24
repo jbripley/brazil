@@ -91,13 +91,17 @@ module Brazil::VersionControl
     protected
 
     def vc_client
-      ctx = Svn::Client::Context.new
-      ctx.add_simple_prompt_provider(0) do |cred, realm, username, may_save|
-        cred.username = @username
-        cred.password = @password
-        cred.may_save = false
+      unless @vc_client
+        ctx = Svn::Client::Context.new
+        ctx.add_simple_prompt_provider(0) do |cred, realm, username, may_save|
+          cred.username = @username
+          cred.password = @password
+          cred.may_save = false
+        end
+        @vc_client = ctx
       end
-      return ctx
+
+      return @vc_client
     end
 
     def set_commit_message(commit_message)
