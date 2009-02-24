@@ -1,4 +1,7 @@
+require 'rio'
+
 require 'brazil/schema_revision'
+require 'brazil/version_control'
 
 class Version < ActiveRecord::Base
   STATE_CREATED = 'created'
@@ -14,42 +17,30 @@ class Version < ActiveRecord::Base
 
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
-  def run_sql(generate_update_sql, generate_rollback_sql, db_username, db_password)
-    notice = nil
-    error_action = 'edit'
+  def version_control_sql(generate_update_sql, generate_rollback_sql, vc_username, vc_password)
+    begin
+      version_repos_path = "#{::AppConfig.vc_uri}/#{activity.app.vc_path}"
+      vc = Brazil::VersionControl.new(::AppConfig.vc_type, version_repos_path, vc_username, vc_password)
 
-    case "#{state}-#{state_was}"
-    when "#{STATE_CREATED}-#{STATE_CREATED}" # update
-      begin
-        self.schema_version = next_schema_version(db_username, db_password)
-        notice = 'Version was successfully updated.'
-      rescue Brazil::DBException => exception
-        errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
+      version_working_copy = rio(::AppConfig.vc_dir, activity.app.vc_path)
+      unless version_working_copy.directory?
+        vc.checkout(version_working_copy.path)
       end
-    when "#{STATE_TESTED}-#{STATE_CREATED}" # tested
-      begin
-        db_instance_test.execute_sql(generate_update_sql.call, db_username, db_password, schema)
-        notice = "Executed Update SQL on #{db_instance_test}"
-      rescue Brazil::DBException => exception
-        error_action = 'show'
-        errors.add_to_base("Failed to execute Update SQL (#{exception})")
-      end
-    when "#{STATE_CREATED}-#{STATE_TESTED}" # rollback
-      begin
-        db_instance_test.execute_sql(generate_rollback_sql.call, db_username, db_password, schema)
-        notice = "Executed Rollback SQL on #{db_instance_test}"
-      rescue Brazil::DBException => exception
-        error_action = 'show'
-        errors.add_to_base("Failed to execute Rollback SQL (#{exception})")
-      end
-    when "#{STATE_DEPLOYED}-#{STATE_TESTED}" # deployed
-      activity.deployed!
-      notice = "Version '#{self}' is now set as deployed"
-    else
-      logger.warn("Version#run_sql default case chosen (#{self})")
+
+      version_sql_dir = rio(version_working_copy, schema, db_instance_test.db_type.downcase).mkpath
+      version_update_sql = rio(version_sql_dir, "#{schema}-#{schema_version}-update.sql")
+      version_rollback_sql = rio(version_sql_dir, "#{schema}-#{schema_version}-rollback.sql")
+
+      version_update_sql.print!(generate_update_sql.call)
+      version_rollback_sql.print!(generate_rollback_sql.call)
+
+      vc.add(rio(version_working_copy, schema).path)
+      vc.commit(version_working_copy.path, "TOOL Add version #{schema_version} SQL for #{activity.app.name} schema #{schema}")
+
+      return true
+    rescue Brazil::VersionControlException => vc_exception
+      return false
     end
-
-    return [notice, error_action]
   end
 
   def next_schema_version(db_username, db_password)

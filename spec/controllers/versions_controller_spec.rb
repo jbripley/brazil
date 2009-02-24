@@ -7,11 +7,11 @@ describe VersionsController do
       @version = mock_model(Version)
       Version.stub!(:find).and_return([@version])
     end
-  
+
     def do_get
       get :index, :app_id => '3', :activity_id => '3'
     end
-  
+
     it "should be successful" do
       do_get
       response.should be_success
@@ -21,12 +21,12 @@ describe VersionsController do
       do_get
       response.should render_template('index')
     end
-  
+
     it "should find all versions" do
       Version.should_receive(:find).with(:all, {:limit=>nil, :joins=>nil, :select=>nil, :group=>nil, :readonly=>nil, :offset=>nil, :conditions=>"\"versions\".activity_id = 3", :include=>nil}).and_return([@version])
       do_get
     end
-  
+
     it "should assign the found versions for the view" do
       do_get
       assigns[:versions].should == [@version]
@@ -39,7 +39,7 @@ describe VersionsController do
       @version = mock_model(Version)
       Version.stub!(:find).and_return(@version)
     end
-  
+
     def do_get
       get :show, :id => "1", :app_id => '3', :activity_id => '3'
     end
@@ -48,17 +48,17 @@ describe VersionsController do
       do_get
       response.should be_success
     end
-  
+
     it "should render show template" do
       do_get
       response.should render_template('show')
     end
-  
+
     it "should find the version requested" do
       Version.should_receive(:find).with("1", {:joins=>nil, :readonly=>nil, :limit=>nil, :conditions=>"\"versions\".activity_id = 3", :select=>nil, :group=>nil, :offset=>nil, :include=>nil}).and_return(@version)
       do_get
     end
-  
+
     it "should assign the found version for the view" do
       do_get
       assigns[:version].should equal(@version)
@@ -74,7 +74,7 @@ describe VersionsController do
 
       Version.stub!(:new).and_return(@version)
     end
-  
+
     def do_get
       get :new, :app_id => '3', :activity_id => '3'
     end
@@ -83,22 +83,22 @@ describe VersionsController do
       do_get
       response.should be_success
     end
-  
+
     it "should render new template" do
       do_get
       response.should render_template('new')
     end
-  
+
     it "should create an new version" do
       Version.should_receive(:new).and_return(@version)
       do_get
     end
-  
+
     it "should not save the new version" do
       @version.should_not_receive(:save)
       do_get
     end
-  
+
     it "should assign the new version for the view" do
       do_get
       assigns[:version].should equal(@version)
@@ -111,7 +111,7 @@ describe VersionsController do
       @version = mock_model(Version)
       Version.stub!(:find).and_return(@version)
     end
-  
+
     def do_get
       get :edit, :id => "1", :app_id => '3', :activity_id => '3'
     end
@@ -120,17 +120,17 @@ describe VersionsController do
       do_get
       response.should be_success
     end
-  
+
     it "should render edit template" do
       do_get
       response.should render_template('edit')
     end
-  
+
     it "should find the version requested" do
       Version.should_receive(:find).and_return(@version)
       do_get
     end
-  
+
     it "should assign the found Versions for the view" do
       do_get
       assigns[:version].should equal(@version)
@@ -156,14 +156,14 @@ describe VersionsController do
 
       Version.stub!(:new).and_return(@version)
     end
-    
+
     describe "with successful save" do
-  
+
       def do_post
         @version.should_receive(:save).and_return(true)
         post :create, :version => {}, :app_id => '3', :activity_id => '3'
       end
-  
+
       it "should create a new version" do
         Version.should_receive(:new).with({}).and_return(@version)
         do_post
@@ -173,12 +173,12 @@ describe VersionsController do
         do_post
         response.should redirect_to(app_activity_version_url('3', '3', "1"))
       end
-      
+
     end
-    
+
     describe "with failed save" do
 
-      def do_post    
+      def do_post
         @version.should_receive(:save).and_return(false)
         post :create, :version => {}, :app_id => '3', :activity_id => '3'
       end
@@ -187,7 +187,7 @@ describe VersionsController do
         do_post
         response.should render_template('new')
       end
-      
+
     end
   end
 
@@ -195,6 +195,7 @@ describe VersionsController do
     fixtures :apps, :activities
 
     before(:each) do
+      @schema_version = '1_2_3'
       @app = apps(:app_3)
 
       @activity = activities(:app_1_deployed)
@@ -202,24 +203,24 @@ describe VersionsController do
 
       Activity.stub!(:find).with('3').and_return(@activity)
 
-      @version = mock_model(Version, :to_param => "1")   
-      @version.should_receive(:attributes=).with(nil)
+      @version = mock_model(Version, :to_param => "1")
       @version.errors.should_receive(:empty?).and_return(true)
-      @version.stub!(:run_sql)
+      @version.should_receive(:next_schema_version).and_return(@schema_version)
 
       Version.stub!(:find).with('1').and_return(@version)
       @version.stub!(:find).with('1').and_return(@version)
       @activity.stub!(:versions).and_return(@version)
     end
-    
+
     describe "with successful update" do
 
       def do_put
-        @version.should_receive(:save).and_return(true)
+        @version.should_receive(:schema_version=).with(@schema_version)
+        @version.should_receive(:update_attributes).and_return(true)
         put :update, :id => "1", :app_id => '3', :activity_id => '3'
       end
 
-      it "should find the version requested" do    
+      it "should find the version requested" do
         @version.should_receive(:find).with("1").and_return(@version)
         do_put
       end
@@ -240,21 +241,21 @@ describe VersionsController do
       end
 
     end
-    
+
     describe "with failed update" do
 
       def do_put
-        @version.stub!(:run_sql).and_return([nil, 'show'])
-        @version.should_receive(:save).and_return(false)
+        @version.should_receive(:schema_version=).with(@schema_version)
+        @version.should_receive(:update_attributes).and_return(false)
         put :update, :id => "1", :app_id => '3', :activity_id => '3'
       end
 
       it "should re-render 'show'" do
         do_put
-        response.should render_template('show')
+        response.should render_template('edit')
       end
 
     end
   end
- 
+
 end

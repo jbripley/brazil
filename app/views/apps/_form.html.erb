@@ -3,3 +3,7 @@
   <%= f.label :name, 'App Name' %><br />
   <%= f.text_field :name, :class => 'span-10' %>
 </p>
+<p>
+  <%= f.label :vc_path, 'Version Control Path (ex. /app_name/trunk/db)' %><br />
+  <span><%= vc_uri %></span> <%= f.text_field :vc_path, :class => 'span-5' %>
+</p>

@@ -16,20 +16,24 @@ class AppsController < ApplicationController
 
   edit.wants.html do
     if request.xhr?
-      render :partial => 'edit_name', :locals => {:app => @app}
+      render :partial => 'edit_horizontal', :locals => {:app => @app}
     end
   end
 
-  update.success.wants.html do
-    if request.xhr?
-      render :partial => 'app', :locals => {:app => @app}
-    else
-      redirect_to app_activities_path(@app)
+  update do
+    success.wants.html do
+      if request.xhr?
+        render :partial => 'app', :locals => {:app => @app}
+      else
+        redirect_to app_activities_path(@app)
+      end
     end
-  end
-  update.failure.wants.html do
-    if request.xhr?
-      render :partial => 'edit_name', :locals => {:app => @app}
+    failure.wants.html do
+      if request.xhr?
+        render :partial => 'edit_name', :locals => {:app => @app}
+      else
+        render :action => 'edit'
+      end
     end
   end
 

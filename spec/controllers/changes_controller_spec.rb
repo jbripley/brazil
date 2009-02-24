@@ -220,7 +220,12 @@ describe ChangesController do
       @change.should_receive(:attributes=).with(nil)
       @change.should_receive(:state=).with('saved')
 
+      @changes = mock(Array)
+      @changes.stub!(:find).and_return([@change])
+      @activity.should_receive(:changes).and_return(@changes)
+
       Change.stub!(:find).and_return(@change)
+      Activity.stub!(:find).and_return(@activity)
     end
 
     describe "with successful update" do

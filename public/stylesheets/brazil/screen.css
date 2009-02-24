@@ -108,7 +108,7 @@ fieldset > a.form_close {
   right:-3px;
 }
 
-input[type=submit] {
+p > input[type=submit] {
   float: right;
 }
 
@@ -135,6 +135,10 @@ input[type=submit] {
 
 .box hr {
   background-color: #888;
+}
+
+.box hr.space {
+  background-color: transparent;
 }
 
 .box.error h2 {

@@ -1,6 +1,9 @@
 common:
-  release_version: 1.2.4.3
-  release_name: 'Cast Away'
+  release_version: 1.2.5
+  release_name: 'Iron Eagle'
+  vc_type: 'svn'
+  vc_uri: ''
+  vc_dir: ''
 
 production:
 

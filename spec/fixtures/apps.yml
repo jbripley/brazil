@@ -1,11 +1,14 @@
 app_1:
   id: 1
   name: 'App 1'
+  vc_path: '/app1/trunk/db'
 
 app_2:
   id: 2
   name: 'App 2'
+  vc_path: '/app2/trunk/db'
 
 app_3:
   id: 3
   name: 'App 3'
+  vc_path: '/app3/trunk/db'

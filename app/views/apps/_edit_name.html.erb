@@ -1,6 +1,0 @@
-<% form_for(app, :url => app_path(app)) do |f| %>
-  <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
-  <%= f.text_field :name, :class => 'span-5' %>
-  <%= f.submit "Save" %>
-  <%= f.submit "Cancel", :name => 'cancel_edit_app_button', :class => 'form_cancel' %>
-<% end %>
