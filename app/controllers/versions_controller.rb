@@ -87,7 +87,7 @@ class VersionsController < ApplicationController
     generate_rollback_sql = Proc.new {create_rollback_sql(@version)}
 
     begin
-      @version.db_instance_test.execute_sql(Proc.new {create_update_sql(@version)}, params[:db_username], params[:db_password], @version.schema)
+      @version.db_instance_test.execute_sql(create_update_sql(@version), params[:db_username], params[:db_password], @version.schema)
       flash[:notice] = "Executed Update SQL on #{@version.db_instance_test}"
     rescue Brazil::DBException => exception
       @version.errors.add_to_base("SQL: #{exception}")
@@ -113,7 +113,7 @@ class VersionsController < ApplicationController
     @version = Version.find(params[:id])
 
     begin
-      @version.db_instance_test.execute_sql(Proc.new {create_rollback_sql(@version)}, params[:db_username], params[:db_password], @version.schema)
+      @version.db_instance_test.execute_sql(create_rollback_sql(@version), params[:db_username], params[:db_password], @version.schema)
       flash[:notice] = "Executed Rollback SQL on #{@version.db_instance_test}"
     rescue Brazil::DBException => exception
       @version.errors.add_to_base("SQL: #{exception}")
