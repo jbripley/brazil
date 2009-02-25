@@ -127,6 +127,7 @@ class VersionsController < ApplicationController
       if version_controlled && @version.update_attributes(params[:version])
         @activity.deployed!
         flash[:notice] = "Version '#{@version}' is now set as deployed"
+        format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
       else
