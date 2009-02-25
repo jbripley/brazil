@@ -3,7 +3,6 @@
 <% end %>
 -- Start version update
 <%= version.update_sql.strip %>
-
 -- End version update
 <% if version.schema_revision.nil? %>
 CREATE TABLE schema_versions (

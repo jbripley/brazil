@@ -1,10 +1,8 @@
 <% unless version.schema_revision %>
 DROP TABLE schema_versions;
 <% end %>
-
 -- Start version rollback
 <%= version.rollback_sql.strip %>
-
 -- End version rollback
 <% if version.schema_revision %>
 DELETE FROM schema_versions WHERE major = <%= sql_escape(version.schema_revision.major) %> AND minor = <%= sql_escape(version.schema_revision.minor) %> AND patch = <%= sql_escape(version.schema_revision.patch) %>;
