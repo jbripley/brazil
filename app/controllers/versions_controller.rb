@@ -69,18 +69,18 @@ class VersionsController < ApplicationController
 
     begin
       @version.db_instance_test.execute_sql(create_update_sql(@version), params[:db_username], params[:db_password], @version.schema)
-      flash[:notice] = "Executed Update SQL on #{@version.db_instance_test}"
     rescue Brazil::DBException => exception
       @version.errors.add_to_base("SQL: #{exception}")
+      flash[:error] = "Failed to execute Update SQL (#{exception})"
     end
 
     respond_to do |format|
       if @version.errors.empty? && @version.update_attributes(params[:version])
+        flash[:notice] = "Executed Update SQL on #{@version.db_instance_test}"
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
       else
-        flash[:error] = 'Failed to execute Update SQL'
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
@@ -95,18 +95,18 @@ class VersionsController < ApplicationController
 
     begin
       @version.db_instance_test.execute_sql(create_rollback_sql(@version), params[:db_username], params[:db_password], @version.schema)
-      flash[:notice] = "Executed Rollback SQL on #{@version.db_instance_test}"
     rescue Brazil::DBException => exception
       @version.errors.add_to_base("SQL: #{exception}")
+      flash[:error] = "Failed to execute Rollback SQL (#{exception})"
     end
 
     respond_to do |format|
       if @version.errors.empty? && @version.update_attributes(params[:version])
+        flash[:notice] = "Executed Rollback SQL on #{@version.db_instance_test}"
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
       else
-        flash[:error] = 'Failed to execute Rollback SQL'
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
