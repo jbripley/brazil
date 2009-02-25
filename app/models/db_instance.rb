@@ -59,6 +59,11 @@ class DbInstance < ActiveRecord::Base
   def find_next_schema_version(username, password, schema)
     schema_version = nil
     db_connection = nil
+
+    unless check_db_credentials(username, password, schema)
+      raise Brazil::DBConnectionException, "Wrong database username or password entered"
+    end
+
     begin
       db_connection = db_connection(username, password, schema)
       latest_version_row = db_connection.select_one("SELECT * FROM #{schema}.schema_versions ORDER BY major, minor, patch DESC")

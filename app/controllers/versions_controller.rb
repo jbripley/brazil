@@ -39,7 +39,7 @@ class VersionsController < ApplicationController
       @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
       flash[:notice] = 'Version was successfully updated.'
     rescue Brazil::DBException => exception
-      @version.errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
+      @version.errors.add_to_base("Could not lookup version for schema '#{@version.schema}' (#{exception})")
     end
 
     respond_to do |format|
@@ -108,7 +108,7 @@ class VersionsController < ApplicationController
       end
     end
   end
-  
+
   def deployed
     @activity = Activity.find(params[:activity_id])
     @version = Version.find(params[:id])
