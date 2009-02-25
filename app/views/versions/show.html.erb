@@ -3,40 +3,16 @@
 <% end %>
 
 <%= render :partial => "shared/activity", :locals => {:activity => @activity} %>
-<div class="clearfix">
-  <%= render :partial => 'version', :locals => {:version => @version} %>
-</div>
+<%= render :partial => 'version', :locals => {:version => @version} %>
 
-<div class="box">
-  <h3>Update SQL</h3>
-  <textarea class="sql:nogutter" name="code"><%= create_update_sql(@version) %></textarea>
+<% if version_testable(@version) %>
+<%= render :partial => 'update_sql_fieldset', :locals => {:version => @version, :activity => @activity} %>
+<% else %>
+<%= render :partial => 'update_sql_box', :locals => {:version => @version} %>
+<% end %>
 
-  <% if version_testable(@version) %>
-  <fieldset class="span-10">
-    <legend>Deploy on <%=h @version.db_instance_test %></legend>
-    <% form_for(@version, :url => test_app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
-      <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
-      <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
-      <%= render :partial => 'shared/db_credentials_form' %>
-      <br /><%= submit_tag 'Deploy' %>
-    <% end %>
-  </fieldset>
-  <% end %>
-</div>
-
-<div class="box">
-  <h3>Rollback SQL</h3>
-  <textarea class="sql:nogutter" name="code"><%= create_rollback_sql(@version) %></textarea>
-
-  <% if version_rollbackable(@version) %>
-  <fieldset class="span-10">
-    <legend>Rollback from <%= @version.db_instance_test %></legend>
-    <% form_for(@version, :url => rollback_app_activity_version_path(@activity.app, @activity, @version)) do |f| %>
-      <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
-      <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
-      <%= render :partial => 'shared/db_credentials_form' %>
-      <br/><%= submit_tag 'Rollback' %>
-    <% end %>
-  </fieldset>
-  <% end %>
-</div>
+<% if version_rollbackable(@version) %>
+<%= render :partial => 'rollback_sql_fieldset', :locals => {:version => @version, :activity => @activity} %>
+<% else %>
+<%= render :partial => 'rollback_sql_box', :locals => {:version => @version} %>
+<% end %>

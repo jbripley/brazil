@@ -33,7 +33,6 @@
   <fieldset class="span-12 clearfix">
     <legend>Mark as Deployed</legend>
     <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
-      <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
       <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
 
       <div>
