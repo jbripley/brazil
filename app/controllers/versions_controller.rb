@@ -14,7 +14,12 @@ class VersionsController < ApplicationController
 
     @version = Version.new(params[:version])
     @version.activity_id = params[:activity_id]
-    @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
+
+    begin
+      @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
+    rescue Brazil::DBException => exception
+      @version.errors.add_to_base("Could not lookup version for schema '#{@version.schema}' (#{exception})")
+    end
 
     respond_to do |format|
       if @version.errors.empty? && @version.save
@@ -37,13 +42,13 @@ class VersionsController < ApplicationController
 
     begin
       @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
-      flash[:notice] = 'Version was successfully updated.'
     rescue Brazil::DBException => exception
       @version.errors.add_to_base("Could not lookup version for schema '#{@version.schema}' (#{exception})")
     end
 
     respond_to do |format|
       if @version.errors.empty? && @version.update_attributes(params[:version])
+        flash[:notice] = 'Version was successfully updated.'
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
