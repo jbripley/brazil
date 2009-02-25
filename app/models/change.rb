@@ -50,12 +50,12 @@ class Change < ActiveRecord::Base
   end
 
   validates_each :developer do |record, attr, value|
-    record.errors.add("#{attr} entry must be a valid email and") unless record.valid_email?(value)
+    record.errors.add(:developer, "entry must be a valid email") unless record.valid_email?(value)
   end
 
   validates_each :dba do |record, attr, value|
     if !record.suggested? && !record.valid_email?(value)
-      record.errors.add("#{attr} entry must be a valid email and")
+      record.errors.add(:dba, "entry must be a valid email")
     end
   end
 
