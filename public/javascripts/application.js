@@ -42,8 +42,11 @@ jQuery.brazil = {
   },
   manipulate: {
     syntax_highlight: function() {
-      dp.SyntaxHighlighter.ClipboardSwf = '/javascripts/syntaxhighlighter/clipboard.swf';
-      dp.SyntaxHighlighter.HighlightAll('code');
+      if (typeof SyntaxHighlighter != "undefined") {
+        SyntaxHighlighter.config.clipboardSwf = '/javascripts/syntaxhighlighter/clipboard.swf';
+        SyntaxHighlighter.defaults.gutter = false;
+        SyntaxHighlighter.all();
+      }
     },
     expand: function(options) {
       var defaults = { expand_button: '', collapse_button: '', expand_container: '' };

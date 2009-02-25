@@ -2,11 +2,11 @@
 <div class="box change <%=h change.state %>">
   <h2>Change</h2>
   <h3><%=h change.created_at.to_s(:long) %> (<%=h time_ago_in_words(change.created_at) %> ago)</h3>
-  <textarea class="sql:nogutter" name="code"><%=h change.sql %></textarea>
+  <pre class="brush: sql; toolbar: false"><%=h change.sql %></pre>
   <div class="people">
     <span class="dba"><strong>DBA</strong> <%=h change.dba %></span>
     <span class="developer"><strong>Developer</strong> <%=h change.developer %></span>
-  </div>       
+  </div>
   <ul class="actions clearfix">
     <li><%= change_action_link(change) %></li>
   </ul>

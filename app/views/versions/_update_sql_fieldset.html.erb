@@ -1,9 +1,9 @@
 <fieldset>
-  <legend>Deploy on <%=h version.db_instance_test %></legend>
+  <legend>Update SQL - Execute on <%=h version.db_instance_test %></legend>
+  <pre class="brush: sql"><%= create_update_sql(version) %></pre>
+
   <% form_for(version, :url => test_app_activity_version_path(activity.app, activity, version)) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
-    <%= label_tag 'code', 'Update SQL' %><br />
-    <textarea class="sql:nogutter clearfix" name="code"><%= create_update_sql(version) %></textarea>
     <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
     <%= render :partial => 'shared/db_credentials_form' %>
     <br /><%= submit_tag 'Deploy' %>

@@ -1,10 +1,10 @@
 <fieldset>
-  <legend>Rollback from <%= version.db_instance_test %></legend>
+  <legend>Rollback SQL - Execute on <%=h version.db_instance_test %></legend>
+  <pre class="brush:sql"><%= create_rollback_sql(version) %></pre>
+
   <% form_for(version, :url => rollback_app_activity_version_path(activity.app, activity, version)) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
-    <%= label_tag 'code', 'Rollback SQL' %><br />
-    <textarea class="sql:nogutter clearfix" name="code"><%= create_rollback_sql(version) %></textarea>
     <%= render :partial => 'shared/db_credentials_form' %>
     <br/><%= submit_tag 'Rollback' %>
   <% end %>

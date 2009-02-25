@@ -1,4 +1,5 @@
-@import url('/stylesheets/syntaxhighlighter.css');
+@import url('/stylesheets/syntaxhighlighter/shCore.css');
+@import url('/stylesheets/syntaxhighlighter/shThemeDefault.css');
 
 .box.version {
   border:2px solid #ddd;

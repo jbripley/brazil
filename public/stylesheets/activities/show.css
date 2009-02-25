@@ -1,4 +1,5 @@
-@import url('/stylesheets/syntaxhighlighter.css');
+@import url('/stylesheets/syntaxhighlighter/shCore.css');
+@import url('/stylesheets/syntaxhighlighter/shThemeDefault.css');
 
 .box.change {
   background:#f4f4f4;

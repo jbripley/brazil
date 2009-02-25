@@ -188,3 +188,9 @@ div.fieldWithErrors input, div.fieldWithErrors textarea {
   color:#8a1f11;
   border-color:#FBC2C4;
 }
+
+pre {
+  overflow: auto;
+	overflow-Y: hidden; /*--Hides vertical scroll created by IE--*/
+  background: #DDD;
+}
