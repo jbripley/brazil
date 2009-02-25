@@ -27,9 +27,15 @@ class Version < ActiveRecord::Base
         vc.checkout(version_working_copy.path)
       end
 
+      if schema_version.to_s.empty?
+        vc_schema_version = '1_0_0'
+      else
+        vc_schema_version = schema_version
+      end
+
       version_sql_dir = rio(version_working_copy, schema, db_instance_test.db_type.downcase).mkpath
-      version_update_sql = rio(version_sql_dir, "#{schema}-#{schema_version}-update.sql")
-      version_rollback_sql = rio(version_sql_dir, "#{schema}-#{schema_version}-rollback.sql")
+      version_update_sql = rio(version_sql_dir, "#{schema}-#{vc_schema_version}-update.sql")
+      version_rollback_sql = rio(version_sql_dir, "#{schema}-#{vc_schema_version}-rollback.sql")
 
       version_update_sql.print!(generate_update_sql.call)
       version_rollback_sql.print!(generate_rollback_sql.call)
