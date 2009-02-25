@@ -3,40 +3,38 @@ require 'brazil/schema_revision'
 class DbInstance < ActiveRecord::Base
   ENV_DEV = 'dev'
   ENV_TEST = 'test'
-  
+
   TYPE_MYSQL = 'MySQL'
   TYPE_ODBC = 'ODBC'
   TYPE_ORACLE = 'Oracle8'
   TYPE_POSTGRES = 'PostgreSQL'
-  TYPE_SQLITE = 'SQLite'
-  TYPE_SQLITE3 = 'SQLite3'
 
   validates_presence_of :db_alias, :host, :port, :db_env, :db_type
 
   named_scope :env_test, :conditions => {:db_env => ENV_TEST}
   named_scope :env_dev, :conditions => {:db_env => ENV_DEV}
-  
+
   def self.db_environments
     [ENV_DEV, ENV_TEST]
   end
-  
+
   def self.db_types
-    # TODO: Only MySQL and Oracle support implemented for now
-    [TYPE_MYSQL, TYPE_ORACLE] #, TYPE_ODBC, TYPE_POSTGRES, TYPE_SQLITE, TYPE_SQLITE3]
+    # TODO: Only MySQL, Oracle and PostgreSQL support implemented for now
+    [TYPE_MYSQL, TYPE_ORACLE, TYPE_POSTGRES] #, TYPE_ODBC ]
   end
-  
+
   def dev?
     (db_env == DbInstance::ENV_DEV)
   end
-  
+
   def test?
     (db_env == DbInstance::ENV_TEST)
   end
-  
+
   def to_s
     db_alias
   end
-  
+
   def execute_sql(sql, username, password, schema)
     db_connection = nil
     begin
@@ -57,7 +55,7 @@ class DbInstance < ActiveRecord::Base
       end
     end
   end
-  
+
   def find_next_schema_version(username, password, schema)
     schema_version = nil
     db_connection = nil
@@ -72,10 +70,10 @@ class DbInstance < ActiveRecord::Base
     ensure
       db_connection.disconnect if db_connection
     end
-    
+
     return schema_version
   end
-  
+
   def check_db_credentials(username, password, schema)
     db_connection = nil
     begin
@@ -88,16 +86,16 @@ class DbInstance < ActiveRecord::Base
       db_connection.disconnect if db_connection
     end
   end
-  
+
   private
-  
+
   def db_connection(username, password, schema)
     begin
       require 'dbi'
     rescue LoadError
       raise Brazil::LoadException, 'Failed to load the DBI module, please install.'
     end
-    
+
     connection = nil
     case db_type
     when TYPE_MYSQL
@@ -107,17 +105,16 @@ class DbInstance < ActiveRecord::Base
     when TYPE_ORACLE
       oracle_host, oracle_instance = host.split('/')
       connection = DBI.connect("DBI:OCI8://#{oracle_host}:#{port}/#{oracle_instance}", username, password)
-    # when TYPE_POSTGRES
-    # when TYPE_SQLITE
-    # when TYPE_SQLITE3
+    when TYPE_POSTGRES
+      connection = DBI.connect("DBI:Pg:database=#{schema};host=#{host};port=#{port}", username, password)
     else
       raise Brazil::UnknownDBTypeException, "Trying to create connection for unsupported DB Type: #{db_type}"
     end
-    
+
     if connection.nil?
       raise Brazil::DBConnectionException, "Failed to connect to DB (#{username}@#{host}:#{port}/#{schema})"
     else
       return connection
     end
-  end  
+  end
 end
