@@ -125,7 +125,7 @@ var brazil = function() {
         if (typeof SyntaxHighlighter != "undefined") {
           SyntaxHighlighter.config.clipboardSwf = '/javascripts/syntaxhighlighter/clipboard.swf';
           SyntaxHighlighter.defaults.gutter = false;
-          SyntaxHighlighter.all();
+          SyntaxHighlighter.highlight();
         }
       },
       expand: function(options) {
