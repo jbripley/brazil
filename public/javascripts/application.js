@@ -1,239 +1,249 @@
-// Brazil namespace
-
 jQuery.ajaxSetup({dataType: 'html'})
 
-jQuery.brazil = {
-  move: {
-    scrollable: function(id) {
-      var scrollablePos = $(id).position();
+// Brazil namespace
+var brazil = function() {
+  function form_insert_ajax_submit(options) {
+    var defaults = { show_form: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+    var settings = jQuery.extend(defaults, options);
 
-      $(window).scroll(function() {
-        var bodyTop = $(document).scrollTop();
-        var scrollableHeight = $(id).outerHeight();
-        var endOfPagePos = $('body').outerHeight();
+    jQuery(settings.inserted_fieldset).find('form').ajaxForm({
+      beforeSubmit: function(formData, jqForm, options) {
+        jQuery('input[type="submit"]', jqForm).attr('disabled', 'disabled');
+      },
+      success: function(responseText, statusText) {
+        jQuery(settings.inserted_fieldset).remove();
 
-        if(endOfPagePos <= (bodyTop + scrollableHeight))
-        {
-          // Stop moving / scrolling element
-        }
-        else if(bodyTop > scrollablePos.top)
-        {
-          $(id).css({position:"absolute", top: bodyTop, left: scrollablePos.left});
-        }
-        else
-        {
-          $(id).css({position:"absolute", top: scrollablePos.top, left: scrollablePos.left});
-        }
-      });
-    }
-  },
-  flash: {
-    notice: function() {
-      $.get('/flash/notice', function(response) {
-        $('#notice').hide().empty().append(response).fadeIn('slow', function() {
-          setTimeout('$("#notice").fadeOut()', 3000);
+        jQuery(settings.response_container).hide();
+        jQuery(settings.response_container).empty().append(responseText);
+
+        settings.success();
+
+        settings.done();
+
+        jQuery(settings.show_form).show();
+        jQuery(settings.response_container).show();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        jQuery(settings.inserted_fieldset).replaceWith(XMLHttpRequest.responseText);
+
+        settings.error();
+
+        settings.done();
+
+        form_insert_ajax_submit(options);
+      }
+    });
+
+    jQuery(settings.inserted_fieldset).find('.form_close').show();
+    jQuery(settings.inserted_fieldset).find('.form_close').live("click", function() {
+      jQuery(settings.inserted_fieldset).remove();
+      jQuery(settings.show_form).show();
+
+      settings.done();
+
+      return false;
+    });
+  }
+
+  function form_inline_ajax_submit(options) {
+    var defaults = { inserted_fieldset: '', form_container: null, success: function(){}, error: function(){}, done: function(){} };
+    var settings = jQuery.extend(defaults, options);
+
+    settings.form_container.find('form').ajaxForm({
+          beforeSubmit: function(formData, jqForm, options) {
+            jQuery('input[type="submit"]', jqForm).attr('disabled', 'disabled');
+          },
+          success: function(responseText, statusText) {
+            settings.form_container.replaceWith(responseText);
+
+            settings.success();
+
+            settings.done();
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            settings.form_container.empty().append(XMLHttpRequest.responseText);
+
+            settings.error();
+
+            settings.done();
+
+            form_inline_ajax_submit(options);
+          }
         });
-      });
-    },
-    discard: function() {
-      $.get('/flash/notice', function() {
-      });
-    }
-  },
-  manipulate: {
-    syntax_highlight: function() {
-      if (typeof SyntaxHighlighter != "undefined") {
-        SyntaxHighlighter.config.clipboardSwf = '/javascripts/syntaxhighlighter/clipboard.swf';
-        SyntaxHighlighter.defaults.gutter = false;
-        SyntaxHighlighter.all();
+
+        jQuery(settings.inserted_fieldset).find('.form_close').show();
+        jQuery(settings.inserted_fieldset).find('.form_close').live("click", function() {
+          jQuery.get(settings.form_container.children('form').attr('action'), function(response) {
+            settings.form_container.replaceWith(response);
+
+            settings.done();
+          });
+          return false;
+        });
+  }
+
+  return {
+    move : {
+      scrollable: function(id) {
+        var scrollablePos = jQuery(id).position();
+
+        jQuery(window).scroll(function() {
+          var bodyTop = jQuery(document).scrollTop();
+          var scrollableHeight = jQuery(id).outerHeight();
+          var endOfPagePos = jQuery('body').outerHeight();
+
+          if(endOfPagePos <= (bodyTop + scrollableHeight))
+          {
+            // Stop moving / scrolling element
+          }
+          else if(bodyTop > scrollablePos.top)
+          {
+            jQuery(id).css({position:"absolute", top: bodyTop, left: scrollablePos.left});
+          }
+          else
+          {
+            jQuery(id).css({position:"absolute", top: scrollablePos.top, left: scrollablePos.left});
+          }
+        });
       }
     },
-    expand: function(options) {
-      var defaults = { expand_button: '', collapse_button: '', expand_container: '' };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.expand_button).live("click", function() {
-        $.get(this.href, function(response) {
-          $(settings.expand_button).parents(settings.expand_container).replaceWith(response);
+    flash : {
+      notice: function() {
+        jQuery.get('/flash/notice', function(response) {
+          jQuery('#notice').hide().empty().append(response).fadeIn('slow', function() {
+            setTimeout('jQuery("#notice").fadeOut()', 3000);
+          });
         });
-
-        return false;
-      });
-    }
-  },
-  form: {
-    simple: function(options) {
-      var defaults = { show_form: '', before_display_form: function(){}, display_form: function(){}, setup_form: function(){}, form_hide: function(){} };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.show_form).live("click", function() {
-        settings.before_display_form();
-
-        $.get(this.href, function() {
-          settings.display_form();
-
-          settings.setup_form();
-
-          settings.form_hide();
+      },
+      discard: function() {
+        jQuery.get('/flash/notice', function() {
         });
-
-        return false;
-      });
+      }
     },
-    insert_only: function(options) {
-      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', done: function(){} };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.show_form).live("click", function() {
-        $(this).hide();
-
-        $.get(this.href, function(response) {
-          $(response).prependTo(settings.form_container);
-          $(settings.inserted_fieldset).show("drop", { direction: 'left' });
-
-          $(settings.inserted_fieldset).find('.form_close').show();
-          $(settings.inserted_fieldset).find('.form_close').live("click", function() {
-            $(settings.inserted_fieldset).remove();
-            $(settings.show_form).show();
-
-            settings.done();
-
-            return false;
-          });
-        });
-
-        return false;
-      });
-    },
-    insert: function(options) {
-      var defaults = { show_form: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.show_form).live("click", function() {
-        $(this).hide();
-
-        $.get(this.href, function(response) {
-          $(response).prependTo(settings.form_container);
-          $(settings.inserted_fieldset).show("drop", { direction: 'left' });
-
-          $(settings.inserted_fieldset).find('form').ajaxForm({
-            beforeSubmit: function(formData, jqForm, options) {
-              $('input[type="submit"]', jqForm).attr('disabled', 'disabled');
-            },
-            success: function(responseText, statusText) {
-              $(settings.inserted_fieldset).remove();
-
-              $(settings.response_container).hide();
-              $(settings.response_container).empty().append(responseText);
-
-              settings.success();
-
-              settings.done();
-
-              $(settings.show_form).show();
-              $(settings.response_container).show();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $(settings.inserted_fieldset).replaceWith(XMLHttpRequest.responseText);
-
-              settings.error();
-
-              settings.done();
-
-              jQuery.brazil.form.insert(options);
-            }
-          });
-
-          $(settings.inserted_fieldset).find('.form_close').show();
-          $(settings.inserted_fieldset).find('.form_close').live("click", function() {
-            $(settings.inserted_fieldset).remove();
-            $(settings.show_form).show();
-
-            settings.done();
-
-            return false;
-          });
-        });
-
-        return false;
-      });
-    },
-    inline: function(options) {
-      var defaults = { show_form: '', form_container: '', success: function(){}, error: function(){}, done: function(){} };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.show_form).live("click", function() {
-        var show_form = this;
-        $.get(this.href, function(response) {
-          var form_container = $(show_form).parents(settings.form_container);
-          form_container.empty().append(response).show('blind');
-
-          form_container.find('form').ajaxForm({
-            beforeSubmit: function(formData, jqForm, options) {
-              $('input[type="submit"]', jqForm).attr('disabled', 'disabled');
-            },
-            success: function(responseText, statusText) {
-              form_container.replaceWith(responseText);
-
-              settings.success();
-
-              settings.done();
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              form_container.empty().append(XMLHttpRequest.responseText);
-
-              settings.error();
-
-              settings.done();
-
-              jQuery.brazil.form.inline(options);
-            }
-          });
-
-          $(settings.inserted_fieldset).find('.form_close').show();
-          $(settings.inserted_fieldset).find('.form_close').live("click", function() {
-            $.get(form_container.children('form').attr('action'), function(response) {
-              form_container.replaceWith(response);
-
-              settings.done();
-            });
-            return false;
-          });
-        });
-
-        return false;
-      });
-    },
-    existing: function(options) {
-      var defaults = { form_container: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
-      var settings = jQuery.extend(defaults, options);
-
-      $(settings.form_container).find('form').ajaxForm({
-        beforeSubmit: function(formData, jqForm, options) {
-          $('input[type="submit"]', jqForm).attr('disabled', 'disabled');
-        },
-        success: function(responseText, statusText) {
-          $(settings.response_container).hide();
-          $(settings.response_container).empty().append(responseText);
-
-          settings.success();
-
-          $(settings.form_container).find('#form_error').hide();
-          $(settings.form_container).find('input[type="submit"]').removeAttr('disabled');
-
-          settings.done();
-          $(settings.response_container).show();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          $(settings.form_container).replaceWith(XMLHttpRequest.responseText);
-
-          settings.error();
-
-          settings.done();
-
-          jQuery.brazil.form.existing(options);
+    manipulate: {
+      syntax_highlight: function() {
+        if (typeof SyntaxHighlighter != "undefined") {
+          SyntaxHighlighter.config.clipboardSwf = '/javascripts/syntaxhighlighter/clipboard.swf';
+          SyntaxHighlighter.defaults.gutter = false;
+          SyntaxHighlighter.all();
         }
-      });
+      },
+      expand: function(options) {
+        var defaults = { expand_button: '', collapse_button: '', expand_container: '' };
+        var settings = jQuery.extend(defaults, options);
+
+        jQuery(settings.expand_button).live("click", function() {
+          jQuery.get(this.href, function(response) {
+            jQuery(settings.expand_button).parents(settings.expand_container).replaceWith(response);
+          });
+
+          return false;
+        });
+      }
+    },
+    form : {
+      inline: function(options) {
+        var defaults = { show_form: '', form_container: '', success: function(){}, error: function(){}, done: function(){} };
+        var settings = jQuery.extend(defaults, options);
+
+        jQuery(settings.show_form).live("click", function() {
+          var show_form = this;
+          jQuery.get(this.href, function(response) {
+            var form_container = jQuery(show_form).parents(settings.form_container);
+            form_container.empty().append(response).show('blind');
+
+            form_inline_ajax_submit({
+              form_container: form_container,
+              inserted_fieldset: settings.inserted_fieldset,
+              success: settings.success,
+              error: settings.error,
+              done: settings.done
+            });
+          });
+
+          return false;
+        });
+      },
+      insert: function(options) {
+        var defaults = { show_form: '', form_container: '', inserted_fieldset: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+        var settings = jQuery.extend(defaults, options);
+
+        jQuery(settings.show_form).live("click", function() {
+          jQuery(this).hide();
+
+          jQuery.get(this.href, function(response) {
+            jQuery(response).prependTo(settings.form_container);
+            jQuery(settings.inserted_fieldset).show("drop", { direction: 'left' });
+
+            form_insert_ajax_submit({
+              inserted_fieldset: settings.inserted_fieldset,
+              response_container: settings.response_container,
+              show_form: settings.show_form,
+              success: settings.success,
+              error: settings.error,
+              done: settings.done
+            });
+          });
+
+          return false;
+        });
+      },
+      insert_only: function(options) {
+        var defaults = { show_form: '', form_container: '', inserted_fieldset: '', done: function(){} };
+        var settings = jQuery.extend(defaults, options);
+
+        jQuery(settings.show_form).live("click", function() {
+          jQuery(this).hide();
+
+          jQuery.get(this.href, function(response) {
+            jQuery(response).prependTo(settings.form_container);
+            jQuery(settings.inserted_fieldset).show("drop", { direction: 'left' });
+
+            jQuery(settings.inserted_fieldset).find('.form_close').show();
+            jQuery(settings.inserted_fieldset).find('.form_close').live("click", function() {
+              jQuery(settings.inserted_fieldset).remove();
+              jQuery(settings.show_form).show();
+
+              settings.done();
+
+              return false;
+            });
+          });
+
+          return false;
+        });
+      },
+      existing: function(options) {
+        var defaults = { form_container: '', response_container: '', success: function(){}, error: function(){}, done: function(){} };
+        var settings = jQuery.extend(defaults, options);
+
+        jQuery(settings.form_container).find('form').ajaxForm({
+          beforeSubmit: function(formData, jqForm, options) {
+            jQuery('input[type="submit"]', jqForm).attr('disabled', 'disabled');
+          },
+          success: function(responseText, statusText) {
+            jQuery(settings.response_container).hide();
+            jQuery(settings.response_container).empty().append(responseText);
+
+            settings.success();
+
+            jQuery(settings.form_container).find('#form_error').hide();
+            jQuery(settings.form_container).find('input[type="submit"]').removeAttr('disabled');
+
+            jQuery(settings.response_container).show();
+            settings.done();
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            jQuery(settings.form_container).replaceWith(XMLHttpRequest.responseText);
+
+            settings.error();
+
+            settings.done();
+
+            brazil.form.existing(options);
+          }
+        });
+      }
     }
   }
-};
+}();

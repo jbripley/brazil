@@ -1,3 +1,3 @@
 $(document).ready(function() {
-  jQuery.brazil.manipulate.syntax_highlight();
+  brazil.manipulate.syntax_highlight();
 });
