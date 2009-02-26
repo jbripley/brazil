@@ -1,13 +1,13 @@
-<%= stylesheet_link_tag "db_instances/index", :media => "screen, projection" %>
-
 <table>
-  <tr>
-    <th>Alias</th>
-    <th>Host</th>
-    <th>Port</th>
-    <th>Environment</th>
-    <th>Type</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Alias</th>
+      <th>Host</th>
+      <th>Port</th>
+      <th>Environment</th>
+      <th>Type</th>
+    </tr>
+  </thead>
 
 <% for db_instance in @db_instances %>
   <tr class="db_instance <%=h db_instance.db_env %> <%= cycle 'odd', 'even' %>">
@@ -23,6 +23,6 @@
 <% end %>
 </table>
 
-<ul class="actions clearfix">	
+<ul class="actions clearfix">
 	<li><%= link_to 'New database instance', new_db_instance_path %></li>
 </ul>

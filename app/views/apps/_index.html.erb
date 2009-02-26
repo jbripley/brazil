@@ -1,10 +1,12 @@
 <%= render :partial => 'app', :locals => {:app => app} %>
 <table class="activity-list">
-  <tr>
-    <th>Activity</th>
-    <th>Description</th>
-    <th>State</th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Description</th>
+      <th>State</th>
+    </tr>
+  </thead>
 
   <%= render :partial => 'shared/activity_row', :collection => app.activities.latest(2), :as => :activity %>
   <% reset_cycle('activity_cycle') %>

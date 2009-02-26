@@ -1,10 +1,10 @@
 /* -----------------------------------------------------------------------
 
 
- Blueprint CSS Framework 0.7.1
- http://blueprintcss.googlecode.com
+ Blueprint CSS Framework 0.8
+ http://blueprintcss.org
 
-   * Copyright (c) 2007-2008. See LICENSE for more info.
+   * Copyright (c) 2007-Present. See LICENSE for more info.
    * See README for instructions on how to use Blueprint.
    * For credits and origins, see AUTHORS.
    * This is a compressed file. See the sources in the 'src' directory.
@@ -32,7 +32,7 @@ h5 {font-size:1em;font-weight:bold;margin-bottom:1.5em;}
 h6 {font-size:1em;font-weight:bold;}
 h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
 p {margin:0 0 1.5em;}
-p img {float:left;margin:1.5em 1.5em 1.5em 0;padding:0;}
+p img.left {float:left;margin:1.5em 1.5em 1.5em 0;padding:0;}
 p img.right {float:right;margin:1.5em 0 1.5em 1.5em;}
 a:focus, a:hover {color:#000;}
 a {color:#009;text-decoration:underline;}
@@ -54,9 +54,10 @@ dl {margin:0 0 1.5em 0;}
 dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
 table {margin-bottom:1.4em;width:100%;}
-th {font-weight:bold;background:#C3D9FF;}
-th, td {padding:4px 10px 4px 5px;}
-tr.even td {background:#E5ECF9;}
+th {font-weight:bold;}
+thead th {background:#c3d9ff;}
+th, td, caption {padding:4px 10px 4px 5px;}
+tr.even td {background:#e5ecf9;}
 tfoot {font-style:italic;}
 caption {background:#eee;}
 .small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
@@ -75,7 +76,6 @@ caption {background:#eee;}
 /* grid.css */
 .container {width:950px;margin:0 auto;}
 .showgrid {background:url(/stylesheets/blueprint/grid.png);}
-body {margin:1.5em 0;}
 .column, div.span-1, div.span-2, div.span-3, div.span-4, div.span-5, div.span-6, div.span-7, div.span-8, div.span-9, div.span-10, div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, div.span-21, div.span-22, div.span-23, div.span-24 {float:left;margin-right:10px;}
 .last, div.last {margin-right:0;}
 .span-1 {width:30px;}
@@ -229,7 +229,7 @@ div.colborder {padding-right:24px;margin-right:25px;border-right:1px solid #eee;
 .box {padding:1.5em;margin-bottom:1.5em;background:#E5ECF9;}
 hr {background:#ddd;color:#ddd;clear:both;float:none;width:100%;height:.1em;margin:0 0 1.45em;border:none;}
 hr.space {background:#fff;color:#fff;}
-.clearfix:after, .container:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
 

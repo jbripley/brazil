@@ -1,10 +1,10 @@
 /* -----------------------------------------------------------------------
 
 
- Blueprint CSS Framework 0.7.1
- http://blueprintcss.googlecode.com
+ Blueprint CSS Framework 0.8
+ http://blueprintcss.org
 
-   * Copyright (c) 2007-2008. See LICENSE for more info.
+   * Copyright (c) 2007-Present. See LICENSE for more info.
    * See README for instructions on how to use Blueprint.
    * For credits and origins, see AUTHORS.
    * This is a compressed file. See the sources in the 'src' directory.
@@ -27,4 +27,4 @@ blockquote {margin:1.5em;padding:1em;font-style:italic;font-size:.9em;}
 .quiet {color:#999;}
 .hide {display:none;}
 a:link, a:visited {background:transparent;font-weight:700;text-decoration:underline;}
-a:link:after, a:visited:after {content:" (" attr(href) ") ";font-size:90%;}
+a:link:after, a:visited:after {content:" (" attr(href) ")";font-size:90%;}
