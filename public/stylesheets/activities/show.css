@@ -27,3 +27,7 @@
 .people {
   float: left;
 }
+
+p.clear {
+  padding-top: 1em;
+}
