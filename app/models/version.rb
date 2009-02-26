@@ -23,7 +23,9 @@ class Version < ActiveRecord::Base
       vc = Brazil::VersionControl.new(::AppConfig.vc_type, version_repos_path, vc_username, vc_password)
 
       version_working_copy = rio(::AppConfig.vc_dir, activity.app.vc_path)
-      unless version_working_copy.directory?
+      if version_working_copy.directory?
+        vc.update(version_working_copy.path)
+      else
         vc.checkout(version_working_copy.path)
       end
 

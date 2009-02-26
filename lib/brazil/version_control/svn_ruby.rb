@@ -24,11 +24,11 @@ module Brazil::VersionControl
       end
     end
 
-    def update(update_path)
+    def update(working_copy_path)
       begin
-        vc_client.update(update_path)
+        vc_client.update(working_copy_path)
       rescue Svn::Error => svn_exception
-        raise Brazil::VersionControlException, "Could not update working copy path: #{update_path} (#{svn_exception})", caller
+        raise Brazil::VersionControlException, "Could not update working copy path: #{working_copy_path} (#{svn_exception})", caller
       end
     end
 
