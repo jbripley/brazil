@@ -7,9 +7,10 @@ To setup Brazil you need to follow these steps:
 1. Copy config/database.example to config/database.yml
 2. Run `rake db:migrate`
 3. Run `rake tmp:create`
+4. Setup version control configuration in config/config.yml, by following the Version Control section.
 
 ## Requirements
-Brazil requires Ruby on Rails 2.2.2 and Ruby DBI. Ruby DBI DBD drivers and their dependencies are required for any deploy database you want to use.
+Brazil requires Ruby on Rails 2.2.2, Ruby DBI and Subversion binding for Ruby. Ruby DBI DBD drivers and their dependencies are required for any deploy database you want to use.
 
 Module sqlite3-ruby is required to use the default database configuration.
 
@@ -32,6 +33,15 @@ Brazil requires a `schema_versions` table as specified below to function correct
 
 ## Example database
 You can setup a example database with some example Database Instances, Apps, Activities, Changes and Versions. This will reset the database, so please make a copy of **db/development.sqlite3** if there is something you want to keep. Run `rake brazil:reset` to setup the example db.
+
+# Version Control
+Brazil enables you to check in the generated update and rollback SQL for each Version you make. There are three configuration values in config/config.yml that need to be setup for this to work:
+
+1. vc_type needs to be set to your version control of choice, currently only Subversion (svn) is supported.
+2. vc_uri needs to be set your version control repository root. In the case of subversion, something like http://example.com/svn.
+3. vc_dir needs to be a, writable by brazil, directory that is used to checkout working copies.
+
+Each App created in Brazil then needs to define its own version control path, which is relative to `vc_uri`. To allow brazil to check it out and commit to it when a Version is deployed.  
 
 # Abstraction
 Brazil allows for Changes to be tracked in each App by a named Activity. Changes can be executed on a designated development database instance / schema pair when created or only saved to track existing Changes.
