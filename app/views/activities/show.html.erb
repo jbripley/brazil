@@ -1,5 +1,6 @@
 <% content_for :view_external_js do %>
   <%= javascript_include_tag "syntaxhighlighter/shCore", "syntaxhighlighter/shBrushSql" %>
+  <%= javascript_include_tag "jquery/jquery.scrollfollow" %>
 <% end %>
 
 <%= render :partial => "shared/activity", :locals => {:activity => @activity} %>

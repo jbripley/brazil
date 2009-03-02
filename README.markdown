@@ -41,18 +41,25 @@ Brazil enables you to check in the generated update and rollback SQL for each Ve
 2. vc_uri needs to be set your version control repository root. In the case of subversion, something like http://example.com/svn.
 3. vc_dir needs to be a, writable by brazil, directory that is used to checkout working copies.
 
-Each App created in Brazil then needs to define its own version control path, which is relative to `vc_uri`. To allow brazil to check it out and commit to it when a Version is deployed.  
+Each App created in Brazil then needs to define its own version control path, which is relative to `vc_uri`. To allow brazil to check it out and commit to it when a Version is deployed.
 
 # Abstraction
 Brazil allows for Changes to be tracked in each App by a named Activity. Changes can be executed on a designated development database instance / schema pair when created or only saved to track existing Changes.
 
 The collected Changes to an Activity can then be turned into Versions and deployed to one or several test database instance / schema pairs. A Version can be marked as deployed when it's been confirmed to have been deployed to the production system.
 
+## Example: App FooBar
+You have an application called `FooBar` which is in the subversion module `http://example.com/svn/foobar/trunk`, that you want to do some database schema changes to.As a first step you create an application named `FooBar`, with the `Version Control Path` set to `/foobar/trunk`.
+
+Your database changes for `FooBar` are connected to a `Change Request` numbered 4711 and are related to the schema `baz`. So you create a new activity in `FooBar` called `CR4711`, which uses `Development Database` Dev1 and will update the `baz` database schema.
+
+You then start to enter the SQL updates for the change request as changes in the `CR4711` activity. When you've entered all your changes, you create a version of all those changes, to deploy to your test database and later on, you production database.
+
 # Third Party
 Brazil uses the following third party libraries:
 
 * Blueprint CSS
-* jQuery, jQuery UI, jQuery Dimensions
+* jQuery, jQuery UI, jQuery Scroll Follow, jQuery Form
 * Styler, Javascripter
 * Crummy
 * Footnotes

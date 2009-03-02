@@ -85,26 +85,8 @@ var brazil = function() {
   return {
     move : {
       scrollable: function(id) {
-        var scrollablePos = jQuery(id).position();
-
-        jQuery(window).scroll(function() {
-          var bodyTop = jQuery(document).scrollTop();
-          var scrollableHeight = jQuery(id).outerHeight();
-          var endOfPagePos = jQuery('body').outerHeight();
-
-          if(endOfPagePos <= (bodyTop + scrollableHeight))
-          {
-            // Stop moving / scrolling element
-          }
-          else if(bodyTop > scrollablePos.top)
-          {
-            jQuery(id).css({position:"absolute", top: bodyTop, left: scrollablePos.left});
-          }
-          else
-          {
-            jQuery(id).css({position:"absolute", top: scrollablePos.top, left: scrollablePos.left});
-          }
-        });
+        jQuery(id).css("position", "relative");
+        jQuery(id).scrollFollow();
       }
     },
     flash : {

@@ -1,3 +1,7 @@
+<% content_for :view_external_js do %>
+  <%= javascript_include_tag "jquery/jquery.scrollfollow" %>
+<% end %>
+
 <div id="app-list" class="span-12 border">
   <% unless @apps.empty? %>
     <% for app in @apps %>
