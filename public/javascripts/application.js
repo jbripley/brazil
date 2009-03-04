@@ -210,6 +210,7 @@ var brazil = function() {
             settings.success();
 
             jQuery(settings.form_container).find('#form_error').hide();
+            jQuery(settings.form_container).find('.fieldWithErrors').removeClass('fieldWithErrors');
             jQuery(settings.form_container).find('input[type="submit"]').removeAttr('disabled');
 
             jQuery(settings.response_container).show();
