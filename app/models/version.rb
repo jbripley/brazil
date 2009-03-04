@@ -13,7 +13,8 @@ class Version < ActiveRecord::Base
   has_many :db_instance_version
   has_many :db_instances, :through => :db_instance_version
 
-  validates_presence_of :schema, :update_sql, :rollback_sql
+  validates_presence_of :schema, :update_sql, :rollback_sql, :schema_version
+  validates_inclusion_of :create_schema_version, :in => [true, false]
 
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
@@ -51,8 +52,45 @@ class Version < ActiveRecord::Base
     end
   end
 
-  def next_schema_version(db_username, db_password)
-    db_instance_test.find_next_schema_version(db_username, db_password, schema)
+  def init_schema_version(db_username, db_password)
+    begin
+      next_schema_version = db_instance_test.find_next_schema_version(db_username, db_password, schema)
+    rescue Brazil::DBException => exception
+      errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
+      return
+    end
+
+    if schema_version
+      self.schema_version = next_schema_version
+      self.create_schema_version = false
+    else
+      self.schema_version = '1_0_0'
+      self.create_schema_version = true
+    end
+  end
+
+  def update_schema_version(updated_schema_version, db_username, db_password)
+    begin
+      next_schema_version = db_instance_test.find_next_schema_version(db_username, db_password, schema)
+    rescue Brazil::DBException => exception
+      errors.add_to_base("Could not lookup version for schema '#{schema}' (#{exception})")
+      return
+    end
+
+    if next_schema_version
+      self.create_schema_version = false
+      next_schema_revision = Brazil::SchemaRevision.from_string(next_schema_version)
+    else
+      self.create_schema_version = true
+      next_schema_revision = Brazil::SchemaRevision.new(1, 0, 0)
+    end
+
+    updated_schema_revision = Brazil::SchemaRevision.from_string(updated_schema_version)
+    if updated_schema_revision >= next_schema_revision
+      self.schema_version = updated_schema_version
+    else
+      errors.add_to_base("Updated schema version: #{updated_schema_revision}, can not be less than the next schema version: #{next_schema_revision}")
+    end
   end
 
   def db_instance_test

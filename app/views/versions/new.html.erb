@@ -2,7 +2,7 @@
 	<legend>New version for <%=h @activity %></legend>
 	<% form_for(@version, :url => app_activity_versions_path(@activity.app, @activity)) do |f| %>
 	  <%= f.hidden_field :state, :value => Version::STATE_CREATED %>
-	  <%= render :partial => 'form', :locals => {:f => f} %>
+	  <%= render :partial => 'form', :locals => {:f => f, :version => @version} %>
     <p>
       <%= f.submit "Create Version" %>
     </p>

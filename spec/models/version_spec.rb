@@ -53,30 +53,6 @@ describe Version do
     end
   end
 
-  describe "when calling next_schema_version" do
-    before(:each) do
-      @db_username = 'foo'
-      @db_password = 'bar'
-    end
-
-    it "should return the next schema version" do
-      schema_version = '3_14_2'
-      db_instance_test = mock_model(DbInstance)
-      db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_return(schema_version)
-      @version.stub!(:db_instance_test).and_return(db_instance_test)
-
-      @version.next_schema_version(@db_username, @db_password).should eql(schema_version)
-    end
-
-    it "should find no schema version" do
-      db_instance_test = mock_model(DbInstance)
-      db_instance_test.should_receive(:find_next_schema_version).with(@db_username, @db_password, @version.schema).and_return(nil)
-      @version.stub!(:db_instance_test).and_return(db_instance_test)
-
-      @version.next_schema_version(@db_username, @db_password).should be_nil
-    end
-  end
-
   describe "when calling db_instance_test" do
     it "should return a test db_instance belonging to the version" do
       db_instance_test = mock_model(DbInstance)

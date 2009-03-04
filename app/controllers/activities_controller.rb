@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
   end
   create.failure.wants.html do
     if request.xhr?
-      render :partial => 'new', :locals => {:activity => @activity}, :status => :unprocessable_entity
+      render :partial => 'new', :locals => {:activity => @activity, :app => @app}, :status => :unprocessable_entity
     else
       render :action => "new"
     end

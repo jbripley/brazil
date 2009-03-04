@@ -11,7 +11,7 @@ describe "/versions/index.html.erb" do
     @activity.stub!(:app).and_return(@app)
 
     assigns[:activity] = @activity
-    
+
     version_98 = mock_model(Version)
     version_98.should_receive(:state).at_least(:once).and_return("created")
     version_98.should_receive(:schema).and_return("brazil_test")
@@ -32,7 +32,7 @@ describe "/versions/index.html.erb" do
     version_99.stub!(:db_instances).and_return([db_instances(:test_2)])
     version_99.stub!(:activity).and_return(@activity)
 
-    assigns[:versions] = [version_98, version_99] 
+    assigns[:versions] = [version_98, version_99]
   end
 
   it "should render list of versions" do
@@ -46,8 +46,8 @@ describe "/versions/index.html.erb" do
     response.should have_text(/brazil_test/)
 
     # version
-    response.should have_text(/2_23/)
-    response.should have_text(/3_1/)
+    response.should have_text(/2_23_3/)
+    response.should have_text(/3_1_5/)
   end
 end
 

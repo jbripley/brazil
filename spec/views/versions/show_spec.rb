@@ -12,7 +12,7 @@ describe "/versions/show.html.erb" do
     @activity.stub!(:app).and_return(@app)
 
     assigns[:activity] = @activity
-    
+
     @version = mock_model(Version)
     @version.should_receive(:state).at_least(:once).and_return("created")
     @version.should_receive(:schema).and_return("brazil_test")
@@ -38,9 +38,9 @@ describe "/versions/show.html.erb" do
     render "/versions/show.html.erb"
     response.should have_text(/created/)
     response.should have_text(/brazil_test/)
-    response.should have_text(/2_23/)
+    response.should have_text(/2_23_7/)
     response.should have_text(/VersionedUpdateSQL/)
-    response.should have_text(/VersionedRollbackSQL/)  
+    response.should have_text(/VersionedRollbackSQL/)
   end
 end
 

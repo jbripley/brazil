@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090218105343) do
+ActiveRecord::Schema.define(:version => 20090303095624) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20090218105343) do
     t.text     "rollback_sql"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "create_schema_version"
   end
 
 end

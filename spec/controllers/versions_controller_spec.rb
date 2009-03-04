@@ -150,8 +150,7 @@ describe VersionsController do
 
       @version = mock_model(Version, :to_param => "1")
       @version.should_receive(:activity_id=).with('3')
-      @version.should_receive(:next_schema_version).with(nil, nil)
-      @version.should_receive(:schema_version=).with(nil)
+      @version.should_receive(:init_schema_version)
       @version.errors.should_receive(:empty?).and_return(true)
 
       Version.stub!(:new).and_return(@version)
@@ -195,7 +194,10 @@ describe VersionsController do
     fixtures :apps, :activities
 
     before(:each) do
-      @schema_version = '1_2_3'
+      @schema_version_major = '1'
+      @schema_version_minor = '2'
+      @schema_version_patch = '3'
+
       @app = apps(:app_3)
 
       @activity = activities(:app_1_deployed)
@@ -204,8 +206,9 @@ describe VersionsController do
       Activity.stub!(:find).with('3').and_return(@activity)
 
       @version = mock_model(Version, :to_param => "1")
+      @version.should_receive(:attributes=)
       @version.errors.should_receive(:empty?).and_return(true)
-      @version.should_receive(:next_schema_version).and_return(@schema_version)
+      @version.should_receive(:update_schema_version).with([@schema_version_major, @schema_version_minor, @schema_version_patch].join('_'), nil, nil)
 
       Version.stub!(:find).with('1').and_return(@version)
       @version.stub!(:find).with('1').and_return(@version)
@@ -215,9 +218,8 @@ describe VersionsController do
     describe "with successful update" do
 
       def do_put
-        @version.should_receive(:schema_version=).with(@schema_version)
-        @version.should_receive(:update_attributes).and_return(true)
-        put :update, :id => "1", :app_id => '3', :activity_id => '3'
+        @version.should_receive(:save).and_return(true)
+        put :update, :id => "1", :app_id => '3', :activity_id => '3', :schema_version_major => @schema_version_major, :schema_version_minor => @schema_version_minor, :schema_version_patch => @schema_version_patch
       end
 
       it "should find the version requested" do
@@ -245,9 +247,8 @@ describe VersionsController do
     describe "with failed update" do
 
       def do_put
-        @version.should_receive(:schema_version=).with(@schema_version)
-        @version.should_receive(:update_attributes).and_return(false)
-        put :update, :id => "1", :app_id => '3', :activity_id => '3'
+        @version.should_receive(:save).and_return(false)
+        put :update, :id => "1", :app_id => '3', :activity_id => '3', :schema_version_major => @schema_version_major, :schema_version_minor => @schema_version_minor, :schema_version_patch => @schema_version_patch
       end
 
       it "should re-render 'show'" do

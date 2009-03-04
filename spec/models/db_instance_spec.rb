@@ -88,7 +88,7 @@ describe DbInstance do
       latest_version_row.stub!(:[]).with('major').and_return('3')
       latest_version_row.stub!(:[]).with('minor').and_return('14')
       latest_version_row.stub!(:[]).with('patch').and_return('2')
-      
+
       @dbi_handle.stub!(:select_one).with("SELECT * FROM #{@schema}.schema_versions ORDER BY major, minor, patch DESC").and_return(latest_version_row)
       setup_handle(@dbi_handle)
 

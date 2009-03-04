@@ -14,12 +14,7 @@ class VersionsController < ApplicationController
 
     @version = Version.new(params[:version])
     @version.activity_id = params[:activity_id]
-
-    begin
-      @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
-    rescue Brazil::DBException => exception
-      @version.errors.add_to_base("Could not lookup version for schema '#{@version.schema}' (#{exception})")
-    end
+    @version.init_schema_version(params[:db_username], params[:db_password])
 
     respond_to do |format|
       if @version.errors.empty? && @version.save
@@ -39,15 +34,13 @@ class VersionsController < ApplicationController
   def update
     @activity = Activity.find(params[:activity_id])
     @version = Version.find(params[:id])
+    @version.attributes = params[:version]
 
-    begin
-      @version.schema_version = @version.next_schema_version(params[:db_username], params[:db_password])
-    rescue Brazil::DBException => exception
-      @version.errors.add_to_base("Could not lookup version for schema '#{@version.schema}' (#{exception})")
-    end
+    updated_schema_version = [params[:schema_version_major], params[:schema_version_minor], params[:schema_version_patch]].join('_')
+    @version.update_schema_version(updated_schema_version, params[:db_username], params[:db_password])
 
     respond_to do |format|
-      if @version.errors.empty? && @version.update_attributes(params[:version])
+      if @version.errors.empty? && @version.save
         flash[:notice] = 'Version was successfully updated.'
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }

@@ -7,6 +7,7 @@ version_1_activity_2:
   schema_version: '1_10_2'
   state: 'created'
   activity_id: 2
+  create_schema_version: false
 
 version_2_activity_2:
   id: 2
@@ -14,9 +15,10 @@ version_2_activity_2:
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
   update_sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL PRIMARY KEY,\nstupid_name VARCHAR(24) NOT NULL default '',\nsome_type CHAR(2) NOT NULL DEFAULT ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\nGRANT SELECT, INSERT ON new_weird_table TO crazy_test_user IDENTIFIED BY 'crazy_test_user';\n\nALTER TABLE already_existing_table DROP COLUMN name;"
   rollback_sql: "-- Use mysqldump to re-create dropped column in already_existing_table\nDROP USER crazy_test_user;\nDROP TABLE new_weird_table;"
-  schema_version: '0_6_0'
+  schema_version: '1_10_2'
   state: 'tested'
   activity_id: 2
+  create_schema_version: true
 
 version_3_activity_3:
   id: 3
@@ -27,14 +29,16 @@ version_3_activity_3:
   schema_version: '2_23_4'
   state: 'deployed'
   activity_id: 3
-  
+  create_schema_version: false
+
 version_4_activity_3:
   id: 4
-  schema: foo_test
+  schema: bar_test
   preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
   update_sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL PRIMARY KEY,\nstupid_name VARCHAR(24) NOT NULL default '',\nsome_type CHAR(2) NOT NULL DEFAULT ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\nGRANT SELECT, INSERT ON new_weird_table TO crazy_test_user IDENTIFIED BY 'crazy_test_user';\n\nALTER TABLE already_existing_table DROP COLUMN name;"
   rollback_sql: "-- Use mysqldump to re-create dropped column in already_existing_table\nDROP USER crazy_test_user;\nDROP TABLE new_weird_table;"
-  schema_version: '3_3_14'
+  schema_version: '2_23_4'
   state: 'tested'
   activity_id: 3
+  create_schema_version: true
 
