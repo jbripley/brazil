@@ -89,15 +89,19 @@ module VersionControl
       raise NotImplementedError
     end
 
-    def mkdir(working_copy_path)
+    def mkdir(working_copy_paths)
       raise NotImplementedError
     end
 
-    def add(working_copy_path)
+    def add(working_copy_paths)
       raise NotImplementedError
     end
 
-    def commit(working_copy_path, commit_message)
+    def commit(working_copy_paths, commit_message)
+      raise NotImplementedError
+    end
+
+    def delete(working_copy_paths)
       raise NotImplementedError
     end
 

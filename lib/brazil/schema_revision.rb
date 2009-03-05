@@ -9,8 +9,12 @@ module Brazil
     end
 
     def self.from_string(version)
-      major, minor, patch = version.split('_')
-      SchemaRevision.new(major, minor, patch)
+      if version.respond_to?(:split)
+        major, minor, patch = version.split('_')
+        SchemaRevision.new(major, minor, patch)
+      else
+        nil
+      end
     end
 
     def next

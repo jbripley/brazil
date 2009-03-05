@@ -18,38 +18,22 @@ class Version < ActiveRecord::Base
 
   before_save :check_no_duplicate_schema_db, :update_activity_state
 
-  def version_control_sql(generate_update_sql, generate_rollback_sql, vc_username, vc_password)
-    begin
-      version_repos_path = "#{::AppConfig.vc_uri}/#{activity.app.vc_path}"
-      vc = Brazil::VersionControl.new(::AppConfig.vc_type, version_repos_path, vc_username, vc_password)
+  def deploy_to_test(versioned_update_sql, versioned_rollback_sql, db_username, db_password, vc_username, vc_password)
+    add_version_sql_to_version_control(versioned_update_sql, versioned_rollback_sql, vc_username, vc_password)
+    db_instance_test.execute_sql(versioned_update_sql, db_username, db_password, schema)
+  rescue Brazil::DBException => db_exception
+    errors.add_to_base("SQL: #{db_exception}")
+  rescue Brazil::VersionControlException => vc_exception
+    errors.add_to_base("Version Control: could not add Version update and rollback SQL (#{vc_exception})")
+  end
 
-      version_working_copy = rio(::AppConfig.vc_dir, activity.app.vc_path)
-      if version_working_copy.directory?
-        vc.update(version_working_copy.path)
-      else
-        vc.checkout(version_working_copy.path)
-      end
-
-      if schema_version.to_s.empty?
-        vc_schema_version = '1_0_0'
-      else
-        vc_schema_version = schema_version
-      end
-
-      version_sql_dir = rio(version_working_copy, schema, db_instance_test.db_type.downcase).mkpath
-      version_update_sql = rio(version_sql_dir, "#{schema}-#{vc_schema_version}-update.sql").mode("w+")
-      version_rollback_sql = rio(version_sql_dir, "#{schema}-#{vc_schema_version}-rollback.sql").mode("w+")
-
-      version_update_sql.print!(generate_update_sql.call)
-      version_rollback_sql.print!(generate_rollback_sql.call)
-
-      vc.add(rio(version_working_copy, schema).path)
-      vc.commit(version_working_copy.path, "TOOL Add version #{schema_version} SQL for #{activity.app.name} schema #{schema}")
-
-      return true
-    rescue Brazil::VersionControlException => vc_exception
-      return false
-    end
+  def rollback_from_test(versioned_rollback_sql, db_username, db_password, vc_username, vc_password)
+    delete_version_sql_from_version_control(vc_username, vc_password)
+    db_instance_test.execute_sql(versioned_rollback_sql, db_username, db_password, schema)
+  rescue Brazil::DBException => db_exception
+    errors.add_to_base("SQL: #{db_exception}")
+  rescue Brazil::VersionControlException => vc_exception
+    errors.add_to_base("Version Control: could not delete Version update and rollback SQL (#{vc_exception})")
   end
 
   def init_schema_version(db_username, db_password)
@@ -77,16 +61,16 @@ class Version < ActiveRecord::Base
       return
     end
 
+    next_schema_revision = Brazil::SchemaRevision.from_string(next_schema_version)
     if next_schema_version
       self.create_schema_version = false
-      next_schema_revision = Brazil::SchemaRevision.from_string(next_schema_version)
     else
       self.create_schema_version = true
       next_schema_revision = Brazil::SchemaRevision.new(1, 0, 0)
     end
 
     updated_schema_revision = Brazil::SchemaRevision.from_string(updated_schema_version)
-    if updated_schema_revision >= next_schema_revision
+    if updated_schema_revision && updated_schema_revision >= next_schema_revision
       self.schema_version = updated_schema_version
     else
       errors.add_to_base("Updated schema version: #{updated_schema_revision}, can not be less than the next schema version: #{next_schema_revision}")
@@ -103,11 +87,7 @@ class Version < ActiveRecord::Base
   end
 
   def schema_revision
-    if schema_version
-      Brazil::SchemaRevision.from_string(schema_version)
-    else
-      nil
-    end
+    Brazil::SchemaRevision.from_string(schema_version)
   end
 
   def created?
@@ -131,6 +111,48 @@ class Version < ActiveRecord::Base
   end
 
   private
+
+  def add_version_sql_to_version_control(update_sql, rollback_sql, vc_username, vc_password)
+    vc = init_vc(vc_password, vc_username)
+
+    version_working_copy = rio(::AppConfig.vc_dir, activity.app.vc_path)
+    if version_working_copy.directory?
+      vc.update(version_working_copy.path)
+    else
+      vc.checkout(version_working_copy.path)
+    end
+
+    version_update_sql, version_rollback_sql = version_sql_working_copy_paths(version_working_copy)
+    version_update_sql.print!(update_sql)
+    version_rollback_sql.print!(rollback_sql)
+
+    vc.add(rio(version_working_copy, schema).path)
+    vc.commit(version_working_copy.path, "TOOL Add version #{schema_version} SQL for #{activity.app.name} schema #{schema}")
+  end
+
+  def delete_version_sql_from_version_control(vc_username, vc_password)
+    vc = init_vc(vc_password, vc_username)
+
+    version_update_sql, version_rollback_sql = version_sql_working_copy_paths(rio(::AppConfig.vc_dir, activity.app.vc_path))
+    vc.delete(version_update_sql.path)
+    vc.delete(version_rollback_sql.path)
+
+    vc.commit([version_update_sql.path, version_rollback_sql.path], "TOOL Delete version #{schema_version} SQL for #{activity.app.name} schema #{schema}")
+  end
+
+  def init_vc(vc_password, vc_username)
+    version_repos_path = "#{::AppConfig.vc_uri}/#{activity.app.vc_path}"
+    vc = Brazil::VersionControl.new(::AppConfig.vc_type, version_repos_path, vc_username, vc_password)
+    unless vc.valid_credentials?
+      raise Brazil::VersionControlException, "version control username or password are not correct"
+    end
+    return vc
+  end
+
+  def version_sql_working_copy_paths(version_working_copy)
+    version_sql_dir = rio(version_working_copy, schema, db_instance_test.db_type.downcase).mkpath
+    [rio(version_sql_dir, "#{schema}-#{schema_version}-update.sql").mode("w+"), rio(version_sql_dir, "#{schema}-#{schema_version}-rollback.sql").mode("w+")]
+  end
 
   def check_no_duplicate_schema_db
     match = DbInstanceVersion.find(:first, :joins => [:version, :db_instance], :conditions => ['versions.schema = ? AND db_instances.id = ? AND versions.activity_id = ?', schema, db_instance_test.id, activity.id])

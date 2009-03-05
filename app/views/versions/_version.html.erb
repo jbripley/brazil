@@ -1,4 +1,4 @@
-<div class="box version <%=h version.state %> clearfix">
+<div class="box version <%=h version.state %>">
   <div class="clearfix">
     <h2>Version</h2>
 
@@ -13,11 +13,20 @@
     </div>
 
     <div class="info span-4">
-      <% for db_instance in version.db_instances %>
+      <% version.db_instances.each do |db_instance| %>
       <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
       <% end %>
       <span><strong>Schema</strong> <%=h version.schema %></span>
     </div>
+
+    <% if version_tested(version) %>
+    <div class="span-2">
+      <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
+        <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
+        <%= f.submit 'Deployed' %>
+      <% end %>
+    </div>
+    <% end %>
 
     <div class="append-1">
       <ul class="actions">
@@ -28,28 +37,4 @@
       </ul>
     </div>
   </div>
-  <% if version_tested(version) %>
-  <hr class="space" />
-  <fieldset class="span-12 clearfix">
-    <legend>Mark as Deployed</legend>
-    <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
-      <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
-
-      <div>
-        <div class="span-5">
-          <%= label_tag :vc_username, 'Version Control Username' %><br />
-          <%= text_field_tag :vc_username, {}, :class => "span-5" %>
-        </div>
-        <div class="span-5">
-          <%= label_tag :vc_password, 'Version Control Password' %><br />
-          <%= password_field_tag :vc_password, {}, :class => "span-5" %>
-        </div>
-        <div class="span-1 last">
-          <br />
-            <%= f.submit 'Deployed' %>
-        </div>
-      </div>
-    <% end %>
-  </fieldset>
-  <% end %>
 </div>

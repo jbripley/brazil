@@ -34,12 +34,12 @@
   <div class="span-8">
     <%= render :partial => 'shared/db_credentials_form' %>
   </div>
-  <% unless version.new_record? %>
+  <% unless f.object.new_record? %>
   <div>
     <%= label_tag :schema_version, 'Schema Version' %><br />
-    <%= text_field_tag 'schema_version_major', version.schema_revision.major, :size => 2 %> .
-    <%= text_field_tag 'schema_version_minor', version.schema_revision.minor, :size => 2 %> .
-    <%= text_field_tag 'schema_version_patch', version.schema_revision.patch, :size => 2 %>
+    <%= text_field_tag 'schema_version_major', f.object.schema_revision.major, :size => 2 %> .
+    <%= text_field_tag 'schema_version_minor', f.object.schema_revision.minor, :size => 2 %> .
+    <%= text_field_tag 'schema_version_patch', f.object.schema_revision.patch, :size => 2 %>
   </div>
   <% end %>
 </div>

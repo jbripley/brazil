@@ -6,6 +6,7 @@
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <%= f.hidden_field :state, :value => Version::STATE_TESTED %>
     <%= render :partial => 'shared/db_credentials_form' %>
-    <br /><%= submit_tag 'Deploy' %>
+    <%= render :partial => 'shared/vc_credentials_form' %>
+    <br /><%= submit_tag 'Execute' %>
   <% end %>
 </fieldset>

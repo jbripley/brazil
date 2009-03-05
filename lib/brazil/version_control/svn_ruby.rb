@@ -51,7 +51,7 @@ module Brazil::VersionControl
     end
 
     # TODO: Test implementation
-#    def mkdir(working_copy_path)
+#    def mkdir(working_copy_paths)
 #      begin
 #        vc_client.mkdir_p(working_copy_path)
 #      rescue Svn::Error => svn_exception
@@ -59,20 +59,28 @@ module Brazil::VersionControl
 #      end
 #    end
 
-    def add(working_copy_path)
+    def add(working_copy_paths)
       begin
-        vc_client.add(working_copy_path, true, true)
+        vc_client.add(working_copy_paths, true, true)
       rescue Svn::Error => svn_exception
-        raise Brazil::VersionControlException, "Could not add working copy path: #{working_copy_path} (#{svn_exception})", caller
+        raise Brazil::VersionControlException, "Could not add working copy path: #{working_copy_paths} (#{svn_exception})", caller
       end
     end
 
-    def commit(working_copy_path, commit_message)
+    def commit(working_copy_paths, commit_message)
       begin
         set_commit_message(commit_message)
-        vc_client.commit(working_copy_path)
+        vc_client.commit(working_copy_paths)
       rescue Svn::Error => svn_exception
-        raise Brazil::VersionControlException, "Failed to commit working copy path: #{working_copy_path} (#{svn_exception})", caller
+        raise Brazil::VersionControlException, "Failed to commit working copy path: #{working_copy_paths} (#{svn_exception})", caller
+      end
+    end
+
+    def delete(working_copy_paths)
+      begin
+        vc_client.delete(working_copy_paths, true)
+      rescue Svn::Error => svn_exception
+        raise Brazil::VersionControlException, "Could not delete working copy path: #{working_copy_paths} (#{svn_exception})", caller
       end
     end
 

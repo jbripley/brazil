@@ -57,15 +57,7 @@ class VersionsController < ApplicationController
   def test
     @activity = Activity.find(params[:activity_id])
     @version = Version.find(params[:id])
-
-    generate_rollback_sql = Proc.new {create_rollback_sql(@version)}
-
-    begin
-      @version.db_instance_test.execute_sql(create_update_sql(@version), params[:db_username], params[:db_password], @version.schema)
-    rescue Brazil::DBException => exception
-      @version.errors.add_to_base("SQL: #{exception}")
-      flash[:error] = "Failed to execute Update SQL (#{exception})"
-    end
+    @version.deploy_to_test(create_update_sql(@version), create_rollback_sql(@version), params[:db_username], params[:db_password], params[:vc_username], params[:vc_password])
 
     respond_to do |format|
       if @version.errors.empty? && @version.update_attributes(params[:version])
@@ -74,6 +66,7 @@ class VersionsController < ApplicationController
         format.xml  { head :ok }
         format.json  { head :ok }
       else
+        flash[:error] = "Failed to execute Update SQL"
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
@@ -85,13 +78,7 @@ class VersionsController < ApplicationController
   def rollback
     @activity = Activity.find(params[:activity_id])
     @version = Version.find(params[:id])
-
-    begin
-      @version.db_instance_test.execute_sql(create_rollback_sql(@version), params[:db_username], params[:db_password], @version.schema)
-    rescue Brazil::DBException => exception
-      @version.errors.add_to_base("SQL: #{exception}")
-      flash[:error] = "Failed to execute Rollback SQL (#{exception})"
-    end
+    @version.rollback_from_test(create_rollback_sql(@version), params[:db_username], params[:db_password], params[:vc_username], params[:vc_password])
 
     respond_to do |format|
       if @version.errors.empty? && @version.update_attributes(params[:version])
@@ -100,6 +87,7 @@ class VersionsController < ApplicationController
         format.xml  { head :ok }
         format.json  { head :ok }
       else
+        flash[:error] = "Failed to execute Rollback SQL"
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
@@ -111,20 +99,14 @@ class VersionsController < ApplicationController
     @activity = Activity.find(params[:activity_id])
     @version = Version.find(params[:id])
 
-    generate_update_sql = Proc.new {create_update_sql(@version)}
-    generate_rollback_sql = Proc.new {create_rollback_sql(@version)}
-
-    version_controlled = @version.version_control_sql(generate_update_sql, generate_rollback_sql, params[:vc_username], params[:vc_password])
-
     respond_to do |format|
-      if version_controlled && @version.update_attributes(params[:version])
+      if @version.update_attributes(params[:version])
         @activity.deployed!
         flash[:notice] = "Version '#{@version}' is now set as deployed"
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
         format.xml  { head :ok }
         format.json  { head :ok }
       else
-        flash[:error] = "Version Control failure"
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
