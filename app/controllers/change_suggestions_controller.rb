@@ -1,38 +1,57 @@
 class ChangeSuggestionsController < ApplicationController
-  resource_controller
-  belongs_to :activity
+  # GET /apps/:app_id/activities/:activity_id/change_suggestions/new
+  # GET /apps/:app_id/activities/:activity_id/change_suggestions/new.xml
+  def new
+    @activity = Activity.find(params[:activity_id])
+    @change = @activity.changes.build
 
-  new_action.before { @change = object }
-  new_action.wants.html { render :layout => false if request.xhr? }
-
-  create.before { @change = object }
-  create.success.wants.html do
-    if request.xhr?
-      render :partial => "changes/change", :collection => @activity.changes
-    else
-      redirect_to app_activity_path(@activity.app, @activity)
-    end
-  end
-  create.failure.wants.html do
-    if request.xhr?
-      render :action => 'new', :layout => false, :status => :unprocessable_entity
-    else
-      render :action => "new"
+    respond_to do |format|
+      format.html do # new.html.erb
+        render :layout => false if request.xhr?
+      end
+      format.xml  { render :xml => @change }
     end
   end
 
-  private
+  # POST /apps/:app_id/activities/:activity_id/change_suggestions
+  def create
+    @activity = Activity.find(params[:activity_id])
+    @change = @activity.changes.build(params[:change])
+    @change.state = Change::STATE_SUGGESTED
 
-  def build_object
-    @object ||= Change.new(params[:change])
-    @object.activity_id = params[:activity_id]
+    respond_to do |format|
+      if @change.save
+        flash[:notice] = 'Change suggestion was successfully created.'
+        format.html do
+          if request.xhr?
+            render :partial => "changes/change", :collection => @activity.changes
+          else
+            redirect_to app_activity_path(@activity.app, @activity)
+          end
+        end
+      else
+        format.html do
+          if request.xhr?
+            render :action => 'new', :layout => false, :status => :unprocessable_entity
+          else
+            render :action => "new"
+          end
+        end
+      end
+    end
   end
 
   private
 
   def add_controller_crumbs
-    add_app_controller_crumbs(parent_object.app)
-    add_activities_controller_crumbs(parent_object.app, parent_object)
+    app = App.find(params[:app_id])
+    add_app_controller_crumbs(app)
+
+    if params.has_key?(:id)
+      add_activities_controller_crumbs(app, app.activities.find(params[:id]))
+    else
+      add_activities_controller_crumbs(app, nil)
+    end
 
     add_crumb 'Change Suggestions'
   end
