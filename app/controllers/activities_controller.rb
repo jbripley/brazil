@@ -1,66 +1,140 @@
 class ActivitiesController < ApplicationController
-  resource_controller
-  belongs_to :app
+  # GET /apps/:app_id/activities
+  # GET /apps/:app_id/activities.xml
+  # GET /apps/:app_id/activities.atom
+  def index
+    @app = App.find(params[:app_id])
+    @activities = @app.activities.all(:order => 'updated_at DESC')
+    @activity = Activity.new(:app_id => params[:app_id])
 
-  index.before { @activity = Activity.new(:app_id => params[:app_id]) }
-  index.wants.html do
-    if request.xhr?
-      render :partial => 'index', :locals => {:app => @activity.app, :activities => @activities}
+    respond_to do |format|
+      format.html do # index.html.erb
+        if request.xhr?
+          render :partial => 'index', :locals => {:app => @app, :activities => @activities}
+        end
+      end
+      format.xml  { render :xml => @activities }
+      format.atom # index.atom.builder
     end
   end
-  index.wants.atom
 
-  show.before do
+  # GET /apps/:app_id/activities/1
+  # GET /apps/:app_id/activities/1.xml
+  # GET /apps/:app_id/activities/1.atom
+  def show
+    @app = App.find(params[:app_id])
+    @activity = @app.activities.find(params[:id])
     @change = Change.new(:activity_id => params[:id])
+
     latest_change = Change.find_by_activity_id_and_state(params[:id], [Change::STATE_EXECUTED, Change::STATE_SAVED], :order => 'created_at DESC')
     if latest_change
       @change.dba = latest_change.dba
       @change.developer = latest_change.developer
     end
-  end
-  show.wants.html do
-    if request.xhr?
-      render :partial => "shared/activity", :locals => {:activity => @activity}
-    end
-  end
-  show.wants.atom
 
-  [new_action, edit].each { |action| action.wants.html { render :layout => false if request.xhr? } }
-
-  create.success.wants.html do
-    if request.xhr?
-      render :partial => 'shared/activity_row', :collection => @app.activities, :as => 'activity'
-    else
-      redirect_to app_activity_path(@app, @activity)
-    end
-  end
-  create.failure.wants.html do
-    if request.xhr?
-      render :partial => 'new', :locals => {:activity => @activity, :app => @app}, :status => :unprocessable_entity
-    else
-      render :action => "new"
+    respond_to do |format|
+      format.html do # show.html.erb
+        if request.xhr?
+          render :partial => "shared/activity", :locals => {:activity => @activity}
+        end
+      end
+      format.xml  { render :xml => @activity }
+      format.atom # show.atom.builder
     end
   end
 
-  update.success.wants.html do
-    if request.xhr?
-      render :partial => "shared/activity", :locals => {:activity => @activity}
-    else
-      redirect_to app_activity_path(@app, @activity)
+  # GET /apps/:app_id/activities/new
+  # GET /apps/:app_id/activities/new.xml
+  def new
+    @app = App.find(params[:app_id])
+    @activity = @app.activities.build
+
+    respond_to do |format|
+      format.html do # new.html.erb
+        render :layout => false if request.xhr?
+      end
+      format.xml  { render :xml => @activity }
     end
   end
-  update.failure.wants.html do
-    if request.xhr?
-      render :action => "edit", :layout => false, :status => :unprocessable_entity
-    else
-      render :action => "edit"
+
+  # GET /apps/:app_id/activities/1/edit
+  def edit
+    @app = App.find(params[:app_id])
+    @activity = @app.activities.find(params[:id])
+    render :layout => false if request.xhr?
+  end
+
+  # POST /apps/:app_id/activities
+  # POST /apps/:app_id/activities.xml
+  def create
+    @app = App.find(params[:app_id])
+    @activity = @app.activities.build(params[:activity])
+    @activity.state = Activity::STATE_DEVELOPMENT
+
+    respond_to do |format|
+      if @activity.save
+        flash[:notice] = 'Activity was successfully created.'
+        format.html do
+          if request.xhr?
+            render :partial => 'shared/activity_row', :collection => @app.activities, :as => 'activity'
+          else
+            redirect_to app_activity_path(@app, @activity)
+          end
+        end
+        format.xml  { render :xml => @activity, :status => :created, :location => @activity }
+      else
+        format.html do
+          if request.xhr?
+            render :partial => 'new', :locals => {:activity => @activity, :app => @app}, :status => :unprocessable_entity
+          else
+            render :action => "new"
+          end
+        end
+        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /apps/:app_id/activities/1
+  # PUT /apps/:app_id/activities/1.xml
+  def update
+    @app = App.find(params[:app_id])
+    @activity = @app.activities.find(params[:id])
+
+    respond_to do |format|
+      if @activity.update_attributes(params[:activity])
+        flash[:notice] = 'Activity was successfully updated.'
+        format.html do
+          if request.xhr?
+            render :partial => "shared/activity", :locals => {:activity => @activity}
+          else
+            redirect_to app_activity_path(@app, @activity)
+          end
+        end
+        format.xml  { head :ok }
+      else
+        format.html do
+          if request.xhr?
+            render :action => "edit", :layout => false, :status => :unprocessable_entity
+          else
+            render :action => "edit"
+          end
+        end
+        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
   private
 
   def add_controller_crumbs
-    add_app_controller_crumbs(parent_object)
-    add_activities_controller_crumbs(parent_object, object)
+    app = App.find(params[:app_id])
+    add_app_controller_crumbs(app)
+
+    if params.has_key?(:id)
+      add_activities_controller_crumbs(app, app.activities.find(params[:id]))
+    else
+      add_activities_controller_crumbs(app, nil)
+    end
   end
 end
