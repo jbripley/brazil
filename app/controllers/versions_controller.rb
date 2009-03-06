@@ -95,9 +95,9 @@ class VersionsController < ApplicationController
     end
   end
 
-  def deployed
+  def deploy
     @activity = Activity.find(params[:activity_id])
-    @version = Version.find(params[:id])
+    @version = @activity.versions.find(params[:id])
 
     respond_to do |format|
       if @version.update_attributes(params[:version])
@@ -110,6 +110,22 @@ class VersionsController < ApplicationController
         format.html { render :action => 'show' }
         format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
         format.json { render :json => @version.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def merge
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.find(params[:id])
+
+    @version.merge_to_dev(create_update_sql(@version), params[:dev_db_instance_id], params[:dev_schema], params[:db_username], params[:db_password])
+
+    respond_to do |format|
+      if @version.errors.empty? && @version.update_attributes(params[:version])
+        flash[:notice] = "Version '#{@version}' is now merged"
+        format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
+      else
+        format.html { render :action => 'show' }
       end
     end
   end

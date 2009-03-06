@@ -42,3 +42,13 @@ version_4_activity_3:
   activity_id: 3
   create_schema_version: true
 
+version_5_activity_2:
+  id: 5
+  schema: baz_test
+  preparation: "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback"
+  update_sql: "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL PRIMARY KEY,\nstupid_name VARCHAR(24) NOT NULL default '',\nsome_type CHAR(2) NOT NULL DEFAULT ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\nGRANT SELECT, INSERT ON new_weird_table TO crazy_test_user IDENTIFIED BY 'crazy_test_user';\n\nALTER TABLE already_existing_table DROP COLUMN name;"
+  rollback_sql: "-- Use mysqldump to re-create dropped column in already_existing_table\nDROP USER crazy_test_user;\nDROP TABLE new_weird_table;"
+  schema_version: '1_4_4'
+  state: 'merged'
+  activity_id: 2
+  create_schema_version: true

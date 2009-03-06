@@ -1,6 +1,6 @@
 common:
- release_version: 1.2.6
- release_name: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb'
+ release_version: 1.2.7
+ release_name: 'Fearless'
  vc_type: 'svn'
  vc_uri: ''
  vc_dir: ''

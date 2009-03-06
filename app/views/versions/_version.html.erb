@@ -21,7 +21,7 @@
 
     <% if version_tested(version) %>
     <div class="span-2">
-      <% form_for(version, :url => deployed_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
+      <% form_for(version, :url => deploy_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
         <%= f.hidden_field :state, :value => Version::STATE_DEPLOYED %>
         <%= f.submit 'Deployed' %>
       <% end %>

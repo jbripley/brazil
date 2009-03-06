@@ -113,11 +113,7 @@ describe Version do
       @version.stub!(:state).and_return(Version::STATE_TESTED)
       @version.deployed?.should be_false
     end
-  end
-
-  it "should return an array of states when calling states" do
-    @version.states.should == [Version::STATE_CREATED, Version::STATE_TESTED, Version::STATE_DEPLOYED]
-  end
+  end 
 
   it "should return a string with schema and test db_instance when calling to_s" do
     db_instance_test_to_s = 'brazil foo'

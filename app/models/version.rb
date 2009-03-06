@@ -7,6 +7,7 @@ class Version < ActiveRecord::Base
   STATE_CREATED = 'created'
   STATE_TESTED = 'tested'
   STATE_DEPLOYED = 'deployed'
+  STATE_MERGED = 'merged'
 
   belongs_to :activity
 
@@ -44,7 +45,7 @@ class Version < ActiveRecord::Base
       return
     end
 
-    if schema_version
+    if next_schema_version
       self.schema_version = next_schema_version
       self.create_schema_version = false
     else
@@ -77,6 +78,14 @@ class Version < ActiveRecord::Base
     end
   end
 
+  def merge_to_dev(update_sql, dev_db_instance_id, dev_schema, db_username, db_password)
+    DbInstance.find(dev_db_instance_id).execute_sql(update_sql, db_username, db_password, dev_schema)
+  rescue ActiveRecord::RecordNotFound
+    errors.add_to_base("Can not find db instance with id: #{dev_db_instance_id}")
+  rescue Brazil::DBException => db_exception
+    errors.add_to_base("SQL: #{db_exception}")
+  end
+
   def db_instance_test
     test_db_instance = DbInstance.find_all_by_id(db_instance_ids, :conditions => {:db_env => DbInstance::ENV_TEST}).first
     if test_db_instance
@@ -100,10 +109,6 @@ class Version < ActiveRecord::Base
 
   def deployed?
     (state == STATE_DEPLOYED)
-  end
-
-  def states
-    [STATE_CREATED, STATE_TESTED, STATE_DEPLOYED]
   end
 
   def to_s

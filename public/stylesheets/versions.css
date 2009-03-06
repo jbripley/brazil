@@ -7,21 +7,6 @@
   border-color:#989E94;
 }
 
-/*.box.created {
-  background:#EAF2E4;
-  border-color:#989E94;
-}
-
-.box.tested {
-  background:#8EA696;
-  border-color:#465052;
-}
-
-.box.deployed {
-  background:#D6BA87;
-  border-color:#827151;
-}*/
-
 .box.version.created h2 {
   border: 3px solid #AB3E1D;
   background:#D14D25;
@@ -33,9 +18,15 @@
   background:#FFCE5B;
 }
 
-.box.version.deployed h2   {
+.box.version.deployed h2 {
   border: 3px solid #6D924B;
   background:#86B35C;
+  color:#FFF;
+}
+
+.box.version.merged h2 {
+  border: 3px solid #1E3D66;
+  background:#375D81;
   color:#FFF;
 }
 

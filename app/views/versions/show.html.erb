@@ -7,6 +7,8 @@
 
 <% if version_testable(@version) %>
 <%= render :partial => 'update_sql_fieldset', :locals => {:version => @version, :activity => @activity} %>
+<% elsif version_mergeable(@version) %>
+<%= render :partial => 'merge_update_sql_fieldset', :locals => {:version => @version, :activity => @activity} %>
 <% else %>
 <%= render :partial => 'update_sql_box', :locals => {:version => @version} %>
 <% end %>
