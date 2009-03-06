@@ -1,38 +1,99 @@
 class AppsController < ApplicationController
-  resource_controller
+  # GET /apps
+  # GET /apps.xml
+  # GET /apps.atom
+  def index
+    @apps = App.all
+    @app = App.new
 
-  index.before { @app = App.new }
-  index.wants.atom
-
-  show.wants.html do
-    if request.xhr?
-      render :partial => 'app', :locals => {:app => @app}
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @apps }
+      format.atom # index.atom.builder
     end
   end
 
-  create.wants.html do
-    redirect_to app_activities_path(@app)
-  end
+  # GET /apps/1
+  # GET /apps/1.xml
+  def show
+    @app = App.find(params[:id])
 
-  edit.wants.html do
-    if request.xhr?
-      render :partial => 'edit_horizontal', :locals => {:app => @app}
+    respond_to do |format|
+      format.html do # show.html.erb
+        if request.xhr?
+          render :partial => 'app', :locals => {:app => @app}
+        end
+      end
+      format.xml  { render :xml => @app }
     end
   end
 
-  update do
-    success.wants.html do
-      if request.xhr?
-        render :partial => 'app', :locals => {:app => @app}
-      else
-        redirect_to app_activities_path(@app)
+  # GET /apps/new
+  # GET /apps/new.xml
+  def new
+    @app = App.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @app }
+    end
+  end
+
+  # GET /apps/1/edit
+  def edit
+    @app = App.find(params[:id])
+
+    respond_to do |format|
+      format.html do
+        if request.xhr?
+          render :partial => 'edit_horizontal', :locals => {:app => @app}
+        end
       end
     end
-    failure.wants.html do
-      if request.xhr?
-        render :partial => 'edit_name', :locals => {:app => @app}
+  end
+
+  # POST /apps
+  # POST /apps.xml
+  def create
+    @app = App.new(params[:app])
+
+    respond_to do |format|
+      if @app.save
+        flash[:notice] = 'App was successfully created.'
+        format.html { redirect_to app_activities_path(@app) }
+        format.xml  { render :xml => @app, :status => :created, :location => @app }
       else
-        render :action => 'edit'
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @app.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /apps/1
+  # PUT /apps/1.xml
+  def update
+    @app = App.find(params[:id])
+
+    respond_to do |format|
+      if @app.update_attributes(params[:app])
+        format.html do
+          if request.xhr?
+            render :partial => 'app', :locals => {:app => @app}
+          else
+            flash[:notice] = 'App was successfully updated.'
+            redirect_to app_activities_path(@app)
+          end
+        end
+        format.xml  { head :ok }
+      else
+        format.html do
+          if request.xhr?
+            render :partial => 'edit_horizontal', :locals => {:app => @app}
+          else
+            render :action => 'edit'
+          end
+        end
+        format.xml  { render :xml => @app.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -42,7 +103,8 @@ class AppsController < ApplicationController
   def add_controller_crumbs
     add_crumb 'Apps', apps_path
 
-    if object
+    if params.has_key?(:id)
+      object = App.find(params[:id])
       add_crumb object.to_s, app_path(object)
     end
   end
