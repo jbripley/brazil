@@ -52,3 +52,4 @@ version_5_activity_2:
   state: 'merged'
   activity_id: 2
   create_schema_version: true
+

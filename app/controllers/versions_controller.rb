@@ -1,19 +1,56 @@
 class VersionsController < ApplicationController
-  helper_method :create_update_sql, :create_rollback_sql
+  helper_method :create_update_sql, :create_rollback_sql 
 
-  resource_controller
-  belongs_to :activity
+  # GET /apps/:app_id/activities/:activity_id/versions
+  # GET /apps/:app_id/activities/:activity_id/versions.xml
+  # GET /apps/:app_id/activities/:activity_id/versions.atom
+  def index
+    @activity = Activity.find(params[:activity_id])
+    @versions = @activity.versions.all
+    @version = @activity.versions.build
 
-  index.wants.atom
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @versions }
+      format.atom # index.atom.builder
+    end
+  end
 
-  new_action.before { object.update_sql = Change.activity_sql(params[:activity_id]) }
+  # GET /apps/:app_id/activities/:activity_id/versions/1
+  # GET /apps/:app_id/activities/:activity_id/versions/1.xml
+  def show
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @version }
+    end
+  end
+
+  # GET /apps/:app_id/activities/:activity_id/versions/new
+  # GET /apps/:app_id/activities/:activity_id/versions/new.xml
+  def new
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.build
+    @version.update_sql = Change.activity_sql(params[:activity_id])
+
+    respond_to do |format|
+      format.html # new.html.erb    
+      format.xml  { render :xml => @version }
+    end
+  end
+
+  # GET /apps/:app_id/activities/:activity_id/versions/1/edit
+  def edit
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.find(params[:id])
+  end
 
   # POST /apps/:app_id/activities/:activity_id/versions.format
   def create
     @activity = Activity.find(params[:activity_id])
-
-    @version = Version.new(params[:version])
-    @version.activity_id = params[:activity_id]
+    @version = @activity.versions.build(params[:version])
     @version.init_schema_version(params[:db_username], params[:db_password])
 
     respond_to do |format|
@@ -33,8 +70,7 @@ class VersionsController < ApplicationController
   # PUT /apps/:app_id/activities/:activity_id/versions.format
   def update
     @activity = Activity.find(params[:activity_id])
-    @version = Version.find(params[:id])
-    @version.attributes = params[:version]
+    @version = @activity.versions.build(params[:version])
 
     updated_schema_version = [params[:schema_version_major], params[:schema_version_minor], params[:schema_version_patch]].join('_')
     @version.update_schema_version(updated_schema_version, params[:db_username], params[:db_password])
@@ -56,7 +92,7 @@ class VersionsController < ApplicationController
   # PUT /apps/:app_id/activities/:activity_id/versions/1/test.format
   def test
     @activity = Activity.find(params[:activity_id])
-    @version = Version.find(params[:id])
+    @version = @activity.versions.find(params[:id])
     @version.deploy_to_test(create_update_sql(@version), create_rollback_sql(@version), params[:db_username], params[:db_password], params[:vc_username], params[:vc_password])
 
     respond_to do |format|
@@ -77,7 +113,7 @@ class VersionsController < ApplicationController
   # PUT /apps/:app_id/activities/:activity_id/versions/1/rollback.format
   def rollback
     @activity = Activity.find(params[:activity_id])
-    @version = Version.find(params[:id])
+    @version = @activity.versions.find(params[:id])
     @version.rollback_from_test(create_rollback_sql(@version), params[:db_username], params[:db_password], params[:vc_username], params[:vc_password])
 
     respond_to do |format|
@@ -117,7 +153,6 @@ class VersionsController < ApplicationController
   def merge
     @activity = Activity.find(params[:activity_id])
     @version = @activity.versions.find(params[:id])
-
     @version.merge_to_dev(create_update_sql(@version), params[:dev_db_instance_id], params[:dev_schema], params[:db_username], params[:db_password])
 
     respond_to do |format|
@@ -141,13 +176,17 @@ class VersionsController < ApplicationController
   end
 
   def add_controller_crumbs
-    add_app_controller_crumbs(parent_object.app)
-    add_activities_controller_crumbs(parent_object.app, parent_object)
+    app = App.find(params[:app_id])
+    activity = app.activities.find(params[:activity_id])
 
-    add_crumb 'Versions', app_activity_versions_path(parent_object.app, parent_object)
+    add_app_controller_crumbs(app)
+    add_activities_controller_crumbs(app, activity)
 
-    if object
-      add_crumb object.to_s, app_activity_version_path(parent_object.app, parent_object, object)
-    end
+    add_crumb 'Versions', app_activity_versions_path(app, activity)
+
+    if params.has_key?(:id)
+      version = activity.versions.find(params[:id])
+      add_crumb version.to_s, app_activity_version_path(app, activity, version)
+    end    
   end
 end

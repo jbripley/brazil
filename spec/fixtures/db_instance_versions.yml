@@ -18,10 +18,6 @@ version-4-db_instance-2:
   db_instance_id: 2
   version_id: 4
 
-version-4-db_instance-2:
-  db_instance_id: 2
-  version_id: 4
-
 version-5-db_instance-2:
   db_instance_id: 2
   version_id: 5
