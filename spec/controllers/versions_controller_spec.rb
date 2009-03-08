@@ -199,20 +199,28 @@ describe VersionsController do
       @schema_version_patch = '3'
 
       @app = apps(:app_3)
+      App.stub!(:find).and_return(@app)
 
       @activity = activities(:app_1_deployed)
-      @activity.stub!(:app).and_return(@app)
 
-      Activity.stub!(:find).with('3').and_return(@activity)
+      @activities = mock(Array)
+      @activities.stub!(:find).and_return(@activity)
+      @app.stub!(:activities).and_return(@activities)
 
       @version = mock_model(Version, :to_param => "1")
-      @version.should_receive(:attributes=)
-      @version.errors.should_receive(:empty?).and_return(true)
       @version.should_receive(:update_schema_version).with([@schema_version_major, @schema_version_minor, @schema_version_patch].join('_'), nil, nil)
 
       Version.stub!(:find).with('1').and_return(@version)
       @version.stub!(:find).with('1').and_return(@version)
       @activity.stub!(:versions).and_return(@version)
+
+      versions = mock(Object)
+      versions.stub!(:build).and_return(@version)
+      @activites.stub!(:versions).and_return(versions)
+
+      db_instance = mock_model(DbInstance)
+      db_instance.should_receive(:find_next_schema_version).and_return("1_2_2")
+      DbInstance.stub!(:find_all_by_id).and_return([db_instance]) 
     end
 
     describe "with successful update" do

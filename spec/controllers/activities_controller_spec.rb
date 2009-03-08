@@ -9,7 +9,7 @@ describe ActivitiesController do
       @activity = mock_model(Activity)
 
       @activities = mock(Array)
-      @activities.stub!(:find).with(:all).and_return([@activity])
+      @activities.stub!(:all).with(:order => 'updated_at DESC').and_return([@activity])
 
       @app = mock_model(App)
       @app.stub!(:activities).and_return(@activities)
@@ -151,6 +151,7 @@ describe ActivitiesController do
     before(:each) do
       @activity = mock_model(Activity, :to_param => "1")
       @activity.should_receive(:[]=).with('app_id', 1)
+      @activity.should_receive(:state=).with("development")
 
       Activity.stub!(:new).and_return(@activity)
     end
