@@ -1,5 +1,5 @@
 class VersionsController < ApplicationController
-  helper_method :create_update_sql, :create_rollback_sql 
+  helper_method :create_update_sql, :create_rollback_sql
 
   # GET /apps/:app_id/activities/:activity_id/versions
   # GET /apps/:app_id/activities/:activity_id/versions.xml
@@ -36,7 +36,7 @@ class VersionsController < ApplicationController
     @version.update_sql = Change.activity_sql(params[:activity_id])
 
     respond_to do |format|
-      format.html # new.html.erb    
+      format.html # new.html.erb
       format.xml  { render :xml => @version }
     end
   end
@@ -70,7 +70,8 @@ class VersionsController < ApplicationController
   # PUT /apps/:app_id/activities/:activity_id/versions.format
   def update
     @activity = Activity.find(params[:activity_id])
-    @version = @activity.versions.build(params[:version])
+    @version = @activity.versions.find(params[:id])
+    @version.attributes = params[:version]
 
     updated_schema_version = [params[:schema_version_major], params[:schema_version_minor], params[:schema_version_patch]].join('_')
     @version.update_schema_version(updated_schema_version, params[:db_username], params[:db_password])
@@ -187,6 +188,6 @@ class VersionsController < ApplicationController
     if params.has_key?(:id)
       version = activity.versions.find(params[:id])
       add_crumb version.to_s, app_activity_version_path(app, activity, version)
-    end    
+    end
   end
 end

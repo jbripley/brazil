@@ -18,7 +18,7 @@ describe ActivitiesController do
     end
 
     def do_get
-      get :index, :app_id => '1', :format => 'html'
+      get :index, :app_id => '1'
     end
 
     it "should be successful" do
@@ -51,7 +51,7 @@ describe ActivitiesController do
     end
 
     def do_get
-      get :show, :id => "1", :app_id => 1, :format => 'html'
+      get :show, :id => "1", :app_id => 1
     end
 
     it "should be successful" do
@@ -85,7 +85,7 @@ describe ActivitiesController do
     end
 
     def do_get
-      get :new, :app_id => 1, :format => 'html'
+      get :new, :app_id => 1
     end
 
     it "should be successful" do
@@ -122,7 +122,7 @@ describe ActivitiesController do
     end
 
     def do_get
-      get :edit, :id => "1", :app_id => 1, :format => 'html'
+      get :edit, :id => "1", :app_id => 1
     end
 
     it "should be successful" do
@@ -160,7 +160,7 @@ describe ActivitiesController do
 
       def do_post
         @activity.should_receive(:save).and_return(true)
-        post :create, :activity => {}, :app_id => 1, :format => 'html'
+        post :create, :activity => {}, :app_id => 1
       end
 
       it "should create a new activity" do
@@ -179,7 +179,7 @@ describe ActivitiesController do
 
       def do_post
         @activity.should_receive(:save).and_return(false)
-        post :create, :activity => {}, :app_id => 1, :format => 'html'
+        post :create, :activity => {}, :app_id => 1
       end
 
       it "should re-render 'new'" do
@@ -201,7 +201,7 @@ describe ActivitiesController do
 
       def do_put
         @activity.should_receive(:update_attributes).and_return(true)
-        put :update, :id => "1", :app_id => 1, :format => 'html'
+        put :update, :id => "1", :app_id => 1
       end
 
       it "should find the activity requested" do
@@ -230,7 +230,7 @@ describe ActivitiesController do
 
       def do_put
         @activity.should_receive(:update_attributes).and_return(false)
-        put :update, :id => "1", :app_id => 1, :format => 'html'
+        put :update, :id => "1", :app_id => 1
       end
 
       it "should re-render 'edit'" do

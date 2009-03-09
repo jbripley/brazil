@@ -7,13 +7,13 @@ describe ChangeSuggestionsController do
 
     before(:each) do
       @change = mock_model(Change)
-      @change.should_receive(:activity_id=).with('2')
+      @change.should_receive(:[]=).with('activity_id', 2)
 
       Change.stub!(:new).and_return(@change)
     end
 
     def do_get
-      get :new, :app_id => '2', :activity_id => '2', :format => 'html'
+      get :new, :app_id => '2', :activity_id => '2'
     end
 
     it "should be successful" do
@@ -52,8 +52,9 @@ describe ChangeSuggestionsController do
       @change = mock_model(Change, :to_param => "1")
       @change.stub!(:activity).and_return(@activity)
       @change.stub!(:sql).and_return('')
-      
-      @change.should_receive(:activity_id=).with('2')
+
+      @change.should_receive(:[]=).with('activity_id', 2)
+      @change.should_receive(:state=).with(Change::STATE_SUGGESTED)
 
       Change.stub!(:new).and_return(@change)
     end
@@ -65,7 +66,7 @@ describe ChangeSuggestionsController do
         @change.stub!(:use_sql).and_return(true)
 
         @change.should_receive(:save).and_return(true)
-        post :create, :change => {}, :app_id => '1', :activity_id => '2', :format => 'html'
+        post :create, :change => {}, :app_id => '1', :activity_id => '2'
       end
 
       it "should create a new change" do
@@ -84,7 +85,7 @@ describe ChangeSuggestionsController do
 
       def do_post
         @change.stub!(:save).and_return(false)
-        post :create, :change => {}, :app_id => '1', :activity_id => '2', :format => 'html'
+        post :create, :change => {}, :app_id => '1', :activity_id => '2'
       end
 
       it "should re-render 'new'" do

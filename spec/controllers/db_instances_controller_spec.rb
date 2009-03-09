@@ -7,11 +7,11 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance)
       DbInstance.stub!(:find).and_return([@db_instance])
     end
-  
+
     def do_get
       get :index
     end
-  
+
     it "should be successful" do
       do_get
       response.should be_success
@@ -21,12 +21,12 @@ describe DbInstancesController do
       do_get
       response.should render_template('index')
     end
-  
+
     it "should find all db_instances" do
       DbInstance.should_receive(:find).with(:all).and_return([@db_instance])
       do_get
     end
-  
+
     it "should assign the found db_instances for the view" do
       do_get
       assigns[:db_instances].should == [@db_instance]
@@ -39,7 +39,7 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance)
       DbInstance.stub!(:find).and_return(@db_instance)
     end
-  
+
     def do_get
       get :show, :id => "1"
     end
@@ -48,17 +48,17 @@ describe DbInstancesController do
       do_get
       response.should be_success
     end
-  
+
     it "should render show template" do
       do_get
       response.should render_template('show')
     end
-  
+
     it "should find the db_instance requested" do
       DbInstance.should_receive(:find).with("1").and_return(@db_instance)
       do_get
     end
-  
+
     it "should assign the found db_instance for the view" do
       do_get
       assigns[:db_instance].should equal(@db_instance)
@@ -71,7 +71,7 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance)
       DbInstance.stub!(:new).and_return(@db_instance)
     end
-  
+
     def do_get
       get :new
     end
@@ -80,22 +80,22 @@ describe DbInstancesController do
       do_get
       response.should be_success
     end
-  
+
     it "should render new template" do
       do_get
       response.should render_template('new')
     end
-  
+
     it "should create an new db_instance" do
       DbInstance.should_receive(:new).and_return(@db_instance)
       do_get
     end
-  
+
     it "should not save the new db_instance" do
       @db_instance.should_not_receive(:save)
       do_get
     end
-  
+
     it "should assign the new db_instance for the view" do
       do_get
       assigns[:db_instance].should equal(@db_instance)
@@ -108,7 +108,7 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance)
       DbInstance.stub!(:find).and_return(@db_instance)
     end
-  
+
     def do_get
       get :edit, :id => "1"
     end
@@ -117,17 +117,17 @@ describe DbInstancesController do
       do_get
       response.should be_success
     end
-  
+
     it "should render edit template" do
       do_get
       response.should render_template('edit')
     end
-  
+
     it "should find the db_instance requested" do
       DbInstance.should_receive(:find).and_return(@db_instance)
       do_get
     end
-  
+
     it "should assign the found DbInstances for the view" do
       do_get
       assigns[:db_instance].should equal(@db_instance)
@@ -140,14 +140,14 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance, :to_param => "1")
       DbInstance.stub!(:new).and_return(@db_instance)
     end
-    
+
     describe "with successful save" do
-  
+
       def do_post
         @db_instance.should_receive(:save).and_return(true)
         post :create, :db_instance => {}
       end
-  
+
       it "should create a new db_instance" do
         DbInstance.should_receive(:new).with({}).and_return(@db_instance)
         do_post
@@ -155,23 +155,23 @@ describe DbInstancesController do
 
       it "should redirect to the new db_instance" do
         do_post
-        response.should redirect_to(db_instance_url("1"))
+        response.should redirect_to(db_instances_url)
       end
-      
+
     end
-    
+
     describe "with failed save" do
 
       def do_post
         @db_instance.should_receive(:save).and_return(false)
         post :create, :db_instance => {}
       end
-  
+
       it "should re-render 'new'" do
         do_post
         response.should render_template('new')
       end
-      
+
     end
   end
 
@@ -181,7 +181,7 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance, :to_param => "1")
       DbInstance.stub!(:find).and_return(@db_instance)
     end
-    
+
     describe "with successful update" do
 
       def do_put
@@ -206,11 +206,11 @@ describe DbInstancesController do
 
       it "should redirect to the db_instance" do
         do_put
-        response.should redirect_to(db_instance_url("1"))
+        response.should redirect_to(db_instances_url)
       end
 
     end
-    
+
     describe "with failed update" do
 
       def do_put
@@ -232,7 +232,7 @@ describe DbInstancesController do
       @db_instance = mock_model(DbInstance, :destroy => true)
       DbInstance.stub!(:find).and_return(@db_instance)
     end
-  
+
     def do_delete
       delete :destroy, :id => "1"
     end
@@ -241,12 +241,12 @@ describe DbInstancesController do
       DbInstance.should_receive(:find).with("1").and_return(@db_instance)
       do_delete
     end
-  
+
     it "should call destroy on the found db_instance" do
-      @db_instance.should_receive(:destroy).and_return(true) 
+      @db_instance.should_receive(:destroy).and_return(true)
       do_delete
     end
-  
+
     it "should redirect to the db_instances list" do
       do_delete
       response.should redirect_to(db_instances_url)

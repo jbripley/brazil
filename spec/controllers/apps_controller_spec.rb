@@ -43,7 +43,7 @@ describe AppsController do
     end
 
     def do_get
-      get :show, :id => "1", :format => 'html'
+      get :show, :id => "1"
     end
 
     it "should be successful" do
@@ -112,7 +112,7 @@ describe AppsController do
     end
 
     def do_get
-      get :edit, :id => "1", :format => 'html'
+      get :edit, :id => "1"
     end
 
     it "should be successful" do
@@ -147,7 +147,7 @@ describe AppsController do
 
       def do_post
         @app.should_receive(:save).and_return(true)
-        post :create, :app => {'name' => 'Foo App'}, :format => 'html'
+        post :create, :app => {'name' => 'Foo App'}
       end
 
       it "should create a new app" do
@@ -188,7 +188,7 @@ describe AppsController do
 
       def do_put
         @app.should_receive(:update_attributes).and_return(true)
-        put :update, :id => "1", :format => 'html'
+        put :update, :id => "1"
       end
 
       it "should find the app requested" do
@@ -217,7 +217,7 @@ describe AppsController do
 
       def do_put
         @app.should_receive(:update_attributes).and_return(false)
-        put :update, :id => "1", :format => 'html'
+        put :update, :id => "1"
       end
 
       it "should re-render 'edit'" do

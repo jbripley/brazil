@@ -1,6 +1,23 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ChangesController do
+  before(:each) do
+    @app = mock_model(App, :to_param => "2")
+    App.stub!(:find).with("2").and_return(@app)
+
+    @activity = mock_model(Activity, :to_param => "2")
+    @activity.stub!(:app).and_return(@app)
+
+    @activities = mock(Array)
+    @activities.stub!(:find).and_return(@activity)
+    @app.stub!(:activities).and_return(@activities)
+
+    change = mock_model(Change)
+    @changes = mock(Array)
+    @changes.stub!(:find).and_return(change)
+    @activity.stub!(:changes).and_return(@changes)
+  end
+
   describe "handling GET /changes" do
 
     before(:each) do
@@ -19,7 +36,7 @@ describe ChangesController do
     end
 
     def do_get
-      get :index, :app_id => '2', :activity_id => '2'
+      get :index, :app_id => '2', :activity_id => '2', :format => 'xml'
     end
 
     it "should be successful" do
@@ -27,9 +44,10 @@ describe ChangesController do
       response.should be_success
     end
 
-    it "should render index template" do
+    it "should render index as xml" do
+      @changes.should_receive(:to_xml).and_return("XML")
       do_get
-      response.should render_template('index')
+      response.body.should == "XML"
     end
 
     it "should find all changes" do
@@ -40,7 +58,7 @@ describe ChangesController do
     it "should assign the found changes for the view" do
       do_get
       assigns[:activity].should == @activity
-      assigns[:changes].should == [@change]
+      assigns[:changes].should == @changes
     end
   end
 
@@ -123,7 +141,7 @@ describe ChangesController do
     end
 
     def do_get
-      get :edit, :id => "1", :app_id => '2', :activity_id => '2', :format => 'html'
+      get :edit, :id => "1", :app_id => '2', :activity_id => '2'
     end
 
     it "should be successful" do
@@ -150,16 +168,12 @@ describe ChangesController do
   describe "handling POST /changes" do
 
     before(:each) do
-      @app = mock_model(App, :to_param => "2")
-      @activity = mock_model(Activity, :to_param => "2")
-      @activity.stub!(:app).and_return(@app)
-
       Activity.stub!(:find).with('2').and_return(@activity)
 
       @change = mock_model(Change, :to_param => "1")
       @change.stub!(:sql).and_return('')
 
-      Change.stub!(:new).and_return(@change)
+      @changes.stub!(:build).and_return(@change)
     end
 
     describe "with successful save" do
@@ -169,13 +183,12 @@ describe ChangesController do
         @change.stub!(:use_sql).and_return(true)
 
         @change.should_receive(:save).and_return(true)
-        @change.should_receive(:activity_id=).with('2')
         @change.should_receive(:state=).with('saved')
         post :create, :change => {}, :app_id => '2', :activity_id => '2'
       end
 
       it "should create a new change" do
-        Change.should_receive(:new).with({}).and_return(@change)
+        @changes.should_receive(:build).with({}).and_return(@change)
         do_post
       end
 
@@ -189,10 +202,11 @@ describe ChangesController do
     describe "with failed save" do
 
       def do_post
+        Activity.stub!(:find).with("2").and_return(@activity)
+
         @change.stub!(:valid?).and_return(false)
         @change.stub!(:use_sql).and_return(false)
 
-        @change.should_receive(:activity_id=).with('2')
         @change.should_receive(:state=).with('saved')
         post :create, :change => {}, :app_id => '2', :activity_id => '2'
       end
@@ -208,24 +222,16 @@ describe ChangesController do
   describe "handling PUT /changes/1" do
 
     before(:each) do
-      @app = mock_model(App, :to_param => "2")
-      @activity = mock_model(Activity, :to_param => "2")
-      @activity.stub!(:app).and_return(@app)
+      Activity.stub!(:find).and_return(@activity)
 
       @change = mock_model(Change, :to_param => "1")
       @change.stub!(:sql).and_return('')
       @change.stub!(:activity).and_return(@activity)
 
-      @change.should_receive(:activity_id=).with('2')
       @change.should_receive(:attributes=).with(nil)
       @change.should_receive(:state=).with('saved')
 
-      @changes = mock(Array)
-      @changes.stub!(:find).and_return([@change])
-      @activity.should_receive(:changes).and_return(@changes)
-
-      Change.stub!(:find).and_return(@change)
-      Activity.stub!(:find).and_return(@activity)
+      @changes.stub!(:find).with("1").and_return(@change)
     end
 
     describe "with successful update" do
@@ -239,7 +245,7 @@ describe ChangesController do
       end
 
       it "should find the change requested" do
-        Change.should_receive(:find).with("1").and_return(@change)
+        @changes.should_receive(:find).with("1").and_return(@change)
         do_put
       end
 
