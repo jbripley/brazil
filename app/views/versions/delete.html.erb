@@ -8,17 +8,17 @@
     <div class="clearfix">
       <h2>Version</h2>
 
-      <div class="span-5">
+      <div class="span-7">
         <h3><%=h @version %></h3>
         <span class="date">Last changed <%=h time_ago_in_words(@version.updated_at) %> ago</span>
       </div>
 
-      <div class="info span-4">
+      <div class="info span-5">
         <span><strong>Version</strong> <%=h @version.schema_version %></span>
         <span><strong>State</strong> <%=h @version.state %></span>
       </div>
 
-      <div class="info span-4">
+      <div class="info span-5">
         <% @version.db_instances.each do |db_instance| %>
         <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
         <% end %>
