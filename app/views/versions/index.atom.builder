@@ -13,7 +13,7 @@ atom_feed do |feed|
             p.text! sql_part
           end
         end
-        
+
         xhtml.p do |p|
           p.b "Rollback SQL"
           create_rollback_sql(version).split("\n").each do |sql_part|
@@ -21,29 +21,25 @@ atom_feed do |feed|
             p.text! sql_part
           end
         end
-        
+
         xhtml.p do |p|
           p.b "Schema"
           p.text! version.schema
         end
-        
+
+        xhtml.p do |p|
+          p.b "Schema Version"
+          p.text! version.schema_version
+        end
+
         for db_instance in version.db_instances
           xhtml.p do |p|
             p.b "#{db_instance.db_env.capitalize} Database"
             p.text! db_instance.to_s
           end
         end
-        
-        if version.deploy_note
-          xhtml.p do |p|
-            p.b "Deploy Note"
-            p.br
-            p.text! version.deploy_note
-          end
-        end
-        
       end # entry.content
-      
+
       for change in @version.activity.changes
         entry.author do |author|
           author.email change.dba
@@ -52,5 +48,5 @@ atom_feed do |feed|
       end
     end
   end # for version in @versions
-  
+
 end
