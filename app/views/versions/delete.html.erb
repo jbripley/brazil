@@ -1,0 +1,34 @@
+<fieldset>
+  <legend>Delete Version</legend>
+
+  <h3>Are you sure you want to delete this Version?</h3>
+  <hr class="space" />
+
+  <div class="box version <%=h @version.state %>">
+    <div class="clearfix">
+      <h2>Version</h2>
+
+      <div class="span-5">
+        <h3><%=h @version %></h3>
+        <span class="date">Last changed <%=h time_ago_in_words(@version.updated_at) %> ago</span>
+      </div>
+
+      <div class="info span-4">
+        <span><strong>Version</strong> <%=h @version.schema_version %></span>
+        <span><strong>State</strong> <%=h @version.state %></span>
+      </div>
+
+      <div class="info span-4">
+        <% @version.db_instances.each do |db_instance| %>
+        <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
+        <% end %>
+        <span><strong>Schema</strong> <%=h @version.schema %></span>
+      </div>
+    </div>
+  </div>
+
+  <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version), :html => {:method => :delete}) do |f| %>
+    <%= f.submit 'Delete Version' %>
+    <%= f.submit 'Cancel', :id => 'version_delete_cancel', :name => 'version_delete_cancel' %>
+  <% end %>
+</fieldset>

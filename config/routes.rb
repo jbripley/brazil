@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
     apps.resources :activities, :except => [:destroy] do |activities|
       activities.resources :changes, :except => [:destroy]
       activities.resources :change_suggestions, :only => [:new, :create]
-      activities.resources :versions, :except => [:destroy], :member => {:test => :put, :rollback => :put, :deploy => :put, :merge => :put}
+      activities.resources :versions, :except => :none, :member => {:test => :put, :rollback => :put, :deploy => :put, :merge => :put, :delete => :get}
     end
   end
 

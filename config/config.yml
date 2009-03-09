@@ -1,6 +1,6 @@
 common:
- release_version: 1.2.8
- release_name: 'Final Destination'
+ release_version: 1.2.9
+ release_name: 'Hot Shots'
  vc_type: 'svn'
  vc_uri: ''
  vc_dir: ''

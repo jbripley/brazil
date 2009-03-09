@@ -18,6 +18,7 @@ class Version < ActiveRecord::Base
   validates_inclusion_of :create_schema_version, :in => [true, false]
 
   before_save :check_no_duplicate_schema_db, :update_activity_state
+  before_destroy :check_version_destroy_state
 
   def deploy_to_test(versioned_update_sql, versioned_rollback_sql, db_username, db_password, vc_username, vc_password)
     add_version_sql_to_version_control(versioned_update_sql, versioned_rollback_sql, vc_username, vc_password)
@@ -170,6 +171,13 @@ class Version < ActiveRecord::Base
   def update_activity_state
     if activity.development?
       activity.versioned!
+    end
+  end
+
+  def check_version_destroy_state
+    unless created?
+      errors.add(:state, "You can only delete version in state '#{Version::STATE_CREATED}'. This version is in state '#{state}'")
+      false
     end
   end
 end

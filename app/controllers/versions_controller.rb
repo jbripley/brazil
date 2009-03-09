@@ -132,6 +132,7 @@ class VersionsController < ApplicationController
     end
   end
 
+  # PUT /apps/:app_id/activities/:activity_id/versions/1/deploy.format
   def deploy
     @activity = Activity.find(params[:activity_id])
     @version = @activity.versions.find(params[:id])
@@ -151,6 +152,7 @@ class VersionsController < ApplicationController
     end
   end
 
+  # PUT /apps/:app_id/activities/:activity_id/versions/1/merge
   def merge
     @activity = Activity.find(params[:activity_id])
     @version = @activity.versions.find(params[:id])
@@ -160,10 +162,50 @@ class VersionsController < ApplicationController
       if @version.errors.empty? && @version.update_attributes(params[:version])
         flash[:notice] = "Version '#{@version}' is now merged"
         format.html { redirect_to app_activity_version_path(@activity.app, @activity, @version) }
+        format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => 'show' }
+        format.xml  { render :xml => @version.errors, :status => :unprocessable_entity }
+        format.json { render :json => @version.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  # GET /apps/:app_id/activities/:activity_id/versions/1/delete
+  def delete
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.find(params[:id])
+  end
+
+  # DELETE /apps/:app_id/activities/:activity_id/versions/1
+  def destroy
+    @activity = Activity.find(params[:activity_id])
+    @version = @activity.versions.find(params[:id])
+
+    if params[:version_delete_cancel]
+      redirect_to app_activity_version_path(@activity.app, @activity, @version)
+      return
+    end
+
+    @version.destroy
+
+    respond_to do |format|
+      if @version.errors.empty?
+        format.html do
+          flash[:notice] = "Version '#{@version}' successfully deleted"
+          if @activity.versions.count == 0
+            @activity.development!
+            redirect_to app_activity_path(@activity.app, @activity)
+          else
+            redirect_to app_activity_versions_path(@activity.app, @activity)
+          end
+        end
+      else
+        format.html { render :action => 'delete' }
+      end
+    end
+
   end
 
   private

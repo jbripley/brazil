@@ -33,6 +33,7 @@
         <li><%= link_to 'Show', app_activity_version_path(version.activity.app, version.activity, version) %></li>
         <% if version_created(version) %>
         <li><%= link_to 'Edit', edit_app_activity_version_path(version.activity.app, version.activity, version) %></li>
+        <li class="destroy"><%= link_to 'Delete', delete_app_activity_version_path(version.activity.app, version.activity, version) %></li>
         <% end %>
       </ul>
     </div>

@@ -15,6 +15,10 @@ class Activity < ActiveRecord::Base
 
   named_scope :latest, lambda { |limit| {:order => 'updated_at DESC', :limit => limit} }
 
+  def development!
+    update_attribute(:state, STATE_DEVELOPMENT)
+  end
+
   def development?
     (state == Activity::STATE_DEVELOPMENT)
   end
