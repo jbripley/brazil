@@ -99,6 +99,10 @@ describe VersionsController do
       @versions = mock(Array)
       @versions.stub!(:build).and_return(@version)
       @activity.stub!(:versions).and_return(@versions)
+
+      change = mock_model(Change)
+      change.should_receive(:sql).and_return("SQL")
+      Change.stub!(:all).and_return([change])
     end
 
     def do_get

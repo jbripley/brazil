@@ -1,12 +1,20 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Version do
-  fixtures :versions, :db_instances
-
+describe Version do 
   before(:each) do
-    @valid_attributes = versions(:version_1_activity_2).attributes
+    @valid_attributes = {
+        :id => 1,
+        :schema => 'brazil_test',
+        :preparation => "Before this change is carried out, take a mysqldump of already_existing_table and use as part of the rollback",
+        :update_sql => "CREATE TABLE new_weird_table (\nweird_id INT(10) unsigned NOT NULL PRIMARY KEY,\nstupid_name VARCHAR(24) NOT NULL default '',\nsome_type CHAR(2) NOT NULL DEFAULT ''\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\n\nGRANT SELECT, INSERT ON new_weird_table TO crazy_test_user IDENTIFIED BY 'crazy_test_user';\n\nALTER TABLE already_existing_table DROP COLUMN name;",
+        :rollback_sql => "-- Use mysqldump to re-create dropped column in already_existing_table\nDROP USER crazy_test_user;\nDROP TABLE new_weird_table;",
+        :schema_version => '1_10_2',
+        :state => Version::STATE_CREATED,
+        :activity_id => 2,
+        :create_schema_version => false
+    }
 
-    db_instance = db_instances(:test_1)
+    db_instance = mock_model(DbInstance)
     db_instance.stub!(:find).with(1).and_return(db_instance)
 
     mock_db_instances = mock(Array)

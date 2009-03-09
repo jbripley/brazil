@@ -16,25 +16,11 @@ describe ChangesController do
     @changes = mock(Array)
     @changes.stub!(:find).and_return(change)
     @activity.stub!(:changes).and_return(@changes)
+
+    Activity.stub!(:find).with("2").and_return(@activity)
   end
 
-  describe "handling GET /changes" do
-
-    before(:each) do
-      @change = mock_model(Change)
-
-      @changes = mock(Array)
-      @changes.stub!(:find).with(:all).and_return([@change])
-
-      @app = mock_model(App)
-
-      @activity = mock_model(Activity)
-      @activity.stub!(:changes).and_return(@changes)
-      @activity.stub!(:app).and_return(@app)
-
-      Activity.stub!(:find).with("2").and_return(@activity)
-    end
-
+  describe "handling GET /changes" do  
     def do_get
       get :index, :app_id => '2', :activity_id => '2', :format => 'xml'
     end
@@ -66,7 +52,7 @@ describe ChangesController do
 
     before(:each) do
       @change = mock_model(Change)
-      Change.stub!(:find).and_return(@change)
+      @changes.stub!(:find).and_return(@change)
     end
 
     def do_get
@@ -84,7 +70,7 @@ describe ChangesController do
     end
 
     it "should find the change requested" do
-      Change.should_receive(:find).with("1", {:limit=>nil, :readonly=>nil, :conditions=>"\"changes\".activity_id = 2", :select=>nil, :group=>nil, :order=>"created_at DESC", :offset=>nil, :include=>nil, :joins=>nil}).and_return(@change)
+      @changes.should_receive(:find).with("1").and_return(@change)
       do_get
     end
 
@@ -98,9 +84,7 @@ describe ChangesController do
 
     before(:each) do
       @change = mock_model(Change)
-      @change.should_receive(:[]=).with('activity_id', 2)
-
-      Change.stub!(:new).and_return(@change)
+      @changes.stub!(:build).and_return(@change)
     end
 
     def do_get
@@ -118,7 +102,7 @@ describe ChangesController do
     end
 
     it "should create an new change" do
-      Change.should_receive(:new).and_return(@change)
+      @changes.should_receive(:build).and_return(@change)
       do_get
     end
 
@@ -138,6 +122,8 @@ describe ChangesController do
     before(:each) do
       @change = mock_model(Change)
       Change.stub!(:find).and_return(@change)
+
+      @changes.stub!(:find).and_return(@change)
     end
 
     def do_get
@@ -155,7 +141,7 @@ describe ChangesController do
     end
 
     it "should find the change requested" do
-      Change.should_receive(:find).and_return(@change)
+      @changes.should_receive(:find).and_return(@change)
       do_get
     end
 
@@ -202,8 +188,6 @@ describe ChangesController do
     describe "with failed save" do
 
       def do_post
-        Activity.stub!(:find).with("2").and_return(@activity)
-
         @change.stub!(:valid?).and_return(false)
         @change.stub!(:use_sql).and_return(false)
 

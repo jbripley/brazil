@@ -4,14 +4,12 @@ class Change < ActiveRecord::Base
   STATE_EXECUTED = 'executed'
 
   belongs_to :activity
-
-  validates_associated :activity
   validates_presence_of :sql
 
   before_save :check_correct_state, :mark_activity_updated
 
   def self.activity_sql(activity_id)
-    Change.find_all_by_activity_id(activity_id, :order => 'created_at ASC', :conditions => {:state => [Change::STATE_EXECUTED, Change::STATE_SAVED]}).collect {|change| change.sql}.join("\n")
+    Change.all(:order => 'created_at ASC', :conditions => {:activity_id => activity_id, :state => [Change::STATE_EXECUTED, Change::STATE_SAVED]}).collect {|change| change.sql}.join("\n")
   end
 
   def use_sql(sql, db_username, db_password)

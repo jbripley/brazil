@@ -1,20 +1,23 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ActivitiesController do
-  fixtures :apps
+  before(:each) do
+    @app = mock_model(App, :to_param => "1")
+
+    @activity = mock_model(Activity, :to_param => "1")
+
+    @activities = mock(Array)
+    @activities.stub!(:find).with("1").and_return(@activity)
+    @app.stub!(:activities).and_return(@activities)
+
+    App.stub!(:find).with("1").and_return(@app)
+  end
 
   describe "handling GET /apps/:app_id/activities" do
 
     before(:each) do
-      @activity = mock_model(Activity)
-
-      @activities = mock(Array)
+      @activities.stub!(:build).and_return(mock_model(Activity))
       @activities.stub!(:all).with(:order => 'updated_at DESC').and_return([@activity])
-
-      @app = mock_model(App)
-      @app.stub!(:activities).and_return(@activities)
-
-      App.stub!(:find).with("1").and_return(@app)
     end
 
     def do_get
@@ -46,8 +49,13 @@ describe ActivitiesController do
   describe "handling GET /activities/1" do
 
     before(:each) do
-      @activity = mock_model(Activity)
-      Activity.stub!(:find).and_return(@activity)
+      change = mock_model(Change)
+
+      changes = mock(Array)
+      changes.should_receive(:build).and_return(change)
+      @activity.should_receive(:changes).and_return(changes)
+
+      Change.should_receive(:first).and_return(nil)
     end
 
     def do_get
@@ -65,7 +73,7 @@ describe ActivitiesController do
     end
 
     it "should find the activity requested" do
-      Activity.should_receive(:find).with("1", {:conditions => "\"activities\".app_id = 1", :select => nil, :group => nil, :readonly => nil, :offset => nil, :joins => nil, :order => "updated_at DESC", :include => nil, :limit => nil}).and_return(@activity)
+      @activities.should_receive(:find).with("1").and_return(@activity)
       do_get
     end
 
@@ -78,10 +86,7 @@ describe ActivitiesController do
   describe "handling GET /activities/new" do
 
     before(:each) do
-      @activity = mock_model(Activity)
-      @activity.should_receive(:[]=).with('app_id', 1)
-
-      Activity.stub!(:new).and_return(@activity)
+      @activities.stub!(:build).and_return(@activity)
     end
 
     def do_get
@@ -99,7 +104,7 @@ describe ActivitiesController do
     end
 
     it "should create an new activity" do
-      Activity.should_receive(:new).and_return(@activity)
+      @activities.should_receive(:build).and_return(@activity)
       do_get
     end
 
@@ -117,7 +122,6 @@ describe ActivitiesController do
   describe "handling GET /activities/1/edit" do
 
     before(:each) do
-      @activity = mock_model(Activity)
       Activity.stub!(:find).and_return(@activity)
     end
 
@@ -136,7 +140,7 @@ describe ActivitiesController do
     end
 
     it "should find the activity requested" do
-      Activity.should_receive(:find).and_return(@activity)
+      @activities.should_receive(:find).with("1").and_return(@activity)
       do_get
     end
 
@@ -149,11 +153,8 @@ describe ActivitiesController do
   describe "handling POST /activities" do
 
     before(:each) do
-      @activity = mock_model(Activity, :to_param => "1")
-      @activity.should_receive(:[]=).with('app_id', 1)
-      @activity.should_receive(:state=).with("development")
-
-      Activity.stub!(:new).and_return(@activity)
+      @activities.should_receive(:build).and_return(@activity)
+      @activity.should_receive(:state=).with("development")   
     end
 
     describe "with successful save" do
@@ -164,7 +165,6 @@ describe ActivitiesController do
       end
 
       it "should create a new activity" do
-        Activity.should_receive(:new).with({}).and_return(@activity)
         do_post
       end
 
@@ -191,12 +191,6 @@ describe ActivitiesController do
   end
 
   describe "handling PUT /activities/1" do
-
-    before(:each) do
-      @activity = mock_model(Activity, :to_param => "1")
-      Activity.stub!(:find).and_return(@activity)
-    end
-
     describe "with successful update" do
 
       def do_put
@@ -205,7 +199,7 @@ describe ActivitiesController do
       end
 
       it "should find the activity requested" do
-        Activity.should_receive(:find).with("1", {:joins => nil, :limit => nil, :select => nil, :group => nil, :offset => nil, :order => "updated_at DESC", :conditions => "\"activities\".app_id = 1", :readonly => nil, :include => nil}).and_return(@activity)
+        @activities.should_receive(:find).with("1").and_return(@activity)
         do_put
       end
 

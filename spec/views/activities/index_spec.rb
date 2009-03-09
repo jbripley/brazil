@@ -1,11 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/activities/index.html.erb" do
-  include ActivitiesHelper
-  fixtures :apps
+  include ActivitiesHelper 
   
   before(:each) do
-    @app = apps(:app_1)
+    @app = mock_model(App)
     assigns[:app] = @app
     
     activity_98 = mock_model(Activity)

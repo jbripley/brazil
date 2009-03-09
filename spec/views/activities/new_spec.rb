@@ -2,10 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/activities/new.html.erb" do
   include ActivitiesHelper
-  fixtures :apps, :db_instances
   
   before do
-    @app = apps(:app_1)
+    @app = mock_model(App)
     assigns[:app] = @app
     
     @activity = mock_model(Activity)
@@ -15,8 +14,8 @@ describe "/activities/new.html.erb" do
     @activity.stub!(:schema).and_return("MyString")
     @activity.stub!(:state).and_return("MyString")
     @activity.stub!(:app_id).and_return("1")
-    
-    @activity.stub!(:db_instance_ids).and_return(db_instances)
+
+    @activity.stub!(:db_instance_ids).and_return([1, 2])
     
     assigns[:activity] = @activity
   end

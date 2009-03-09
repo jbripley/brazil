@@ -2,13 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/versions/show.html.erb" do
   include VersionsHelper
-  fixtures :db_instances
-  fixtures :apps, :activities, :db_instances
 
   before do
-    @app = apps(:app_1)
+    @app = mock_model(App)
 
-    @activity = activities(:app_1_dev)
+    @activity = mock_model(Activity, :state => Activity::STATE_DEVELOPMENT, :development? => true, :updated_at => Time.now, :schema => 'foo')
+
+    db_instance_dev = mock_model(DbInstance)
+    db_instance_dev.stub!(:db_env).and_return(DbInstance::ENV_DEV)
+    @activity.stub!(:db_instances).and_return([db_instance_dev])
+
     @activity.stub!(:app).and_return(@app)
 
     assigns[:activity] = @activity
@@ -24,8 +27,11 @@ describe "/versions/show.html.erb" do
     @version.stub!(:update_sql).and_return("CreateTableFoo")
     @version.stub!(:rollback_sql).and_return("DropTableFoo")
 
-    @version.stub!(:db_instances).and_return([db_instances(:test_1)])
-    @version.stub!(:db_instance_test).and_return(db_instances(:test_1))
+    db_instance_test = mock_model(DbInstance)
+    db_instance_test.stub!(:db_env).and_return(DbInstance::ENV_TEST)
+
+    @version.stub!(:db_instances).and_return([db_instance_test])
+    @version.stub!(:db_instance_test).and_return(db_instance_test)
     @version.stub!(:activity).and_return(@activity)
 
     assigns[:version] = @version

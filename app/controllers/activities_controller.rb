@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
   def index
     @app = App.find(params[:app_id])
     @activities = @app.activities.all(:order => 'updated_at DESC')
-    @activity = Activity.new(:app_id => params[:app_id])
+    @activity = @app.activities.build
 
     respond_to do |format|
       format.html do # index.html.erb
@@ -24,9 +24,9 @@ class ActivitiesController < ApplicationController
   def show
     @app = App.find(params[:app_id])
     @activity = @app.activities.find(params[:id])
-    @change = Change.new(:activity_id => params[:id])
+    @change = @activity.changes.build
 
-    latest_change = Change.find_by_activity_id_and_state(params[:id], [Change::STATE_EXECUTED, Change::STATE_SAVED], :order => 'created_at DESC')
+    latest_change = Change.first(:conditions => {:activity_id => params[:id], :state => [Change::STATE_EXECUTED, Change::STATE_SAVED]}, :order => 'created_at DESC')
     if latest_change
       @change.dba = latest_change.dba
       @change.developer = latest_change.developer

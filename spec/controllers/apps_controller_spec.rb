@@ -1,13 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe AppsController do
-  fixtures :apps
-
+describe AppsController do 
   describe "handling GET /apps" do
 
     before(:each) do
       @app = mock_model(App)
-      App.stub!(:find).and_return([@app])
+      App.stub!(:all).and_return([@app])
+      App.stub!(:new).and_return(mock_model(App))
     end
 
     def do_get
@@ -25,7 +24,7 @@ describe AppsController do
     end
 
     it "should find all apps" do
-      App.should_receive(:find).with(:all).and_return([@app])
+      App.should_receive(:all).and_return([@app])
       do_get
     end
 

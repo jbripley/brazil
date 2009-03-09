@@ -1,19 +1,33 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ChangeSuggestionsController do
-  fixtures :activities
+  before(:each) do
+    @app = mock_model(App, :to_param => "1")
+    App.stub!(:find).with("1").and_return(@app)
+
+    @activity = mock_model(Activity, :to_param => "2")
+    @activity.stub!(:app).and_return(@app)
+
+    @activities = mock(Array)
+    @activities.stub!(:find).and_return(@activity)
+    @app.stub!(:activities).and_return(@activities)    
+  end
 
   describe "handling GET /change_suggetions/new" do
 
     before(:each) do
       @change = mock_model(Change)
-      @change.should_receive(:[]=).with('activity_id', 2)
+      @changes.stub!(:build).and_return(@change)
 
-      Change.stub!(:new).and_return(@change)
+      @changes = mock(Array)
+      @changes.stub!(:build).and_return(@change)
+      @activity.stub!(:changes).and_return(@changes)
+
+      Activity.stub!(:find).with("2").and_return(@activity)
     end
 
     def do_get
-      get :new, :app_id => '2', :activity_id => '2'
+      get :new, :app_id => '1', :activity_id => '2'
     end
 
     it "should be successful" do
@@ -27,7 +41,7 @@ describe ChangeSuggestionsController do
     end
 
     it "should create an new change" do
-      Change.should_receive(:new).and_return(@change)
+      @changes.should_receive(:build).and_return(@change)
       do_get
     end
 
@@ -45,18 +59,16 @@ describe ChangeSuggestionsController do
   describe "handling POST /change_suggestions" do
 
     before(:each) do
-      @app = mock_model(App, :to_param => "1")
-      @activity = mock_model(Activity, :to_param => "2")
-      @activity.stub!(:app).and_return(@app)
-
       @change = mock_model(Change, :to_param => "1")
-      @change.stub!(:activity).and_return(@activity)
       @change.stub!(:sql).and_return('')
-
-      @change.should_receive(:[]=).with('activity_id', 2)
       @change.should_receive(:state=).with(Change::STATE_SUGGESTED)
 
-      Change.stub!(:new).and_return(@change)
+      @changes = mock(Array)
+      @changes.stub!(:build).and_return(@change)
+      
+      @activity.stub!(:changes).and_return(@changes)
+
+      Activity.stub!(:find).with("2").and_return(@activity)
     end
 
     describe "with successful save" do
@@ -70,7 +82,7 @@ describe ChangeSuggestionsController do
       end
 
       it "should create a new change" do
-        Change.should_receive(:new).with({}).and_return(@change)
+        @changes.stub!(:build).should_receive(:build).with({}).and_return(@change)
         do_post
       end
 
