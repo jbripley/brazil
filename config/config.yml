@@ -1,6 +1,6 @@
 common:
- release_version: 1.2.7
- release_name: 'Fearless'
+ release_version: 1.2.8
+ release_name: 'Final Destination'
  vc_type: 'svn'
  vc_uri: ''
  vc_dir: ''
