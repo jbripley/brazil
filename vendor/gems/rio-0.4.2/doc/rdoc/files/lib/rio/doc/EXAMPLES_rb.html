@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: EXAMPLES.rb</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>EXAMPLES.rb</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>lib/rio/doc/EXAMPLES.rb
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Nov 03 07:47:57 -0800 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+To create the documentation for Rio run the command
+</p>
+<pre>
+ ruby build_doc.rb
+</pre>
+<p>
+from the distribution directory.
+</p>
+<p>
+Suggested Reading
+</p>
+<ul>
+<li><a href="../../../../classes/RIO/Doc/SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="../../../../classes/RIO/Doc/INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="../../../../classes/RIO/Doc/HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="../../../../classes/RIO/Doc/EXAMPLES.html">RIO::Doc::EXAMPLES</a>
+
+</li>
+<li><a href="../../../../classes/RIO/Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

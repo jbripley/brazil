@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require 'rio'
+
+# riocat: reads from stdin and writes it to stdout
+# example use:
+#   riocat < afile.txt >bfile.txt
+# 
+# explanation:
+#
+# rio(?-)
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#
+# rio(?-)
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#
+# <
+#   <: copy operator indicating rio on left is written to and the rio on the right is read from
+#
+rio(?-) < ?-
+
+#
+# this could also be written
+#    rio(?-) < rio(?-)
+# or
+#    rio(?-) > ?-
+# or
+#    rio(?-) > rio(?-)
+#
+#
+# this is similar but reads the entire file before writing
+#    rio(?-).print!( rio(?-).slurp )
+
+
+
+#rio(?-).print!( rio(?-).slurp)
+
+
+# DONT DO THIS:
+#io = rio(?-)
+#io.print!( io.slurp )
+

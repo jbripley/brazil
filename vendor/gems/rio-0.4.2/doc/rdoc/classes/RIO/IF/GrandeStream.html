@@ -1,0 +1,1513 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::GrandeStream</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::GrandeStream</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/grande_stream_rb.html">
+                lib/rio/if/grande_stream.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000087">+@</a>&nbsp;&nbsp;
+      <a href="#M000086">a</a>&nbsp;&nbsp;
+      <a href="#M000088">a!</a>&nbsp;&nbsp;
+      <a href="#M000075">bytes</a>&nbsp;&nbsp;
+      <a href="#M000101">chomp</a>&nbsp;&nbsp;
+      <a href="#M000100">chomp?</a>&nbsp;&nbsp;
+      <a href="#M000096">closeoncopy</a>&nbsp;&nbsp;
+      <a href="#M000098">closeoncopy?</a>&nbsp;&nbsp;
+      <a href="#M000093">closeoneof</a>&nbsp;&nbsp;
+      <a href="#M000095">closeoneof?</a>&nbsp;&nbsp;
+      <a href="#M000084">contents</a>&nbsp;&nbsp;
+      <a href="#M000083">getline</a>&nbsp;&nbsp;
+      <a href="#M000081">getrec</a>&nbsp;&nbsp;
+      <a href="#M000082">getrow</a>&nbsp;&nbsp;
+      <a href="#M000104">gzip</a>&nbsp;&nbsp;
+      <a href="#M000105">gzip?</a>&nbsp;&nbsp;
+      <a href="#M000071">line</a>&nbsp;&nbsp;
+      <a href="#M000074">lines</a>&nbsp;&nbsp;
+      <a href="#M000099">noautoclose</a>&nbsp;&nbsp;
+      <a href="#M000097">nocloseoncopy</a>&nbsp;&nbsp;
+      <a href="#M000094">nocloseoneof</a>&nbsp;&nbsp;
+      <a href="#M000085">putrec</a>&nbsp;&nbsp;
+      <a href="#M000089">r</a>&nbsp;&nbsp;
+      <a href="#M000090">r!</a>&nbsp;&nbsp;
+      <a href="#M000072">record</a>&nbsp;&nbsp;
+      <a href="#M000076">records</a>&nbsp;&nbsp;
+      <a href="#M000073">row</a>&nbsp;&nbsp;
+      <a href="#M000079">rows</a>&nbsp;&nbsp;
+      <a href="#M000078">skiplines</a>&nbsp;&nbsp;
+      <a href="#M000077">skiprecords</a>&nbsp;&nbsp;
+      <a href="#M000080">skiprows</a>&nbsp;&nbsp;
+      <a href="#M000106">splitlines</a>&nbsp;&nbsp;
+      <a href="#M000103">strip</a>&nbsp;&nbsp;
+      <a href="#M000102">strip?</a>&nbsp;&nbsp;
+      <a href="#M000091">w</a>&nbsp;&nbsp;
+      <a href="#M000092">w!</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000087.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000087.html');return false;">
+          <span class="method-name">+@</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Unary Plus. Alternate form of <a href="GrandeStream.html#M000086">a</a>
+</p>
+<pre>
+ rio('f1') &gt; rio('f2')     # copy f1 to f2
+ rio('f1') &gt; rio('f2').a   # append f1 to f2
+ rio('f1') &gt; +rio('f2')    # same thing
+ rio('f1') &gt;&gt; rio('f2')    # same thing
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000086" class="method-detail">
+        <a name="M000086"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000086.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000086.html');return false;">
+          <span class="method-name">a</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit output mode to &#8216;a&#8217;.
+</p>
+<p>
+This is the mode Rio will use for output when no mode is specified
+</p>
+<p>
+Rios normally don&#8217;t need to be opened or have their open mode
+specified. A Rio determines the mode based on the file system object and on
+the action specified. For instance when a Rio encounters a <tt>read</tt> on
+a file it opens the file for reading using File#open and calls IO#read;
+when it encounters a <tt>read</tt> on a directory it knows to use Dir#open
+and call Dir#read. When it encounters a <a
+href="RubyIO.html#M000021">puts</a>, it knows to perform a File#open, and
+call IO#puts on the returned handle. By default when a method requires a
+file be opened for writing the file is opened with a mode of
+&#8216;w&#8217;. <a href="GrandeStream.html#M000086">a</a> changes this
+implicit output mode to &#8216;a&#8217;.
+</p>
+<p>
+Note that this is not the same as setting the output mode
+<b>explicitly</b>, as in rio(&#8216;afile&#8217;).mode(&#8216;a&#8217;).
+When the mode is set explicitly using <a
+href="RubyIO.html#M000028">mode</a>, the mode specified will be used
+regardless of the operation being performed. The <a
+href="GrandeStream.html#M000086">a</a> method only affects how Rio opens a
+file when it sees an operator that requires writing, and must determine for
+itself how to open it.
+</p>
+<pre>
+ rio('afile').puts!('Hello World') # call IO#puts on a file handle opened in 'w' mode
+ rio('afile').a.puts!('Hello World') # call IO#puts on a file handle opened in 'a' mode
+</pre>
+<p>
+See also <a href="GrandeStream.html#M000088">a!</a>, <a
+href="GrandeStream.html#M000092">w!</a> for setting the implicit output
+mode &#8216;a+&#8217; and &#8216;w+&#8217; respectively
+</p>
+<p>
+The methods <a href="GrandeStream.html#M000086">a</a>, <a
+href="GrandeStream.html#M000088">a!</a>, <a
+href="GrandeStream.html#M000091">w</a>, <a
+href="GrandeStream.html#M000092">w!</a>, <a
+href="GrandeStream.html#M000089">r</a>, <a
+href="GrandeStream.html#M000090">r!</a> set the <tt>implicit</tt> open mode
+to
+&#8216;a&#8217;,&#8217;a+&#8217;,&#8217;w&#8217;,&#8217;w+&#8217;,&#8217;r&#8217;
+and &#8216;r+&#8217; respectively.
+</p>
+<p>
+See also <a href="GrandeStream.html#M000087">+@</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000088.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000088.html');return false;">
+          <span class="method-name">a!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit output mode to &#8216;a+&#8217;.
+</p>
+<p>
+The implicit output mode is the mode Rio will use for output when no mode
+is specified.
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See the discussion for <a href="GrandeStream.html#M000086">a</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000075.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000075.html');return false;">
+          <span class="method-name">bytes</span><span class="method-args">(n=1,*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the rio to read bytes and returns the rio
+</p>
+<p>
+<em>n</em> specifies the number of bytes to be returned on each iteration
+of <a href="Grande.html#M000054">each</a> or by <a
+href="GrandeStream.html#M000081">getrec</a>. If <em>args</em> are provided,
+they are treated as record selectors as if
+<tt>ario.bytes(n).records(*args)</tt> had been called. See also <a
+href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+<p>
+If called with a block behaves as if
+<tt>ario.bytes(n,*args).each(&amp;block)</tt> had been called
+</p>
+<pre>
+ rio('f.dat').bytes(1024) { |rec| ... }      # iterate through f.txt 1024 bytes at a time
+ rio('f.dat').bytes(1024).each { |rec| ... } # same as above
+
+ rio('f.dat').bytes(1024,0..4) { |rec| ... } # iterate through the first five 1024 byte blocks
+
+ rio('f.dat').bytes(64).to_a # return the contents of f.dat as an array of 64 byte chunks
+
+ rio('f.dat').bytes(512).records(0,7..9) &gt; rio('dfile.dat') # copy 512-byte blocks 0,7,8 and 9 to dfile.dat
+
+ rio('f.dat').bytes(2048).records[0...10] # return an array containing the first 10 2K blocks of f.dat
+ rio('f.dat').bytes(2048)[0...10]         # same thing
+
+ rio('f.dat').bytes { |bytestr| ... } # iterate over f.dat 1 byte at a time.
+ rio('f.dat').bytes[0...100]          # returns an array of the first 100 bytes of f.dat
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000101.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000101.html');return false;">
+          <span class="method-name">chomp</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to chomp lines and returns the Rio
+</p>
+<p>
+When called with a block, behaves as if <tt>chomp.each(&amp;block)</tt> had
+been called
+</p>
+<p>
+chomp causes lines returned by each, to_a, readlines, readline, gets,
+each_line etc. to be chomped before iterated over or assigned
+</p>
+<pre>
+ rio('f.txt').chomp.each { |line| ... } # Block is called with lines already chomped
+
+ rio('f.txt').chomp { |line| ... } # same as above
+
+ rio('f.txt').chomp.to_a # returns the lines of f.txt chomped
+
+ rio('f.txt').chomp.lines(1..2).to_a # returns an array containg lines 1 and 2 of the file after being chomped
+
+   This would have similar results to rio('f.txt').lines(1..2).to_a.map{ |line| line.chomp}
+
+ rio('f.txt').lines(1..2).chomp.to_a # same as above
+
+ rio('f.txt').chomp.readlines # returns the lines of f.txt chomped
+
+ rio('f.txt').chomp.gets # returns the first line of 'f.txt' chomped
+
+ rio('f.txt').chomp &gt; an_array # copies the chomped lines of f.txt into an_array
+
+ # fill an array with all the 'require' lines in all the .rb files (recursively) in adir
+ # chomping each line
+
+ an_array = []
+ rio('adir').chomp.all.files(&quot;*.rb&quot;) { |file|
+   an_array += file.lines[/^\s*require/]
+ }
+
+ or simply
+
+ an_array = rio('adir').chomp.all.files(&quot;*.rb&quot;).lines[/^\s*require/]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000100.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000100.html');return false;">
+          <span class="method-name">chomp?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Queries the Rio&#8217;s chomp-mode. See <a
+href="GrandeStream.html#M000101">chomp</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000096" class="method-detail">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000096.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000096.html');return false;">
+          <span class="method-name">closeoncopy</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set a Rio&#8217;s closeoncopy mode
+</p>
+<pre>
+ ario.closeoncopy(&amp;block) =&gt; ario
+</pre>
+<p>
+<a href="GrandeStream.html#M000096">closeoncopy</a> causes the Rio being
+written to to be closed when using a grande copy operator. While <a
+href="GrandeStream.html#M000093">closeoneof</a> causes all Rio&#8217;s to
+be closed when reading to the end of file, it does not affect Rios being
+written to. <a href="GrandeStream.html#M000096">closeoncopy</a> only
+affects the Rio being written to and only when a grande copy operator is
+used. <tt>closeoncopy</tt> is on by default, with one exception.
+</p>
+<pre>
+ dest = rio('destfile')
+ dest &lt; rio('srcfile')
+ dest.closed?   #=&gt; true
+
+ dest = rio('destfile').nocloseoncopy
+ dest &lt; rio('srcfile')
+ dest.closed?   #=&gt; false
+ dest.close     # must be explicitly closed
+
+ dest = rio('destfile')
+ dest.print(rio('srcfile').contents)
+ dest.closed?   #=&gt; false (IF::RubyIO#print is not a copy operator)
+ dest.close
+</pre>
+<h4>The Exception</h4>
+<p>
+When a block is passed directly to the rio constructor <tt>closeoncopy</tt>
+is turned off.
+</p>
+<pre>
+ rio('afile') { |file|
+   file.closeoncopy? #=&gt; false
+   file &lt; a_string
+   file.closed?  #=&gt; false
+ }
+ # The file is now closed. See IF::GrandeStream#rio for more informatioin
+</pre>
+<h4>Why?</h4>
+<p>
+Some of my favorite Rio idioms are its copy one-liners
+</p>
+<pre>
+ rio('afile') &lt; a_string # put a string into a file
+ rio('afile') &lt; an_array # put an array into a file
+ rio('afile') &lt; rio('anotherfile').lines(0..9) # copy the first 10 lines of anotherfile into afile
+ rio('afile.gz').gzip &lt; rio('anotherfile').lines(0..9) # same thing into a gzipped file
+</pre>
+<p>
+In each of these cases, &#8216;afile&#8217; would remain open after the
+copy and furthermore since the destination Rio was not saved in a variable,
+There is no way to close file. Without closeoncopy Something like this
+would be required:
+</p>
+<pre>
+ ario = rio('afile')
+ ario &lt; something_else
+ ario.close
+</pre>
+<p>
+Or this&#8230;
+</p>
+<pre>
+ ario = rio('afile') &lt; something_else
+ ario.close
+</pre>
+<p>
+Or this&#8230;
+</p>
+<pre>
+ (rio('afile') &lt; something_else).close
+</pre>
+<p>
+One line, but ugly, and prone to error.
+</p>
+<p>
+What I want is this:
+</p>
+<pre>
+ rio('afile') &lt; something_else
+</pre>
+<p>
+Simple. I want to copy this to that, I point the arrow and it works.
+</p>
+<p>
+In perl the rio&#8217;s destructor would be called, because there are no
+remaining references to the Rio However, it my understanding and experience
+that in Ruby the finalizer will not necessarily be called at this point.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000098.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000098.html');return false;">
+          <span class="method-name">closeoncopy?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Query a Rio&#8217;s closeoncopy mode
+</p>
+<pre>
+    ario.closeoncopy? =&gt; true or false
+</pre>
+<p>
+See <a href="GrandeStream.html#M000096">closeoncopy</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000093.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000093.html');return false;">
+          <span class="method-name">closeoneof</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the Rio&#8217;s closeoneof mode.
+</p>
+<pre>
+ ario.closeoneof(&amp;block) =&gt; ario
+</pre>
+<p>
+<tt>closeoneof</tt> causes a Rio to be closed automatically whenever the
+end of file is reached. This affects# all methods that read from a rio (<a
+href="RubyIO.html#M000012">readlines</a>, #to_a, <a
+href="Grande.html#M000054">each</a> <a href="RubyIO.html#M000004">gets</a>
+etc.) Because <tt>closeoneof</tt> must be on for many of Rio&#8217;s most
+useful idioms, it is on by default. <tt>closeoneof</tt> can be turned off
+using <a href="GrandeStream.html#M000094">nocloseoneof</a>.
+</p>
+<p>
+If a block is given behaves like <tt>ario.closeoneof.each(&amp;block)</tt>
+had been called
+</p>
+<p>
+Returns the Rio
+</p>
+<pre>
+ ario = rio('afile')
+ lines = ario.readlines
+ ario.closed?     #=&gt; true
+
+ ario = rio('afile').nocloseoneof
+ lines = ario.readlines
+ ario.closed?     #=&gt; false
+ ario.close       # must be explicitly closed
+</pre>
+<p>
+<tt>closeoneof</tt> is ignored by directory Rios, however, setting it on a
+directory Rio causes each file Rio returned while iterating to inherit the
+directory&#8217;s setting
+</p>
+<pre>
+ rio('adir').files do |file|
+   file.closeoneof?    #=&gt; true
+ end
+
+ rio('adir').files.nocloseoneof do |file|
+   file.closeoneof?    #=&gt; false
+ end
+
+ rio('adir').files.nocloseoneof['*.rb'] # array of .rb file Rios in adir with closeoneof off
+
+ drio = rio('adir').files
+ frio1 = drio.read
+ frio1.closeoneof?    #=&gt; true
+ drio.nocloseoneof
+ frio2 = drio.read
+ frio2.closeoneof?    #=&gt; false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000095" class="method-detail">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000095.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000095.html');return false;">
+          <span class="method-name">closeoneof?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Query a Rio&#8217;s closeoneof mode
+</p>
+<pre>
+ ario.closeoneof?    =&gt; true or false
+</pre>
+<p>
+See <a href="GrandeStream.html#M000093">closeoneof</a> and <a
+href="GrandeStream.html#M000094">nocloseoneof</a>
+</p>
+<pre>
+ ario = rio('afile')
+ ario.closeoneof?  #=&gt; true
+ lines = ario.to_a
+ ario.closed?     #=&gt; true
+
+ ario = rio('afile').nocloseoneof
+ ario.closeoneof?  #=&gt; false
+ lines = ario.to_a
+ ario.closed?     #=&gt; false
+ ario.close       # must be explicitly closed
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000084" class="method-detail">
+        <a name="M000084"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000084.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000084.html');return false;">
+          <span class="method-name">contents</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Slurps the contents of the rio into a string.
+</p>
+<pre>
+ astring = rio('afile.txt').contents # slurp the entire contents of afile.txt into astring
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000083" class="method-detail">
+        <a name="M000083"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000083.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000083.html');return false;">
+          <span class="method-name">getline</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Temporarily set the Rio to read lines, and call <a
+href="Grande.html#M000067">get</a>
+</p>
+<p>
+See also <a href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000081.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000081.html');return false;">
+          <span class="method-name">getrec</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Temporarily set the Rio to read records, and call <a
+href="Grande.html#M000067">get</a>
+</p>
+<p>
+See also <a href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000082.html');return false;">
+          <span class="method-name">getrow</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Temporarily set the Rio to read rows, and call <a
+href="Grande.html#M000067">get</a>
+</p>
+<p>
+See also <a href="GrandeStream.html#M000079">rows</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000104.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000104.html');return false;">
+          <span class="method-name">gzip</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to gzip mode.
+</p>
+<pre>
+    ario.gzip    #=&gt; ario
+</pre>
+<p>
+If applied to a Rio that is being read from Reads through a
+<tt>Zlib::GzipReader</tt>; If applied to a Rio that is being written to
+writes through a <tt>Zlib::GzipWriter</tt>.
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+If a block is given, acts like <tt>ario.gzip.each(&amp;block)</tt>
+</p>
+<pre>
+ rio('afile') &gt; rio('afile.gz').gzip # gzip a file
+ rio('afile.gz').gzip &lt; rio('afile') # same thing
+
+ rio('afile.gz').gzip &gt; rio('afile') # ungzip a file
+ rio('afile') &lt; rio('afile.gz').gzip # same thing
+
+ rio('afile.gz').gzip.chomp { |line| ...} # process each chomped line of a gzipped file
+ rio('afile.gz').gzip[0..9] # an array containing the first 10 lines of a gzipped file
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000105.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000105.html');return false;">
+          <span class="method-name">gzip?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Queries the Rio&#8217;s gzip-mode
+</p>
+<pre>
+ ario.gzip?     #=&gt; true or false
+</pre>
+<p>
+See <a href="GrandeStream.html#M000104">gzip</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000071.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000071.html');return false;">
+          <span class="method-name">line</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls <a href="GrandeStream.html#M000074">lines</a>(*args) but when used
+with the subscript operator returns the first element of the returned array
+instead of the array.
+</p>
+<p>
+If afile contains [&quot;line 0\n&quot;,&quot;line 1\n&quot;]
+</p>
+<pre>
+ rio('afile').line[0]       #=&gt; &quot;line 0\n&quot;
+ rio('afile').line[1]       #=&gt; &quot;line 1\n&quot;
+ rio('afile').lines[0]      #=&gt; [&quot;line 0\n&quot;]
+ rio('afile').lines[1]      #=&gt; [&quot;line 1\n&quot;]
+ rio('afile').lines[0][0]   #=&gt; &quot;line 0\n&quot;
+ rio('afile').lines[1][0]   #=&gt; &quot;line 1\n&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000074.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000074.html');return false;">
+          <span class="method-name">lines</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the rio to read lines and returns the Rio
+</p>
+<p>
+If called with a block behaves as if <tt>lines(*args).each(&amp;block)</tt>
+had been called
+</p>
+<p>
+<tt>lines</tt> returns the Rio which called it. This might seem
+counter-intuitive at first. One might reasonably assume that
+</p>
+<pre>
+ rio('adir').lines(0..10)
+</pre>
+<p>
+would return lines. It does not. It configures the rio to return lines and
+returns the Rio. This enables chaining for further configuration so
+constructs like
+</p>
+<pre>
+ rio('afile').lines(0..10).skiplines(/::/)
+</pre>
+<p>
+are possible.
+</p>
+<p>
+If args are provided they may be one or more of the following:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>any matching record will be processed
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>specifies a range of records (zero-based) to be included
+
+</td></tr>
+<tr><td valign="top">Integer:</td><td>interpreted as a one element range of lines to be processed
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>a proc which will be called for each record, records are included unless
+nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>a symbol which will <em>sent</em> to each record, records are included
+unless nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>an array of other selectors. records are selected unless any of the matches
+fail.
+
+</td></tr>
+</table>
+<pre>
+ rio('f.txt').lines(/^\s*#/) { |line| ... } # iterate over comment-only lines
+ rio('f.txt').lines(/^\s*#/).each { |line| ... } # same as above
+
+ rio('f.txt').lines(1,7..9) &gt; rio('anotherfile.txt') # copy lines 1,7,8 and 9 to anotherfile.txt
+
+ rio('f.txt').lines(1...3).to_a # return an array containing lines 1 and 2 of f.txt
+ rio('f.txt').lines[1...3]      # same thing
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000099.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000099.html');return false;">
+          <span class="method-name">noautoclose</span><span class="method-args">(arg=false,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Turns off both closeoneof and closeoncopy. Equivelent to:
+</p>
+<pre>
+ ario.nocloseoneof.nocloseoncopy
+</pre>
+<p>
+Returns the Rio
+</p>
+<pre>
+ ario.noautoclose(&amp;block) =&gt; ario
+</pre>
+<p>
+If a block is given, acts as if
+</p>
+<pre>
+ ario.noautoclose.each(&amp;block)
+</pre>
+<p>
+had been called.
+</p>
+<p>
+See <a href="GrandeStream.html#M000094">nocloseoneof</a> and <a
+href="GrandeStream.html#M000097">nocloseoncopy</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000097.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000097.html');return false;">
+          <span class="method-name">nocloseoncopy</span><span class="method-args">(arg=false,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set a Rio&#8217;s closeoncopy mode to false
+</p>
+<pre>
+    ario.nocloseoncopy(&amp;block) =&gt; ario
+</pre>
+<p>
+See <a href="GrandeStream.html#M000096">closeoncopy</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000094" class="method-detail">
+        <a name="M000094"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000094.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000094.html');return false;">
+          <span class="method-name">nocloseoneof</span><span class="method-args">(arg=false,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the Rio&#8217;s closeoneof mode to false
+</p>
+<pre>
+ ario.nocloseoneof(&amp;block) =&gt; ario
+</pre>
+<p>
+See <a href="GrandeStream.html#M000093">closeoneof</a>
+</p>
+<p>
+If a block is given behaves like
+</p>
+<pre>
+ ario.nocloseoneof.each(&amp;block)
+</pre>
+<p>
+Returns the Rio
+</p>
+<pre>
+ ario = rio('afile')
+ lines = ario.to_a
+ ario.closed?     #=&gt; true
+
+ ario = rio('afile').nocloseoneof
+ lines = ario.to_a
+ ario.closed?     #=&gt; false
+ ario.close       # must be explicitly closed
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000085" class="method-detail">
+        <a name="M000085"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000085.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000085.html');return false;">
+          <span class="method-name">putrec</span><span class="method-args">(el)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes a single record to a Rio
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000089.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000089.html');return false;">
+          <span class="method-name">r</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit input mode to &#8216;r&#8217;.
+</p>
+<p>
+The implicit input mode is the mode Rio will use for input when no mode is
+specified.
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See the discussion for <a href="GrandeStream.html#M000086">a</a>.
+</p>
+<p>
+Since &#8216;r&#8217; is the implicit input mode used by default, this
+method is probably uneeded.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000090.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000090.html');return false;">
+          <span class="method-name">r!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit input mode to &#8216;r+&#8217;.
+</p>
+<p>
+The implicit input mode is the mode Rio will use for input when no mode is
+specified.
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See the discussion for <a href="GrandeStream.html#M000086">a</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000072.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000072.html');return false;">
+          <span class="method-name">record</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See <a href="GrandeStream.html#M000071">line</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000076.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000076.html');return false;">
+          <span class="method-name">records</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies which records will be iterated through by <a
+href="Grande.html#M000054">each</a> or returned by <a
+href="GrandeStream.html#M000081">getrec</a>
+</p>
+<p>
+If called with a block behaves as if
+<tt>records(*args).each(&amp;block)</tt> had been called
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+If no args are provided, all records are selected. What constitutes a
+record is affected by <a href="GrandeStream.html#M000074">lines</a>,<a
+href="GrandeStream.html#M000075">bytes</a>, and extensions such as <a
+href="CSV.html#M000129">csv</a> and <a href="YAML.html#M000164">yaml</a>.
+</p>
+<p>
+If args are provided they may be one or more of the following:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>any matching record will be iterated over by <a
+href="Grande.html#M000054">each</a> or returned by <a
+href="GrandeStream.html#M000081">getrec</a>
+
+</td></tr>
+<tr><td valign="top">Integer:</td><td>specifies a record-number (zero-based) to be iterated over by <a
+href="Grande.html#M000054">each</a> or returned by <a
+href="GrandeStream.html#M000081">getrec</a>
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>specifies a range of records (zero-based) to included in the iteration
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>a proc which will be called for each record, records are included unless
+nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>a symbol which will <em>sent</em> to each record, records are included
+unless nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>an array of any of above. All must match for a line to be included
+
+</td></tr>
+</table>
+<p>
+Any other argument type is compared with the record using its <tt>===</tt>
+method.
+</p>
+<p>
+If the argument is a ::Proc it may be called with one, two or three
+paramaters.
+</p>
+<ol>
+<li>the record
+
+</li>
+<li>the recno (optional)
+
+</li>
+<li>the rio (optional)
+
+</li>
+</ol>
+<p>
+Note in the following examples that since <tt>lines</tt> is the default
+<tt>ario.records(*args)</tt> is effectively the same as
+<tt>ario.lines(*args)</tt>.
+</p>
+<pre>
+ rio('afile').records(0) { |line| ... } # iterate over the first line of 'afile'
+ rio('afile').records(0,5..7)) { |line| ... } # iterate over lines 0,5,6 and 7
+ rio('afile').records(/Zippy/) { |line| ... } # iterate over all lines containing 'Zippy'
+
+ rio('f.csv').puts!([&quot;h0,h1&quot;,&quot;f0,f1&quot;]) # Create f.csv
+
+ rio('f.csv').csv.records[]    #==&gt;[[&quot;h0&quot;, &quot;h1&quot;], [&quot;f0&quot;, &quot;f1&quot;]]
+ rio('f.csv').csv.lines[]      #==&gt;[&quot;h0,h1\n&quot;, &quot;f0,f1\n&quot;]
+ rio('f.csv').csv.records[0]   #==&gt;[[&quot;h0&quot;, &quot;h1&quot;]]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000073.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000073.html');return false;">
+          <span class="method-name">row</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See <a href="GrandeStream.html#M000071">line</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000079.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000079.html');return false;">
+          <span class="method-name">rows</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to read rows and specifies rows which should be iterated
+through by <a href="Grande.html#M000054">each</a> or returned by <a
+href="GrandeStream.html#M000081">getrec</a>. <a
+href="GrandeStream.html#M000079">rows</a> is intended for use by
+extensions, where the concept of a row is reasonable. In the absensence of
+an extension behaves like <a href="GrandeStream.html#M000076">records</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000078.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000078.html');return false;">
+          <span class="method-name">skiplines</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to read lines and specifies lines which should <b>not</b> be
+iterated through by <a href="Grande.html#M000054">each</a> or returned by
+<a href="GrandeStream.html#M000081">getrec</a>
+</p>
+<p>
+If called with a block behaves as if
+<tt>skiplines(*args).each(&amp;block)</tt> had been called
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See also <a href="GrandeStream.html#M000074">lines</a>, <a
+href="GrandeStream.html#M000076">records</a>, <a
+href="Grande.html#M000068">skip</a>
+</p>
+<p>
+If no args are provided, no lines are rejected.
+</p>
+<p>
+If args are provided they may be one or more of the following:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>any matching line will not be processed
+
+</td></tr>
+<tr><td valign="top">Integer:</td><td>specifies a line-number (zero-based) to be skipped
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>specifies a range of lines (zero-based) to be excluded
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>a proc which will be called for each line, lines are excluded unless nil or
+false is returned
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>a symbol which will <em>sent</em> to each line, lines are excluded unless
+nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>an array of any of above. All must match for a line to be included
+
+</td></tr>
+</table>
+<pre>
+ rio('afile').skiplines(0) { |line| ... } # iterate over all but the first line of 'afile'
+ rio('afile').skiplines(0,5..7)) { |line| ... } # don't iterate over lines 0,5,6 and 7
+ rio('afile').skiplines(/Zippy/) { |line| ... } # skip all lines containing 'Zippy'
+ rio('afile').chomp.skiplines(:empty?) { |line| ... } # skip empty lines
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000077.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000077.html');return false;">
+          <span class="method-name">skiprecords</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies records which should <b>not</b> be iterated through by <a
+href="Grande.html#M000054">each</a> or returned by <a
+href="GrandeStream.html#M000081">getrec</a>
+</p>
+<p>
+If called with a block behaves as if
+<tt>skiprecords(*args).each(&amp;block)</tt> had been called
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See also <a href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000078">skiplines</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000068">skip</a>
+</p>
+<p>
+If no args are provided, no records are rejected. What constitutes a record
+is affected by <a href="GrandeStream.html#M000074">lines</a>,<a
+href="GrandeStream.html#M000075">bytes</a>, and extensions such as <a
+href="CSV.html#M000129">csv</a> and <a href="YAML.html#M000164">yaml</a>.
+</p>
+<p>
+If args are provided they may be one or more of the following:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>any matching record will not be processed
+
+</td></tr>
+<tr><td valign="top">Integer:</td><td>specifies a record-number (zero-based) to be skipped
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>specifies a range of records (zero-based) to be excluded
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>a proc which will be called for each record, records are excluded unless
+nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>a symbol which will <em>sent</em> to each record, records are excluded
+unless nil or false is returned
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>an array of any of the above, all of which must match for the array to
+match.
+
+</td></tr>
+</table>
+<p>
+Note in the following examples that since <tt>lines</tt> is the default
+record type <tt>ario.skiprecords(*args)</tt> is effectively the same as
+<tt>ario.skiplines(*args)</tt>.
+</p>
+<pre>
+ rio('afile').skiprecords(0) { |line| ... } # iterate over all but the first line of 'afile'
+ rio('afile').skiprecords(0,5..7)) { |line| ... } # don't iterate over lines 0,5,6 and 7
+ rio('afile').skiprecords(/Zippy/) { |line| ... } # skip all lines containing 'Zippy'
+ rio('afile').chomp.skiplines(:empty?) { |line| ... } # skip empty lines
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000080.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000080.html');return false;">
+          <span class="method-name">skiprows</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to read rows and specifies lines which should <b>not</b> be
+iterated through by <a href="Grande.html#M000054">each</a> or returned by
+<a href="GrandeStream.html#M000081">getrec</a> <a
+href="GrandeStream.html#M000080">skiprows</a> is intended for use by
+extensions, where the concept of a row is reasonable. In the absence of an
+extension behaves like <a href="GrandeStream.html#M000077">skiprecords</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000106.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000106.html');return false;">
+          <span class="method-name">splitlines</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This causes String#split(arg) to be called on every line before it is
+returned. An array of the split lines is returned when iterating
+</p>
+<pre>
+ rio('/etc/passwd').split(':').columns(0,2) { |ary|
+   username,uid = ary
+ }
+
+ rio('/etc/passwd').split(':').columns(0,2).to_a #=&gt; [[user1,uid1],[user2,uid2]]
+</pre>
+<p>
+See also <a href="Grande.html#M000070">split</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000103.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000103.html');return false;">
+          <span class="method-name">strip</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the Rio to strip lines and returns the Rio
+</p>
+<p>
+When called with a block, behaves as if strip.each(&amp;block) had been
+called
+</p>
+<p>
+<tt>strip</tt> causes lines returned by each, to_a, readlines, readline,
+gets, each_line etc. to be stripped with String#strip before iterated over
+or assigned
+</p>
+<pre>
+ ans = rio(?-).print(&quot;A Prompt&gt; &quot;).strip.gets # prompt the user
+</pre>
+<p>
+See also <a href="GrandeStream.html#M000101">chomp</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000102.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000102.html');return false;">
+          <span class="method-name">strip?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Queries the Rio&#8217;s strip-mode. See <a
+href="GrandeStream.html#M000103">strip</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000091.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000091.html');return false;">
+          <span class="method-name">w</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit output mode to &#8216;w&#8217;.
+</p>
+<p>
+The implicit output mode is the mode Rio will use for output when no mode
+is specified.
+</p>
+<p>
+Returns the Rio
+</p>
+<p>
+See the discussion for <a href="GrandeStream.html#M000086">a</a>.
+</p>
+<p>
+Since &#8216;w&#8217; is the implicit output mode used by default, this
+method is uneeded, but is provided for completeness..
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="GrandeStream.src/M000092.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeStream.src/M000092.html');return false;">
+          <span class="method-name">w!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the implicit output mode to &#8216;w+&#8217;.
+</p>
+<p>
+The implicit output mode is the mode Rio will use for output when no mode
+is specified.
+</p>
+<p>
+Returns the Rio
+</p>
+<pre>
+ rio(?-,'cat').w!.puts!(&quot;Hello Kitty&quot;).readline #=&gt; &quot;Hello Kitty&quot;
+</pre>
+<p>
+See the discussion for <a href="GrandeStream.html#M000086">a</a>.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

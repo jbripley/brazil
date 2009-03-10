@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::Test</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::Test</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/test_rb.html">
+                lib/rio/if/test.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000209">abs?</a>&nbsp;&nbsp;
+      <a href="#M000210">absolute?</a>&nbsp;&nbsp;
+      <a href="#M000192">atime</a>&nbsp;&nbsp;
+      <a href="#M000177">blockdev?</a>&nbsp;&nbsp;
+      <a href="#M000178">chardev?</a>&nbsp;&nbsp;
+      <a href="#M000186">closed?</a>&nbsp;&nbsp;
+      <a href="#M000193">ctime</a>&nbsp;&nbsp;
+      <a href="#M000180">dir?</a>&nbsp;&nbsp;
+      <a href="#M000179">directory?</a>&nbsp;&nbsp;
+      <a href="#M000195">executable?</a>&nbsp;&nbsp;
+      <a href="#M000196">executable_real?</a>&nbsp;&nbsp;
+      <a href="#M000181">exist?</a>&nbsp;&nbsp;
+      <a href="#M000182">file?</a>&nbsp;&nbsp;
+      <a href="#M000187">fnmatch?</a>&nbsp;&nbsp;
+      <a href="#M000188">ftype</a>&nbsp;&nbsp;
+      <a href="#M000203">grpowned?</a>&nbsp;&nbsp;
+      <a href="#M000190">lstat</a>&nbsp;&nbsp;
+      <a href="#M000211">mountpoint?</a>&nbsp;&nbsp;
+      <a href="#M000194">mtime</a>&nbsp;&nbsp;
+      <a href="#M000185">open?</a>&nbsp;&nbsp;
+      <a href="#M000202">owned?</a>&nbsp;&nbsp;
+      <a href="#M000191">pipe?</a>&nbsp;&nbsp;
+      <a href="#M000197">readable?</a>&nbsp;&nbsp;
+      <a href="#M000198">readable_real?</a>&nbsp;&nbsp;
+      <a href="#M000212">root?</a>&nbsp;&nbsp;
+      <a href="#M000204">setgid?</a>&nbsp;&nbsp;
+      <a href="#M000205">setuid?</a>&nbsp;&nbsp;
+      <a href="#M000206">size</a>&nbsp;&nbsp;
+      <a href="#M000207">size?</a>&nbsp;&nbsp;
+      <a href="#M000183">socket?</a>&nbsp;&nbsp;
+      <a href="#M000189">stat</a>&nbsp;&nbsp;
+      <a href="#M000201">sticky?</a>&nbsp;&nbsp;
+      <a href="#M000184">symlink?</a>&nbsp;&nbsp;
+      <a href="#M000199">writable?</a>&nbsp;&nbsp;
+      <a href="#M000200">writable_real?</a>&nbsp;&nbsp;
+      <a href="#M000208">zero?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000209" class="method-detail">
+        <a name="M000209"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000209.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000209.html');return false;">
+          <span class="method-name">abs?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the rio represents an absolute path or URI. Alias for <a
+href="Test.html#M000210">absolute?</a>
+</p>
+<pre>
+ rio('/tmp').abs?                     # &gt;&gt; true
+ rio('.ssh').abs?                     # &gt;&gt; false
+ rio('file:///tmp').abs?              # &gt;&gt; true
+ rio('http://www.ruby-doc.org/').abs? # &gt;&gt; true
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000210.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000210.html');return false;">
+          <span class="method-name">absolute?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the Rio represents and absolute path or URI. Calls
+URI#absolute?
+</p>
+<pre>
+ rio('/tmp').absolute?                     # &gt;&gt; true
+ rio('.ssh').absolute?                     # &gt;&gt; false
+ rio('file:///tmp').absolute?              # &gt;&gt; true
+ rio('http://www.ruby-doc.org/').absolute? # &gt;&gt; true
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000192" class="method-detail">
+        <a name="M000192"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000192.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000192.html');return false;">
+          <span class="method-name">atime</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#atime
+</p>
+<p>
+Returns the last access time (a Time object) for the file system object
+referenced
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000177" class="method-detail">
+        <a name="M000177"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000177.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000177.html');return false;">
+          <span class="method-name">blockdev?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#blockdev?
+</p>
+<pre>
+ rio('afile').blockdev?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a block device.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000178" class="method-detail">
+        <a name="M000178"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000178.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000178.html');return false;">
+          <span class="method-name">chardev?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#chardev?
+</p>
+<pre>
+ rio('afile').chardev?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a character device.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000186" class="method-detail">
+        <a name="M000186"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000186.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000186.html');return false;">
+          <span class="method-name">closed?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#closed?
+</p>
+<pre>
+ ario.closed?    =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if <em>ario</em> is completely closed (for duplex
+streams, both reader and writer), <tt>false</tt> otherwise.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000193" class="method-detail">
+        <a name="M000193"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000193.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000193.html');return false;">
+          <span class="method-name">ctime</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#ctime
+</p>
+<p>
+Returns the change time for Rios that reference file system object (that
+is, the time directory information about the file was changed, not the file
+itself).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000180" class="method-detail">
+        <a name="M000180"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000180.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000180.html');return false;">
+          <span class="method-name">dir?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Test.html#M000179">directory?</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000179" class="method-detail">
+        <a name="M000179"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000179.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000179.html');return false;">
+          <span class="method-name">directory?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#directory?
+</p>
+<pre>
+ rio('afile').directory?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a directory, <tt>false</tt>
+otherwise.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000195" class="method-detail">
+        <a name="M000195"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000195.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000195.html');return false;">
+          <span class="method-name">executable?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#executable?
+</p>
+<p>
+Returns true if the file is executable by the effective user id of this
+process.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000196" class="method-detail">
+        <a name="M000196"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000196.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000196.html');return false;">
+          <span class="method-name">executable_real?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#executable_real?
+</p>
+<p>
+Returns true if the file is executable by the real user id of this process.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000181" class="method-detail">
+        <a name="M000181"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000181.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000181.html');return false;">
+          <span class="method-name">exist?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#exist?
+</p>
+<pre>
+ rio('afile').exist?()    =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file exists.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000182" class="method-detail">
+        <a name="M000182"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000182.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000182.html');return false;">
+          <span class="method-name">file?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#file?
+</p>
+<pre>
+ rio('afile').file?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file exists and is a regular file.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000187" class="method-detail">
+        <a name="M000187"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000187.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000187.html');return false;">
+          <span class="method-name">fnmatch?( pattern, [flags] ) => (true or false)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#fnmatch?
+</p>
+<p>
+Returns true if <a href="Path.html#M000132">path</a> matches
+<em>pattern</em>. The pattern is not a regular expression; instead it
+follows rules similar to shell filename globbing. It may contain the
+following metacharacters:
+</p>
+<p>
+<em>flags</em> is a bitwise OR of the <tt>FNM_xxx</tt> parameters. The same
+glob pattern and flags are used by <tt>Dir::glob</tt>.
+</p>
+<pre>
+ rio('cat').fnmatch?('cat')              #=&gt; true
+ rio('category').fnmatch?('cat')         #=&gt; false
+ rio('cats').fnmatch?('c{at,ub}s')       #=&gt; false
+ rio('cubs').fnmatch?('c{at,ub}s')       #=&gt; false
+ rio('cat').fnmatch?('c{at,ub}s')        #=&gt; false
+
+ rio('cat').fnmatch?('c?t')              #=&gt; true
+ rio('cat').fnmatch?('c\?t')             #=&gt; false
+ rio('cat').fnmatch?('c??t')             #=&gt; false
+ rio('cats').fnmatch?('c*')              #=&gt; true
+
+ rio('cat').fnmatch?('c*t')                       #=&gt; true
+ rio('cat').fnmatch?('c\at')                      #=&gt; true
+ rio('cat').fnmatch?('c\at',File::FNM_NOESCAPE)   #=&gt; false
+ rio('a/b').fnmatch?('a?b')                       #=&gt; true
+ rio('a/b').fnmatch?('a?b',File::FNM_PATHNAME)    #=&gt; false
+
+ rio('.profile').fnmatch?('*')                           #=&gt; false
+ rio('.profile').fnmatch?('*',File::FNM_DOTMATCH)        #=&gt; true
+ rio('dave/.profile').fnmatch?('*')                      #=&gt; true
+ rio('dave/.profile').fnmatch?('*',File::FNM_DOTMATCH)   #=&gt; true
+ rio('dave/.profile').fnmatch?('*',File::FNM_PATHNAME)   #=&gt; false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000188" class="method-detail">
+        <a name="M000188"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000188.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000188.html');return false;">
+          <span class="method-name">ftype</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#ftype
+</p>
+<p>
+Identifies the type of the named file; the return string is one of
+&#8216;file’, &#8216;directory’, &#8216;characterSpecial’,
+&#8216;blockSpecial’, &#8216;fifo’, &#8216;link’, &#8216;socket’, or
+&#8216;unknown’.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000203" class="method-detail">
+        <a name="M000203"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000203.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000203.html');return false;">
+          <span class="method-name">grpowned?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#grpowned?
+</p>
+<pre>
+ rio('afile').grpowned?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file exists and the effective group id
+of the calling process is the owner of the file. Returns <tt>false</tt> on
+Windows.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000190" class="method-detail">
+        <a name="M000190"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000190.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000190.html');return false;">
+          <span class="method-name">lstat</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#lstat
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000211.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000211.html');return false;">
+          <span class="method-name">mountpoint?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls Pathname#mountpoint?
+</p>
+<p>
+Returns <tt>true</tt> if <tt>self</tt> points to a mountpoint.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000194" class="method-detail">
+        <a name="M000194"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000194.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000194.html');return false;">
+          <span class="method-name">mtime</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#mtime
+</p>
+<p>
+Returns the modification time for Rio that reference file system objects
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000185" class="method-detail">
+        <a name="M000185"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000185.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000185.html');return false;">
+          <span class="method-name">open?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns <tt>true</tt> if a Rio is not <a
+href="Test.html#M000186">closed?</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000202.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000202.html');return false;">
+          <span class="method-name">owned?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#owned?
+</p>
+<pre>
+ rio('afile').owned?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file exists and the effective used id of
+the calling process is the owner of the file.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000191" class="method-detail">
+        <a name="M000191"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000191.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000191.html');return false;">
+          <span class="method-name">pipe?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#pipe?
+</p>
+<pre>
+ rio('afile').pipe?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a pipe.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000197" class="method-detail">
+        <a name="M000197"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000197.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000197.html');return false;">
+          <span class="method-name">readable?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#readable?
+</p>
+<pre>
+ rio('afile').readable?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is readable by the effective user
+</p>
+<pre>
+     id of this process.
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000198.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000198.html');return false;">
+          <span class="method-name">readable_real?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#readable_real?
+</p>
+<pre>
+ rio('afile').readable_real?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is readable by the real user id of
+this process.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000212.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000212.html');return false;">
+          <span class="method-name">root?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls Pathname#root?
+</p>
+<p>
+<a href="Test.html#M000212">root?</a> is a predicate for root directories.
+I.e. it returns <tt>true</tt> if the pathname consists of consecutive
+slashes.
+</p>
+<p>
+It doesn&#8217;t access the actual filesystem. So it may return
+<tt>false</tt> for some pathnames which points to roots such as
+<tt>/usr/..</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000204" class="method-detail">
+        <a name="M000204"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000204.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000204.html');return false;">
+          <span class="method-name">setgid?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#setgid?
+</p>
+<pre>
+ rio('afile').setgid?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a has the setgid bit set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000205" class="method-detail">
+        <a name="M000205"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000205.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000205.html');return false;">
+          <span class="method-name">setuid?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#setuid?
+</p>
+<pre>
+ rio('afile').setuid?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a has the setuid bit set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000206" class="method-detail">
+        <a name="M000206"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000206.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000206.html');return false;">
+          <span class="method-name">size</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#size
+</p>
+<pre>
+ rio('afile').size     =&gt; integer
+</pre>
+<p>
+Returns the size of <em>afile</em>. To get the length of the Rio&#8217;s
+string representation use <a href="../Rio.html#M000227">Rio#length</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000207" class="method-detail">
+        <a name="M000207"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000207.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000207.html');return false;">
+          <span class="method-name">size?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#size?
+</p>
+<pre>
+ rio('afile').size?     =&gt; integer  or  nil
+</pre>
+<p>
+Returns <tt>nil</tt> if <em>afile</em> doesn&#8217;t exist or has zero
+size, the size of the file otherwise.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000183" class="method-detail">
+        <a name="M000183"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000183.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000183.html');return false;">
+          <span class="method-name">socket?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#socket?
+</p>
+<pre>
+ rio('afile').socket?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a socket.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000189" class="method-detail">
+        <a name="M000189"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000189.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000189.html');return false;">
+          <span class="method-name">stat</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#stat
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000201.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000201.html');return false;">
+          <span class="method-name">sticky?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#sticky?
+</p>
+<pre>
+ rio('afile').sticky?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a has the sticky bit set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000184" class="method-detail">
+        <a name="M000184"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000184.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000184.html');return false;">
+          <span class="method-name">symlink?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#symlink?
+</p>
+<pre>
+ rio('afile').symlink?     =&gt;  true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is a symbolic link.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000199.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000199.html');return false;">
+          <span class="method-name">writable?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#writable?
+</p>
+<pre>
+ rio('afile').writable?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is writable by the effective user
+id of this process.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000200.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000200.html');return false;">
+          <span class="method-name">writable_real?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#writable_real?
+</p>
+<pre>
+ rio('afile').writable_real?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file is writable by the real user id of
+this process.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000208" class="method-detail">
+        <a name="M000208"></a>
+
+        <div class="method-heading">
+          <a href="Test.src/M000208.html" target="Code" class="method-signature"
+            onclick="popupCode('Test.src/M000208.html');return false;">
+          <span class="method-name">zero?</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls FileTest#zero?
+</p>
+<pre>
+ rio('afile').zero?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if the named file exists and has a zero size.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

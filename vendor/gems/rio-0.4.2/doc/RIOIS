@@ -1,0 +1,215 @@
+Rio IS
+
+=== EASY
+
+Anything that does I/O is a Rio:
+
+File:	   
+ rio('aflile')
+Directory: 
+ rio('adir')
+Web Page:  
+ rio('http://ahost/adir/afile')
+Any IO:    
+ rio(any_io)
+
+... much more
+
+Makes common tasks easy
+
+ rio('afile') > rio('copy of afile')
+ rio('adir') > rio('copy of adir')
+ rio('gzipped_file.gz').gzip > rio('ungzipped_file')
+ chomped_lines = rio('afile').chomp[]
+
+... much more
+
+=== Powerful
+
+ rb_files= rio('adir').files['*.rb']
+ rb_files_including_those_in_subdirectories = rio('adir').all.files['*.rb']
+ first_ten_lines_chomped = rio('afile').chomp[0..9]
+ first_ten_lines_chomped_from_gzipped_file = rio('afile.gz').gzip.chomp[0..9]
+ first_ten_lines_chomped_from_gzipped_file_on_ftp_server = rio('ftp://ahost/afile.gz').gzip.chomp[0..9]
+
+... much more
+
+=== Consistent
+
+To iterate, add a block: 
+ rio('afile').lines(/regular_expression/) { |line| ... }
+ rio('adir').files('
+To return an array, use a subscript: 
+ rio('afile').lines[/regular_expression/]
+To copy use the copy-operator: 
+ rio('afile').lines(/regular_expression/) > rio('destination_file')
+
+
+
+
+
+= Rio - Ruby I/O Facilitator
+
+fa-cil-i-tate:  To make easy or easier [http://www.thefreedictionary.com/facilitate]
+
+== Overview
+
+Rio is a facade for most of the standard ruby classes that deal with I/O;
+providing a simple, intuitive, succinct interface to the functionality
+provided by IO, File, Dir, Pathname, FileUtils, Tempfile, StringIO, OpenURI
+and others. Rio also provides an application level interface which allows many
+common I/O idioms to be expressed succinctly.
+
+== New
+
+Enhanced support for FTP file-systems. All of Rio's most powerful
+idioms are now supported seamlessly on FTP servers.
+
+ # copy a file from or to an FTP server
+ rio('ftp://ahost/adir/afile') > rio('localfile') # server -> local file
+ rio('ftp://ahost/adir/afile') < rio('localfile') # local file -> server
+
+ # copy an entire directory structure from or to an FTP server
+ rio('ftp://ahost/adir') > rio('localdir') # server -> local directory
+ rio('ftp://ahost/adir') < rio('localdir') # local directory -> server
+
+All of Rio's grande selection and filtering options are available for
+files and directories on FTP servers.
+
+ # create a gzipped copy of a web page on an ftp server
+ rio('ftp://ftphost/f.html.gz').gzip < rio('http://httphost/f.html')
+
+ # dump the first 10 lines of a gzipped log file on an FTP server to stdout
+ rio('ftp://ftphost/logfile.txt').lines(0...10) > ?-
+
+ # iterate through the entries of a directory on an FTP server
+ rio('ftp://ftphost/adir').entries { |entrio| ... }
+
+ # get an array of all .rb files on an ftp server
+ rb_files = rio('ftp://ftphost/').all.files['*.rb']
+
+
+== SYNOPSIS
+
+For the following assume:
+ astring = ""
+ anarray = []
+
+Copy or append a file to a string
+ rio('afile') > astring      # copy
+ rio('afile') >> astring     # append
+
+Copy or append a string to a file
+ rio('afile') < astring      # copy
+ rio('afile') << astring     # append
+
+Copy or append the lines of a file to an array
+ rio('afile') > anarray     
+ rio('afile') >> anarray
+ 
+Copy or append a file to another file
+ rio('afile') > rio('another_file')  
+ rio('afile') >> rio('another_file') 
+
+Copy a file to a directory
+ rio('adir') << rio('afile')
+
+Copy a directory structure to another directory
+ rio('adir') >> rio('another_directory')
+
+Copy a web-page to a file
+ rio('http://rubydoc.org/') > rio('afile')
+
+Ways to get the chomped lines of a file into an array
+ anarray = rio('afile').chomp[]         # subscript operator
+ rio('afile').chomp > anarray           # copy-to operator
+ anarray = rio('afile').chomp.to_a      # to_a
+ anarray = rio('afile').chomp.readlines # IO#readlines
+ 
+Copy a gzipped file un-gzipping it
+ rio('afile.gz').gzip > rio('afile')
+
+Copy a plain file, gzipping it
+ rio('afile.gz').gzip < rio('afile')
+
+Copy a file from a ftp server into a local file un-gzipping it
+ rio('ftp://host/afile.gz').gzip > rio('afile')
+
+Iterate over the entries in a directory
+ rio('adir').entries { |entrio| ... }
+
+Iterate over only the files in a directory
+ rio('adir').files { |entrio| ... }
+
+Iterate over only the .rb files in a directory
+ rio('adir').files('*.rb') { |entrio| ... }
+
+Iterate over .rb files but not symlinks to .rb files
+ rio('adir').files('*.rb').skip(:symlink?) { |entrio| ... }
+
+Iterate over only the _dot_ files in a directory
+ rio('adir').files(/^\./) { |entrio| ... }
+
+Iterate over the files in a directory and its subdirectories, skipping
+'.svn' and 'CVS' directories
+
+ rio('adir').norecurse(/^\.svn$/,'CVS').files { |entrio| ... }
+
+Create an array of the .rb entries in a directory
+ anarray = rio('adir')['*.rb']
+
+Create an array of the .rb entries in a directory and its
+subdirectories.
+ anarray = rio('adir').all['*.rb']
+
+Iterate over the .rb files in a directory and its subdirectories
+ rio('adir').all.files('*.rb') { |entrio| ... }
+
+Iterate over the non-empty, non-comment chomped lines of a file
+ rio('afile').chomp.skip.lines(:empty?,/^\s*#/) { |line| ... }
+
+Copy the output of th ps command into an array, skipping the header
+line and the ps command entry
+ rio(?-,'ps -a').skip.lines(0,/ps$/) > anarray 
+
+Prompt for input and return what was typed
+ ans = rio(?-).print("Type Something: ").chomp.gets 
+
+Change the extension of all .htm files in a directory and its
+subdirectories to .html
+ rio('adir').rename.all.files('*.htm') do |htmfile|
+   htmfile.extname = '.html'
+ end
+
+Create a symbolic link 'asymlink' in 'adir' which refers to
+'adir/afile'
+ rio('adir/afile').symlink('adir/asymlink')
+
+Copy a CSV file, changing the separator to a semicolon
+ rio('comma.csv').csv > rio('semicolon.csv').csv(';')
+
+Iterate through a CSVfile with each line parsed into an array
+ rio('afile.csv').csv { |array_of_fields| ...}
+
+Create a tab separated file of accounts in a UNIX passwd file,
+listing only the username, uid, and realname fields
+ rio('/etc/passwd').csv(':').columns(0,2,4) > rio('rpt').csv("\t")
+
+Pipe multiple commands
+ rio('afile') | rio(?-,'acmd') | 'another_cmd' | ?-
+
+== Contact
+
+Project:: http://rubyforge.org/projects/rio/
+Documentation:: http://rio.rubyforge.org/
+Bugs:: http://rubyforge.org/tracker/?group_id=821
+Email:: rio4ruby@rubyforge.org
+
+== Copyright
+Copyright (c) 2005,2006,2007,2008 Christopher Kleckner. All rights reserved
+
+== License
+Rio is released under the GNU General Public License
+(http://www.gnu.org/licenses/gpl.html)
+
+-Christopher Kleckner 

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::FileOrDir</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::FileOrDir</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/fileordir_rb.html">
+                lib/rio/if/fileordir.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000117">open</a>&nbsp;&nbsp;
+      <a href="#M000125">pos</a>&nbsp;&nbsp;
+      <a href="#M000127">pos=</a>&nbsp;&nbsp;
+      <a href="#M000122">read</a>&nbsp;&nbsp;
+      <a href="#M000119">readlink</a>&nbsp;&nbsp;
+      <a href="#M000120">rename</a>&nbsp;&nbsp;
+      <a href="#M000121">rename!</a>&nbsp;&nbsp;
+      <a href="#M000128">reopen</a>&nbsp;&nbsp;
+      <a href="#M000123">rewind</a>&nbsp;&nbsp;
+      <a href="#M000124">seek</a>&nbsp;&nbsp;
+      <a href="#M000118">symlink</a>&nbsp;&nbsp;
+      <a href="#M000126">tell</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000117" class="method-detail">
+        <a name="M000117"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000117.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000117.html');return false;">
+          <span class="method-name">open</span><span class="method-args">(m,*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+undocumented
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000125.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000125.html');return false;">
+          <span class="method-name">pos</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For directories calls Dir#pos, otherwise calls IO#pos
+</p>
+<p>
+For streams calls IO#pos
+</p>
+<pre>
+     ario.pos     =&gt; integer
+     ario.tell    =&gt; integer
+</pre>
+<p>
+Returns the current offset (in bytes) of <em>ario</em>.
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.pos    #=&gt; 0
+ f.gets   #=&gt; &quot;This is line one\n&quot;
+ f.pos    #=&gt; 17
+</pre>
+<p>
+For directories calls Dir#pos
+</p>
+<pre>
+    ario.pos =&gt; integer
+    ario.tell =&gt; integer
+</pre>
+<p>
+Returns the current position in <em>dir</em>. See also <a
+href="FileOrDir.html#M000124">seek</a>.
+</p>
+<pre>
+    d = rio(&quot;testdir&quot;)
+    d.pos   #=&gt; 0
+    d.read  #=&gt; rio(&quot;.&quot;)
+    d.pos   #=&gt; 12
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000127.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000127.html');return false;">
+          <span class="method-name">pos=</span><span class="method-args">(integer)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For directories calls Dir#pos=, otherwise calls IO#pos=
+</p>
+<p>
+For streams calls IO#pos=
+</p>
+<pre>
+     ario.pos = integer    =&gt; 0
+</pre>
+<p>
+Seeks to the given position (in bytes) in <em>ario</em>.
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.pos = 17
+ f.gets   #=&gt; &quot;This is line two\n&quot;
+</pre>
+<p>
+For directories calls Dir#pos=
+</p>
+<pre>
+    ario.pos = integer     =&gt; integer
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000122" class="method-detail">
+        <a name="M000122"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000122.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000122.html');return false;">
+          <span class="method-name">read</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For directories calls Dir#read, otherwise calls IO#read
+</p>
+<p>
+For streams calls IO#read
+</p>
+<pre>
+ ario.read([integer [, buffer]])    =&gt; string, buffer, or nil
+</pre>
+<p>
+Reads at most <em>integer</em> bytes from the I/O stream, or to the end of
+file if <em>integer</em> is omitted or is <tt>nil</tt>. If the optional
+<em>buffer</em> argument is present, it must reference a String, which will
+receive the data. Returns <tt>nil</tt> if called at end of file.
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.read(16)   #=&gt; &quot;This is line one&quot;
+
+ rio(&quot;testfile&quot;).read(16) #=&gt; &quot;This is line one&quot;
+</pre>
+<p>
+For directories calls Dir#read
+</p>
+<pre>
+ dir.read =&gt; ario or nil
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000119" class="method-detail">
+        <a name="M000119"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000119.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000119.html');return false;">
+          <span class="method-name">readlink</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#readlink
+</p>
+<p>
+Returns a Rio referencing the file referenced by the given link. Not
+available on all platforms.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000120" class="method-detail">
+        <a name="M000120"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000120.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000120.html');return false;">
+          <span class="method-name">rename</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If called with an argument calls FileUtils#rename. If called without an
+argument puts the Rio in &quot;rename mode&quot;.
+</p>
+<p>
+Proxy for FileUtils#rename
+</p>
+<pre>
+ ario = rio('afile.cpp')
+ ario.rename('afile.cxx') # renamed the file, but ario still references
+                          # the old path
+</pre>
+<h5>Rename Mode</h5>
+<p>
+In rename mode, changes to a Rio&#8217;s path using <a
+href="Path.html#M000150">dirname=</a>, <a
+href="Path.html#M000151">filename=</a>, <a
+href="Path.html#M000149">basename=</a>, and <a
+href="Path.html#M000148">extname=</a> also cause the object on the
+filesystem to be renamed.
+</p>
+<p>
+Change the extension of all&#8217;.cpp&#8217; files in &#8216;adir&#8217;
+to &#8217;.cxx&#8217;
+</p>
+<pre>
+ rio('adir').rename.files('*.cpp') do |file|
+   file.ext = '.cxx' # 'file' references the new path and the actual file is renamed
+ end
+</pre>
+<p>
+Recursively change all &#8217;.tar.gz&#8217; files to &#8217;.tgz&#8217;
+files
+</p>
+<pre>
+ rio('adir').rename.all.files('*.tar.gz') do |gzfile|
+   gzfile.ext('.tar.gz').ext = '.tgz'
+ end
+</pre>
+<p>
+See <a href="Path.html#M000150">dirname=</a>, <a
+href="Path.html#M000151">filename=</a>, <a
+href="Path.html#M000149">basename=</a>, and <a
+href="Path.html#M000148">extname=</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000121" class="method-detail">
+        <a name="M000121"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000121.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000121.html');return false;">
+          <span class="method-name">rename!</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Behaves like <a href="FileOrDir.html#M000120">rename</a>, but also changes
+the calling Rio to refer to the renamed path
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000128.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000128.html');return false;">
+          <span class="method-name">reopen</span><span class="method-args">(mode=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For Streams calls IO#reopen, otherwise closes and re-opens the Rio.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000123" class="method-detail">
+        <a name="M000123"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000123.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000123.html');return false;">
+          <span class="method-name">rewind</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For directories proxies Dir#rewind, otherwise proxies IO#rewind
+</p>
+<p>
+Proxy for IO#rewind
+</p>
+<pre>
+      ario.rewind   =&gt; ario
+</pre>
+<p>
+Positions <em>ario</em> to the beginning of input, resetting lineno to
+zero.
+</p>
+<p>
+Returns the Rio
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.readline   #=&gt; &quot;This is line one\n&quot;
+ f.rewind     #=&gt; f
+ f.lineno     #=&gt; 0
+ f.readline   #=&gt; &quot;This is line one\n&quot;
+
+ f.rewind.readline #=&gt; &quot;This is line one\n&quot;
+</pre>
+<p>
+Proxy for Dir#rewind
+</p>
+<pre>
+ ario.rewind =&gt; ario
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000124" class="method-detail">
+        <a name="M000124"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000124.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000124.html');return false;">
+          <span class="method-name">seek</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For directories calls Dir#seek, otherwise calls IO#seek
+</p>
+<p>
+For streams calls IO#seek
+</p>
+<pre>
+     ario.seek(amount, whence=SEEK_SET) -&gt; ario
+</pre>
+<p>
+Seeks to a given offset <em>amount</em> in the stream according to the
+value of <em>whence</em>:
+</p>
+<pre>
+ IO::SEEK_CUR  | Seeks to 'amount' plus current position
+ --------------+----------------------------------------------------
+ IO::SEEK_END  | Seeks to 'amount' plus end of stream (you probably
+               | want a negative value for 'amount')
+ --------------+----------------------------------------------------
+ IO::SEEK_SET  | Seeks to the absolute location given by 'amount'
+</pre>
+<p>
+Example:
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.seek(-28, IO::SEEK_END).readline                  #=&gt; &quot;happily ever after. The End\n&quot;
+</pre>
+<p>
+For directories calls Dir#seek
+</p>
+<pre>
+    ario.seek( integer ) =&gt; ario
+</pre>
+<p>
+Seeks to a particular location in <em>ario</em>. <em>integer</em> must be a
+value returned by <a href="FileOrDir.html#M000126">tell</a>.
+</p>
+<pre>
+ d = rio(&quot;testdir&quot;)       #=&gt; #&lt;RIO::Rio:0x401b3c40&gt;
+ d.read                   #=&gt; rio(&quot;.&quot;)
+ i = d.tell               #=&gt; 12
+ d.read                   #=&gt; rio(&quot;..&quot;)
+ d.seek(i)                #=&gt; #&lt;RIO::Rio:0x401b3c40&gt;
+ d.read                   #=&gt; rio(&quot;..&quot;)
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000118" class="method-detail">
+        <a name="M000118"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000118.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000118.html');return false;">
+          <span class="method-name">symlink</span><span class="method-args">(dest)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a symbolic link <em>dest</em> which points to the Rio&#8217;s <a
+href="Path.html#M000135">fspath</a>. Raises a NotImplementedError exception
+on platforms that do not support symbolic links. <em>dest</em> may be a
+Rio, a String, or anything that will create an appropriate Rio when passed
+to <a href="../Rio.html#M000220">Rio#new</a> . If <em>dest</em> already
+exists and is a directory, creates a symbolic link in the <em>dest</em>
+directory, named with the name returned by <a
+href="Path.html#M000147">filename</a>. If <em>dest</em> already exists and
+it is not a directory, raises Errno::EEXIST.
+</p>
+<p>
+Returns the Rio (not the symlink).
+</p>
+<p>
+<a href="FileOrDir.html#M000118">symlink</a> differs from File#symlink when
+the Rio or the <em>dest</em> path has directory information. In this case
+<a href="FileOrDir.html#M000118">symlink</a> creates a symlink that
+actually refers to the Rio&#8217;s location from the perspective of the
+link&#8217;s location.
+</p>
+<p>
+For example: Given an existing file &#8216;adir/afile&#8217; and a
+<em>dest</em> of &#8216;adir/alink&#8216;
+</p>
+<pre>
+ ::File.symlink('adir/afile','adir/alink1') # creates 'adir/alink1 -&gt; adir/afile'
+ ::File.exist?('adir/alink1') # false
+ rio('adir/afile').symlink('adir/alink2')   # creates 'adir/alink2 -&gt; afile'
+ ::File.exist?('adir/alink2') # true
+</pre>
+<p>
+To replace an existing symlink use the following Rio idiom
+</p>
+<pre>
+ rio('afile').symlink( rio('link_name').delete ) # delete 'link_name' and recreate linked to 'afile'
+</pre>
+<p>
+Examples
+</p>
+<pre>
+ rio('afile').symlink('alink')    # create the symbolic link 'alink' which references 'afile'
+ rio('afile').symlink('adir/alink') # create a symlink 'adir/alink' -&gt; '../afile'
+ rio('adir/afile').symlink('alink') # create a symlink 'alink' -&gt; 'adir/afile'
+ rio('adir/afile').symlink('adir/alink') # create a symlink 'adir/alink' -&gt; 'afile'
+ rio('adir/afile').symlink('adir/alink') # create a symlink 'adir/alink' -&gt; 'afile'
+ rio('adir1/afile').symlink('adir2/alink') # create a symlink 'adir2/alink' -&gt; '../adir1/afile'
+ rio('/tmp/afile').symlink('alink') # create a symlink 'adir/alink' -&gt; '/tmp/afile'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
+
+        <div class="method-heading">
+          <a href="FileOrDir.src/M000126.html" target="Code" class="method-signature"
+            onclick="popupCode('FileOrDir.src/M000126.html');return false;">
+          <span class="method-name">tell</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See <a href="FileOrDir.html#M000125">pos</a>
+</p>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

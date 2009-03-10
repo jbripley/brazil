@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::EXAMPLES</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::EXAMPLES</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/EXAMPLES_rb.html">
+                lib/rio/doc/EXAMPLES.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The following examples are provided without comment
+</p>
+<pre>
+ array = rio('afile').readlines
+
+ rio('afile') &gt; rio('acopy')
+
+ ary = rio('afile').chomp.lines[0...10]
+
+ rio('adir').rename.all.files('*.htm') do |file|
+   file.ext = '.html'
+ end
+</pre>
+<p>
+A basic familiarity with ruby and shell operations should allow a casual
+reader to guess what these examples will do. How they are being performed
+may not be what a casual reader might expect. I will explain these example
+to illustrate the Rio basics.
+</p>
+<p>
+For many more examples please read the <a href="HOWTO.html">HOWTO</a>
+document and the rdoc documentation.
+</p>
+<h2>Example 1.</h2>
+<pre>
+ array = rio('afile').readlines
+</pre>
+<p>
+This uses IO#readlines to read the lines of &#8216;afile&#8217; into an
+array.
+</p>
+<h3>Creating a Rio</h3>
+<p>
+Rio extends the module <a href="../../Kernel.html">Kernel</a> by adding one
+function <tt>rio</tt>, which acts as a constructor returning a Rio. This
+constructor builds a description of the resource the Rio will access
+(usually a path). It does not open the resource, check for its existance,
+or do anything except remember its specifcation. <em>rio</em> returns the
+Rio which can be chained to a Rio method as in this example or stored in a
+variable. This coud have been written
+</p>
+<pre>
+ ario = rio('afile')
+ array = ario.readlines
+
+ ario = rio('afile')
+</pre>
+<p>
+In this case the resource specified is a relative path. After the first
+line the Rio does know or care whether it is a path to a file nor whether
+it exists. Rio provides many methods that only deal with a resource at this
+level, much as the standard library classes Pathname and URI. It should be
+noted at this point that Rio paths stored internally as a URL as specified
+in RFC 1738 and therefore use slashes as separators. A resource can also be
+specified without separators, because <em>rio</em> interprets multiple
+arguments as parts of a path to be joined, and an array as an array of
+parts to be joined. So the following all specify the same resource.
+</p>
+<pre>
+ rio('adir/afile')
+ rio('adir','afile')
+ rio(%w/adir afile/)
+</pre>
+<p>
+The rio constructor can be used to specify non-file-system resources, but
+for this example we will restrict our discussion to paths to entities on
+file-systems.
+</p>
+<pre>
+ array = ario.readlines
+</pre>
+<p>
+Now that we have a Rio, we can call one of its methods; in this case
+<em>readlines</em>. This is an example of using a Rio as a proxy for the
+builtin IO#readlines. Given the method <em>readlines</em>, the Rio opens
+&#8216;afile&#8217; for reading, calls readlines on the resulting IO
+object, closes the IO object, and returns the lines read.
+</p>
+<h2>Example 2</h2>
+<pre>
+ rio('afile') &gt; rio('acopy')
+</pre>
+<p>
+This copies the file &#8216;afile&#8217; into the file &#8216;acopy&#8217;.
+</p>
+<p>
+The first things that happen here are the creation of the Rios. As
+described in Example 1, when created a Rio simply remembers the
+specifcation of its resource. In this case, a relative path
+&#8216;afile&#8217; on the left and a relative path &#8216;acopy&#8217; on
+the right.
+</p>
+<p>
+Next the Rio#> (copy-to) method is called on the &#8216;afile&#8217; Rio
+with the &#8216;acopy&#8217; Rio as its argument. If that looks like a
+greater-than operator to you, think Unix shell, with Rios
+&#8217;&gt;&#8217; is the copy-to operator.
+</p>
+<p>
+Upon seeing the copy-to operator, the Rio has all the information it needs
+to proceed. It determines that it must be opened for reading, that its
+argument must be opened for writing, and that it&#8217;s contents must be
+copied to the resource referenced by it&#8217; argument &#8212; and that is
+what it does. Then it closes itself and its argument.
+</p>
+<p>
+Consider if we had written this example this way.
+</p>
+<pre>
+ afile = rio('afile')
+ acopy = rio('acopy')
+ afile &gt; acopy
+</pre>
+<p>
+In this case we would still have variables referencing the Rios, and
+perhaps we would like do things a little differently than described above.
+Be assured that the selection of mode and automatic closing of files are
+the default behaviour and can be changed. Say we wanted &#8216;afile&#8217;
+to remain open so that we could rewind it and make a second copy, we might
+do something like this:
+</p>
+<pre>
+ afile = rio('afile').nocloseoneof
+ afile &gt; rio('acopy1')
+ afile.rewind &gt; rio('acopy2')
+ afile.close
+</pre>
+<p>
+Actually the &#8216;thinking process&#8217; of the Rio when it sees a
+copy-to operator is much more complex than that described above. If its
+argument had been a rio referencing a directory, it would not have opened
+itself for reading, but instead used FileUtils#cp to copy itself; if its
+argument had been a string, its contents would have ended up in the string;
+If its argument had been an array, its lines would been elements of that
+array; if its argument had been a socket, the its contents would have been
+copied to the socket. See the documentation for details.
+</p>
+<h2>Example 3.</h2>
+<pre>
+ array = rio('afile').chomp.lines[0...10]
+</pre>
+<p>
+This fills <tt>array</tt> with the first ten lines of &#8216;afile&#8217;,
+with each line chomped
+</p>
+<p>
+The casual observer mentioned above might think that <tt>lines</tt> returns
+an array of lines and that this is a simple rewording of <tt>array = <a
+href="http://0...10">rio('afile').readlines</a></tt> or even of <tt>array =
+<a href="http://0...10">File.new('afile').readlines</a></tt>. They would be
+wrong.
+</p>
+<p>
+<tt>chomp</tt> is a configuration method which turns on chomp-mode and
+returns the Rio. Chomp-mode causes all line oriented read operations to
+perform a String#chomp on each line
+</p>
+<h3>Reading files</h3>
+<p>
+Rio provides four methods to select which part of the file is read and how
+the file is divided. They are <tt>lines</tt>, <tt>records</tt>,
+<tt>rows</tt> and <tt>bytes</tt>. Briefly, <tt>lines</tt> specifies that
+the file should be read line by line and <tt>bytes(n)</tt> specifies that
+the file should be read in <em>n</em> byte chunks. All four take arguments
+which can be used to filter lines or chunks in or out. For simple Rios
+<tt>records</tt> and <tt>rows</tt> only specify the filter arguments and
+are provided for use be extensions. For example, the CSV extension returns
+an array of the columns in a line when <tt>records</tt> is used. In the
+absence of an extension <tt>records</tt> and <tt>rows</tt> behave like
+<tt>lines</tt>.
+</p>
+<p>
+First lets rewrite our example as:
+</p>
+<pre>
+ array = rio('afile').chomp.lines(0...10).to_a
+</pre>
+<p>
+The arguments to lines specify which records are to be read. Arguments are
+interpreted based on their class as follows:
+</p>
+<ul>
+<li>Range - interpreted as a range of record numbers to be read
+
+</li>
+<li>Integer - interpreted as a one-element range
+
+</li>
+<li>RegExp - only matching records are processed
+
+</li>
+<li>Symbol - sent to each record, which is processed unless the result is false
+or nil
+
+</li>
+<li>Proc - called for each record, the record is processed unless the return
+value is false or nil
+
+</li>
+</ul>
+<p>
+See the documentation for details and examples.
+</p>
+<p>
+In our example we have specified the Range (0...10). The <tt>lines</tt>
+method is just configuring the Rio, it does not trigger any IO operation.
+The fact that it was called and the arguments it was called with are stored
+away and the Rio is returned for further configuration or an actual IO
+operation. When an IO operation is called the Range will be used to limit
+processing to the first ten records. For example:
+</p>
+<pre>
+ rio('afile').lines(0...10) { |line| ... }      # block will be called for the first 10 records
+ rio('afile').lines[0...10]                     # the first 10 records will be returned in an array
+ rio('afile').lines(0...10) &gt; rio('acopy')      # the first 10 records will be copied to 'acopy'
+</pre>
+<p>
+&quot;But wait&quot;, you say, &quot;In our original example the range was
+an argument to the subscript operator, not to <tt>lines</tt>&quot;. This
+works because the subscript operator processes its arguments as if they had
+been arguments to the most-recently-called selection method and then calls
+<tt>to_a</tt> on the rio. So our rewrite of the example does precisely the
+same thing as the original
+</p>
+<p>
+The big difference between the original example and the
+casual-observer&#8217;s solution is that hers creates an array of the
+entire contents and only returns the first 10 while the original only puts
+10 records into the array.
+</p>
+<p>
+As a sidenote, Rios also have an optimization that can really help in
+certain situations. If records are only selected using Ranges, it stops
+iterating when it is beyond the point where it could possibly ever match.
+This can make a dramatic difference when one is only interested in the
+first few lines of very large files.
+</p>
+<h2>Example 4.</h2>
+<pre>
+ rio('adir').rename.all.files('*.htm') do |file|
+   file.ext = '.html'
+ end
+</pre>
+<p>
+This changes the extension of all .htm files below &#8216;adir&#8217; to
+&#8217;.html&#8217;
+</p>
+<p>
+First we create the rio as always.
+</p>
+<p>
+Next we process the <tt>rename</tt> method. When used as it is here &#8212;
+without arguments &#8212; it just turns on rename-mode and returns the Rio.
+</p>
+<p>
+<tt>all</tt> is another configuration method, which causes directories to
+be processed recursively
+</p>
+<p>
+<tt>files</tt> is another configuration method. In example 3 we used
+<tt>lines</tt> to select what to process when iterating through a file.
+<tt>files</tt> is used to select what to process when iterating through
+directories. The arguments to <tt>files</tt> can be the same as those for
+<tt>lines</tt> except that Ranges can not be used and globs can.
+</p>
+<p>
+In our example, the argument to <tt>files</tt> is a string which is treated
+as a glob. As with <tt>lines</tt>, <tt>files</tt> does not trigger any IO,
+it just configures the Rio.
+</p>
+<h3>There&#8217;s no action</h3>
+<p>
+The previous examples had something that triggered IO: <tt>readlines</tt>,
+<tt>to_a</tt>, <tt>each</tt>, <tt>&gt; (copy-to)</tt>. This example does
+not. This example illustrates Rio&#8217;s &#8216;implied each&#8217;. All
+the configuration methods will call each for you if a block is given. So,
+because a block follows the <tt>files</tt> method, it calls <tt>each</tt>
+and passes it the block.
+</p>
+<p>
+Let&#8217;s recap. At this point we have a Rio with a resource specified.
+We have configured with a couple of modes, &#8216;rename&#8217;, and
+&#8216;all&#8217;, and we have limited the elements we want to process to
+entries that are files and match the glob &#8217;*.htm&#8217;.
+<tt>each</tt> causes the Rio to open the directory and call the block for
+each entry that is both a file and matches the glob. It was also configured
+with <tt>all</tt>,so it descends into subdirectories to find further
+matches and calles the block for each of them. The argument passed to the
+block is a Rio referencing the entry on the file-system.
+</p>
+<p>
+The <em>rename_mode</em> we set has had no effect on our iteration at all,
+so why is it there? In general, configuration options that are not
+applicable to a Rio are silently ignored, however, for directories some of
+them are passed on to the Rios for each entry when iterating. Since
+<tt>rename</tt> is one such option, The example could have been written:
+</p>
+<pre>
+ rio('adir').all.files('*.htm') do |file|
+   file.rename.ext = '.html'
+ end
+</pre>
+<p>
+The rename-with-no-args method affects the behaviour of the <tt>ext=</tt>
+option. In this case, setting it for the directory, rather than for each
+file in the block seems to make the intent of the code more clear, but that
+is a matter of personal taste. See the documentation for more information
+on the rename-with-no-args method
+</p>
+<h2>Suggested Reading</h2>
+<ul>
+<li><a href="SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="../Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

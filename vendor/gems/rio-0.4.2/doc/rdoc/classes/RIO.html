@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../files/lib/rio_rb.html">
+                lib/rio.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/EXAMPLES_rb.html">
+                lib/rio/doc/EXAMPLES.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/HOWTO_rb.html">
+                lib/rio/doc/HOWTO.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/INDEX_rb.html">
+                lib/rio/doc/INDEX.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/INTRO_rb.html">
+                lib/rio/doc/INTRO.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/OPTIONAL_rb.html">
+                lib/rio/doc/OPTIONAL.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/doc/SYNOPSIS_rb.html">
+                lib/rio/doc/SYNOPSIS.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/basic_rb.html">
+                lib/rio/if/basic.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/csv_rb.html">
+                lib/rio/if/csv.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/dir_rb.html">
+                lib/rio/if/dir.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/file_rb.html">
+                lib/rio/if/file.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/fileordir_rb.html">
+                lib/rio/if/fileordir.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/grande_rb.html">
+                lib/rio/if/grande.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/grande_entry_rb.html">
+                lib/rio/if/grande_entry.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/grande_stream_rb.html">
+                lib/rio/if/grande_stream.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/internal_rb.html">
+                lib/rio/if/internal.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/path_rb.html">
+                lib/rio/if/path.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/rubyio_rb.html">
+                lib/rio/if/rubyio.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/string_rb.html">
+                lib/rio/if/string.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/temp_rb.html">
+                lib/rio/if/temp.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/test_rb.html">
+                lib/rio/if/test.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/if/yaml_rb.html">
+                lib/rio/if/yaml.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/constructor_rb.html">
+                lib/rio/constructor.rb
+                </a>
+        &nbsp;&nbsp;
+                <a class="in-url" href="../files/lib/rio/kernel_rb.html">
+                lib/rio/kernel.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+To create the documentation for Rio run the command
+</p>
+<pre>
+ ruby build_doc.rb
+</pre>
+<p>
+from the distribution directory.
+</p>
+<p>
+Suggested Reading
+</p>
+<ul>
+<li><a href="RIO/Doc/SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="RIO/Doc/INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="RIO/Doc/HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="RIO/Doc/EXAMPLES.html">RIO::Doc::EXAMPLES</a>
+
+</li>
+<li><a href="RIO/Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000002">cwd</a>&nbsp;&nbsp;
+      <a href="#M000001">rio</a>&nbsp;&nbsp;
+      <a href="#M000003">root</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="RIO/Doc.html" class="link">RIO::Doc</a><br />
+Module <a href="RIO/IF.html" class="link">RIO::IF</a><br />
+Class <a href="RIO/Rio.html" class="link">RIO::Rio</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="RIO.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('RIO.src/M000002.html');return false;">
+          <span class="method-name">cwd</span><span class="method-args">(*args) {|self| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a Rio as with <a href="RIO.html#M000001">RIO#rio</a> which refers to
+the current working directory
+</p>
+<pre>
+  wd = RIO.cwd
+</pre>
+<p>
+If passed arguments they are treated as if
+</p>
+<pre>
+  rio(RIO.cwd,*args)
+</pre>
+<p>
+had been called
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="RIO.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('RIO.src/M000001.html');return false;">
+          <span class="method-name">rio</span><span class="method-args">(*args) {|self| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Rio Constructor
+</p>
+<p>
+For purposes of discussion, we divide Rios into two catagories, those that
+have a path and those that don&#8217;t.
+</p>
+<h4>Creating a Rio that has a path</h4>
+<p>
+To create a Rio that has a path the arguments to <tt>rio</tt> may be:
+</p>
+<ul>
+<li>a string representing the entire path. The separator used for Rios is as
+specified in RFC1738 (&#8217;/&#8217;).
+
+<pre>
+ rio('adir/afile')
+</pre>
+</li>
+<li>a string representing a fully qualified <tt>file</tt> URL as per RFC1738
+
+<pre>
+ rio('file:///atopleveldir/adir/afile')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>file</tt> or generic <tt>URL</tt>
+
+<pre>
+ rio(URI('adir/afile'))
+</pre>
+</li>
+<li>the components of a path as separate arguments
+
+<pre>
+ rio('adir','afile')
+</pre>
+</li>
+<li>the components of a path as an array of separate arguments
+
+<pre>
+ rio(%w/adir afile/)
+</pre>
+</li>
+<li>another Rio
+
+<pre>
+ another_rio = rio('adir/afile')
+ rio(another_rio)
+</pre>
+</li>
+<li>any object whose <tt>to_s</tt> method returns one of the above
+
+<pre>
+ rio(Pathname.new('apath'))
+</pre>
+</li>
+<li>any combination of the above either as separate arguments or as elements of
+an array,
+
+<pre>
+ another_rio = rio('dir1/dir2')
+ auri = URI('dir4/dir5)
+ rio(another_rio,'dir3',auri,'dir6/dir7')
+</pre>
+</li>
+</ul>
+<h5>Creating a Rio that refers to a web page</h5>
+<p>
+To create a Rio that refers to a web page the arguments to <tt>rio</tt> may
+be:
+</p>
+<ul>
+<li>a string representing a fully qualified <tt>http</tt> URL
+
+<pre>
+ rio('http://ruby-doc.org/index.html')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>http</tt> <tt>URL</tt>
+
+<pre>
+ rio(URI('http://ruby-doc.org/index.html'))
+</pre>
+</li>
+<li>either of the above with additional path elements
+
+<pre>
+ rio('http://www.ruby-doc.org/','core','classes/Object.html')
+</pre>
+</li>
+</ul>
+<h5>Creating a Rio that refers to a file or directory on a FTP server</h5>
+<p>
+To create a Rio that refers to a file on a FTP server the arguments to
+<tt>rio</tt> may be:
+</p>
+<ul>
+<li>a string representing a fully qualified <tt>ftp</tt> URL
+
+<pre>
+ rio('ftp://user:password@ftp.example.com/afile.tar.gz')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>ftp</tt> <tt>URL</tt>
+
+<pre>
+ rio(URI('ftp://ftp.example.com/afile.tar.gz'))
+</pre>
+</li>
+<li>either of the above with additional path elements
+
+<pre>
+ rio('ftp://ftp.gnu.org/pub/gnu','emacs','windows','README')
+</pre>
+</li>
+</ul>
+<h4>Creating Rios that do not have a path</h4>
+<p>
+To create a Rio without a path, the first argument to <tt>rio</tt> is
+usually either a single character or a symbol.
+</p>
+<h5>Creating a Rio that refers to a clone of your programs stdin or stdout.</h5>
+<p>
+<tt>rio(?-)</tt> (mnemonic: &#8217;-&#8217; is used by some Unix programs
+to specify stdin or stdout in place of a file)
+</p>
+<p>
+<tt>rio(:stdio)</tt>
+</p>
+<p>
+Just as a Rio that refers to a file, does not know whether that file will
+be opened for reading or writing until an I/O operation is specified, a
+<tt>stdio:</tt> Rio does not know whether it will connect to stdin or
+stdout until an I/O operation is specified.
+</p>
+<p>
+Currently :stdin and :stdout are allowed as synonyms for :stdio. This
+allows one to write
+</p>
+<pre>
+ rio(:stdout).puts(&quot;Hello :stdout&quot;)
+</pre>
+<p>
+which is reasonable. It also allows one to write
+</p>
+<pre>
+ rio(:stdin).puts(&quot;Hello :stdin&quot;)
+</pre>
+<p>
+which is not reasonable and will be disallowed in future releases.
+</p>
+<h5>Creating a Rio that refers to a clone of your programs stderr.</h5>
+<p>
+<tt>rio(?=)</tt> (mnemonic: &#8217;-&#8217; refers to fileno 1, so
+&#8217;=&#8217; refers to fileno 2)
+</p>
+<p>
+<tt>rio(:stderr)</tt>
+</p>
+<h5>Creating a Rio that refers to an arbitrary IO object.</h5>
+<pre>
+ an_io = ::File.new('afile')
+ rio(an_io)
+</pre>
+<h5>Creating a Rio that refers to a file descriptor</h5>
+<p>
+<tt>rio(?#,file_descriptor)</tt> (mnemonic: a file descriptor is a number
+&#8217;#&#8217;)
+</p>
+<p>
+<tt>rio(:fd,file_descriptor)</tt>
+</p>
+<pre>
+ an_io = ::File.new('afile')
+ fnum = an_io.fileno
+ rio(?#,fnum)
+</pre>
+<h5>Creating a Rio that refers to a StringIO object</h5>
+<p>
+<tt>rio(?&quot;)</tt> (mnemonic: &#8217;&quot;&#8217; surrounds strings)
+</p>
+<p>
+<tt>rio(:string)</tt>
+</p>
+<p>
+<tt>rio(:strio)</tt>
+</p>
+<p>
+<tt>rio(:stringio)</tt>
+</p>
+<ul>
+<li>create a Rio that refers to a string that it creates
+
+<pre>
+ rio(?&quot;)
+</pre>
+</li>
+<li>create a Rio that refers to a string of your choosing
+
+<pre>
+ astring = &quot;&quot;
+ rio(?&quot;,astring)
+</pre>
+</li>
+</ul>
+<h5>Creating a Rio that refers to a temporary object</h5>
+<p>
+To create a temporary object that will become a file (Tempfile) or a
+temporary directory, depending on how it is used.
+</p>
+<p>
+<tt>rio(??)</tt> (mnemonic: &#8217;?&#8217; you don&#8217;t know its name)
+</p>
+<p>
+<tt>rio(:temp)</tt>
+</p>
+<p>
+The following are also supported, to specify file or directory
+</p>
+<p>
+<tt>rio(:tempfile)</tt>
+</p>
+<p>
+<tt>rio(:tempdir)</tt>
+</p>
+<pre>
+ rio(??)
+ rio(??,basename='rio',tmpdir=Dir::tmpdir)
+</pre>
+<p>
+To create a temporary object that will become a file or a directory,
+depending on how you use it:
+</p>
+<pre>
+ rio(??)
+ rio(??,basename='rio',tmpdir=Dir::tmpdir)
+</pre>
+<p>
+To force it to become a file
+</p>
+<pre>
+ rio(??).file
+</pre>
+<p>
+or just write to it.
+</p>
+<p>
+To force it to become a directory:
+</p>
+<pre>
+ rio(??).mkdir
+</pre>
+<p>
+or
+</p>
+<pre>
+ rio(??).chdir
+</pre>
+<h5>Creating a Rio that refers to an arbitrary TCPSocket</h5>
+<p>
+<tt>rio(&#8216;tcp:&#8217;,hostname,port)</tt>
+</p>
+<p>
+<tt>rio(&#8216;tcp://hostname:port&#8217;)</tt>
+</p>
+<p>
+<tt>rio(:tcp,hostname,port)</tt>
+</p>
+<h5>Creating a Rio that runs an external program and connects to its stdin and stdout</h5>
+<p>
+<tt>rio(?-,cmd)</tt> (mnemonic: &#8217;-&#8217; is used by some Unix
+programs to specify stdin or stdout in place of a file)
+</p>
+<p>
+<tt>rio(?`,cmd)</tt> (mnemonic: &#8217;`&#8217; (backtick) runs an external
+program in ruby)
+</p>
+<p>
+<tt>rio(:cmdio,cmd)</tt>
+</p>
+<p>
+This is Rio&#8217;s interface to IO#popen
+</p>
+<h5>Creating a Rio that acts like /dev/null</h5>
+<p>
+<tt>rio(nil)</tt>
+</p>
+<p>
+<tt>rio(:null)</tt>
+</p>
+<p>
+This rio behaves like the Unix file /dev/null, but does depend on it - and
+thus will work on non-Unix systems. Reading behaves as if reading from an
+empty file, and writing to it discards anything written.
+</p>
+<h5>Creating a Rio Pipe</h5>
+<p>
+A Rio Pipe is a sequence of Rios that are run with the output of each being
+copied to the input of the next.
+</p>
+<p>
+<tt>rio(?|, ario, &#8230;)</tt> (mnemonic: &#8217;|&#8217; is the Unix pipe
+operator)
+</p>
+<p>
+<tt>rio(:cmdpipe, ario, &#8230;)</tt>
+</p>
+<p>
+See also <a href="RIO/IF/Grande.html#M000060">|</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="RIO.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('RIO.src/M000003.html');return false;">
+          <span class="method-name">root</span><span class="method-args">(*args) {|self| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a Rio as with <a href="RIO.html#M000001">RIO#rio</a> which refers to
+a directory at the root of the file system
+</p>
+<pre>
+ tmpdir = RIO.root('tmp') #=&gt; rio('/tmp')
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

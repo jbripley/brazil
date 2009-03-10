@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'rio'
+require 'rio/argv'
+
+re = ARGV.shift
+
+is_ruby_exe = proc{ |f| f.executable? and f.line[0] =~ /^#!.+ruby/ }
+
+RIO.ARGV.each do |rpath|
+  rpath.norecurse('.svn','pkg').files('*.rb',is_ruby_exe) do |f|
+    print f.lines(/#{re}/).map{ |l| "#{f}: #{l}" }
+  end
+end
+__END__

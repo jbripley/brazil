@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::GrandeEntry</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::GrandeEntry</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/grande_entry_rb.html">
+                lib/rio/if/grande_entry.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000114">all</a>&nbsp;&nbsp;
+      <a href="#M000113">all?</a>&nbsp;&nbsp;
+      <a href="#M000107">dirs</a>&nbsp;&nbsp;
+      <a href="#M000109">entries</a>&nbsp;&nbsp;
+      <a href="#M000111">files</a>&nbsp;&nbsp;
+      <a href="#M000116">norecurse</a>&nbsp;&nbsp;
+      <a href="#M000115">recurse</a>&nbsp;&nbsp;
+      <a href="#M000108">skipdirs</a>&nbsp;&nbsp;
+      <a href="#M000110">skipentries</a>&nbsp;&nbsp;
+      <a href="#M000112">skipfiles</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000114" class="method-detail">
+        <a name="M000114"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000114.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000114.html');return false;">
+          <span class="method-name">all</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Recursion Method
+</p>
+<p>
+Sets the Rio to all mode (recursive)
+</p>
+<p>
+When called with a block, behaves as if all.each(&amp;block) had been
+called
+</p>
+<p>
+<tt>all</tt> causes subsequent calls to <tt>files</tt> or <tt>dirs</tt> to
+be applied recursively to subdirectories
+</p>
+<pre>
+ rio('adir').all.files('*.[ch]').each { |file| ... } # process all c language source files in adir
+                                                     # and all subdirectories of adir
+ rio('adir').all.files(/\.[ch]$/) { |file| ... }     # same as above
+ rio('adir').files(&quot;*.[ch]&quot;).all { |file| ... }      # once again
+ rio('adir').all.files[&quot;*.[ch]&quot;]                     # same, but return an array instead of iterating
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000113" class="method-detail">
+        <a name="M000113"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000113.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000113.html');return false;">
+          <span class="method-name">all?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns <tt>true</tt> if the rio is in <tt>all</tt> (recursive) mode. See
+<a href="GrandeEntry.html#M000114">all</a>
+</p>
+<pre>
+ adir = rio('adir').all.dirs
+ adir.all? # true
+ adir.each do |subdir|
+   subdir.all?  # true
+ end
+
+ rio('adir').all? # false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000107.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000107.html');return false;">
+          <span class="method-name">dirs</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Selection Method
+</p>
+<p>
+Sets the rio to return directories. <em>args</em> can be used to select
+which directories are returned.
+</p>
+<pre>
+ ario.dirs(*args) do |f|
+   f.directory?      #=&gt; true
+ end
+</pre>
+<p>
+No aguments selects all directories. if <em>args</em> are:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>selects matching directories
+
+</td></tr>
+<tr><td valign="top">glob:</td><td>selects matching directories
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>called for each directory. the directory is processed unless the proc
+returns false
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>sent to each directory. Each directory is processed unless the symbol
+returns false
+
+</td></tr>
+<tr><td valign="top">Fixnum:</td><td>matched against the &quot;depth&quot; of the directory
+
+</td></tr>
+</table>
+<p>
+If a block is given, behaves like
+<tt>ario.dirs(*args).each(&amp;block)</tt>
+</p>
+<p>
+See also <a href="GrandeEntry.html#M000111">files</a>, <a
+href="GrandeEntry.html#M000109">entries</a>, <a
+href="GrandeEntry.html#M000108">skipdirs</a>
+</p>
+<pre>
+ rio('adir').dirs { |frio| ... } # process all directories in 'adir'
+ rio('adir').all.dirs { |frio| ... } #  same thing recursively
+ rio('adir').dirs(/^\./) { |frio| ...} # process dot directories
+ rio('adir').dirs[/^\./] # return an array of dot directories
+ rio('adir').dirs[:symlink?] # an array of symlinks to directories
+</pre>
+<p>
+Given the directory structure &#8216;adir/a/b/c/d&#8216;
+</p>
+<pre>
+ rio('adir').all.dirs[2]          #=&gt; 'adir/a/b'
+ rio('adir').all.dirs[0..2]       #=&gt; 'adir/a','adir/a/b'
+ rio('adir').all.skipdirs[0..2]   #=&gt; 'adir/a/b/c','adir/a/b/c/d'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000109.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000109.html');return false;">
+          <span class="method-name">entries</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Entry Selection Method
+</p>
+<p>
+No aguments selects all entries.
+</p>
+<p>
+if <tt>args</tt> are:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>selects matching entries
+
+</td></tr>
+<tr><td valign="top">glob:</td><td>selects matching entries
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>called for each entry. the entry is processed unless the proc returns false
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>sent to each entry. Each entry is processed unless the symbol returns false
+
+</td></tr>
+</table>
+<p>
+If a block is given, behaves like
+<tt>ario.etries(*args).each(&amp;block)</tt>
+</p>
+<p>
+See also <a href="GrandeEntry.html#M000111">files</a>, <a
+href="GrandeEntry.html#M000107">dirs</a>, <a
+href="GrandeEntry.html#M000110">skipentries</a>
+</p>
+<pre>
+ rio('adir').entries { |frio| ... } # process all entries in 'adir'
+ rio('adir').all.entries { |frio| ... } #  same thing recursively
+ rio('adir').entries(/^\./) { |frio| ...} # process entries starting with a dot
+ rio('adir').entries[/^\./] # return an array of all entries starting with a dot
+ rio('adir').entries[:symlink?] # an array of symlinks in 'adir'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000111" class="method-detail">
+        <a name="M000111"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000111.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000111.html');return false;">
+          <span class="method-name">files</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande <a href="File.html">File</a> Selection Method
+</p>
+<p>
+Configures the rio to process files. <tt>args</tt> can be used to select
+which files are returned.
+</p>
+<pre>
+ ario.files(*args) do |f|
+   f.file?      #=&gt; true
+ end
+</pre>
+<p>
+No aguments selects all files.
+</p>
+<p>
+<tt>args</tt> may be zero or more of the following:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>selects matching files
+
+</td></tr>
+<tr><td valign="top">String:</td><td>treated as a glob, and selects matching files
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>called for each file. the file is processed unless the proc returns false
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>sent to each file. Each file is processed unless the symbol returns false
+
+</td></tr>
+</table>
+<p>
+<tt>files</tt> returns the Rio which called it. This might seem
+counter-intuitive at first. One might reasonably assume that
+</p>
+<pre>
+ rio('adir').files('*.rb')
+</pre>
+<p>
+would return files. It does not. It configures the rio to return files and
+returns the Rio. This enables chaining for further configuration so
+constructs like
+</p>
+<pre>
+ rio('adir').all.files('*.rb').norecurse('.svn')
+</pre>
+<p>
+are possible.
+</p>
+<p>
+If a block is given, behaves like
+</p>
+<pre>
+ ario.files(*args).each
+</pre>
+<p>
+See also <a href="GrandeEntry.html#M000107">dirs</a>, <a
+href="GrandeEntry.html#M000109">entries</a>, <a
+href="GrandeEntry.html#M000112">skipfiles</a>
+</p>
+<pre>
+ rio('adir').files { |frio| ... } # process all files in 'adir'
+ rio('adir').all.files { |frio| ... } #  same thing recursively
+ rio('adir').files('*.rb') { |frio| ...} # process .rb files
+ rio('adir').files['*.rb'] # return an array of .rb files
+ rio('adir').files[/\.rb$/] # same thing using a regular expression
+ rio('adir').files[:symlink?] # an array of symlinks to files
+ rio('adir').files &gt;&gt; rio('other_dir') # copy files to 'other_dir'
+ rio('adir').files('*.rb') &gt;&gt; rio('other_dir') # only copy .rb files
+</pre>
+<p>
+For Rios that refer to files, <tt>files(*args)</tt> causes the file to be
+processed only if it meets the criteria specified by the args.
+</p>
+<pre>
+ rio('afile.z').files['*.z'] #=&gt; [rio('afile.z')]
+ rio('afile.q').files['*.z'] #=&gt; []
+</pre>
+<h3>Example Problem</h3>
+<p>
+Fill the array <tt>ruby_progs</tt> with all ruby programs in a directory
+and its subdirectories, skipping those in <em>subversion</em> (.svn)
+directories.
+</p>
+<pre>
+ ruby_progs = []
+</pre>
+<p>
+For the purposes of this problem, a Ruby program is defined as a file
+ending with .rb or a file that is executable and whose shebang line
+contains &#8216;ruby&#8217;:
+</p>
+<pre>
+ is_ruby_exe = proc{ |f| f.executable? and f.gets =~ /^#!.+ruby/ }
+</pre>
+<h4>Solution 1. Use the subscript operator.</h4>
+<pre>
+ ruby_progs = rio('adir').norecurse('.svn').files['*.rb',is_ruby_exe]
+</pre>
+<p>
+Explanation:
+</p>
+<ol>
+<li>Create the Rio
+
+<p>
+Create a Rio for a directory
+</p>
+<pre>
+ rio('adir')
+</pre>
+</li>
+<li>Configure the Rio
+
+<p>
+Specify recursion and that &#8217;.svn&#8217; directories should not be
+included.
+</p>
+<pre>
+ rio('adir').norecurse('.svn')
+</pre>
+<p>
+Select files
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files
+</pre>
+<p>
+Limit to files ending with &#8217;.rb&#8217;
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb')
+</pre>
+<p>
+Also allow files for whom <tt>is_ruby_exe</tt> returns true
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb',is_ruby_exe)
+</pre>
+</li>
+<li>Do the I/O
+
+<p>
+Return an array rather than iterating thru them
+</p>
+<pre>
+ ruby_progs = rio('adir').norecurse('.svn').files['*.rb',is_ruby_exe]
+</pre>
+</li>
+</ol>
+<h4>Solution 2. Use the copy-to operator</h4>
+<pre>
+ rio('adir').files('*.rb',is_ruby_exe).norecurse('.svn') &gt; ruby_progs
+</pre>
+<p>
+Explanation:
+</p>
+<ol>
+<li>Create the Rio
+
+<p>
+Create a Rio for a directory
+</p>
+<pre>
+ rio('adir')
+</pre>
+</li>
+<li>Configure the Rio
+
+<p>
+Select only files
+</p>
+<pre>
+ rio('adir').files
+</pre>
+<p>
+Limit to files ending with &#8217;.rb&#8217;
+</p>
+<pre>
+ rio('adir').files('*.rb')
+</pre>
+<p>
+Also allow files for whom <tt>is_ruby_exe</tt> returns true
+</p>
+<pre>
+ rio('adir').files('*.rb',is_ruby_exe)
+</pre>
+<p>
+Specify recursion and that &#8217;.svn&#8217; directories should not be
+included.
+</p>
+<pre>
+ rio('adir').files('*.rb',is_ruby_exe).norecurse('.svn')
+</pre>
+</li>
+<li>Do the I/O
+
+<p>
+Copy the Rio to ruby_progs
+</p>
+<pre>
+ rio('adir').files('*.rb',is_ruby_exe).norecurse('.svn') &gt; ruby_progs
+</pre>
+</li>
+</ol>
+<h4>Example Discussion</h4>
+<p>
+Note that the only difference between Step 2 of Solution 1 and that of
+Solution 2 is the order of the configuration methods. Step 2 of Solution 1
+would have worked equally well:
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb',is_ruby_exe) &gt; ruby_progs
+</pre>
+<p>
+Furthermore if our problem were changed slightly and instead of having our
+results ending up in an array, we wished to iterate through them, we could
+use:
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb',is_ruby_exe) { |ruby_prog_rio| ... }
+</pre>
+<p>
+Note the similarities. In fact, solution 1 could have been written:
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb',is_ruby_exe).to_a
+</pre>
+<p>
+or
+</p>
+<pre>
+ rio('adir').norecurse('.svn').files('*.rb',is_ruby_exe)[]
+</pre>
+<p>
+Passing the arguments for <tt>files</tt> to the subscript operator is
+syntactic sugar. The subscript operator does not really take any arguments
+of its own. It always passes them to the most recently called of the grande
+selection methods (or the default selection method, if none have been
+called). So,
+</p>
+<pre>
+ rio('adir').files['*.rb']
+</pre>
+<p>
+is a shortcut for
+</p>
+<pre>
+ rio('adir').files('*.rb').to_a
+</pre>
+<p>
+and
+</p>
+<pre>
+ rio('adir')['*.rb']
+</pre>
+<p>
+is a shortcut for
+</p>
+<pre>
+ rio('adir').entries('*.rb').to_a
+</pre>
+<p>
+and
+</p>
+<pre>
+ rio('afile').lines[0..10]
+</pre>
+<p>
+is a shortcut for
+</p>
+<pre>
+ rio('afile').lines(0..10).to_a
+</pre>
+<p>
+And so on.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000116" class="method-detail">
+        <a name="M000116"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000116.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000116.html');return false;">
+          <span class="method-name">norecurse</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Recursion Exclude Method
+</p>
+<p>
+Sets the Rio to recurse into directories like <a
+href="GrandeEntry.html#M000114">all</a>. If no args are provided, no
+directories will be recursed into. If args are provided, behaves like <a
+href="GrandeEntry.html#M000115">recurse</a>, except that matching
+directories will <b>not</b> be recursed into
+</p>
+<pre>
+ rio('adir').norecurse('.svn') { |drio| ... } # recurse, skipping subversion directories
+
+ rio('adir').norecurse(3) {|drio| ... } # only recurse 2 levels deep into a directory structure
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000115" class="method-detail">
+        <a name="M000115"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000115.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000115.html');return false;">
+          <span class="method-name">recurse</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Recursion Selection Method
+</p>
+<p>
+Sets the Rio to recurse into directories like <a
+href="GrandeEntry.html#M000114">all</a>. If no args are provided behaves
+like <a href="GrandeEntry.html#M000114">all</a>. If args are provided, they
+are processed like <a href="GrandeEntry.html#M000107">dirs</a> to select
+which subdirectories should be recursed into. <a
+href="GrandeEntry.html#M000115">recurse</a> always implies <a
+href="GrandeEntry.html#M000114">all</a>.
+</p>
+<p>
+<tt>args</tt> may be one or more of:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>recurse into matching subdirectories
+
+</td></tr>
+<tr><td valign="top">glob:</td><td>recurse into matching subdirectories
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>called for each directory. The directory is recursed into unless the proc
+returns false
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>sent to each directory. Each directory is recursed into unless the symbol
+returns false
+
+</td></tr>
+<tr><td valign="top">Fixnum:</td><td>recurse into directories only at the given depth
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>recurse into directories at a range of depths
+
+</td></tr>
+</table>
+<p>
+If a block is given, behaves like
+<tt>ario.recurse(*args).each(&amp;block)</tt>
+</p>
+<p>
+See also <a href="GrandeEntry.html#M000116">norecurse</a>, <a
+href="GrandeEntry.html#M000114">all</a>, <a
+href="GrandeEntry.html#M000107">dirs</a>
+</p>
+<pre>
+ rio('adir').recurse('test*') { |drio| ... } # process all entries and all entries in subdirectories
+                                             # starting with 'test' -- recursively
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000108.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000108.html');return false;">
+          <span class="method-name">skipdirs</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Exclude Method
+</p>
+<p>
+If no args are provided selects anything but directories.
+</p>
+<pre>
+ ario.skipdirs do |el|
+   el.directory?     #=&gt; false
+ end
+</pre>
+<p>
+If args are provided, sets the rio to select directories as with <a
+href="GrandeEntry.html#M000107">dirs</a>, but the arguments are used to
+determine which directories will <b>not</b> be processed
+</p>
+<p>
+If a block is given behaves like
+</p>
+<pre>
+ ario.skipdirs(*args).each(&amp;block)
+</pre>
+<p>
+See <a href="GrandeEntry.html#M000107">dirs</a>
+</p>
+<pre>
+ rio('adir').skipdirs { |ent| ... } # iterate through everything except directories
+ rio('adir').skipdirs(/^\./) { |drio| ... } # iterate through directories, skipping dot directories
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000110.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000110.html');return false;">
+          <span class="method-name">skipentries</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Directory Entry Rejection Method
+</p>
+<p>
+No aguments rejects all entries.
+</p>
+<p>
+Behaves like <a href="GrandeEntry.html#M000109">entries</a>, except that
+matching entries are excluded.
+</p>
+<p>
+See also <a href="GrandeEntry.html#M000109">entries</a>, <a
+href="Grande.html#M000068">skip</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000112" class="method-detail">
+        <a name="M000112"></a>
+
+        <div class="method-heading">
+          <a href="GrandeEntry.src/M000112.html" target="Code" class="method-signature"
+            onclick="popupCode('GrandeEntry.src/M000112.html');return false;">
+          <span class="method-name">skipfiles</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande <a href="File.html">File</a> Exclude Method
+</p>
+<p>
+If no args are provided selects anything but files.
+</p>
+<pre>
+ ario.skipfiles do |el|
+   el.file?     #=&gt; false
+ end
+</pre>
+<p>
+If args are provided, sets the rio to select files as with <a
+href="GrandeEntry.html#M000111">files</a>, but the arguments are used to
+determine which files will <b>not</b> be processed
+</p>
+<p>
+If a block is given behaves like
+<tt>ario.skipfiles(*args).each(&amp;block)</tt>
+</p>
+<p>
+See <a href="GrandeEntry.html#M000111">files</a>, <a
+href="Grande.html#M000068">skip</a>
+</p>
+<pre>
+ rio('adir').skipfiles { |ent| ... } # iterate through everything except files
+ rio('adir').skipfiles('*~') { |frio| ... } # iterate through files, skipping those ending with a tilde
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

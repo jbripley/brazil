@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'rio'
+require 'rio/argv'
+
+is_ruby_exe = proc{ |f| f.executable? and f.line[0] =~ /^#!.+ruby/ }
+
+RIO.ARGV.each do |rpath|
+  rpath.norecurse('.svn','pkg').files('*.rb',is_ruby_exe) do |f|
+    puts f
+  end
+end
+
+__END__

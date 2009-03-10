@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'rio'
+# riogzip: reads from stdin, gzips and writes it to stdout
+# example use:
+#   riogzip < afile.txt > afile.txt.gz
+# 
+# explanation:
+#
+# rio(?-).gzip
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#   .gzip: filter the input or output through Zlib:Gzip[Reader or Writer]
+#
+# rio(?-)
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#
+# <
+# rio copy operator indicating the direction of data
+
+rio(?-).gzip < rio(?-)
+
+# 
+# could also be written:
+# rio(?-) > rio(?-).gzip
+# 

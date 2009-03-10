@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::HOWTO</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::HOWTO</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/HOWTO_rb.html">
+                lib/rio/doc/HOWTO.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Rio - Ruby I/O Facilitator</h1>
+<p>
+Rio is a facade for most of the standard ruby classes that deal with I/O;
+providing a simple, intuitive, succinct interface to the functionality
+provided by IO, File, Dir, Pathname, FileUtils, Tempfile, StringIO, OpenURI
+and others. Rio also provides an application level interface which allows
+many common I/O idioms to be expressed succinctly.
+</p>
+<h2><a href="HOWTO.html">HOWTO</a>&#8230;</h2>
+<h3>Read a single file</h3>
+<pre>
+   ario = rio('afile')
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Read a file into a string.
+
+<pre>
+ # method 1
+ string = ario.contents
+ # method 2
+ ario &gt; string
+</pre>
+</li>
+<li>Append a file onto a string.
+
+<pre>
+ # method 1
+ ario &gt;&gt; string
+ # method 2
+ string += ario.contents
+</pre>
+</li>
+<li>Read lines of a file into an array
+
+<pre>
+ # method 1
+ array = ario[]
+ # method 2
+ ario &gt; array
+ # method 3
+ array = ario.to_a
+ # method 4
+ array = ario.readlines
+</pre>
+</li>
+<li>Append lines of a file into an array
+
+<pre>
+ # method 1
+ ario &gt;&gt; array
+ # method 2
+ array += ario.lines[]
+</pre>
+</li>
+<li>Read the first 10 lines of a file into an array
+
+<pre>
+ # method 1
+ array = ario[0...10]
+ # method 2
+ array = ario.lines[0...10]
+ # method 3
+ ario.lines(0...10) &gt; array
+</pre>
+</li>
+<li>Read lines of a file into an array, with each line chomped
+
+<pre>
+ # method 1
+ array = ario.chomp[]
+ # method 2
+ array = ario.chomp.lines[]
+ # method 3
+ ario.chomp &gt; array
+</pre>
+</li>
+<li>Append the first 10 lines of a file into an array, with each line chomped
+
+<pre>
+ # method 1
+ array += ario.chomp[0...10]
+ # method 2
+ array += ario.chomp.lines[0...10]
+ # method 3
+ ario.chomp.lines(0...10) &gt;&gt; array
+</pre>
+</li>
+<li>Read all lines starting with &#8216;require&#8217; into an array, with each
+line chomped
+
+<pre>
+ # method 1
+ array = ario.chomp[/^\s*require/]
+ # method 2
+ array = ario.chomp.lines[/^\s*require/]
+ # method 3
+ ario.chomp.lines(/^\s*require/) &gt; array
+</pre>
+</li>
+<li>Read a gzipped file into a string
+
+<pre>
+ # method 1
+ rio('afile.gz').gzip &gt; string
+ # method 2
+ string = rio('afile.gz').gzip.contents
+</pre>
+</li>
+<li>Append a gzipped file into a string
+
+<pre>
+ # method 1
+ rio('afile.gz').gzip &gt;&gt; string
+ # method 2
+ string += rio('afile.gz').gzip.contents
+</pre>
+</li>
+<li>Iterate through all the lines of a file
+
+<pre>
+ # method 1
+ rio('afile').lines { |line| ... }
+ # method 2
+ rio('afile').each { |line| ... }
+ # method 3
+ rio('afile').each_line { |line| ... }
+</pre>
+</li>
+<li>Iterate through the lines of a gzipped file
+
+<pre>
+ rio('afile.gz').gzip { |line| ... }
+</pre>
+</li>
+<li>Iterate through all non-empty lines of a gzipped file, with each line
+chomped
+
+<pre>
+ rio('afile.gz').gzip.chomp.skiplines(:empty?) { |line| ... }
+</pre>
+</li>
+<li>Iterate through the first 100 lines of a file
+
+<pre>
+ # method 1
+ rio('afile').lines(0...100) { |line| ... }
+</pre>
+</li>
+<li>Iterate through the first line and all ruby comment lines in a gzipped file
+
+<pre>
+ rio('afile.rb.gz').gzip.lines(0,/^\s*#/) { |line| ... }
+</pre>
+</li>
+<li>Iterate through the lines of a ruby file that are neither empty nor
+comments, with all lines chomped
+
+<pre>
+ rio('afile.rb').chomp.skiplines(/^\s*#/,:empty?) { |line| ... }
+</pre>
+</li>
+<li>Read all the comment lines from a ruby file into an array with all lines
+chomped
+
+<pre>
+ # method 1
+ array = rio('afile.rb').chomp[/^\s*#/]
+ # method 2
+ array = rio('afile.rb').chomp.lines[/^\s*#/]
+ # method 3
+ rio('afile.rb').chomp.lines(/^\s*#/) &gt; array
+</pre>
+</li>
+<li>Read lines of a file into an array, with each line chomped, skipping any
+lines longer than 1024 chars
+
+<pre>
+ # method 1
+ array = ario.chomp[proc{ |line| line.length &lt;= 1024}]
+ # method 2
+ ario.chomp.lines(proc{ |line| line.length &lt;= 1024}) &gt; array
+ # method 3
+ array = ario.chomp.skiplines[proc{ |line| line.length &gt; 1024}]
+ # method 4
+ array = ario.chomp.lines(proc{ |line| line.length &lt;= 1024}).to_a
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Write to a single file</h3>
+<pre>
+   ario = rio('afile')
+   string = &quot;A String\n&quot;
+   array = [&quot;Line 0\n&quot;,&quot;Line 1\n&quot;]
+</pre>
+<ul>
+<li>Write a string to a file, leaving the Rio open
+
+<pre>
+ # method 1
+ ario.puts(string)
+ # method 2
+ ario.print(string)
+ # method 3
+ ario.noautoclose &lt; string
+</pre>
+</li>
+<li>Write a string to a file and close the file
+
+<pre>
+ # method 1
+ rio('afile') &lt; string
+ # method 2
+ ario.print!(string)
+ # method 3
+ ario.print(string).close
+</pre>
+</li>
+<li>Append a string to a file, leaving the Rio open
+
+<pre>
+ # method 1
+ ario.a.puts(string)
+ # method 2
+ ario.a.print(string)
+ # method 3
+ ario.noautoclose &lt;&lt; string
+</pre>
+</li>
+<li>Append a string to a file and close the file
+
+<pre>
+ # method 1
+ rio('afile') &lt;&lt; string
+ # method 2
+ rio('afile').a.print!(string)
+ # method 3
+ rio('afile').a.print(string).close
+</pre>
+</li>
+<li>Write an array to a file, leaving the Rio open
+
+<pre>
+ # method 1
+ ario = rio('afile').nocloseoncopy
+ ario &lt;&lt; array
+ # method 2
+ ario.noautoclose &lt; array
+</pre>
+</li>
+<li>Write an array to a file and close the file
+
+<pre>
+ # method 1
+ rio('afile') &lt; array
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Select records</h3>
+<pre>
+   ario = rio('afile')
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Put lines one thru ten and line 100 into an array
+
+<pre>
+ # method 1
+ array = ario[0..9,99]
+ # method 2
+ array = ario.lines[0..9,99]
+ # method 3
+ ario.lines(0..9,99) &gt; array
+</pre>
+</li>
+<li>Put lines one thru ten,line 100 and lines starting with
+&#8216;rio4ruby&#8217; into an array
+
+<pre>
+ # method 1
+ array = ario[0..9,99,/^rio4ruby/]
+ # method 2
+ array = ario.lines[0..9,99,/^rio4ruby/]
+ # method 3
+ ario.lines(0..9,99,/^rio4ruby/) &gt; array
+</pre>
+</li>
+<li>Put lines that are longer than 128 bytes into an array
+
+<pre>
+ # method 1
+ array = ario[proc{ |l| l.length &gt; 128}]
+ # method 2
+ array = ario.lines[proc{ |l| l.length &gt; 128}]
+ # method 3
+ array = ario.skiplines[proc{ |l| l.length &lt;= 128}]
+ # method 4
+ array = ario.skip.lines[proc{ |l| l.length &lt;= 128}]
+</pre>
+</li>
+<li>Copy all lines that do not start with &#8216;rio4ruby&#8217; into another
+file
+
+<pre>
+ # method 1
+ ario.skiplines(/^rio4ruby/) &gt; rio('another_file')
+ # method 2
+ ario.lines.skiplines(/^rio4ruby/) &gt; rio('another_file')
+ # method 3
+ rio('another_file') &lt; ario.skiplines(/^rio4ruby/)
+</pre>
+</li>
+<li>Copy the first 10 lines and lines starting with &#8216;rio4ruby&#8217;, but
+exclude any lines longer than 128 bytes
+
+<pre>
+ # method 1
+ ario.lines(0...10,/^rio4ruby/).skiplines(proc{ |l| l.length &gt; 128}] &gt; rio('another_file')
+ # method 2
+ rio('another_file') &lt; ario.lines(0...10,/^rio4ruby/).skiplines(proc{ |l| l.length &gt; 128})
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Select directory entries</h3>
+<pre>
+   ario = rio('adir')
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Put all entries with the extension &#8217;.txt&#8217; into an array
+
+<pre>
+ # method 1
+ array = ario['*.txt']
+ # method 2
+ array = ario[/\.txt$/]
+ # method 3
+ array = ario.entries['*.txt']
+</pre>
+</li>
+<li>Put all files with the extension &#8217;.txt&#8217; into an array
+
+<pre>
+ # method 1
+ array = ario.files['*.txt']
+ # method 2
+ array = ario.files[/\.txt$/]
+ # method 3
+ array = ario.files['*.txt']
+</pre>
+</li>
+<li>Put all entries with the extension &#8217;.txt&#8217; into an array,
+including those in subdirectories
+
+<pre>
+ # method 1
+ array = ario.all['*.txt']
+ # method 2
+ array = ario.all[/\.txt$/]
+ # method 3
+ array = ario.all.entries['*.txt']
+</pre>
+</li>
+<li>Put all entries with the extension &#8217;.txt&#8217; into an array,
+including those in subdirectories, except those in subdirectories name
+&#8217;.svn&#8217;
+
+<pre>
+ # method 1
+ array = ario.norecurse('.svn').all['*.txt']
+ # method 2
+ array = ario.norecurse(/^\.svn$/).all[/\.txt$/]
+ # method 3
+ array = ario.norecurse('.svn').entries['*.txt']
+ # method 4
+ array = ario.entries('*.txt').norecurse('.svn').to_a
+ # method 5
+ array = ario.norecurse('.svn')['*.txt']
+</pre>
+</li>
+<li>Put all directories into an array
+
+<pre>
+ # method 1
+ array = ario.dirs[]
+ # method 2
+ array = ario.dirs.to_a
+</pre>
+</li>
+<li>Put all directories (recursively) into an array
+
+<pre>
+ # method 1
+ array = ario.all.dirs[]
+ # method 2
+ array = ario.all.dirs.to_a
+</pre>
+</li>
+<li>Put all entries (recursively) into an array, but limit the depth of
+recursion to 2
+
+<pre>
+ # method 1
+ array = ario.norecurse(3).to_a
+</pre>
+</li>
+<li>Iterate through ruby files in a directory and subdirectories skipping those
+in the &#8217;.svn&#8217;, and &#8216;pkg&#8217; directories
+
+<pre>
+ # method 1
+ is_ruby_exe = proc{ |f| f.executable? and f[0][0] =~ /^#!.+ruby/ }
+ ario.norecurse('.svn','pkg').files('*.rb',is_ruby_exe) { |f| ... }
+ # method 2
+ is_ruby_exe = proc{ |f| f.executable? and f.gets =~ /^#!.+ruby/ }
+ ario.norecurse('.svn','pkg').files('*.rb',is_ruby_exe) { |f| ... }
+</pre>
+</li>
+<li>Put all files excluding those that are symlinks to files in an array
+
+<pre>
+ # method 1
+ array = ario.skipfiles[:symlink?]
+ # method 2
+ array = ario.skipfiles(:symlink?).files[]
+ # method 3
+ array = ario.skipfiles(:symlink?).to_a
+ # method 4
+ array = ario.files.skipfiles[:symlink?]
+</pre>
+</li>
+<li>Put all entries that are not files (or symlinks to files) into an array
+
+<pre>
+ # method 1
+ array = ario.skipfiles[]
+ # method 2
+ array = ario.skipfiles.to_a
+</pre>
+</li>
+<li>Put all entries that are symlinks to files into an array
+
+<pre>
+ # method 1
+ array = ario.files[proc{|f| f.file? and f.symlink?}]
+ # method 2
+ array = ario.files(proc{|f| f.file? and f.symlink?}).to_a
+</pre>
+</li>
+<li>Put all directories except those named &#8217;.svn&#8217; into an array
+
+<pre>
+ # method 1
+ array = ario.skipdirs['.svn']
+ # method 2
+ array = ario.skipdirs[/^\.svn$/]
+ # method 3
+ array = ario.skipdirs('.svn').to_a
+ # method 4
+ array = ario.skipdirs('.svn').dirs[]
+ # method 5
+ array = ario.skipdirs('.svn')[]
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Read and writing files</h3>
+<pre>
+   ario = rio('afile')
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Copy the contents of one file into another file
+
+<pre>
+ # method 1
+ rio('srcfile') &gt; rio('dstfile')
+ # method 2
+ rio('dstfile') &lt; rio('srcfile')
+ # method 3
+ rip('dstfile').print!(rio('srcfile').contents)
+</pre>
+</li>
+<li>Append the contents of one file to another file
+
+<pre>
+ # method 1
+ rio('srcfile') &gt;&gt; rio('dstfile')
+ # method 2
+ rio('dstfile') &lt;&lt; rio('srcfile')
+ # method 3
+ rip('dstfile').a.print!(rio('srcfile').contents)
+</pre>
+</li>
+<li>Copy the first 10 lines of one file to another file
+
+<pre>
+ # method 1
+ rio('srcfile').lines(0...10) &gt; rio('dstfile')
+ # method 2
+ rio('dstfile') &lt; rio('srcfile').lines(0...10)
+ # method 3
+ rio('dstfile') &lt; rio('srcfile').lines[0...10]
+</pre>
+</li>
+<li>Concatenate several files into one
+
+<pre>
+ # method 1
+ rio('dstfile') &lt; [ rio('src1'), rio('src2'), rio('src3') ]
+ # method 2
+ rio('dstfile') &lt; rio('src1') &lt;&lt; rio('src2') &lt;&lt; rio('src3')
+</pre>
+</li>
+<li>Copy a web page into a file
+
+<pre>
+ # method 1
+ rio('http://ruby-doc.org/') &gt; rio('afile')
+ # method 2
+ rio('afile') &lt; rio('http://ruby-doc.org/')
+ # method 3
+ rio('afile').print!(rio('http://ruby-doc.org/').contents)
+</pre>
+</li>
+<li>Append the output of the daytime server running on the localhost to a file
+
+<pre>
+ # method 1
+ rio(&quot;tcp://localhost:daytime&quot;) &gt;&gt; rio('afile')
+ # method 2
+ rio(&quot;tcp:&quot;,'localhost','daytime') &gt;&gt; rio('afile')
+ # method 3
+ rio('afile') &lt;&lt; rio(&quot;tcp://:daytime&quot;)
+ # method 4
+ rio('afile') &lt;&lt; rio(&quot;tcp://:13&quot;)
+</pre>
+</li>
+<li>Copy the first line and all lines containing &#8216;http:&#8217; to a file
+
+<pre>
+ # method 1
+ rio('srcfile').lines(0,/http:/) &gt; rio('dstfile')
+ # method 2
+ rio('dstfile') &lt; rio('srcfile').lines(0,/http:/)
+ # method 3
+ rio('dstfile') &lt; rio('srcfile').lines[0,/http:/]
+ # method 4
+</pre>
+</li>
+<li>Create a gzipped copy of a file
+
+<pre>
+ # method 1
+ rio('afile') &gt; rio('afile.gz').gzip
+ # method 2
+ rio('afile.gz').gzip &lt; rio('afile')
+ # method 3
+ rio('afile.gz').gzip.print!( rio('afile').contents )
+</pre>
+</li>
+<li>Create an ungzipped copy of a gzipped file
+
+<pre>
+ # method 1
+ rio('afile') &lt; rio('afile.gz').gzip
+ # method 2
+ rio('afile.gz').gzip &gt; rio('afile')
+ # method 3
+ rio('afile').print!( rio('afile.gz').gzip.contents )
+</pre>
+</li>
+<li>Copy the first 100 lines of gzipped file on a webserver into a local file
+
+<pre>
+ # method 1
+ rio('http://aserver/afile.gz').gzip.lines(0...100) &gt; rio('afile')
+</pre>
+</li>
+<li>Create a file composed of a header from another file, the output of the
+&#8216;ps&#8217; command, some text and its creation time pulled from the
+daytime server running on your localhost
+
+<pre>
+ # method 1
+ rio('out') &lt; [ rio('header'), rio(?-,'ps'), &quot;Created on &quot;, rio('tcp://:daytime') ]
+ # method 2
+ rio('out') &lt; rio('header') &lt;&lt; rio(?-,'ps') &lt;&lt; &quot;Created on: &quot; &lt;&lt; rio(&quot;tcp://:daytime&quot;)
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Reading multiple files</h3>
+<pre>
+   ario = rio('adir')
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Count the lines of code in a directory tree of ruby source files
+
+<pre>
+ # method 1
+ cnt = ario.all.files('*.rb').skiplines[/^\s*#/,/^\s*$/].size
+ # method 2
+ cnt = ario.all.files('*.rb').skiplines(/^\s*#/,/^\s*$/).inject(0) { |sum,l|  sum += 1 }
+</pre>
+</li>
+<li>Concatanate the contents of all .txt files in a directory into an array
+
+<pre>
+ # method 1
+ array = ario.lines.files['*.txt']
+ # method 2
+ array = ario.files('*.txt').lines[]
+ # method 3
+ ario.files('*.txt').lines &gt; array
+</pre>
+</li>
+<li>Concatanate the first line of all .txt files in a directory into an array
+
+<pre>
+ # method 1
+ array = ario.lines(0).files['*.txt']
+ # method 2
+ array = ario.files('*.txt').lines[0]
+ # method 3
+ ario.files('*.txt').lines(0) &gt; array
+</pre>
+</li>
+<li>Copy all .txt files (but only their first ten lines) in a directory into
+another directiory
+
+<pre>
+ # method 1
+ ario.files('*.txt').lines(0...10) &gt; rio('another_dir')
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Read and write using Standard IO</h3>
+<pre>
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Prompt for input and return what was typed
+
+<pre>
+ # method 1
+ ans = rio(?-).chomp.print(&quot;Type Something: &quot;).gets
+ # method 2
+ stdio = rio(?-).chomp
+ ans = stdio.print(&quot;Type Something: &quot;).gets
+</pre>
+</li>
+<li>Create a Rio tied to stdin or stdout, depending on how it is used
+
+<pre>
+ stdio = rio(?-)
+</pre>
+</li>
+<li>Create a Rio tied to stderr
+
+<pre>
+ stderr = rio(?=)
+</pre>
+</li>
+<li>Write a string to stdout
+
+<pre>
+ # method 1
+ rio(?-).puts(&quot;Hello World&quot;)
+ # method 2
+ rio(?-) &lt;&lt; &quot;Hello World\n&quot;
+ # method 3
+ rio(?-) &lt; &quot;Hello World\n&quot;
+</pre>
+</li>
+<li>Read a string from stdin with the input chomped
+
+<pre>
+ # method 1
+ ans = rio(?-).chomp.gets
+ # method 2
+ stdio = rio(?-).chomp
+ ans = stdio.gets
+</pre>
+</li>
+<li>Read from stdin until end of file with the result going into a string
+
+<pre>
+ # method 1
+ rio(?-) &gt;&gt; string
+ # method 2
+ rio(?-) &gt; string
+</pre>
+</li>
+<li>Read from stdin until end of file with the chomped lines going into an
+array
+
+<pre>
+ # method 1
+ rio(?-).chomp &gt;&gt; array
+ # method 2
+ rio(?-).chomp &gt; array
+</pre>
+</li>
+<li>Read from stdin until end of file with the result going into a file
+
+<pre>
+ # method 1
+ rio(?-) &gt; rio('afile')
+ # method 2
+ rio('afile') &lt; rio(?-)
+</pre>
+</li>
+<li>Read from stdin until end of file with the result appended to a file
+
+<pre>
+ # method 1
+ rio(?-) &gt;&gt; rio('afile')
+ # method 2
+ rio('afile') &lt;&lt; rio(?-)
+</pre>
+</li>
+<li>Write a message to stderr
+
+<pre>
+ # method 1
+ rio(?=).puts(&quot;Hello Error&quot;)
+ # method 2
+ rio(?=) &lt;&lt; &quot;Hello Error\n&quot;
+ # method 3
+ rio(?=) &lt; &quot;Hello Error\n&quot;
+</pre>
+</li>
+<li>Dump a file to stdout
+
+<pre>
+ # method 1
+ rio('afile') &gt; ?-
+ # method 2
+ rio('afile') &gt; rio(?-)
+ # method 3
+ rio(?-) &lt;&lt; rio('afile')
+ # method 4
+ rio('afile') &gt;&gt; ?-
+ # method 5
+ rio(?-) &lt; rio('afile')
+ # method 6
+ rio(?-).print(rio('afile').contents)
+</pre>
+</li>
+<li>Emulate a simplified unix &#8216;head&#8217; command which reads from stdin
+and writes the first 10 lines to stdout
+
+<pre>
+ # method 1
+ rio(?-).lines(0..9) &gt; ?-
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Reading and writing from processes as one might do with popen</h3>
+<ul>
+<li>Read the output of the &#8216;ps&#8217; command into an array without the
+header line or the line representing the &#8216;ps&#8217; command itself
+
+<pre>
+ ps =  rio(?-,'ps -a').skiplines[0,/ps$/]
+</pre>
+</li>
+<li>Run an external program, copying its input from one location and its output
+to another, and make it look very much like a shell command.
+
+<pre>
+ infile = rio(?&quot;,&quot;Hello Kitty\n&quot;)
+ outfile = rio('out.txt')
+
+ # method 1
+ cat = rio(?-,'cat').w!
+ cat &lt;infile &gt;outfile
+
+ # method 2
+ infile | 'cat' | outfile
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Renaming and moving files</h3>
+<pre>
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Rename the file &#8216;a&#8217; to &#8216;b&#8217;
+
+<pre>
+ # method 1
+ rio('a').rename('b')
+ # method 2
+ rio('a').rename.filename = 'b'
+</pre>
+</li>
+<li>Rename a file and leave the Rio referencing the files old name
+
+<pre>
+ ario = rio('a')
+ # method 1
+ ario.rename('b')
+</pre>
+</li>
+<li>Rename a file and change the Rio to reference the new file name
+
+<pre>
+ ario = rio('a')
+ # method 1
+ ario.rename!('b')
+</pre>
+</li>
+<li>Rename the file &#8216;index.htm&#8217; to &#8216;index.html&#8216;
+
+<pre>
+ # method 1
+ rio('index.htm').rename('index.html')
+ # method 2
+ rio('index.htm').rename.extname = '.html'
+</pre>
+</li>
+<li>Rename the file &#8216;index.html&#8217; to &#8216;welcome.html&#8216;
+
+<pre>
+ # method 1
+ rio('index.html').rename('welecome.html')
+ # method 2
+ rio('index.htm').rename.basename = 'welcome'
+</pre>
+</li>
+<li>Move a file from directory &#8216;src&#8217; to directory &#8216;dst&#8217;
+
+<pre>
+ # method 1
+ rio('src/afile').rename('dst/afile')
+ # method 2
+ rio('src/afile').rename.dirname = 'dst'
+</pre>
+</li>
+<li>Change a file to have the extension &#8217;.html&#8217; leaving the rest of
+it as is
+
+<pre>
+ # method 1
+ ario.rename.extname = '.html'
+</pre>
+</li>
+<li>Change a files basename to &#8216;rio4ruby&#8217; without changing its
+extension
+
+<pre>
+ # method 1
+ ario.rename.basename = 'rio4ruby'
+</pre>
+</li>
+<li>Change a file ending with &#8217;.tar.gz&#8217; to end with
+&#8217;.tgz&#8217;
+
+<pre>
+ # method 1
+ ario.rename.ext('.tar.gz').extname = '.tgz'
+</pre>
+</li>
+<li>Change the extension of all files with the extension &#8217;.htm&#8217; in
+a directory to have the extension &#8217;.html&#8217;
+
+<pre>
+ # method 1
+ rio('adir').rename.files('*.htm') do |htmfile|
+   htmlfile.extname = '.html'
+ end
+ # method 2
+ rio('adir').files('*.htm') do |htmfile|
+   htmlfile.rename.extname = '.html'
+ end
+</pre>
+</li>
+<li>Change the extension of all files with the extension &#8217;.htm&#8217; in
+a directory and its subdirectories to have the extension
+&#8217;.html&#8217;
+
+<pre>
+ # method 1
+ rio('adir').rename.all.files('*.htm') do |htmfile|
+   htmfile.extname = '.html'
+ end
+ # method 2
+ rio('adir').all.files('*.htm') do |htmfile|
+   htmfile.rename.extname = '.html'
+ end
+</pre>
+</li>
+<li>Move a file in an arbitrary directory into the current working directory.
+
+<pre>
+ # method 1
+ rio('arb/i/trary/di/rec/tory/afile').rename.dirname = '.'
+</pre>
+</li>
+</ul>
+<hr size="1"></hr><h3>Manipulate a Rio&#8217;s path</h3>
+<pre>
+   string = &quot;&quot;
+   array = []
+</pre>
+<ul>
+<li>Create a Rio with an additional subdirectory appended
+
+<pre>
+ ap = rio('adir')
+ # method 1
+ ap /= 'subdirectory'
+ # method 2
+ ap = ap.join('subdirectory')
+ # method 3
+ ap = rio(ap,'subdirectory')
+</pre>
+</li>
+<li>Create a Rio from an array of subdirectories
+
+<pre>
+ dirs = ['adir','subdir1','subdir2']
+ # method 1
+ ario = rio(dirs)
+</pre>
+</li>
+<li>Create an array of subdirectories from a Rio
+
+<pre>
+ # method 1
+ anarray = rio('adir/subdir1/subdir2').split
+</pre>
+</li>
+<li>Append a string to a path
+
+<pre>
+ # method 1
+ ario = rio('apath') + astring
+ # method 2
+ ario = rio('apath')
+ ario += astring
+</pre>
+</li>
+<li>create a directory &#8216;links&#8217; with a symlink pointing to each .rb
+file in directory &#8216;lib&#8217; (including subdirectories)
+
+<pre>
+ lib = rio('lib')
+ links = rio('links').delete!.mkdir
+ lib.all.files(&quot;*.rb&quot;) do |f|
+   f.symlink( f.dirname.sub(/^#{lib}/,links).mkdir )
+ end
+</pre>
+</li>
+</ul>
+<hr size="2"></hr><p>
+Suggested Reading
+</p>
+<ul>
+<li><a href="SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="../Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

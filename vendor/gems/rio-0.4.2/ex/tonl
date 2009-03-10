@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rio'
+require 'rio/argv'
+
+# converts files given as arguments from DOS format (lines end with "\r\n")
+# to Unix format (lines end with "\n").
+ 
+RIO.ARGV.each { |file| file < file.chomp.map{ |l| "#{l}\n" } }
+

@@ -1,0 +1,1529 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::INTRO</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::INTRO</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/INTRO_rb.html">
+                lib/rio/doc/INTRO.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Rio - Ruby I/O Facilitator</h1>
+<p>
+Rio is a facade for most of the standard ruby classes that deal with I/O;
+providing a simple, intuitive, succinct interface to the functionality
+provided by IO, File, Dir, Pathname, FileUtils, Tempfile, StringIO, OpenURI
+and others. Rio also provides an application level interface which allows
+many common I/O idioms to be expressed succinctly.
+</p>
+<p>
+Rio functionality can be broadly broken into three categories
+</p>
+<ul>
+<li>path manipulation
+
+</li>
+<li>file system access
+
+</li>
+<li>stream manipulation
+
+</li>
+</ul>
+<p>
+Which methods are available to a given Rio, depends on the underlying
+object.
+</p>
+<p>
+A Rio generally does not need to be opened or have its mode specified. Most
+of Rio&#8217;s methods simply configure it. When an actual IO operation is
+specified, Rio determines how to open it based on the object it is opening,
+the operation it is performing, and the options specified.
+</p>
+<p>
+Rio configuration methods return the Rio for easy chaining and regard the
+presence of a block as an implied <tt>each</tt>.
+</p>
+<h2>Using a Rio</h2>
+<p>
+Using a Rio can be described as having 3 steps:
+</p>
+<ul>
+<li>Creating a Rio
+
+</li>
+<li>Configuring a Rio
+
+</li>
+<li>Rio I/O
+
+</li>
+</ul>
+<h3>Creating a Rio</h3>
+<p>
+Rio extends <a href="../../Kernel.html">Kernel</a> with one function
+<tt>rio</tt>, its constructor. This function is overloaded to create any
+type of Rio. <tt>rio</tt> looks at the class and sometimes the value of its
+first argument to create an internal representation of the resource
+specified, additional arguments are used as needed by the resource type.
+The rio constructor does not initiate any io, it does not check for a
+resources existance or type. It neither knows nor cares what can be done
+with this Rio. Using methods like <tt>respond_to?</tt> are meaningless at
+best and usually misleading.
+</p>
+<p>
+For purposes of discussion, we divide Rios into two catagories, those that
+have a path and those that don&#8217;t.
+</p>
+<h4>Creating a Rio that has a path</h4>
+<p>
+To create a Rio that has a path the arguments to <tt>rio</tt> may be:
+</p>
+<ul>
+<li>a string representing the entire path. The separator used for Rios is as
+specified in RFC1738 (&#8217;/&#8217;).
+
+<pre>
+ rio('adir/afile')
+</pre>
+</li>
+<li>a string representing a fully qualified <tt>file</tt> URI as per RFC1738
+
+<pre>
+ rio('file:///atopleveldir/adir/afile')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>file</tt> or generic <tt>URI</tt>
+
+<pre>
+ rio(URI('adir/afile'))
+</pre>
+</li>
+<li>the components of a path as separate arguments
+
+<pre>
+ rio('adir','afile')
+</pre>
+</li>
+<li>the components of a path as an array
+
+<pre>
+ rio(%w/adir afile/)
+</pre>
+</li>
+<li>another Rio
+
+<pre>
+ another_rio = rio('adir/afile')
+ rio(another_rio)
+</pre>
+</li>
+<li>any object whose <tt>to_s</tt> method returns one of the above
+
+<pre>
+ rio(Pathname.new('apath'))
+</pre>
+</li>
+<li>any combination of the above either as separate arguments or as elements of
+an array,
+
+<pre>
+ another_rio = rio('dir1/dir2')
+ auri = URI('dir4/dir5)
+ rio(another_rio,'dir3',auri,'dir6/dir7')
+</pre>
+</li>
+</ul>
+<h5>Creating a Rio that refers to a web page</h5>
+<p>
+To create a Rio that refers to a web page the arguments to <tt>rio</tt> may
+be:
+</p>
+<ul>
+<li>a string representing a fully qualified <tt>http</tt> URI
+
+<pre>
+ rio('http://ruby-doc.org/index.html')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>http</tt> <tt>URI</tt>
+
+<pre>
+ rio(URI('http://ruby-doc.org/index.html'))
+</pre>
+</li>
+<li>either of the above with additional path elements
+
+<pre>
+ rio('http://www.ruby-doc.org/','core','classes/Object.html')
+</pre>
+</li>
+</ul>
+<h5>Creating a Rio that refers to a file or directory on a FTP server</h5>
+<p>
+To create a Rio that refers to a file on a FTP server the arguments to
+<tt>rio</tt> may be:
+</p>
+<ul>
+<li>a string representing a fully qualified <tt>ftp</tt> URI
+
+<pre>
+ rio('ftp://user:password@ftp.example.com/afile.tar.gz')
+</pre>
+</li>
+<li>a <tt>URI</tt> object representing a <tt>ftp</tt> <tt>URI</tt>
+
+<pre>
+ rio(URI('ftp://ftp.example.com/afile.tar.gz'))
+</pre>
+</li>
+<li>either of the above with additional path elements
+
+<pre>
+ rio('ftp://ftp.gnu.org/pub/gnu','emacs','windows','README')
+</pre>
+</li>
+</ul>
+<h4>Creating Rios that do not have a path</h4>
+<p>
+To create a Rio without a path, the first argument to <tt>rio</tt> is
+usually a single character.
+</p>
+<h5>Creating a Rio that refers to a clone of your programs stdin or stdout.</h5>
+<p>
+<tt>rio(?-)</tt> (mnemonic: &#8217;-&#8217; is used by some Unix programs
+to specify stdin or stdout in place of a file)
+</p>
+<p>
+Just as a Rio that refers to a file, does not know whether that file will
+be opened for reading or writing until an io operation is specified, a
+<tt>stdio:</tt> Rio does not know whether it will connect to stdin or
+stdout until an I/O operation is specified.
+</p>
+<h5>Creating a Rio that refers to a clone of your programs stderr.</h5>
+<p>
+<tt>rio(?=)</tt> (mnemonic: &#8217;-&#8217; refers to fileno 1, so
+&#8217;=&#8217; refers to fileno 2)
+</p>
+<h5>Creating a Rio that refers to an arbitrary IO object.</h5>
+<pre>
+ an_io = ::File.new('afile')
+ rio(an_io)
+</pre>
+<h5>Creating a Rio that refers to a file descriptor</h5>
+<p>
+<tt>rio(?#,fd)</tt> (mnemonic: a file descriptor is a number
+&#8217;#&#8217; )
+</p>
+<pre>
+ an_io = ::File.new('afile')
+ rio(an_io)
+</pre>
+<h5>Creating a Rio that refers to a StringIO object</h5>
+<p>
+<tt>rio(?&quot;)</tt> (mnemonic: &#8217;&quot;&#8217; surrounds strings)
+</p>
+<ul>
+<li>create a Rio that refers to its own string
+
+</li>
+</ul>
+<pre>
+ rio(?&quot;)
+</pre>
+<ul>
+<li>create a Rio that refers to a string of your choosing
+
+</li>
+</ul>
+<pre>
+ astring = &quot;&quot;
+ rio(?&quot;,astring)
+</pre>
+<h5>Creating a Rio that refers to a Temporary object</h5>
+<p>
+<tt>rio(??)</tt> (mnemonic: &#8217;?&#8217; you don&#8217;t know its name)
+</p>
+<p>
+To create a temporary object that will become a file or a directory,
+depending on how you use it:
+</p>
+<pre>
+ rio(??)
+ rio(??,basename='rio',tmpdir=Dir::tmpdir)
+</pre>
+<p>
+To force it to become a directory:
+</p>
+<pre>
+ rio(??).mkdir
+</pre>
+<p>
+or
+</p>
+<pre>
+ rio(??).chdir
+</pre>
+<h5>Creating a Rio that refers to an arbitrary TCPSocket</h5>
+<pre>
+ rio('tcp:',hostname,port)
+</pre>
+<p>
+or
+</p>
+<pre>
+ rio('tcp://hostname:port')
+</pre>
+<h5>Creating a Rio that runs an external program and connects to its stdin and stdout</h5>
+<p>
+<tt>rio(?-,cmd)</tt> (mnemonic: &#8217;-&#8217; is used by some Unix
+programs to specify stdin or stdout in place of a file)
+</p>
+<p>
+or
+</p>
+<p>
+<tt>rio(?`,cmd)</tt> (mnemonic: &#8217;`&#8217; (backtick) runs an external
+program in ruby)
+</p>
+<p>
+This is Rio&#8217;s interface to IO#popen
+</p>
+<h3>Path Manipulation</h3>
+<p>
+Rio&#8217;s path manipulation methods are for the most part simply
+forwarded to the File or URI classes with the return values converted to a
+Rio.
+</p>
+<h4>Creating a Rio from a Rio&#8217;s component parts.</h4>
+<p>
+The Rio methods for creating a Rio from a Rio&#8217;s component parts are
+<a href="../IF/Path.html#M000146">dirname</a>, <a
+href="../IF/Path.html#M000147">filename</a>, <a
+href="../IF/Path.html#M000145">basename</a>, and <a
+href="../IF/Path.html#M000144">extname</a>. The behavior of <a
+href="../IF/Path.html#M000145">basename</a> depends on the setting of the
+<tt>ext</tt> configuration variable and is different from its counterpart
+in the File class. The default value of the <tt>ext</tt> configuration
+variable is the string returned File#extname. The <tt>ext</tt>
+configuration variable can be changed using <a
+href="../IF/Path.html#M000141">ext</a> and <a
+href="../IF/Path.html#M000142">noext</a> and can be queried using <a
+href="../IF/Path.html#M000143">ext?</a>. This value is used by calls to <a
+href="../IF/Path.html#M000145">basename</a>.
+</p>
+<p>
+<a href="../IF/Path.html#M000147">filename</a> returns the last component
+of a path, and is basically the same as <tt>basename</tt> without
+consideration of an extension.
+</p>
+<pre>
+   rio('afile.txt').basename       #=&gt; rio('afile')
+   rio('afile.txt').filename       #=&gt; rio('afile.txt')
+
+   ario = rio('afile.tar.gz')
+   ario.basename                   #=&gt; rio('afile.tar')
+   ario.ext?                       #=&gt; &quot;.gz&quot;
+   ario.ext('.tar.gz').basename    #=&gt; rio('afile')
+   ario.ext?                       #=&gt; &quot;.tar.gz&quot;
+</pre>
+<h4>Changing a path&#8217;s component parts.</h4>
+<p>
+Rio also provides methods for changing the component parts of its path.
+They are <a href="../IF/Path.html#M000150">dirname=</a>, <a
+href="../IF/Path.html#M000151">filename=</a>, <a
+href="../IF/Path.html#M000149">basename=</a>, and <a
+href="../IF/Path.html#M000148">extname=</a>. These methods replace the part
+extracted as described above with their argument.
+</p>
+<pre>
+   ario = rio('dirA/dirB/afile.rb')
+   ario.dirname = 'dirC'          # rio('dirC/afile.rb')
+   ario.basename = 'bfile'        # rio('dirC/bfile.rb')
+   ario.extname = '.txt'          # rio('dirC/bfile.txt')
+   ario.filename = 'cfile.rb'     # rio('dirC/cfile.rb')
+</pre>
+<p>
+Rio also has a <tt>rename</tt> mode which causes each of these to rename
+the actual file system object as well as changing the Rio. This is
+discussed in the section on Renaming and Moving.
+</p>
+<h4>Splitting a Rio</h4>
+<p>
+<a href="../IF/Grande.html#M000070">split</a> (or <a
+href="../IF/Path.html#M000153">splitpath</a>) returns an array of Rios, one
+for each path element. (Note that this behavior differs from File#split.)
+</p>
+<pre>
+   rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+</pre>
+<p>
+The array returned is extended with a <tt>to_rio</tt> method, which will
+put the parts back together again.
+</p>
+<pre>
+   ary = rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+   ary.to_rio           #=&gt; rio('a/b/c')
+</pre>
+<h4>Creating a Rio by specifying the individual parts of its path</h4>
+<p>
+The first way to create a Rio by specifying its parts is to use the Rio
+constructor <a href="../Rio.html#M000222">Rio#rio</a>. Since a Rio is among
+the arguments the constructor will take, the constructor can be used.
+</p>
+<pre>
+   ario = rio('adir')
+   rio(ario,'b')    #=&gt; rio('adir/b')
+</pre>
+<p>
+<a href="../IF/Path.html#M000152">join</a> and <a
+href="../IF/Path.html#M000154">/</a> do the same thing, but the operator
+version <tt>/</tt> can take only one argument.
+</p>
+<pre>
+   a = rio('a')
+   b = rio('b')
+   c = a.join(b)    #=&gt; rio('a/b')
+   c = a/b          #=&gt; rio('a/b')
+</pre>
+<p>
+The arguments to <a href="../IF/Path.html#M000152">join</a> and <a
+href="../IF/Path.html#M000154">/</a> do not need to be Rios, of course
+</p>
+<pre>
+   ario = rio('adir')
+   ario/'afile.rb'           #=&gt; rio('adir/afile.rb')
+   ario.join('b','c','d')    #=&gt; rio('adir/b/c/d')
+   ario/'b'/'c'/'d'          #=&gt; rio('adir/b/c/d')
+   ario /= 'e'               #=&gt; rio('adir/b/c/d/e')
+</pre>
+<h4>Manipulating a Rio path by treating it as a string.</h4>
+<p>
+The Rio methods which treat a Rio as a string are <a
+href="../IF/String.html#M000214">sub</a>, <a
+href="../IF/String.html#M000215">gsub</a> and <a
+href="../IF/String.html#M000213">+</a>. These methods create a new Rio
+using the string created by forwarding the method to the String returned by
+<a href="../Rio.html#M000223">Rio#to_s</a>.
+</p>
+<pre>
+   ario = rio('dirA/dirB/afile') + '-1.1.1'   # rio('dirA/dirB/afile-1.1.1')
+   brio = ario.sub(/^dirA/, 'dirC')           # rio('dirC/dirB/afile-1.1.1')
+</pre>
+<h4>Creating a Rio based on its relationship to another</h4>
+<p>
+<a href="../IF/Path.html#M000138">abs</a> creates a new rio whose path is
+the absolute path of a Rio. If called with an argument, it uses it as the
+base path, otherwise it uses an internal base path (usually the current
+working directory when it was created).
+</p>
+<pre>
+   rio('/tmp').chdir do
+     rio('a').abs            #=&gt; rio('/tmp/a')
+     rio('a').abs('/usr')    #=&gt; rio('/usr/a')
+   end
+</pre>
+<p>
+<a href="../IF/Path.html#M000139">rel</a> creates a new rio with a path
+relative to a Rio.
+</p>
+<pre>
+   rio('/tmp').chdir do
+     rio('/tmp/a').rel       #=&gt; rio('a')
+   end
+   rio('/tmp/b').rel('/tmp') #=&gt; rio('b')
+</pre>
+<p>
+<a href="../IF/Path.html#M000161">route_to</a> and <a
+href="../IF/Path.html#M000160">route_from</a> creates a new rio with a path
+representing the route to get to/from a Rio. They are based on the methods
+of the same names in the ::URI class
+</p>
+<h3>Configuring a Rio</h3>
+<p>
+The second step in using a rio is configuring it. Note that many times no
+configuration is necessary and that this is not a comprehensive list of all
+of Rio&#8217;s configuration methods.
+</p>
+<p>
+Rio&#8217;s configuration mehods fall into three categories.
+</p>
+<ul>
+<li>I/O manipulators
+
+<p>
+An I/O manipulator alters the behavior of a Rio&#8217;s underlying IO
+object. These affect the behaviour of I/O methods which are forwarded
+directly to the underlying object as well as the grande I/O methods.
+</p>
+</li>
+<li>Grande configuration methods
+
+<p>
+The grande configuration methods affect the behaviour of Rio&#8217;s grande
+I/O methods
+</p>
+</li>
+<li>Grande selection methods
+
+<p>
+The grande selection methods select what data is returned by Rio&#8217;s
+grande I/O methods
+</p>
+</li>
+</ul>
+<p>
+All of Rio&#8217;s configuration and selection methods can be passed a
+block, which will cause the Rio to behave as if <a
+href="../IF/Grande.html#M000054">each</a> had been called with the block
+after the method.
+</p>
+<h4>IO manipulators</h4>
+<ul>
+<li><tt>gzip</tt> a file on output, and ungzip it on input
+
+<pre>
+ rio('afile.gz').gzip
+</pre>
+<p>
+This causes the rio to read through a Zlib::GzipReader and to write
+Zlib::GzipWriter.
+</p>
+</li>
+<li><tt>chomp</tt> lines as they are read
+
+<pre>
+ rio('afile').chomp
+</pre>
+<p>
+This causes a Rio to call String#chomp on the the String returned by all
+line oriented read operations.
+</p>
+</li>
+</ul>
+<h4>Grande configuration methods</h4>
+<ul>
+<li><tt>all</tt>, <tt>recurse</tt>, <tt>norecurse</tt>
+
+<pre>
+ rio('adir').all
+ rio('adir').norecurse('CVS')
+</pre>
+<p>
+These methods instruct the Rio to also include entries in subdirectories
+when iterating through directories and control which subdirectories are
+included or excluded.
+</p>
+</li>
+<li><tt>bytes</tt>
+
+<pre>
+ rio('afile').bytes(1024)
+</pre>
+<p>
+This causes a Rio to read the specified number of bytes at a time as a file
+is iterated through.
+</p>
+</li>
+</ul>
+<h4>Grande selection methods</h4>
+<ul>
+<li><tt>lines</tt>, <tt>skiplines</tt>
+
+<pre>
+ rio('afile').lines(0..9)
+ rio('afile').skiplines(/^\s*#/)
+</pre>
+<p>
+Strictly speaking these are both configuration and selection methods. They
+configure the Rio to iterate through an input stream as lines. The
+arguments select which lines are actually returned. Lines are included
+(<tt>lines</tt>) or excluded (<tt>skiplines</tt>) if they match <b>any</b>
+of the arguments as follows.
+</p>
+<p>
+If the argument is a:
+</p>
+<table>
+<tr><td valign="top"><tt>RegExp</tt>:</td><td>the line is matched against it
+
+</td></tr>
+<tr><td valign="top"><tt>Range</tt>:</td><td>the lineno is matched against it
+
+</td></tr>
+<tr><td valign="top"><tt>Integer</tt>:</td><td>the lineno is matched against it as if it were a one element range
+
+</td></tr>
+<tr><td valign="top"><tt>Symbol</tt>:</td><td>the symbol is <tt>sent</tt> to the string; the line is included unless it
+returns false
+
+</td></tr>
+<tr><td valign="top"><tt>Proc</tt>:</td><td>the proc is called with the line as an argument; the line is included
+unless it returns false
+
+</td></tr>
+<tr><td valign="top"><tt>Array</tt>:</td><td>an array containing any of the above, all of which must match for the line
+to be included
+
+</td></tr>
+</table>
+</li>
+<li><tt>entries</tt>, <tt>files</tt>, <tt>dirs</tt>, <tt>skipentries</tt>,
+<tt>skipfiles</tt>, <tt>skipdirs</tt>
+
+<pre>
+ rio('adir').files('*.txt')
+ rio('adir').skipfiles(/^\./)
+</pre>
+<p>
+These methods select which entries will be returned when iterating through
+directories. Entries are included
+(<tt>entries</tt>,<tt>files</tt>,<tt>dirs</tt>) or
+excluded(<tt>skipentries</tt>,<tt>skipfiles</tt>,<tt>skipdirs</tt>) if they
+match <b>any</b> of the arguments as follows.
+</p>
+<p>
+If the argument is a:
+</p>
+<table>
+<tr><td valign="top"><tt>String</tt>:</td><td>the arg is treated as a glob; the filname is matched against it
+
+</td></tr>
+<tr><td valign="top"><tt>RegExp</tt>:</td><td>the filname is matched against it
+
+</td></tr>
+<tr><td valign="top"><tt>Symbol</tt>:</td><td>the symbol is <tt>sent</tt> to the entry (a Rio); the entry is included
+unless it returns false
+
+</td></tr>
+<tr><td valign="top"><tt>Proc</tt>:</td><td>the proc is called with the entry (a Rio) as an argument; the entry is
+included unless it returns false
+
+</td></tr>
+<tr><td valign="top"><tt>Array</tt>:</td><td>an array containing any of the above, all of which must match for the line
+to be included
+
+</td></tr>
+</table>
+</li>
+<li><tt>records</tt>, <tt>rows</tt>, <tt>skiprecords</tt>, <tt>skiprows</tt>
+
+<pre>
+ rio('afile').bytes(1024).records(0...10)
+</pre>
+<p>
+These select items from an input stream just as <tt>lines</tt>, but without
+specifying lines as the input record type. They can be used to select
+different record types in extension modules. The only such module at this
+writing is the CSV extension. In that case <tt>records</tt> causes each
+line of a CSV file to be parsed into an array while <tt>lines</tt> causes
+each line of the file to be returned normally.
+</p>
+</li>
+</ul>
+<h3>Rio I/O</h3>
+<p>
+As stated above the the three steps to using a Rio are:
+</p>
+<ul>
+<li>Creating a Rio
+
+</li>
+<li>Configuring a Rio
+
+</li>
+<li>Doing I/O
+
+</li>
+</ul>
+<p>
+This section describes that final step.
+</p>
+<p>
+After creating and configuring a Rio, the file-system has not been
+accessed, no socket has been opened, not so much as a test for a files
+existance has been done. When an I/O method is called on a Rio, the
+sequence of events required to complete that operation on the underlying
+object takes place. Rio takes care of creating the appropriate object (eg
+IO,Dir), opening the object with the appropriate mode, performing the
+operation, closing the object if required, and returning the results of the
+operation.
+</p>
+<p>
+Rio&#8217;s I/O operations can be divide into two catagories:
+</p>
+<ul>
+<li>Proxy operations
+
+</li>
+<li>Grande operations
+
+</li>
+</ul>
+<h4>Proxy operations</h4>
+<p>
+These are calls which are forwarded to the underlying object (eg
+IO,Dir,Net::FTP), after appropriately creating and configuring that object.
+The result produced by the method is returned, and the object is closed.
+</p>
+<p>
+In some cases the result is modified before being returned, as when a Rio
+is configured with <a href="../IF/GrandeStream.html#M000101">chomp</a>.
+</p>
+<p>
+In all cases, if the result returned by the underlying object, could itself
+be used for further I/O operations it is returned as a Rio. For example:
+where File#dirname returns a string, <a
+href="../IF/Path.html#M000146">dirname</a> returns a Rio; where Dir#read
+returns a string representing a directory entry, <a
+href="../IF/FileOrDir.html#M000122">read</a> returns a Rio.
+</p>
+<p>
+With some noteable exceptions, most of the operations available if one were
+using the underlying Ruby I/O class are available to the Rio and will
+behave identically.
+</p>
+<p>
+For things that exist on a file system:
+</p>
+<ul>
+<li>All the methods in FileTest are available as Rio instance methods. For
+example
+
+<pre>
+ FileTest.file?('afile')
+</pre>
+<p>
+becomes
+</p>
+<pre>
+ rio('afile').file?
+</pre>
+</li>
+<li>All the instance methods of <tt>File</tt> except <tt>path</tt> are
+available to a rio without change
+
+</li>
+<li>Most of the class methods of <tt>File</tt> are available.
+
+<ul>
+<li>For those that take a filename as their only argument the calls are mapped
+to Rio instance methods as described above for FileTest.
+
+</li>
+<li><tt>dirname</tt>, and <tt>readlink</tt> return Rios instead of strings
+
+</li>
+<li>Rio has its own <a href="../IF/Path.html#M000145">basename</a>, <a
+href="../IF/Path.html#M000152">join</a> and <a
+href="../IF/FileOrDir.html#M000118">symlink</a>, which provide similar
+functionality.
+
+</li>
+<li>The class methods which take multiple filenames
+(<tt>chmod</tt>,<tt>chown</tt>,<tt>lchmod</tt>,<tt>lchown</tt>) are
+available as Rio instance methods. For example
+
+<pre>
+ File.chmod(0666,'afile')
+</pre>
+<p>
+becomes
+</p>
+<pre>
+ rio('afile').chmod(06660)
+</pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+For I/O Streams
+</p>
+<p>
+Most of the instance methods of IO are available, and most do the same
+thing, with some interface changes. <b>The big exception to this is the
+&#8217;&lt;&lt;&#8217; operator.</b> This is one of Rio&#8217;s grande
+operators. While the symantics one would use to write to an IO object would
+actually accomplish the same thing with a Rio, It is a very different
+operator. Read the section on grande operators. The other differences
+between IO instance methods and the Rio equivelence can be summarized as
+follows.
+</p>
+<ul>
+<li>The simple instance methods (eg <tt>fcntl</tt>, <tt>eof?</tt>,
+<tt>tty?</tt> etc.) are forwarded and the result returned as is
+
+</li>
+<li>Anywhere IO returns an IO, Rio returns a Rio
+
+</li>
+<li><tt>close</tt> and its cousins return the Rio.
+
+</li>
+<li><tt>each_byte</tt> and <tt>each_line</tt> are forwarded as is.
+
+</li>
+<li>All methods which read (read*,get*,each*) will cause the file to closed
+when the end of file is reached. This behavior is configurable, but the
+default is to close on eof
+
+</li>
+<li>The methods which write (put*,print*) are forwarded as is; put* and print*
+return the Rio; write returns the value returned by IO#write; as mentioned
+above &#8217;&lt;&lt;&#8217; is a grande operator in Rio.
+
+</li>
+</ul>
+<p>
+For directories:
+</p>
+<ul>
+<li>all the instance methods of Dir are available except <tt>each</tt> which is
+a grande method.
+
+</li>
+<li>the class methods <tt>mkdir</tt>, <tt>delete</tt>, <tt>rmdir</tt> are
+provided as instance methods.
+
+</li>
+<li><tt>chdir</tt> is provided as an instance method. <a
+href="../IF/Dir.html#M000045">chdir</a> returns a Rio and passes a Rio to a
+block if one is provided.
+
+</li>
+<li><tt>glob</tt> is provided as an instance method, but returns an array of
+Rios
+
+</li>
+<li><tt>foreach</tt> is not supported
+
+</li>
+<li><tt>each</tt> and <tt>[]</tt> have similar functionality provided by Rio
+
+</li>
+</ul>
+<p>
+For other Rios, instance methods are generally forwarded where appropriate.
+For example
+</p>
+<ul>
+<li>Rios that refer to StringIO objects forward &#8216;string&#8217; and
+&#8216;string=&#8217;
+
+</li>
+<li>Rios that refer to http URIs support all the Meta methods provided by
+open-uri
+
+</li>
+</ul>
+<h4>Grande operators</h4>
+<p>
+The primary grande operator is <a
+href="../IF/Grande.html#M000054">each</a>. <tt>each</tt> is used to iterate
+through Rios. When applied to a file it iterates through records in the
+file. When applied to a directory it iterates through the entries in the
+directory. Its behavior is modified by configuring the Rio prior to calling
+it using the configuration methods discussed above. Since iterating through
+things is ubiquitous in ruby, it is implied by the presence of a block
+after any of the grande configuration methods and many times does not need
+to be call explicitly. For example:
+</p>
+<pre>
+ # iterate through chomped ruby comment lines
+ rio('afile.rb').chomp.lines(/^\s*#/) { |line| ... }
+
+ # iterate through all .rb files in 'adir' and its subdirectories
+ rio('adir').all.files('*.rb') { |f| ... }
+</pre>
+<p>
+Because a Rio is an Enumerable, it supports <tt>to_a</tt>, which is the
+basis for the grande subscript operator. <a
+href="../IF/Grande.html#M000053">[]</a> with no arguments simply calls
+to_a. With arguments it behaves as if those arguments had been passed to
+the most recently called of the grande selection methods listed above, and
+then calls to_a. For example to get the first ten lines of a file into an
+array with lines chomped
+</p>
+<pre>
+ rio('afile').chomp.lines(0...10).to_a
+</pre>
+<p>
+can be written as
+</p>
+<pre>
+ rio('afile.gz').chomp.lines[0...10]
+</pre>
+<p>
+or, to create an array of all the .c files in a directory, one could write
+</p>
+<pre>
+ rio('adir').files['*.c']
+</pre>
+<p>
+The other grande operators are its copy operators. They are:
+</p>
+<ul>
+<li><tt>&lt;</tt> (copy-from)
+
+</li>
+<li><tt>&lt;&lt;</tt> (append-from)
+
+</li>
+<li><tt>&gt;</tt> (copy-to)
+
+</li>
+<li><tt>&gt;&gt;</tt> (append-to)
+
+</li>
+</ul>
+<p>
+The only difference between the &#8216;copy&#8217; and &#8216;append&#8217;
+versions is how they deal with an unopened resource. In the former the open
+it with mode &#8216;w&#8217; and in the latter, mode &#8216;a&#8217;.
+Beyond that, their behavior can be summarized as:
+</p>
+<pre>
+   source.each do |entry|
+     destination &lt;&lt; entry
+   end
+</pre>
+<p>
+Since they are based on the <tt>each</tt> operator, all of the selection
+and configuration options are available. And the right-hand-side argument
+of the operators are not restricted to Rios &#8212; Strings and Arrays are
+also supported.
+</p>
+<p>
+For example:
+</p>
+<pre>
+ rio('afile') &gt; astring # copy a file into a string
+
+ rio('afile').chomp &gt; anarray # copy the chomped lines of afile into an array
+
+ rio('afile.gz').gzip.lines(0...100) &gt; rio('bfile') # copy 100 lines from a gzipped file into another file
+
+ rio(?-) &lt; rio('http://rubydoc.org/') # copy a web page to stdout
+
+ rio('bdir') &lt; rio('adir') # copy an entire directory structure
+
+ rio('adir').dirs.files('README') &gt; rio('bdir') # same thing, but only README files
+
+ rio(?-,'ps -a').skiplines(0,/ps$/) &gt; anarray # copy the output of th ps command into an array, skippying
+                                            # the header line and the ps command entry
+</pre>
+<h3>Renaming and Moving</h3>
+<p>
+Rio provides two methods for directly renaming objects on the filesystem:
+<a href="../IF/FileOrDir.html#M000120">rename</a> and <a
+href="../IF/FileOrDir.html#M000121">rename!</a>. Both of these use
+File#rename. The difference between them is the returned Rio. <a
+href="../IF/FileOrDir.html#M000120">rename</a> leaves the path of the Rio
+unchanged, while <a href="../IF/FileOrDir.html#M000121">rename!</a> changes
+the path of the Rio to refer to the renamed path.
+</p>
+<pre>
+   ario = rio('a')
+   ario.rename('b')  # file 'a' has been renamed to 'b' but 'ario' =&gt; rio('a')
+   ario.rename!('b')  # file 'a' has been renamed to 'b' and 'ario' =&gt; rio('b')
+</pre>
+<p>
+Rio also has a <tt>rename</tt> mode, which causes the path manipulation
+methods <a href="../IF/Path.html#M000150">dirname=</a>, <a
+href="../IF/Path.html#M000151">filename=</a>, <a
+href="../IF/Path.html#M000149">basename=</a> and <a
+href="../IF/Path.html#M000148">extname=</a> to rename an object on the
+filesystem when they are used to change a Rio&#8217;s path. A Rio is put in
+<tt>rename</tt> mode by calling <a
+href="../IF/FileOrDir.html#M000120">rename</a> with no arguments.
+</p>
+<pre>
+   rio('adir/afile.txt').rename.filename = 'bfile.rb' # adir/afile.txt =&gt; adir/bfile.rb
+   rio('adir/afile.txt').rename.basename = 'bfile'    # adir/afile.txt =&gt; adir/bfile.txt
+   rio('adir/afile.txt').rename.extname  = '.rb'      # adir/afile.txt =&gt; adir/afile.rb
+   rio('adir/afile.txt').rename.dirname =  'b/c'      # adir/afile.txt =&gt; b/c/afile.txt
+</pre>
+<p>
+When <tt>rename</tt> mode is set for a directory Rio, it is automatically
+set in the Rios created when iterating through that directory.
+</p>
+<pre>
+   rio('adir').rename.files('*.htm') do |frio|
+      frio.extname = '.html'  #=&gt; changes the rio and renames the file
+   end
+</pre>
+<h3>Deleting</h3>
+<p>
+The Rio methods for deleting filesystem objects are <a
+href="../IF/File.html#M000216">rm</a>, <a
+href="../IF/Dir.html#M000048">rmdir</a>, <a
+href="../IF/Dir.html#M000049">rmtree</a>, <a
+href="../IF/Grande.html#M000055">delete</a>, and <a
+href="../IF/Grande.html#M000057">delete!</a>. <tt>rm</tt>, <tt>rmdir</tt>
+and <tt>rmtree</tt> are passed the like named methods in the FileUtils
+module. <a href="../IF/Grande.html#M000055">delete</a> calls <tt>rmdir</tt>
+for directories and <tt>rm</tt> for anything else, while <a
+href="../IF/Grande.html#M000057">delete!</a> calls <a
+href="../IF/Dir.html#M000049">rmtree</a> for directories.
+</p>
+<ul>
+<li>To delete something only if it is not a directory use <a
+href="../IF/File.html#M000216">rm</a>
+
+</li>
+<li>To delete an empty directory use <a href="../IF/Dir.html#M000048">rmdir</a>
+
+</li>
+<li>To delete an entire directory tree use <a
+href="../IF/Dir.html#M000049">rmtree</a>
+
+</li>
+<li>To delete anything except a populated directory use <a
+href="../IF/Grande.html#M000055">delete</a>
+
+</li>
+<li>To delete anything use <a href="../IF/Grande.html#M000057">delete!</a>
+
+</li>
+</ul>
+<p>
+It is not an error to call any of the deleting methods on something that
+does not exist. Rio provides <a href="../IF/Test.html#M000181">exist?</a>
+and <a href="../IF/Test.html#M000184">symlink?</a> to check if something
+exists (<tt>exist?</tt> returns false for symlinks to non-existant object
+even though the symlink itself exists). The deleting methods&#8217; purpose
+is to make things not exist, so calling one of them on something that
+already does not exist is considered a success.
+</p>
+<p>
+To create a clean copy of a directory whether or not anything with that
+name exists one might do this
+</p>
+<pre>
+ rio('adir').delete!.mkpath.chdir do
+   # do something in adir
+ end
+</pre>
+<hr size="1"></hr><h2>Miscellany</h2>
+<h4>Using Symbolic Links</h4>
+<p>
+To create a symbolic link (symlink) to the file-system entry refered to by
+a Rio, use <a href="../IF/FileOrDir.html#M000118">symlink</a>. <a
+href="../IF/FileOrDir.html#M000118">symlink</a> differs from File#symlink
+in that it calculates the path from the symlink location to the Rio&#8217;s
+position.
+</p>
+<pre>
+ File#symlink('adir/afile','adir/alink')
+</pre>
+<p>
+creates a symlink in the directory &#8216;adir&#8217; named
+&#8216;alink&#8217; which references &#8216;adir/afile&#8217;. From the
+perspective of &#8216;alink&#8217;, &#8216;adir/afile&#8217; does not
+exist. While:
+</p>
+<pre>
+ rio('adir/afile').symlink('adir/alink')
+</pre>
+<p>
+creates a symlink in the directory &#8216;adir&#8217; named
+&#8216;alink&#8217; which references &#8216;afile&#8217;. This is the route
+to &#8216;adir/afile&#8217; from the perspective of
+&#8216;adir/alink&#8217;.
+</p>
+<p>
+Note that the return value from <tt>symlink</tt> is the calling Rio and not
+a Rio refering to the symlink. This is done for consistency with the rest
+of Rio.
+</p>
+<p>
+<a href="../IF/Test.html#M000184">symlink?</a> can be used to test if a
+file-system object is a symlink. A Rio is extended with <a
+href="../IF/FileOrDir.html#M000119">readlink</a>, and <a
+href="../IF/Test.html#M000190">lstat</a> only if <a
+href="../IF/Test.html#M000184">symlink?</a> returns true. So for
+non-symlinks, these will raise a NoMethodError. These are both passed to
+their counterparts in File. <a
+href="../IF/FileOrDir.html#M000119">readlink</a> returns a Rio refering to
+the result of File#readlink.
+</p>
+<h4>Using A Rio as an IO (or File or Dir)</h4>
+<p>
+Rio supports so much of IO&#8217;s interface that one might be tempted to
+pass it to a method that expects an IO. While Rio is not and is not
+intended to be a stand in for IO, this can work. It requires knowledge of
+every IO method that will be called, under any circumstances.
+</p>
+<p>
+Even in cases where Rio supports the required IO interface, A Rio feature
+that seems to cause the most incompatibility, is its automatic closing of
+files. To turn off all of Rio&#8217;s automatic closing use <a
+href="../IF/GrandeStream.html#M000099">noautoclose</a>.
+</p>
+<p>
+For example:
+</p>
+<pre>
+ require 'yaml'
+ yrio = rio('ran.yaml').delete!.noautoclose
+ YAML.dump( ['badger', 'elephant', 'tiger'], yrio )
+ obj = YAML::load( yrio ) #=&gt; [&quot;badger&quot;, &quot;tiger&quot;, &quot;elephant&quot;]
+</pre>
+<h4>Automatically Closing Files</h4>
+<p>
+Rio closes files automatically in three instances.
+</p>
+<p>
+When reading from an IO it is closed when the end of file is reached. While
+this is a reasonable thing to do in many cases, sometimes this is not
+desired. To turn Rio&#8217;s automatic closing on end of file use <a
+href="../IF/GrandeStream.html#M000094">nocloseoneof</a> (it can be turned
+back on via <a href="../IF/GrandeStream.html#M000093">closeoneof</a>)
+</p>
+<pre>
+ ario = rio('afile').nocloseoneof
+ lines = ario[]
+ ario.closed?   #=&gt; false
+</pre>
+<p>
+Closing on end-of-file is necessary for many of Rio&#8217;s one-liners, but
+has an implication that may be surprising at first. A Rio starts life as a
+path, not much more than a string. When one of its read methods is called
+it becomes an input stream. When the stream is closed, it becomes a path
+again. This means that when reading from a Rio, the end-of-file condition
+is seen only once before it becomes a path again, and will be reopened if
+another read operation is attempted.
+</p>
+<p>
+Another time a Rio will be closed atomatically is when writing to it with
+one of the copy operators (<tt>&lt;, &lt;&lt;, &gt;, &gt;&gt;</tt>). This
+behavior can be turned off with <a
+href="../IF/GrandeStream.html#M000097">nocloseoncopy</a>.
+</p>
+<p>
+To turn off both of thes types of automatic closing use <a
+href="../IF/GrandeStream.html#M000099">noautoclose</a>.
+</p>
+<p>
+The third instance when Rio will close a file automatically is when a file
+opened for one type of access receives a method which that access mode does
+not support. So, the code
+</p>
+<pre>
+ rio('afile').puts(&quot;Hello World&quot;).gets
+</pre>
+<p>
+will open the file for write access when the <tt>puts</tt> method is
+received. When <tt>gets</tt> is called the file is closed and reopened with
+read access.
+</p>
+<h4>Explicitly Closing Files</h4>
+<p>
+Rio can not determine when the client is finished writing to it, as it does
+using <tt>eof</tt> on read. It is the author&#8217;s understanding that
+Ruby does not support a mechanism to have code run when there are no more
+references to it &#8212; that finalizers are not necessarily run immediatly
+upon an object&#8217;s reference count reaching 0. If this understanding is
+incorrect, some of Rio&#8217;s extranious ways of closing a file may be
+rethought.
+</p>
+<p>
+That being said, Rio support several ways to explicitly close a file. <a
+href="../IF/RubyIO.html#M000030">close</a> will close any open Rio. The
+output methods <a href="../IF/RubyIO.html#M000022">puts!</a>, <a
+href="../IF/RubyIO.html#M000019">putc!</a>, <a
+href="../IF/RubyIO.html#M000017">printf!</a>, <a
+href="../IF/RubyIO.html#M000016">print!</a>, and <a
+href="../IF/RubyIO.html#M000023">write!</a> behave as if their counterparts
+without the exclamation point had been called and then call <a
+href="../IF/RubyIO.html#M000030">close</a> or <a
+href="../IF/RubyIO.html#M000031">close_write</a> if the underlying IO
+object is opened for duplex access.
+</p>
+<h4>Open mode selection</h4>
+<p>
+A Rio is typically not explicitly opened. It opens a file automatically
+when an input or output methed is called. For output methods Rio opens a
+file with mode &#8216;w&#8217;, and otherwise opens a file with mode
+&#8216;r&#8217;. This behavior can be modified using the tersely named
+methods <a href="../IF/GrandeStream.html#M000086">a</a>, <a
+href="../IF/GrandeStream.html#M000088">a!</a>, <a
+href="../IF/GrandeStream.html#M000089">r</a>, <a
+href="../IF/GrandeStream.html#M000090">r!</a>, <a
+href="../IF/GrandeStream.html#M000091">w</a>, and <a
+href="../IF/GrandeStream.html#M000092">w!</a>, which cause the Rio to use
+modes
+&#8216;a&#8217;,&#8217;a+&#8217;,&#8217;r&#8217;,&#8217;r+&#8217;,&#8217;w&#8217;,and
+&#8216;w+&#8217; respectively.
+</p>
+<p>
+One way to append a string to a file and close it in one line is
+</p>
+<pre>
+ rio('afile').a.puts!(&quot;Hello World&quot;)
+</pre>
+<p>
+Run a cmd that must be opened for read and write
+</p>
+<pre>
+ ans = rio(?-,'cat').w!.puts!(&quot;Hello Kitty&quot;).readline
+</pre>
+<p>
+The automatic selection of mode can be bypassed entirely using <a
+href="../IF/RubyIO.html#M000028">mode</a> and <a
+href="../IF/FileOrDir.html#M000117">open</a>.
+</p>
+<p>
+If a mode is specified using <tt>mode</tt>, the file will still be opened
+automatically, but the mode specified in the <tt>mode</tt> method will be
+used regardless of whether it makes sense.
+</p>
+<p>
+A Rio can also be opened explicitly using <a
+href="../IF/FileOrDir.html#M000117">open</a>. <tt>open</tt> takes one
+parameter, a mode. This also will override all of Rio&#8217;s automatic
+mode selection.
+</p>
+<h4>CSV mode</h4>
+<p>
+Rio uses the CSV class from the Ruby standard library to provide support
+for reading and writing comma-separated-value files. Normally using
+<tt>(skip)records</tt> is identical to <tt>(skip)lines</tt> because while
+<tt>records</tt> only selects and does not specify the record-type,
+<tt>lines</tt> is the default.
+</p>
+<pre>
+ rio('afile').records(1..2)
+</pre>
+<p>
+effectively means
+</p>
+<pre>
+ rio('afile').lines.records(1..2)
+</pre>
+<p>
+The CSV extension distingishes between items selected using <a
+href="../IF/GrandeStream.html#M000076">records</a> and those selected using
+<a href="../IF/GrandeStream.html#M000074">lines</a>. Rio returns records
+parsed into Arrays by the CSV library when <tt>records</tt> is used, and
+returns Strings as normal when <tt>lines</tt> is used. <tt>records</tt> is
+the default.
+</p>
+<pre>
+ rio('f.csv').puts!([&quot;h0,h1&quot;,&quot;f0,f1&quot;])
+
+ rio('f.csv').csv.records[]    #==&gt;[[&quot;h0&quot;, &quot;h1&quot;], [&quot;f0&quot;, &quot;f1&quot;]]
+ rio('f.csv').csv[]            #==&gt; same thing
+ rio('f.csv').csv.lines[]      #==&gt;[&quot;h0,h1\n&quot;, &quot;f0,f1\n&quot;]
+ rio('f.csv').csv.records[0]   #==&gt;[[&quot;h0&quot;, &quot;h1&quot;]]
+ rio('f.csv').csv[0]           #==&gt; same thing
+ rio('f.csv').csv.lines[0]     #==&gt;[&quot;h0,h1\n&quot;]
+ rio('f.csv').csv.skiprecords[0] #==&gt;[[&quot;f0&quot;, &quot;f1&quot;]]
+ rio('f.csv').csv.skiplines[0]   #==&gt;[&quot;f0,f1\n&quot;]
+</pre>
+<p>
+This distinction, of course, applies equally when using the copy operators
+and <tt>each</tt>
+</p>
+<pre>
+ rio('f.csv').csv[0] &gt; rio('out').csv # out contains &quot;f0,f1\n&quot;
+
+ rio('f.csv').csv { |array_of_fields| ... }
+</pre>
+<p>
+Notice that <tt>csv</tt> mode is called on both the input and output Rios.
+The <tt>csv</tt> on the &#8216;out&#8217; Rio causes it to treat an array
+written to it as an array of records which is converted into CSV format
+before writing. Without the <tt>csv</tt>, the output would be written as if
+Array#to_s on [[&quot;f0&quot;,&quot;f1&quot;]] had been called
+</p>
+<pre>
+ rio('f.csv').csv[0] &gt; rio('out') # out contains &quot;f0f1&quot;
+</pre>
+<p>
+The String representing a record that is returned when using <tt>lines</tt>
+is extended with a <tt>to_a</tt> method which will parse it into an array
+of fields. Likewise the Array returned when a record is returned using
+<tt>records</tt> is extended with a modified <tt>to_s</tt> which treats it
+as an array CSV fields, rather than just an array of strings.
+</p>
+<pre>
+ array_of_lines = rio('f.csv').csv.lines[1]      #==&gt;[&quot;f0,f1\n&quot;]
+ array_of_records = rio('f.csv').csv.records[1]  #==&gt;[[&quot;f0&quot;, &quot;f1&quot;]]
+
+ array_of_lines[0].to_a                          #==&gt;[&quot;f0&quot;, &quot;f1&quot;]
+ array_of_records[0].to_s                        #==&gt;&quot;f0,f1&quot;
+</pre>
+<p>
+<a href="../IF/CSV.html#M000129">csv</a> takes two optional parameters,
+which are passed on to the CSV library. They are the
+<tt>field_separator</tt> and the <tt>record_separator</tt>.
+</p>
+<pre>
+ rio('semisep').puts!([&quot;h0;h1&quot;,&quot;f0;f1&quot;])
+
+ rio('semisep').csv(';').to_a  #==&gt;[[&quot;h0&quot;, &quot;h1&quot;], [&quot;f0&quot;, &quot;f1&quot;]]
+</pre>
+<p>
+These are specified independently on the source and destination when using
+the copy operators.
+</p>
+<pre>
+ rio('semisep').csv(';') &gt; rio('colonsep').csv(':')
+ rio('colonsep').contents  #==&gt;&quot;h0:h1\nf0:f1\n&quot;
+</pre>
+<p>
+Rio provides two methods for selecting fields from CSV records in a manner
+similar to that provided for selecting lines &#8212; <a
+href="../IF/CSV.html#M000130">columns</a> and <a
+href="../IF/CSV.html#M000131">skipcolumns</a>.
+</p>
+<pre>
+ rio('f.csv').puts!([&quot;h0,h1,h2,h3&quot;,&quot;f0,f1,f2,f3&quot;])
+
+ rio('f.csv').csv.columns(0).to_a       #==&gt;[[&quot;h0&quot;], [&quot;f0&quot;]]
+ rio('f.csv').csv.skipcolumns(0).to_a     #==&gt;[[&quot;h1&quot;, &quot;h2&quot;, &quot;h3&quot;], [&quot;f1&quot;, &quot;f2&quot;, &quot;f3&quot;]]
+ rio('f.csv').csv.columns(1..2).to_a    #==&gt;[[&quot;h1&quot;, &quot;h2&quot;], [&quot;f1&quot;, &quot;f2&quot;]]
+ rio('f.csv').csv.skipcolumns(1..2).to_a  #==&gt;[[&quot;h0&quot;, &quot;h3&quot;], [&quot;f0&quot;, &quot;f3&quot;]]
+</pre>
+<p>
+<a href="../IF/CSV.html#M000130">columns</a> can, of course be used with
+the <tt>each</tt> and the copy operators:
+</p>
+<pre>
+ rio('f.csv').csv.columns(0..1) &gt; rio('out').csv
+ rio('out').contents  #==&gt;&quot;h0,h1\nf0,f1\n&quot;
+</pre>
+<h4>YAML mode</h4>
+<p>
+Rio uses the YAML class from the Ruby standard library to provide support
+for reading and writing YAML files. Normally using <tt>(skip)records</tt>
+is identical to <tt>(skip)lines</tt> because while <tt>records</tt> only
+selects and does not specify the record-type, <tt>lines</tt> is the
+default.
+</p>
+<p>
+The YAML extension distingishes between items selected using <a
+href="../IF/GrandeStream.html#M000076">records</a>, <a
+href="../IF/GrandeStream.html#M000079">rows</a> and <a
+href="../IF/GrandeStream.html#M000074">lines</a>. Rio returns objects
+loaded via YAML#load when <tt>records</tt> is used; returns the YAML text
+as a String when <tt>rows</tt> is used; and returns lines as Strings as
+normal when <tt>lines</tt> is used. <tt>records</tt> is the default. In
+yaml-mode, <tt>(skip)records</tt> can be called as <tt>(skip)objects</tt>
+and <tt>(skip)rows</tt> can be called as <tt>(skip)documents</tt>
+</p>
+<p>
+To read a single YAML document, Rio provides #getobj and #load For example,
+consider the following partial &#8216;database.yml&#8217; from the rails
+distribution:
+</p>
+<pre>
+ development:
+   adapter: mysql
+   database: rails_development
+
+ test:
+   adapter: mysql
+   database: rails_test
+</pre>
+<p>
+To get the object represented in the yaml file:
+</p>
+<pre>
+ rio('database.yml').yaml.load
+    ==&gt;{&quot;development&quot;=&gt;{&quot;adapter&quot;=&gt;&quot;mysql&quot;, &quot;database&quot;=&gt;&quot;rails_development&quot;},
+        &quot;test&quot;=&gt;{&quot;adapter&quot;=&gt;&quot;mysql&quot;, &quot;database&quot;=&gt;&quot;rails_test&quot;}}
+</pre>
+<p>
+Or one could read parts of the file like so:
+</p>
+<pre>
+ rio('database.yml').yaml.getobj['development']['database']
+    ==&gt;&quot;rails_development&quot;
+</pre>
+<p>
+Single objects can be written using #putobj and #putobj! which is aliased
+to #dump
+</p>
+<pre>
+ anobject = {
+   'production' =&gt; {
+     'adapter' =&gt; 'mysql',
+     'database' =&gt; 'rails_production',
+   }
+ }
+ rio('afile.yaml').yaml.dump(anobject)
+</pre>
+<p>
+<a href="../IF/Grande.html#M000058">></a> (copy-to) and <a
+href="../IF/Grande.html#M000061">>></a> (append-to) will fill an array with
+with all selected YAML documents in the Rio. For non-arrays, the yaml text
+is copied. (This may change if a useful reasonable alternative can be
+found)
+</p>
+<pre>
+ rio('afile.yaml').yaml &gt; anarray # load all YAML documents from 'afile.yaml'
+</pre>
+<p>
+Single objects can be written using <a
+href="../IF/GrandeStream.html#M000085">putrec</a> (aliased to <a
+href="../IF/YAML.html#M000174">putobj</a> and <a
+href="../IF/YAML.html#M000176">dump</a>)
+</p>
+<pre>
+ rio('afile.yaml').yaml.putobj(anobject)
+</pre>
+<p>
+Single objects can be loaded using <a
+href="../IF/GrandeStream.html#M000081">getrec</a> (aliase to <a
+href="../IF/YAML.html#M000172">getobj</a> and <a
+href="../IF/YAML.html#M000173">load</a>)
+</p>
+<pre>
+ anobject = rio('afile.yaml').yaml.getobj
+</pre>
+<p>
+A Rio in yaml-mode is just like any other Rio. And all the things you can
+do with any Rio come for free. They can be iterated over using <a
+href="../IF/Grande.html#M000054">each</a> and read into an array using <a
+href="../IF/Grande.html#M000053">[]</a> just like any other Rio. All the
+selection criteria are identical also.
+</p>
+<p>
+Get the first three objects into an array:
+</p>
+<pre>
+ array_of_objects = rio('afile.yaml').yaml[0..2]
+</pre>
+<p>
+Iterate over only YAML documents that are a kind_of ::Hash use:
+</p>
+<pre>
+ rio('afile.yaml').yaml(::Hash) {|ahash| ...}
+</pre>
+<p>
+This takes advantage of the fact that the default for matching records is
+<tt>===</tt>
+</p>
+<p>
+Selecting records using a Proc can be used as normal:
+</p>
+<pre>
+ anarray = rio('afile.yaml').yaml(proc{|anobject| ...}).to_a
+</pre>
+<hr size="1"></hr><p>
+See also:
+</p>
+<ul>
+<li><a href="SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="EXAMPLES.html">RIO::Doc::EXAMPLES</a>
+
+</li>
+<li><a href="../Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

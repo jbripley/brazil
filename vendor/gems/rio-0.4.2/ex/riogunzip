@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require 'rio'
+# riogunzip: reads from stdin, gzips and writes it to stdout
+# example use:
+#   riogunzip < afile.txt.gz
+# 
+# explanation:
+#
+# rio(?-).gzip
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#   .gzip: filter the input or output through Zlib:Gzip[Reader or Writer]
+#
+# rio(?-)
+#   rio(?-): a rio that will be connected to stdin or stdout depending how it is used
+#
+# <
+#   rio copy operator indicating the direction of data
+#   pointed in this direction the rio on the right is read from and the one on the left is
+#   written. (or stdin and stdout respectively)
+#
+rio(?-).gzip > rio(?-)
+
+# could be written this way
+# rio(?-) < rio(?-).gzip
+#
+# this is similar, but reads the entire file in before writing it out
+#    rio(?-).print!( rio(?-).gzip.contents )
+#
+#rio(?-).gzip.each_record do |rec|
+#  rio(?-).print(rec)
+#end

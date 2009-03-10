@@ -1,0 +1,1376 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::Grande</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::Grande</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/grande_rb.html">
+                lib/rio/if/grande.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000065">&lt;</a>&nbsp;&nbsp;
+      <a href="#M000063">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000058">&gt;</a>&nbsp;&nbsp;
+      <a href="#M000061">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000053">[]</a>&nbsp;&nbsp;
+      <a href="#M000064">append_from</a>&nbsp;&nbsp;
+      <a href="#M000062">append_to</a>&nbsp;&nbsp;
+      <a href="#M000066">copy_from</a>&nbsp;&nbsp;
+      <a href="#M000059">copy_to</a>&nbsp;&nbsp;
+      <a href="#M000055">delete</a>&nbsp;&nbsp;
+      <a href="#M000057">delete!</a>&nbsp;&nbsp;
+      <a href="#M000054">each</a>&nbsp;&nbsp;
+      <a href="#M000069">empty?</a>&nbsp;&nbsp;
+      <a href="#M000067">get</a>&nbsp;&nbsp;
+      <a href="#M000068">skip</a>&nbsp;&nbsp;
+      <a href="#M000070">split</a>&nbsp;&nbsp;
+      <a href="#M000052">to_a</a>&nbsp;&nbsp;
+      <a href="#M000056">unlink</a>&nbsp;&nbsp;
+      <a href="#M000060">|</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000065.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000065.html');return false;">
+          <span class="method-name">&lt;</span><span class="method-args">(source)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Copy-From Operator
+</p>
+<p>
+The copy-from grande-operator copies a Rio from another Rio or another ruby
+object. Its operation is dependent on the the file system objects
+referenced, the rio options set, and the state of its source and
+destination. In the broadest of terms it could be described as doing the
+following:
+</p>
+<pre>
+   source.each do |entry|
+     destination &lt;&lt; entry
+   end
+</pre>
+<p>
+That is to say, it iterates through its argument, calling the copy-from
+operator again for each element. While it is not implemented like this, and
+the above code would not give the same results, This generalized
+description is convenient.
+</p>
+<p>
+For example the code:
+</p>
+<pre>
+ destination &lt; source
+</pre>
+<p>
+is like
+</p>
+<pre>
+ source.each { |element| destination &lt;&lt; element }
+</pre>
+<p>
+for any of the following definitions of src and dst
+</p>
+<ul>
+<li>copying files
+
+<pre>
+ src = rio('afile')
+ dst = rio('acopy')
+</pre>
+</li>
+<li>copying parts of files
+
+<pre>
+ src = rio('afile').lines(0..9)
+ dst = rio('acopy')
+</pre>
+</li>
+<li>copying directories
+
+<pre>
+ src = rio('srcdir')
+ dst = rio('dstdir')
+</pre>
+</li>
+<li>copy directories selectively
+
+<pre>
+ src = rio('srcdir').dirs(/^\./).files('*.tmp')
+ dst = rio('dstdir')
+</pre>
+</li>
+<li>copying to a file from an array
+
+<pre>
+ src = [&quot;line0\n&quot;,&quot;line1\n&quot;]
+ dst = rio('afile')
+</pre>
+</li>
+<li>copying to a directory from an array
+
+<pre>
+ array = [rio(&quot;file1&quot;),rio(&quot;file2&quot;)]
+ dst = rio('adir')
+</pre>
+</li>
+</ul>
+<p>
+Arrays are handled differently depending on whether the rio references a
+file or a directory.
+</p>
+<ul>
+<li>If the destination is a file.
+
+<pre>
+ dest = rio('afile')
+ dest &lt; array
+ # is roughly equivelent to
+ array.each do |el|
+   case el
+   when ::String then dest.print(el)
+   when ::Rio then dest &lt;&lt; el
+   else dest &lt;&lt; rio(el)
+ end
+</pre>
+</li>
+<li>If the destination is a directory
+
+<pre>
+ dest = rio('adir')
+ dest &lt; array
+ # is roughly equivelent to
+ array.each do |el|
+   case el
+   when ::String then rio(el)
+   when ::Rio then dest &lt;&lt; el
+   else dest &lt;&lt; rio(el)
+ end
+</pre>
+</li>
+</ul>
+<p>
+To improve run-time efficiency, Rio will choose from among several
+strategies when copying. For instance when no file or directory filtering
+is specified, FileUtils#cp_r is used to copy directories; and when no line
+filtering is specified, FileUtils#cp is used to copy files.
+</p>
+<pre>
+ rio('adir') &lt; rio('anotherdir') # 'anotherdir' is copied to 'adir' using FileUtils#cp_r
+ rio('adir') &lt; rio('anotherdir').files('*.rb') # copy only .rb files
+ rio('afile') &lt; rio('anotherfile') # 'anotherfile' is copied to 'afile' using FileUtils#cp
+ rio('afile') &lt; ios # ios must be an IO object opened for reading
+ rio('afile') &lt; astring # basically the same as rio('afile').print(astring)
+
+ anarray = [ astring, rio('anotherfile') ]
+ rio('afile') &lt; anarray # copies each element to 'afile' as if one had written
+    ario = rio('afile')
+    anarray.each do |el|
+      ario &lt;&lt; el
+    end
+    ario.close
+ rio('skeldir') &lt; rio('adir').dirs # copy only the directory structure
+ rio('destdir') &lt; rio('adir').dirs.files(/^\./) # copy the directory structure and all dot files
+</pre>
+<p>
+See also <a href="Grande.html#M000058">></a> (copy-to), <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000063.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000063.html');return false;">
+          <span class="method-name">&lt;&lt;</span><span class="method-args">(source)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Append-From Operator
+</p>
+<p>
+The append-from grande-operator copies a Rio from another Rio or another
+ruby object. This behaves like <a href="Grande.html#M000065"><</a>
+(copy-from) except unopened Rios are opened for append.
+</p>
+<p>
+The following summarizes how objects are copied:
+</p>
+<table>
+<tr><td valign="top">IO:</td><td>IO#each is used to iterate through the source with each record appended to
+the Rio
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>Each element of the Array is appended individually to the Rio.
+
+</td></tr>
+<tr><td valign="top">String:</td><td>The string is appended to the Rio using <a
+href="RubyIO.html#M000015">print</a>
+
+</td></tr>
+<tr><td valign="top">Rio:</td><td>The source Rio is appended using its <a href="Grande.html#M000061">>></a>
+(append-to) operator
+
+</td></tr>
+</table>
+<p>
+See <a href="Grande.html#M000065"><</a> (copy-from)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000058.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000058.html');return false;">
+          <span class="method-name">&gt;</span><span class="method-args">(destination)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Copy-To Operator
+</p>
+<p>
+The copy grande-operator copies a Rio to a another Rio or another ruby
+object. The behaviour and the library used depend on the types of the of
+the source and destination. For simple file or directory copying
+::FileUtils#cp or ::FileUtils#cp_r will be used. If any of the Rio grande
+methods are specified for the source or destination, the source Rio will be
+iterated through copying records to the destintion as specified. Roughly
+equivelant to
+</p>
+<pre>
+ dst = rio('dst_file')
+ rio('src_file').each do |line|
+   dst.print(line)
+ end
+ dst.close
+</pre>
+<p>
+The destination of the copy operators may be a:
+</p>
+<table>
+<tr><td valign="top">IO:</td><td>Each record of the Rio is written to the IO using IO#print. The IO must be
+opened for writing.
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>Each record or entry of the Rio becomes an element of the array
+
+</td></tr>
+<tr><td valign="top">String:</td><td>Puts the entire contents of the Rio into the string
+
+</td></tr>
+<tr><td valign="top">Rio:</td><td>Depends on the destination. See below.
+
+</td></tr>
+</table>
+<p>
+Copy a file to a file
+</p>
+<pre>
+ rio('src_file') &gt; rio('dst_file')
+</pre>
+<p>
+Copy a file to a directory
+</p>
+<pre>
+ rio('src_file') &gt; rio('dst_dir')
+</pre>
+<p>
+Copy a directory to another directory
+</p>
+<pre>
+ rio('src_dir') &gt; rio('dst_dir')
+</pre>
+<p>
+Make an ungizipped copy of a gzipped file
+</p>
+<pre>
+ rio('src.txt.gz').gzip &gt; rio('dst.txt')
+</pre>
+<p>
+Copying to an array
+</p>
+<pre>
+ rio('afile') &gt; ary # each line of the file becomes an element of the ary
+ rio('afile').chomp &gt; ary # same thing with lines chomped
+ rio('afile.gz').gzip.chomp &gt; ary # same thing from a gzipped file
+
+ rio('afile').lines(0..9) &gt; ary # ary will contain only the first ten lines of the file
+ rio('afile').chomp.lines(0..9) &gt; ary # same thing with lines chomped
+ rio('afile').gzip.chomp.lines(0..9) &gt; ary # same thing from a gzipped file
+
+ rio('afile').skiplines(0..9) &gt; ary # ary will contain all but the first ten lines of the file
+
+ rio('adir') &gt; ary # ary will contain a Rio for each entry in the directory
+ rio('adir').files &gt; ary # same, but only files
+ rio('adir').files('*.rb') &gt;ary # same, but only .rb files
+</pre>
+<p>
+Copying to a string
+</p>
+<pre>
+ rio('afile') &gt; astring # slurp the entire contents of the file into astring
+ astring = rio('afile').contents # same effect
+</pre>
+<p>
+Copy the first line <b>and</b> every line containing the word Rio into a
+gzipped file
+</p>
+<pre>
+ rio('src').lines(1,/Rio/) &gt; rio('dst.gz').gzip
+</pre>
+<p>
+Copy lines of a web page into an array with each line chomped
+</p>
+<pre>
+ rio('http://ruby-doc.org/index.html').chomp &gt; an_array
+</pre>
+<p>
+Copy the first and 8th through 10th columns of the first ten rows of a
+gzipped csv file on a web site into a local gzipped csv file that uses
+semi-colons as separators
+</p>
+<pre>
+ rio('http://host/file.csv.gz').columns(0,7..9).gzip.csv[0..9] &gt; rio('localfile.csv.gz').csv(';').gzip
+</pre>
+<p>
+See also <a href="Grande.html#M000061">>></a>, <a
+href="Grande.html#M000060">|</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000061.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000061.html');return false;">
+          <span class="method-name">&gt;&gt;</span><span class="method-args">(destination)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Append-To Operator
+</p>
+<p>
+The append-to grande-operator is the same as <a
+href="Grande.html#M000058">></a> (copy-to) except that it opens the
+destination for append. The destination can be a kind of:
+</p>
+<table>
+<tr><td valign="top">IO:</td><td>Each record of the Rio is written to the IO using IO#print. The IO must be
+opened for writing.
+
+</td></tr>
+<tr><td valign="top">Array:</td><td>Each record or entry of the Rio is appended to the destination array
+
+</td></tr>
+<tr><td valign="top">String:</td><td>Appends the entire contents of the Rio to destination
+
+</td></tr>
+<tr><td valign="top">Rio:</td><td>Just like <a href="Grande.html#M000058">></a> (copy-to) except the unopened
+object are opened for append. If the destination is already opened for
+writing or is a directory, this is identical to <a
+href="Grande.html#M000058">></a> (copy-to)
+
+</td></tr>
+</table>
+<p>
+See <a href="Grande.html#M000058">></a> (copy-to)
+</p>
+<pre>
+ rio('afile') &gt;&gt; rio('anotherfile') # append the contents of 'afile' to 'anotherfile'
+ rio('afile') &gt;&gt; rio('adir') # copies 'afile' to the directory 'adir'
+ rio('adir') &gt;&gt; rio('anotherdir') # copy directory 'adir' recursively to 'anotherdir'
+ rio('adir') &gt;&gt; array # a Rio for each entry in the directory will be appended to ary
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000053.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000053.html');return false;">
+          <span class="method-name">[]</span><span class="method-args">(*selectors)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande subscript operator.
+</p>
+<p>
+For files this returns all or part of a file as an array.
+</p>
+<p>
+For directories this returns all or some of the entries in a directory
+</p>
+<h3>Files</h3>
+<p>
+This combines the record selection offered by <a
+href="GrandeStream.html#M000076">records</a> with the conversion to an
+array provided by <a href="Grande.html#M000052">to_a</a>. The following two
+are equivelant:
+</p>
+<pre>
+ ario[*args]
+ ario.records(*args).to_a
+</pre>
+<p>
+What constitutes an array element is determined by <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="GrandeStream.html#M000075">bytes</a>, or by an extension such as <a
+href="CSV.html#M000129">csv</a>. <a
+href="GrandeStream.html#M000074">lines</a> is the default.
+</p>
+<p>
+Arguments may consist of zero or more integers, ranges, regular
+expressions, symbols, procs, and arrays An empty argument list selects all
+records
+</p>
+<p>
+Records are selected as follows.
+</p>
+<table>
+<tr><td valign="top">range:</td><td>specifies a range of records to be selected (zero based)
+
+</td></tr>
+<tr><td valign="top">regexp:</td><td>matching records will be selected.
+
+</td></tr>
+<tr><td valign="top">integer:</td><td>treated like a one element range
+
+</td></tr>
+<tr><td valign="top">symbol:</td><td>the symbol is sent to each record. Record is selected unless false is
+returned
+
+</td></tr>
+<tr><td valign="top">proc:</td><td>the proc is called with the record as an argument. Record is selected
+unless false is returned
+
+</td></tr>
+<tr><td valign="top">array:</td><td>the array may contain any of the other selector types. Record is selected
+unless any of the selectors returns false. (a logical and)
+
+</td></tr>
+</table>
+<p>
+A record matching <b>any</b> of the selectors will be included in the
+array. (acts like an <em>or</em>)
+</p>
+<p>
+Because this is implemented in terms of the <a
+href="Grande.html#M000054">each</a>, When only record ranges are used to
+select records, iteration will stop when the recno exceeds the maximum of
+any range. That is to say
+</p>
+<p>
+This reads one record from a file and returns it
+</p>
+<pre>
+ rio('bigfile.mp3').bytes(1024)[0]
+</pre>
+<p>
+While this reads <b>all</b> records from a file and returns the first one
+</p>
+<pre>
+ rio('bigfile.mp3').bytes(1024).to_a[0]
+</pre>
+<h3>Directories</h3>
+<p>
+This combines the entry selection offered by <a
+href="GrandeEntry.html#M000109">entries</a> with the conversion to an array
+provided by <a href="Grande.html#M000052">to_a</a>. The following two are
+equivelant:
+</p>
+<pre>
+ ario[*args]
+ ario.entries(*args).to_a
+</pre>
+<p>
+Arguments may consist of strings (treated as globs) or regular expressions.
+An empty argument list selects all entries See ::Dir#glob and
+::File::fnmatch? for more in information on <em>globs</em>. Be warned that
+using the &#8217;**&#8217; glob recurses into directories independently of
+<a href="GrandeEntry.html#M000114">all</a> and using both is unsupported.
+</p>
+<pre>
+ ario = rio('adir')
+ ario[] # returns an array containg all entries in _adir_
+ ario[/^zippy/] # all entries starting with 'zippy'
+ ario['zippy*'] # same thing
+</pre>
+<p>
+As with <a href="Grande.html#M000054">each</a>:
+</p>
+<ul>
+<li>Files and directories are returned as Rios
+
+</li>
+<li>The types of entries is also affected by <a
+href="GrandeEntry.html#M000111">files</a> and <a
+href="GrandeEntry.html#M000107">dirs</a>.
+
+<pre>
+ rio('adir').files['*.txt'] # array of all .txt files
+ rio('adir').dirs[/^\./] # array of all dot directories
+</pre>
+</li>
+<li>Recursion is enabled using <a href="GrandeEntry.html#M000114">all</a>
+
+<pre>
+ rio('adir').all.files['*.[ch]'] # array of c source files in adir and its subdirecories
+ rio('adir').all.dirs[/^\.svn/]  # array of subversion directories in adir and subdirectories
+</pre>
+</li>
+<li><a href="GrandeEntry.html#M000111">files</a> and <a
+href="GrandeEntry.html#M000107">dirs</a> act independently of each other.
+Specifying both will cause both to be returned. The argument list to <a
+href="Grande.html#M000053">[]</a> will be applied to the closest.
+
+<pre>
+ rio('adir').files('*.rb').dirs['ruby*'] # array of .rb files and
+                                         # directories starting with 'ruby'
+ rio('adir').dirs('ruby*').files['*.rb'] # same thing
+</pre>
+</li>
+</ul>
+<h3>Lines</h3>
+<p>
+This section applies similarly to <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="GrandeStream.html#M000075">bytes</a>, <a
+href="GrandeStream.html#M000076">records</a>, and <a
+href="GrandeStream.html#M000079">rows</a>
+</p>
+<p>
+Using <a href="GrandeStream.html#M000074">lines</a> and related methods
+with a Rio referencing a directory imples <a
+href="GrandeEntry.html#M000111">files</a> and will cause an array of the
+lines or bytes in the files to be returned. As above, the arguments to the
+subscript operator will be applied to the closest.
+</p>
+<pre>
+ rio('adir').lines[] # array of all lines in the files in 'adir'
+ rio('adir').files.lines[] # same thing
+ rio('adir').lines(0..9).files['*.txt'] # array of the first ten lines of all .txt files
+ rio('adir').files('*.txt').lines[0..9] # same thing
+ rio('adir').all.files('*.rb').lines[/^\s*require/] # array of 'require' lines in .rb files in
+                                                    # 'adir and its subdirectories
+</pre>
+<p>
+Note the difference between the following similar usages
+</p>
+<pre>
+ it1 = rio('adir').files('*.rb') # returns a Rio, prepared for selecting ruby files
+ it2 = rio('adir').files['*.rb'] # returns an array of the ruby files
+</pre>
+<p>
+The second example above could have been written
+</p>
+<pre>
+ it2 = it1.to_a
+</pre>
+<p>
+Examples:
+</p>
+<pre>
+ rio('afile.txt').lines[1..2] # array containing the 2nd and 3rd line
+
+ rio('afile.txt')[1,3..5] # array containing lines 1,3,4 and 5
+
+ rio('afile.txt')[/Zippy/] # array of all lines containing 'Zippy'
+
+ rio('afile.txt')[1,3..5,/Zippy/] # array with lines 1,3,4 and 5 and all lines containing 'Zippy'
+
+ rio('afile.dat').bytes(50)[] # array containing the contents of afile.dat broken up into 50 byte chunks
+
+ rio('afile.dat').bytes(50)[0,2] # array containing the first and third such chunk
+
+ rio('afile.dat').bytes(50).records[0,2] # same thing
+
+ rio('afile.dat').bytes(50).records(0,2).to_a # once again
+
+ rio('afile.csv').csv[0..9] # array of the first 10 records of afile.csv parsed by the ::CSV module
+
+ rio('afile.csv').csv.records[0..9] # same thing
+
+ rio('afile.csv').csv(';').records[0..9] # same thing using semi-colon as the value separator
+
+ rio('afile.csv').csv.records[0,/Zippy/] # record 0 and all records containing 'Zippy'
+                                         # the regexp is matched against the line before parsing by ::CSV
+
+ rio('adir')[] # array of entries in 'adir'
+
+ rio('adir')['*.txt'] # array of all .txt entries
+
+ rio('adir').all['*.txt'] # array of all .txt entries in 'adir and its subdirectories
+
+ rio('adir').files['*.txt'] # array of all .txt files
+
+ rio('adir').dirs['CSV'] # array of all CSV directories
+ rio('adir').skipdirs['CSV'] # array of all non-CSV directories
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000064.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000064.html');return false;">
+          <span class="method-name">append_from</span><span class="method-args">(source)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Grande.html#M000063"><<</a> (append-from grande
+operator)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000062.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000062.html');return false;">
+          <span class="method-name">append_to</span><span class="method-args">(destination)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Grande.html#M000061">>></a> (append-to grande operator)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000066.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000066.html');return false;">
+          <span class="method-name">copy_from</span><span class="method-args">(source)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Grande.html#M000065"><</a> (copy-from grande operator)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000059" class="method-detail">
+        <a name="M000059"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000059.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000059.html');return false;">
+          <span class="method-name">copy_to</span><span class="method-args">(destination)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Grande.html#M000058">></a> (copy-to grande operator)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000055" class="method-detail">
+        <a name="M000055"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000055.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000055.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For a file Rio <tt>delete</tt> calls FileUtils#rm. For a directory Rio
+<tt>delete</tt> calls FileUtils#rmdir Returns the Rio. If the Rio does not
+exist, simply return the Rio.
+</p>
+<pre>
+ rio('afile,txt').delete # delete 'afile.txt'
+ rio('adir').delete # delete adir
+ rio('something').delete # delete something
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000057.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000057.html');return false;">
+          <span class="method-name">delete!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For a file <a href="Grande.html#M000057">delete!</a> calls FileUtils#rm.
+For a directory <a href="Grande.html#M000057">delete!</a> calls
+FileUtils#rmtree. Returns the Rio. If the rio does not exist, simply
+returns itself.
+</p>
+<pre>
+ rio('afile,txt').delete! # delete f.txt
+ rio('adir').delete! # delete adir
+
+ # create a directory, after deleting anything that previously had its name
+ rio('adir/asubdir').delete!.mkpath
+</pre>
+<h4>Deleting Summary</h4>
+<ul>
+<li>To delete something only if it is not a directory use <a
+href="File.html#M000216">rm</a>
+
+</li>
+<li>To delete an empty directory use <a href="Dir.html#M000048">rmdir</a>
+
+</li>
+<li>To delete an entire directory tree use <a
+href="Dir.html#M000049">rmtree</a>
+
+</li>
+<li>To delete anything except a populated directory use <a
+href="Grande.html#M000055">delete</a>
+
+</li>
+<li>To delete anything use <a href="Grande.html#M000057">delete!</a>
+
+</li>
+</ul>
+<p>
+In all cases, deleting something that does not exist is considered
+successful.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000054.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000054.html');return false;">
+          <span class="method-name">each</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Iterate through a rio. Executes the block for each item selected for the
+Rio. See <a href="GrandeStream.html#M000074">lines</a>, <a
+href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000075">bytes</a>, <a
+href="GrandeEntry.html#M000111">files</a>, <a
+href="GrandeEntry.html#M000107">dirs</a>, <a
+href="Grande.html#M000053">[]</a> and <a
+href="Grande.html#M000052">to_a</a> for more information on how records are
+selected and what kind of record is passed to the block.
+</p>
+<p>
+<a href="Grande.html#M000054">each</a> is the fundemental method for all
+the Rio grande operators. <a href="Grande.html#M000052">to_a</a> and the
+Rio copy operators <a href="Grande.html#M000065"><</a>, <a
+href="Grande.html#M000063"><<</a>, <a href="Grande.html#M000061">>></a>,
+and <a href="Grande.html#M000058">></a> are all implemented in terms of <a
+href="Grande.html#M000054">each</a>.
+</p>
+<p>
+While <a href="Grande.html#M000054">each</a> is fundamental to a Rio, it
+rarely needs actually be called because all the grande configuration
+methods will also take a block and call <a
+href="Grande.html#M000054">each</a> if one is given. So the existance of a
+block after many methods is taken as an implied <a
+href="Grande.html#M000054">each</a>
+</p>
+<p>
+For Rios that refer to files, the item passed to the block is a String
+containing the line or block as selected by <a
+href="GrandeStream.html#M000074">lines</a>, or <a
+href="GrandeStream.html#M000075">bytes</a>. <tt>lines</tt> is the default.
+</p>
+<pre>
+ rio('afile').lines.each { |line| ...}
+</pre>
+<p>
+The block passed to <tt>each</tt> will also accept an optional second
+parameter which will contain the result of the matching function. What this
+variable contains depends on the argument to <tt>lines</tt> that resulted
+in the match as follows:
+</p>
+<table>
+<tr><td valign="top">Regexp:</td><td>The MatchData that resulted from the match.
+
+</td></tr>
+<tr><td valign="top">Range:</td><td>The record number of the matching record.
+
+</td></tr>
+<tr><td valign="top">Fixnum:</td><td>The record number of the matching record.
+
+</td></tr>
+<tr><td valign="top">Proc:</td><td>The value returned by the proc.
+
+</td></tr>
+<tr><td valign="top">Symbol:</td><td>The value resulting from sending the symbol to the String.
+
+</td></tr>
+</table>
+<p>
+If no selection arguments were used, this variable will simply contain
+<tt>true</tt>.
+</p>
+<pre>
+ rio(??).puts(%w[0:zero 1:one]).rewind.lines(/(\d+):([a-z]+)/) do |line,match|
+   puts(&quot;#{match[1]} is spelled '#{match[2]}'&quot;)
+ end
+</pre>
+<p>
+Produces:
+</p>
+<pre>
+ 0 is spelled 'zero'
+ 1 is spelled 'one'
+</pre>
+<p>
+For Rios that refer to directories, the item passed to the block is a Rio
+refering to the directory entry.
+</p>
+<pre>
+ rio('adir').files.each do |file|
+   file.kind_of?(RIO::Rio)  # true
+ end
+</pre>
+<p>
+In addition, the Rio passed to the block inherits certain attributes from
+the directory Rio.
+</p>
+<pre>
+ rio('adir').files.chomp.each do |file| # chomp is ignored for directories,
+   file.each do |line|                  # chomp attribute is inherited by the file rio
+     # .. line is chomped
+   end
+ end
+</pre>
+<p>
+<a href="Grande.html#M000054">each</a> returns the Rio which called it.
+</p>
+<p>
+Here are a few illustrative examples
+</p>
+<ul>
+<li>Processing lines in a file
+
+<pre>
+ rio('f.txt').each { |line| ... }        # execute block for every line in the file
+ rio('f.txt').lines.each { |line| ... }  # same thing
+ rio('f.txt').lines { |line| ... }       # same thing
+
+ rio('f.txt').chomp.each { |line| ... }  # same as above with lines chomped
+ rio('f.txt').chomp { |line| ... }       # ditto
+ rio('f.txt').lines.chomp { |line| ... } # ditto
+ rio('f.txt').chomp.lines { |line| ... } # ditto
+
+ rio('f.txt.gz').gzip.each { |line| ... }   # execute block for every line in a gzipped file
+ rio('f.txt.gz').gzip { |line| ... }        # same thing
+ rio('f.txt.gz').lines.gzip { |line| ... }  # same thing
+
+ rio('f.txt.gz').gzip.chomp { |line| ... } # chomp lines from a gzipped file
+ rio('f.txt.gz').gzip.chomp.each { |line| ... } # ditto
+ rio('f.txt.gz').chomp.lines.gzip { |line| ... } # ditto
+
+ rio('f.txt').lines(0..9) { |line| ... } # execute block for the first 10 lines in the file
+ rio('f.txt').lines(0..9).each { |line| ... } # same thing
+
+ rio('f.txt').lines(/^\s*#/) { |line| ... } # execute block for comment-only lines
+ rio('f.txt').lines(/^\s*#/).each { |line| ... } # same thing
+
+ rio('f.txt').lines(0,/Rio/) { |line| ... } # execute block for the first line and
+                                            # all lines containing 'Rio'
+
+ rio('f.txt.gz').gzip.chomp.lines(0..1) { |line| ... } # first 2 lines chomped from a gzip file
+</pre>
+</li>
+<li>Processing a file a block at a time
+
+<pre>
+ rio('f.dat').bytes(10).each { |data| ... } # process the file 10 bytes at a time
+ rio('f.dat').bytes(10) { |data| ... }      # same thing
+ rio('f.dat').bytes(10).records(2,4) { |data| ... } # only 3rd and 5th ten-byte data-block
+ rio('f.dat.gz').gzip.records(2,4).bytes(10) { |data| ... } # same from a gzipped file
+</pre>
+</li>
+<li>Iterating over directories
+
+<pre>
+ rio('adir').each { |ent| ... }       # execute the block for each entry in the directory 'adir'
+ rio('adir').files.each { |file| ...} # only files
+ rio('adir').files { |file| ...}      # ditto
+ rio('adir').all.files { |file| ...}  # files, recurse into subdirectories
+ rio('adir').dirs { |dir| ...}       # only directories
+ rio('adir').files('*.rb') { |file| ...}  # only .rb files using a glob
+ rio('adir').files(/\.rb$/) { |file| ...}  # only .rb files using a regular expression
+ rio('adir').all.files('*.rb') { |file| ...}  # .rb files, recursing into subdirectories
+ rio('adir').dirs(/^\./) { |dir| ... } # only dot directories
+ rio('adir').dirs('/home/*') { |dir| ... } # home directories
+</pre>
+</li>
+</ul>
+<p>
+See <a href="../Doc/HOWTO.html">RIO::Doc::HOWTO</a> and <a
+href="../Doc/SYNOPSIS.html">RIO::Doc::SYNOPSIS</a> for more examples, and
+<a href="../Doc/INTRO.html">RIO::Doc::INTRO</a> for further explanation.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000069.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000069.html');return false;">
+          <span class="method-name">empty?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if the referenced file or directory is empty after honoring
+the grande selection methods.
+</p>
+<pre>
+ rio('f0').delete!.touch.empty?        #=&gt; true
+ rio('f1').puts!(&quot;Not Empty\n&quot;).empty? #=&gt; false
+ rio('d0').delete!.mkdir.empty?        #=&gt; true
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000067.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000067.html');return false;">
+          <span class="method-name">get</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reads and returns the next record or entry from a Rio, honoring the grande
+selection methods.
+</p>
+<p>
+Returns nil on end of file.
+</p>
+<p>
+See also <a href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="Grande.html#M000054">each</a>, <a href="Grande.html#M000053">[]</a>
+</p>
+<pre>
+ ario = rio('afile').lines(10..12)
+ line10 = ario.get
+ line11 = ario.get
+ line12 = ario.get
+ a_nil  = ario.get
+
+ ario = rio('adir').entries('*.txt')
+ ent1 = ario.get
+ ent2 = ario.get
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000068.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000068.html');return false;">
+          <span class="method-name">skip</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Exclude method
+</p>
+<p>
+<tt>skip</tt> can be used in two ways.
+</p>
+<h4>skip with no arguments</h4>
+<p>
+If called with no arguments it reverses the polarity of the next non-skip
+grande selection method that is called. That is, it turns <tt>lines</tt>,
+<tt>records</tt>, <tt>rows</tt>, <tt>files</tt>, <tt>dirs</tt> and
+<tt>entries</tt> into <tt>skiplines</tt>, <tt>skiprecords</tt>,
+<tt>skiprows</tt>, <tt>skipfiles</tt>, <tt>skipdirs</tt>, and
+<tt>skipentries</tt>, respectively.
+</p>
+<pre>
+ rio('afile').skip.lines(0..5) # same as rio('afile').skiplines(0..5)
+ rio('adir').skip.files('*~')  # same as rio('adir').skipfiles('*~')
+</pre>
+<p>
+Note that it only affects the next selection method seen &#8212; and may be
+used more than once. If no grande selection method is seen, <tt>skip</tt>
+is ignored.
+</p>
+<h4>skip with arguments</h4>
+<p>
+When called with arguments it acts like <a
+href="GrandeEntry.html#M000110">skipentries</a> for directory Rios and like
+<a href="GrandeStream.html#M000077">skiprecords</a> for stream Rios.
+</p>
+<pre>
+ rio('afile').lines(/Rio/).skip[0..4] # lines containg 'Rio' excluding the
+                                      # first five lines
+
+ rio('adir').files('*.rb').skip[:symlink?] # .rb files, but not symlinks to
+                                           # .rb files
+</pre>
+<p>
+If a block is given, behaves as if <tt>skip(*args).each(&amp;block)</tt>
+had been called.
+</p>
+<p>
+Returns the Rio.
+</p>
+<p>
+See <a href="GrandeStream.html#M000078">skiplines</a>, <a
+href="GrandeStream.html#M000077">skiprecords</a>, <a
+href="GrandeStream.html#M000080">skiprows</a>, <a
+href="GrandeEntry.html#M000112">skipfiles</a>, <a
+href="GrandeEntry.html#M000108">skipdirs</a>, and <a
+href="GrandeEntry.html#M000110">skipentries</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000070.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000070.html');return false;">
+          <span class="method-name">split</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Grande.html#M000070">split</a> has two distinct behaviors
+depending on whether or not it is called with an argument.
+</p>
+<h4>split with no aruments:</h4>
+<p>
+Returns an array of Rios, one for each path element. (Note that this
+behavior differs from File#split.)
+</p>
+<pre>
+ rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+</pre>
+<p>
+The array returned is extended with a <tt>to_rio</tt> method, which will
+put the parts back together again.
+</p>
+<pre>
+ ary = rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+ ary.to_rio                 #=&gt; rio('a/b/c')
+
+ ary = rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+ ary[1] = rio('d')
+ ary.to_rio                 #=&gt; rio('a/d/c')
+</pre>
+<p>
+See also <a href="Path.html#M000152">join</a>, <a
+href="Path.html#M000154">/</a>, <a href="Path.html#M000153">splitpath</a>
+</p>
+<h4>split with an argument:</h4>
+<p>
+This causes String#split(arg) to be called on every line before it is
+returned. An array of the split lines is returned when iterating
+</p>
+<pre>
+ rio('/etc/passwd').split(':').columns(0,2) { |ary|
+   username,uid = ary
+ }
+
+ rio('/etc/passwd').split(':').columns(0,2).to_a #=&gt; [[user1,uid1],[user2,uid2]]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000052.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000052.html');return false;">
+          <span class="method-name">to_a</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the contents of the rio as an array. (See ::Enumerable#to_a)
+</p>
+<p>
+<a href="Grande.html#M000052">to_a</a> is implemented in terms of <a
+href="Grande.html#M000054">each</a> so the the following are roughly
+equivelent
+</p>
+<pre>
+ ary = ario.to_a
+
+ ary = []
+ ario.each do |rec|
+   ary &lt;&lt; ary
+ end
+</pre>
+<p>
+What constitutes an array element is determined by <a
+href="GrandeStream.html#M000074">lines</a>, <a
+href="GrandeStream.html#M000075">bytes</a>, <a
+href="GrandeStream.html#M000076">records</a>, <a
+href="GrandeStream.html#M000079">rows</a> or by an extension such as <a
+href="CSV.html#M000129">csv</a>. <a
+href="GrandeStream.html#M000074">lines</a> is the default.
+</p>
+<pre>
+ rio('afile.txt').to_a # returns an array of the lines in afile.txt
+
+ rio('afile.txt').lines(1...3).to_a # an array containing lines 1 and 2 of afile.txt
+
+ rio('afile.dat').bytes(50).to_a # an array containing the contents of afile.dat broken
+                                 # up into 50 byte chunks
+</pre>
+<p>
+See also <a href="Grande.html#M000053">[]</a> (subscript operator)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000056" class="method-detail">
+        <a name="M000056"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000056.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000056.html');return false;">
+          <span class="method-name">unlink</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See <a href="Grande.html#M000055">delete</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000060" class="method-detail">
+        <a name="M000060"></a>
+
+        <div class="method-heading">
+          <a href="Grande.src/M000060.html" target="Code" class="method-signature"
+            onclick="popupCode('Grande.src/M000060.html');return false;">
+          <span class="method-name">|</span><span class="method-args">(destination)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Grande Pipe Operator
+</p>
+<p>
+The Rio pipe operator is actually an alternative syntax for calling the <a
+href="Grande.html#M000058">></a> (copy-to) operator, designed to allow
+several copy operation to be performed in one line of code, with behavior
+that mimics the pipe operator commonly available in shells.
+</p>
+<p>
+If <tt>destination</tt> is a <tt>cmdio</tt>, a <tt>cmdpipe</tt> Rio is
+returned, and none of the commands are run.
+</p>
+<p>
+Otherwise the <tt>cmdpipe</tt> Rio is run with the output of the pipe being
+copied to the destination. In this case a Rio representing the
+<tt>destination</tt> is returned.
+</p>
+<p>
+If destination is not a Rio it is passed to the Rio constructor as is done
+with the copy-to operator except that if <tt>destination</tt> is a String
+it is assumed to be a command instead of a path.
+</p>
+<pre>
+ rio('afile') | rio(?-,'grep i') | rio(?-) # returns rio(?-)
+                                           # equivelent to rio(?-, 'grep i') &lt; rio('afile') &gt; rio(?-)
+
+ rio('infile') | rio(?-, 'acmd') | rio(?-, 'acmd2') | rio('outfile')
+ # same as
+ # acmd = rio(?-,'acmd')
+ # acmd2 = rio(?-,'acmd2')
+ # out = rio('outfile')
+ # acmd &lt; rio('infile')
+ # acmd2 &lt; acmd
+ # out &lt; acmd2
+
+ rio('afile') | 'acmd' | 'acmd2' | rio('outfile') # same thing
+
+ acmdpipe = rio(?-,'acmd') | 'acmd2'
+ rio('afile') | acmdpipe | rio('outfile') # same thing
+
+ acmdpipe1 = rio(?|,'acmd','acmd2')
+ rio('afile') | acmdpipe1 | rio('outfile') # same thing
+
+ acmdpipe2 = rio('afile') | 'acmd' | 'acmd2'
+ acmdpipe2 | rio('outfile') # same thing
+</pre>
+<p>
+The grande pipe operator can not be used to create a <tt>cmdpipe</tt> Rio
+that includes a destination. This must be done using a Rio constructor
+</p>
+<pre>
+ cmd_with_output = rio(?|,'acmd',rio('outfile'))
+ rio('afile') | cmd_with_output # same as above
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

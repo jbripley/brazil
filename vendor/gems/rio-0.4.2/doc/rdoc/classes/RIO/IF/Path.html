@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::Path</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::Path</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/path_rb.html">
+                lib/rio/if/path.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000154">/</a>&nbsp;&nbsp;
+      <a href="#M000138">abs</a>&nbsp;&nbsp;
+      <a href="#M000140">base</a>&nbsp;&nbsp;
+      <a href="#M000145">basename</a>&nbsp;&nbsp;
+      <a href="#M000149">basename=</a>&nbsp;&nbsp;
+      <a href="#M000162">cleanpath</a>&nbsp;&nbsp;
+      <a href="#M000146">dirname</a>&nbsp;&nbsp;
+      <a href="#M000150">dirname=</a>&nbsp;&nbsp;
+      <a href="#M000137">expand_path</a>&nbsp;&nbsp;
+      <a href="#M000141">ext</a>&nbsp;&nbsp;
+      <a href="#M000143">ext?</a>&nbsp;&nbsp;
+      <a href="#M000144">extname</a>&nbsp;&nbsp;
+      <a href="#M000148">extname=</a>&nbsp;&nbsp;
+      <a href="#M000147">filename</a>&nbsp;&nbsp;
+      <a href="#M000151">filename=</a>&nbsp;&nbsp;
+      <a href="#M000135">fspath</a>&nbsp;&nbsp;
+      <a href="#M000157">host</a>&nbsp;&nbsp;
+      <a href="#M000152">join</a>&nbsp;&nbsp;
+      <a href="#M000155">join!</a>&nbsp;&nbsp;
+      <a href="#M000159">merge</a>&nbsp;&nbsp;
+      <a href="#M000142">noext</a>&nbsp;&nbsp;
+      <a href="#M000158">opaque</a>&nbsp;&nbsp;
+      <a href="#M000132">path</a>&nbsp;&nbsp;
+      <a href="#M000163">realpath</a>&nbsp;&nbsp;
+      <a href="#M000139">rel</a>&nbsp;&nbsp;
+      <a href="#M000160">route_from</a>&nbsp;&nbsp;
+      <a href="#M000161">route_to</a>&nbsp;&nbsp;
+      <a href="#M000156">scheme</a>&nbsp;&nbsp;
+      <a href="#M000153">splitpath</a>&nbsp;&nbsp;
+      <a href="#M000134">to_uri</a>&nbsp;&nbsp;
+      <a href="#M000133">to_url</a>&nbsp;&nbsp;
+      <a href="#M000136">urlpath</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000154" class="method-detail">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000154.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000154.html');return false;">
+          <span class="method-name">/</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Subdirectory operator.
+</p>
+<p>
+Effectively the same as <a href="Path.html#M000152">join</a>(arg)
+</p>
+<pre>
+  a = rio('a')
+  b = rio('b')
+  c = a/b                   #=&gt; rio('a/b')
+
+  ario = rio('adir')
+  ario/'afile.rb'           #=&gt; rio('adir/afile.rb')
+  ario/'b'/'c'/'d'          #=&gt; rio('adir/b/c/d')
+
+  ario = rio('adir')
+  ario /= 'afile.rb'        #=&gt; rio('adir/afile.rb')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000138.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000138.html');return false;">
+          <span class="method-name">abs</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a new rio with a path equal to the absolute path of this rio
+</p>
+<pre>
+ rio('/tmp').chdir
+ rio('afile').abs # =&gt; rio('/tmp/afile')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000140.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000140.html');return false;">
+          <span class="method-name">base</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a new Rio whose path is the base path that is used by <a
+href="Path.html#M000138">abs</a> to create an absolute Rio from a relative
+one.
+</p>
+<pre>
+ rio('/tmp').chdir
+ rio('afile').base # =&gt; rio('/tmp/')
+</pre>
+<p>
+See <a href="Path.html#M000138">abs</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000145.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000145.html');return false;">
+          <span class="method-name">basename</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Similar to File#basename
+</p>
+<p>
+Returns a Rio whose path is that returned by File#basename when passed the
+path of a rio and the value returned by File#extname. This differs from the
+behaviour of File#basename.
+</p>
+<pre>
+ File.basename('afile.txt')                           #=&gt; 'afile.txt'
+ File.basename('afile.txt',File.extname('afile.txt')) #=&gt; 'afile'
+ rio('afile.txt').basename                            #=&gt; rio('afile')
+ rio('afile.txt').basename('.txt')                    #=&gt; same thing
+ rio('afile.txt').ext('.txt').basename                #=&gt; same thing
+</pre>
+<p>
+See also <a href="Path.html#M000141">ext</a>,<a
+href="Path.html#M000143">ext?</a>,<a href="Path.html#M000147">filename</a>,
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000149" class="method-detail">
+        <a name="M000149"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000149.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000149.html');return false;">
+          <span class="method-name">basename=</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace the part of the path returned by <a
+href="Path.html#M000145">basename</a>. If in <tt>rename</tt> mode, also
+renames the referenced filesystem object.
+</p>
+<p>
+Returns the new value of <tt>basename</tt>
+</p>
+<pre>
+  ario = rio('dirA/dirB/afile.rb')
+  ario.dirname = 'dirC'          # rio('dirC/afile.rb')
+  ario.basename = 'bfile'        # rio('dirC/bfile.rb')
+  ario.extname = '.txt'          # rio('dirC/bfile.txt')
+  ario.filename = 'cfile.rb'     # rio('dirC/cfile.rb')
+
+  rio('adir/afile.txt').rename.filename = 'bfile.rb' # adir/afile.txt =&gt; adir/bfile.rb
+  rio('adir/afile.txt').rename.basename = 'bfile'    # adir/afile.txt =&gt; adir/bfile.txt
+  rio('adir/afile.txt').rename.extname  = '.rb'      # adir/afile.txt =&gt; adir/afile.rb
+  rio('adir/afile.txt').rename.dirname =  'b/c'      # adir/afile.txt =&gt; b/c/afile.txt
+</pre>
+<p>
+See <a href="Path.html#M000145">basename</a>, <a
+href="FileOrDir.html#M000120">rename</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000162" class="method-detail">
+        <a name="M000162"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000162.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000162.html');return false;">
+          <span class="method-name">cleanpath</span><span class="method-args">(consider_symlink=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls Pathname#cleanpath
+</p>
+<p>
+Returns a new Rio whose path is the clean pathname of <tt>self</tt> with
+consecutive slashes and useless dots removed. The filesystem is not
+accessed.
+</p>
+<p>
+If <tt>consider_symlink</tt> is <tt>true</tt>, then a more conservative
+algorithm is used to avoid breaking symbolic linkages. This may retain more
+<tt>..</tt> entries than absolutely necessary, but without accessing the
+filesystem, this can&#8217;t be avoided. See <a
+href="Path.html#M000163">realpath</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000146.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000146.html');return false;">
+          <span class="method-name">dirname</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#dirname
+</p>
+<p>
+Returns a new Rio referencing the directory portion of a Rio.
+</p>
+<pre>
+   rio('/tmp/zippy.txt').dirname   #=&gt; rio('/tmp')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000150" class="method-detail">
+        <a name="M000150"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000150.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000150.html');return false;">
+          <span class="method-name">dirname=</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace the part of the path returned by <a
+href="Path.html#M000146">dirname</a>. If in <tt>rename</tt> mode, also
+renames the referenced filesystem object.
+</p>
+<p>
+Returns the new value of <tt>dirname</tt>
+</p>
+<pre>
+  ario = rio('dirA/dirB/afile.rb')
+  ario.dirname = 'dirC'          # rio('dirC/afile.rb')
+  ario.basename = 'bfile'        # rio('dirC/bfile.rb')
+  ario.extname = '.txt'          # rio('dirC/bfile.txt')
+  ario.filename = 'cfile.rb'     # rio('dirC/cfile.rb')
+
+  rio('adir/afile.txt').rename.filename = 'bfile.rb' # adir/afile.txt =&gt; adir/bfile.rb
+  rio('adir/afile.txt').rename.basename = 'bfile'    # adir/afile.txt =&gt; adir/bfile.txt
+  rio('adir/afile.txt').rename.extname  = '.rb'      # adir/afile.txt =&gt; adir/afile.rb
+  rio('adir/afile.txt').rename.dirname =  'b/c'      # adir/afile.txt =&gt; b/c/afile.txt
+</pre>
+<p>
+See <a href="Path.html#M000146">dirname</a>, <a
+href="FileOrDir.html#M000120">rename</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000137.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000137.html');return false;">
+          <span class="method-name">expand_path</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#expand_path
+</p>
+<p>
+Converts a pathname to an absolute pathname. Relative paths are referenced
+from the current working directory of the process unless dir_string is
+given, in which case it will be used as the starting point. The given
+pathname may start with a ``~’’, which expands to the process owner’s home
+directory (the environment variable HOME must be set correctly). ``~user’’
+expands to the named user’s home directory.
+</p>
+<p>
+Returns a Rio representing the returned path
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000141.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000141.html');return false;">
+          <span class="method-name">ext</span><span class="method-args">(arg=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the string that the Rio considers an extension. The value will be used
+by subsequent calls to <a href="Path.html#M000145">basename</a>. If called
+with no arguments resets its value to the value returned by File#extname.
+Returns the Rio.
+</p>
+<pre>
+ ario = rio('afile.tar.gz')
+ ario.ext?                        #=&gt; '.gz'
+ ario.basename                    #=&gt; rio('afile.tar')
+ ario.ext('.tar.gz').basename     #=&gt; rio('afile')
+ ario.ext?                        #=&gt; '.tar.gz'
+
+ ario = rio('afile.txt')
+ ario.ext('.txt').basename        #=&gt; rio('afile')
+ ario.ext('.zip').basename        #=&gt; rio('afile.txt')
+ ario.ext.basename                #=&gt; rio('afile')
+ ario.ext('').basename            #=&gt; rio('afile.txt')
+</pre>
+<p>
+See also <a href="Path.html#M000143">ext?</a>,<a
+href="Path.html#M000142">noext</a>,<a
+href="Path.html#M000145">basename</a>,
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000143.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000143.html');return false;">
+          <span class="method-name">ext?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the value of the Rio&#8217;s &#8216;ext&#8217; variable This
+defaults to the value returned by <a href="Path.html#M000144">extname</a>
+and may be set by either calling <a href="Path.html#M000141">ext</a> or by
+passing an argument <a href="Path.html#M000145">basename</a> See also <a
+href="Path.html#M000145">basename</a>, <a href="Path.html#M000141">ext</a>,
+<a href="Path.html#M000144">extname</a>, <a
+href="Path.html#M000142">noext</a>
+</p>
+<pre>
+ ario = rio('afile.txt')
+ ario.ext?                        #=&gt; '.txt'
+ ario.ext('.txt').basename        #=&gt; rio('afile')
+ ario.ext?                        #=&gt; '.txt'
+ ario.ext('.zip').basename        #=&gt; rio('afile.txt')
+ ario.ext?                        #=&gt; '.zip'
+ ario.basename('.tar')            #=&gt; rio('afile.txt')
+ ario.ext?                        #=&gt; '.tar'
+ ario.ext.basename                #=&gt; rio('afile')
+ ario.ext?                        #=&gt; '.txt'
+ ario.noext.basename              #=&gt; rio('afile.txt')
+ ario.ext?                        #=&gt; ''
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000144.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000144.html');return false;">
+          <span class="method-name">extname</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls File#extname
+</p>
+<p>
+Returns a String containing the path&#8217;s extension
+</p>
+<pre>
+   rio('/tmp/zippy.txt').extname   #=&gt; '.txt'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000148.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000148.html');return false;">
+          <span class="method-name">extname=</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace the part of the path returned by <a
+href="Path.html#M000144">extname</a>. If in <tt>rename</tt> mode, also
+renames the referenced filesystem object.
+</p>
+<p>
+Returns the extension
+</p>
+<pre>
+  ario = rio('dirA/dirB/afile.rb')
+  ario.extname = '.txt'          # rio('dirC/bfile.txt')
+
+  rio('adir/afile.txt').rename.extname  = '.rb'      # adir/afile.txt =&gt; adir/afile.rb
+</pre>
+<p>
+See aslo <a href="Path.html#M000144">extname</a>, <a
+href="FileOrDir.html#M000120">rename</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000147.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000147.html');return false;">
+          <span class="method-name">filename</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a new Rio with all path information stripped away. This is similar
+to <a href="Path.html#M000145">basename</a>, except that it always includes
+an extension if one exists
+</p>
+<pre>
+ rio('apath/afile.txt').filename #=&gt; rio('afile.txt')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000151" class="method-detail">
+        <a name="M000151"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000151.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000151.html');return false;">
+          <span class="method-name">filename=</span><span class="method-args">(arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace the part of the path returned by <a
+href="Path.html#M000147">filename</a>. If in <tt>rename</tt> mode, also
+renames the referenced filesystem object.
+</p>
+<p>
+Returns the new value of <tt>filename</tt>
+</p>
+<pre>
+  ario = rio('dirA/dirB/afile.rb')
+  ario.dirname = 'dirC'          # rio('dirC/afile.rb')
+  ario.basename = 'bfile'        # rio('dirC/bfile.rb')
+  ario.extname = '.txt'          # rio('dirC/bfile.txt')
+  ario.filename = 'cfile.rb'     # rio('dirC/cfile.rb')
+
+  rio('adir/afile.txt').rename.filename = 'bfile.rb' # adir/afile.txt =&gt; adir/bfile.rb
+  rio('adir/afile.txt').rename.basename = 'bfile'    # adir/afile.txt =&gt; adir/bfile.txt
+  rio('adir/afile.txt').rename.extname  = '.rb'      # adir/afile.txt =&gt; adir/afile.rb
+  rio('adir/afile.txt').rename.dirname =  'b/c'      # adir/afile.txt =&gt; b/c/afile.txt
+</pre>
+<p>
+See <a href="Path.html#M000147">filename</a>, <a
+href="FileOrDir.html#M000120">rename</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000135.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000135.html');return false;">
+          <span class="method-name">fspath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the path for the Rio on the underlying file system Returns nil if
+the Rio is not on the filesystem (i.e. stdin: or http: Rios)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000157.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000157.html');return false;">
+          <span class="method-name">host</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls URI#host for Rios which have a URI. Otherwise raises NoMethodError.
+</p>
+<pre>
+ rio('http://ruby-doc.org/').host #=&gt; 'ruby-doc'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000152" class="method-detail">
+        <a name="M000152"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000152.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000152.html');return false;">
+          <span class="method-name">join</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates new Rio by adding args as additional directory components like
+File#join.
+</p>
+<pre>
+  ario = rio('adir')
+  brio = rio('b')
+  crio = ario.join(brio)    #=&gt; rio('adir/b')
+
+  ario = rio('adir')
+  ario.join('b','c','d')    #=&gt; rio('ario/b/c/d')
+</pre>
+<p>
+See also <a href="Path.html#M000154">/</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000155" class="method-detail">
+        <a name="M000155"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000155.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000155.html');return false;">
+          <span class="method-name">join!</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Changes a Rio inplace by adding args as additional directory components
+like <a href="Path.html#M000152">join</a>,
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000159.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000159.html');return false;">
+          <span class="method-name">merge</span><span class="method-args">(other)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls URI#merge
+</p>
+<p>
+Merges two Rios. URI#merge does not document exactly what merging two URIs
+means. This appears to join the paths like <tt>other + path</tt>. See
+URI#merge for less information.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000142.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000142.html');return false;">
+          <span class="method-name">noext</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Identical to <a href="Path.html#M000141">ext</a>(&#8217;&#8217;)
+</p>
+<pre>
+ ario.basename                  #=&gt; rio('afile')
+ ario.noext.basename            #=&gt; rio('afile.txt')
+</pre>
+<p>
+See also <a href="Path.html#M000141">ext</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000158" class="method-detail">
+        <a name="M000158"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000158.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000158.html');return false;">
+          <span class="method-name">opaque</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls URI#opaque for Rios which have URI representations. The opaque
+portion of a URI is the portion after the colon and before the
+question-mark beginning the query.
+</p>
+<pre>
+ rio('http://example.org/do.cgi?n=1').opaque  #=&gt; '//example.org/do.cgi'
+</pre>
+<p>
+For Rios that do not have URL representations, returns the same part of
+Rio&#8217;s internal psuedo-URL
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000132.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000132.html');return false;">
+          <span class="method-name">path</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the path for the Rio, which is defined differently for different
+types of Rios.
+</p>
+<p>
+For Rios representing paths on the underlying file system this is an alias
+<a href="Path.html#M000135">fspath</a>. For Rios with paths that are not on
+the file system this is an alias for <a
+href="Path.html#M000136">urlpath</a>.
+</p>
+<p>
+Otherwise this returns nil.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000163" class="method-detail">
+        <a name="M000163"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000163.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000163.html');return false;">
+          <span class="method-name">realpath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls Pathname#realpath
+</p>
+<p>
+Returns a new Rio whose path is the real (absolute) pathname of
+<tt>self</tt> in the actual filesystem. The real pathname doesn&#8217;t
+contain symlinks or useless dots.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000139.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000139.html');return false;">
+          <span class="method-name">rel</span><span class="method-args">(other=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a new rio with a path equal to the relative path from
+<em>other</em>
+</p>
+<pre>
+ rio('/tmp/afile').rel('/tmp')   #=&gt; rio('afile')
+ rio('zippy/afile').rel('zippy') #=&gt; rio('afile')
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000160.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000160.html');return false;">
+          <span class="method-name">route_from</span><span class="method-args">(other)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls URI#route_from
+</p>
+<p>
+Returns a new rio representing the path to this Rio from the perspective of
+<em>other</em>. URI#route_from requires that absolute URIs be used. <a
+href="Path.html#M000160">route_from</a> does not.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000161.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000161.html');return false;">
+          <span class="method-name">route_to</span><span class="method-args">(other)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls URI#route_to
+</p>
+<p>
+Returns a new rio representing the path to <em>other</em> from the
+perspective of this Rio. URI#route_to requires that absolute URIs be used.
+<a href="Path.html#M000161">route_to</a> does not.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000156" class="method-detail">
+        <a name="M000156"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000156.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000156.html');return false;">
+          <span class="method-name">scheme</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the scheme for the Rio&#8217;s URI-like URI#scheme where the Rio is
+represented by a standard URI. For Rios that are not represented by
+standard URIs one of Rio&#8217;s non-standard schemes is returned.
+</p>
+<pre>
+ rio('http://ruby-doc.org/').scheme #=&gt; 'http'
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000153" class="method-detail">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000153.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000153.html');return false;">
+          <span class="method-name">splitpath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of Rios, one for each path element. (Note that this
+behavior differs from File#split.)
+</p>
+<pre>
+ rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+</pre>
+<p>
+The array returned is extended with a <tt>to_rio</tt> method, which will
+put the parts back together again.
+</p>
+<pre>
+ ary = rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+ ary.to_rio           #=&gt; rio('a/b/c')
+
+ ary = rio('a/b/c').split   #=&gt; [rio('a'),rio('b'),rio('c')]
+ ary[1] = rio('d')
+ ary.to_rio           #=&gt; rio('a/d/c')
+</pre>
+<p>
+See also <a href="Path.html#M000152">join</a>, <a
+href="Path.html#M000154">/</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000134.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000134.html');return false;">
+          <span class="method-name">to_uri</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For resources that have a URL (RFC1738) representation, this returns a URI
+object referencing it. Otherwise this raises NoMethodError.
+</p>
+<pre>
+ rio('http://rubyforge.org/').to_uri     #=&gt; &lt;URI::HTTP:0x818bd84 URL:http://rubyforge.org/&gt;
+ rio('adir/afile').to_uri                #=&gt; &lt;URI::Generic:0x817d288 URL:adir/afile&gt;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000133.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000133.html');return false;">
+          <span class="method-name">to_url</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For resources that have a absolute URL (RFC1738) representation, this
+returns a string containing that representation. For objects that do not
+this returns a RIORL (a descriptive pseudo-URL).
+</p>
+<pre>
+ rio('/var/www/')                  #=&gt; &quot;file:///var/www/&quot;
+ rio('http://rio.rubyforge.org/')  #=&gt; &quot;http://rio.rubyforge.org&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="Path.src/M000136.html" target="Code" class="method-signature"
+            onclick="popupCode('Path.src/M000136.html');return false;">
+          <span class="method-name">urlpath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the path portion of the URL representation of the rio Returns nil
+if the Rio URL has no path (i.e. stdin: or http: Rios)
+</p>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

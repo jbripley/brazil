@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::INDEX</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::INDEX</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/INDEX_rb.html">
+                lib/rio/doc/INDEX.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Rio - Index</h1>
+<p>
+Constructors: <a href="../../RIO.html#M000001">RIO#rio</a> <a
+href="../../RIO.html#M000002">RIO#cwd</a> <a
+href="../../RIO.html#M000003">RIO#root</a>
+</p>
+<p>
+Directories: <a href="../IF/Dir.html#M000045">chdir</a> <a
+href="../IF/Dir.html#M000046">find</a> <a
+href="../IF/Dir.html#M000047">glob</a> <a
+href="../IF/Dir.html#M000051">mkdir</a> <a
+href="../IF/Dir.html#M000050">mkpath</a> <a
+href="../IF/Dir.html#M000048">rmdir</a> <a
+href="../IF/Dir.html#M000049">rmtree</a>
+</p>
+<p>
+Files: <a href="../IF/File.html#M000219">clear</a> <a
+href="../IF/File.html#M000216">rm</a> <a
+href="../IF/File.html#M000217">touch</a> <a
+href="../IF/File.html#M000218">truncate</a>
+</p>
+<p>
+Files or Directories: <a href="../IF/FileOrDir.html#M000117">open</a> <a
+href="../IF/FileOrDir.html#M000125">pos</a> <a
+href="../IF/FileOrDir.html#M000127">pos=</a> <a
+href="../IF/FileOrDir.html#M000122">read</a> <a
+href="../IF/FileOrDir.html#M000119">readlink</a> <a
+href="../IF/FileOrDir.html#M000120">rename</a> <a
+href="../IF/FileOrDir.html#M000121">rename!</a> <a
+href="../IF/FileOrDir.html#M000128">reopen</a> <a
+href="../IF/FileOrDir.html#M000123">rewind</a> <a
+href="../IF/FileOrDir.html#M000124">seek</a> <a
+href="../IF/FileOrDir.html#M000118">symlink</a> <a
+href="../IF/FileOrDir.html#M000126">tell</a>
+</p>
+<p>
+Path: <a href="../IF/Path.html#M000154">/</a> <a
+href="../IF/Path.html#M000138">abs</a> <a
+href="../IF/Path.html#M000140">base</a> <a
+href="../IF/Path.html#M000145">basename</a> <a
+href="../IF/Path.html#M000149">basename=</a> <a
+href="../IF/Path.html#M000162">cleanpath</a> <a
+href="../IF/Path.html#M000146">dirname</a> <a
+href="../IF/Path.html#M000150">dirname=</a> <a
+href="../IF/Path.html#M000137">expand_path</a> <a
+href="../IF/Path.html#M000141">ext</a> <a
+href="../IF/Path.html#M000143">ext?</a> <a
+href="../IF/Path.html#M000144">extname</a> <a
+href="../IF/Path.html#M000148">extname=</a> <a
+href="../IF/Path.html#M000147">filename</a> <a
+href="../IF/Path.html#M000151">filename=</a> <a
+href="../IF/Path.html#M000135">fspath</a> <a
+href="../IF/Path.html#M000157">host</a> <a
+href="../IF/Path.html#M000152">join</a> <a
+href="../IF/Path.html#M000155">join!</a> <a
+href="../IF/Path.html#M000159">merge</a> <a
+href="../IF/Path.html#M000142">noext</a> <a
+href="../IF/Path.html#M000158">opaque</a> <a
+href="../IF/Path.html#M000132">path</a> <a
+href="../IF/Path.html#M000163">realpath</a> <a
+href="../IF/Path.html#M000139">rel</a> <a
+href="../IF/Path.html#M000160">route_from</a> <a
+href="../IF/Path.html#M000161">route_to</a> <a
+href="../IF/Path.html#M000156">scheme</a> <a
+href="../IF/Path.html#M000153">splitpath</a> <a
+href="../IF/Path.html#M000134">to_uri</a> <a
+href="../IF/Path.html#M000133">to_url</a> <a
+href="../IF/Path.html#M000136">urlpath</a>
+</p>
+<p>
+String: <a href="../IF/String.html#M000213">+</a> <a
+href="../IF/String.html#M000215">gsub</a> <a
+href="../IF/String.html#M000214">sub</a>
+</p>
+<p>
+Grande: <a href="../IF/Grande.html#M000053">[]</a> <a
+href="../IF/Grande.html#M000065"><</a> <a
+href="../IF/Grande.html#M000063"><<</a> <a
+href="../IF/Grande.html#M000058">></a> <a
+href="../IF/Grande.html#M000061">>></a> <a
+href="../IF/Grande.html#M000060">|</a> <a
+href="../IF/Grande.html#M000064">append_from</a> <a
+href="../IF/Grande.html#M000062">append_to</a> <a
+href="../IF/Grande.html#M000066">copy_from</a> <a
+href="../IF/Grande.html#M000059">copy_to</a> <a
+href="../IF/Grande.html#M000055">delete</a> <a
+href="../IF/Grande.html#M000057">delete!</a> <a
+href="../IF/Grande.html#M000054">each</a> <a
+href="../IF/Grande.html#M000069">empty?</a> <a
+href="../IF/Grande.html#M000067">get</a> <a
+href="../IF/Grande.html#M000068">skip</a> <a
+href="../IF/Grande.html#M000070">split</a> <a
+href="../IF/Grande.html#M000052">to_a</a>
+</p>
+<p>
+Grande Directory: <a href="../IF/GrandeEntry.html#M000114">all</a> <a
+href="../IF/GrandeEntry.html#M000113">all?</a> <a
+href="../IF/GrandeEntry.html#M000107">dirs</a> <a
+href="../IF/GrandeEntry.html#M000109">entries</a> <a
+href="../IF/GrandeEntry.html#M000111">files</a> <a
+href="../IF/GrandeEntry.html#M000116">norecurse</a> <a
+href="../IF/GrandeEntry.html#M000115">recurse</a> <a
+href="../IF/GrandeEntry.html#M000108">skipdirs</a> <a
+href="../IF/GrandeEntry.html#M000110">skipentries</a> <a
+href="../IF/GrandeEntry.html#M000112">skipfiles</a>
+</p>
+<p>
+Grande Stream: <a href="../IF/GrandeStream.html#M000087">+@</a> <a
+href="../IF/GrandeStream.html#M000086">a</a> <a
+href="../IF/GrandeStream.html#M000088">a!</a> <a
+href="../IF/GrandeStream.html#M000075">bytes</a> <a
+href="../IF/GrandeStream.html#M000101">chomp</a> <a
+href="../IF/GrandeStream.html#M000100">chomp?</a> <a
+href="../IF/GrandeStream.html#M000096">closeoncopy</a> <a
+href="../IF/GrandeStream.html#M000098">closeoncopy?</a> <a
+href="../IF/GrandeStream.html#M000093">closeoneof</a> <a
+href="../IF/GrandeStream.html#M000095">closeoneof?</a> <a
+href="../IF/GrandeStream.html#M000084">contents</a> <a
+href="../IF/GrandeStream.html#M000083">getline</a> <a
+href="../IF/GrandeStream.html#M000081">getrec</a> <a
+href="../IF/GrandeStream.html#M000082">getrow</a> <a
+href="../IF/GrandeStream.html#M000104">gzip</a> <a
+href="../IF/GrandeStream.html#M000105">gzip?</a> <a
+href="../IF/GrandeStream.html#M000071">line</a> <a
+href="../IF/GrandeStream.html#M000074">lines</a> <a
+href="../IF/GrandeStream.html#M000099">noautoclose</a> <a
+href="../IF/GrandeStream.html#M000097">nocloseoncopy</a> <a
+href="../IF/GrandeStream.html#M000094">nocloseoneof</a> <a
+href="../IF/GrandeStream.html#M000085">putrec</a> <a
+href="../IF/GrandeStream.html#M000089">r</a> <a
+href="../IF/GrandeStream.html#M000090">r!</a> <a
+href="../IF/GrandeStream.html#M000072">record</a> <a
+href="../IF/GrandeStream.html#M000076">records</a> <a
+href="../IF/GrandeStream.html#M000073">row</a> <a
+href="../IF/GrandeStream.html#M000079">rows</a> <a
+href="../IF/GrandeStream.html#M000078">skiplines</a> <a
+href="../IF/GrandeStream.html#M000077">skiprecords</a> <a
+href="../IF/GrandeStream.html#M000080">skiprows</a> <a
+href="../IF/GrandeStream.html#M000106">splitlines</a> <a
+href="../IF/GrandeStream.html#M000103">strip</a> <a
+href="../IF/GrandeStream.html#M000102">strip?</a> <a
+href="../IF/GrandeStream.html#M000091">w</a> <a
+href="../IF/GrandeStream.html#M000092">w!</a>
+</p>
+<p>
+Ruby I/O: <a href="../IF/RubyIO.html#M000008">binmode</a> <a
+href="../IF/RubyIO.html#M000030">close</a> <a
+href="../IF/RubyIO.html#M000031">close_write</a> <a
+href="../IF/RubyIO.html#M000010">each_byte</a> <a
+href="../IF/RubyIO.html#M000011">each_line</a> <a
+href="../IF/RubyIO.html#M000025">eof?</a> <a
+href="../IF/RubyIO.html#M000032">fcntl</a> <a
+href="../IF/RubyIO.html#M000034">fileno</a> <a
+href="../IF/RubyIO.html#M000009">flush</a> <a
+href="../IF/RubyIO.html#M000035">fsync</a> <a
+href="../IF/RubyIO.html#M000037">getc</a> <a
+href="../IF/RubyIO.html#M000004">gets</a> <a
+href="../IF/RubyIO.html#M000033">ioctl</a> <a
+href="../IF/RubyIO.html#M000026">ioh</a> <a
+href="../IF/RubyIO.html#M000027">ios</a> <a
+href="../IF/RubyIO.html#M000005">lineno</a> <a
+href="../IF/RubyIO.html#M000006">lineno=</a> <a
+href="../IF/RubyIO.html#M000028">mode</a> <a
+href="../IF/RubyIO.html#M000029">mode?</a> <a
+href="../IF/RubyIO.html#M000043">nosync</a> <a
+href="../IF/RubyIO.html#M000036">pid</a> <a
+href="../IF/RubyIO.html#M000015">print</a> <a
+href="../IF/RubyIO.html#M000016">print!</a> <a
+href="../IF/RubyIO.html#M000018">printf</a> <a
+href="../IF/RubyIO.html#M000017">printf!</a> <a
+href="../IF/RubyIO.html#M000020">putc</a> <a
+href="../IF/RubyIO.html#M000019">putc!</a> <a
+href="../IF/RubyIO.html#M000021">puts</a> <a
+href="../IF/RubyIO.html#M000022">puts!</a> <a
+href="../IF/RubyIO.html#M000013">readline</a> <a
+href="../IF/RubyIO.html#M000012">readlines</a> <a
+href="../IF/RubyIO.html#M000014">readpartial</a> <a
+href="../IF/RubyIO.html#M000007">recno</a> <a
+href="../IF/RubyIO.html#M000042">sync</a> <a
+href="../IF/RubyIO.html#M000044">sync?</a> <a
+href="../IF/RubyIO.html#M000038">to_i</a> <a
+href="../IF/RubyIO.html#M000039">to_io</a> <a
+href="../IF/RubyIO.html#M000040">tty?</a> <a
+href="../IF/RubyIO.html#M000041">ungetc</a> <a
+href="../IF/RubyIO.html#M000024">write</a> <a
+href="../IF/RubyIO.html#M000023">write!</a>
+</p>
+<p>
+Test: <a href="../IF/Test.html#M000209">abs?</a> <a
+href="../IF/Test.html#M000210">absolute?</a> <a
+href="../IF/Test.html#M000192">atime</a> <a
+href="../IF/Test.html#M000177">blockdev?</a> <a
+href="../IF/Test.html#M000178">chardev?</a> <a
+href="../IF/Test.html#M000186">closed?</a> <a
+href="../IF/Test.html#M000193">ctime</a> <a
+href="../IF/Test.html#M000180">dir?</a> <a
+href="../IF/Test.html#M000179">directory?</a> <a
+href="../IF/Test.html#M000196">executable_real?</a> <a
+href="../IF/Test.html#M000195">executable?</a> <a
+href="../IF/Test.html#M000181">exist?</a> <a
+href="../IF/Test.html#M000182">file?</a> <a
+href="../IF/Test.html#M000187">fnmatch?</a> <a
+href="../IF/Test.html#M000188">ftype</a> <a
+href="../IF/Test.html#M000203">grpowned?</a> <a
+href="../IF/Test.html#M000190">lstat</a> <a
+href="../IF/Test.html#M000211">mountpoint?</a> <a
+href="../IF/Test.html#M000194">mtime</a> <a
+href="../IF/Test.html#M000185">open?</a> <a
+href="../IF/Test.html#M000202">owned?</a> <a
+href="../IF/Test.html#M000191">pipe?</a> <a
+href="../IF/Test.html#M000198">readable_real?</a> <a
+href="../IF/Test.html#M000197">readable?</a> <a
+href="../IF/Test.html#M000212">root?</a> <a
+href="../IF/Test.html#M000204">setgid?</a> <a
+href="../IF/Test.html#M000205">setuid?</a> <a
+href="../IF/Test.html#M000206">size</a> <a
+href="../IF/Test.html#M000207">size?</a> <a
+href="../IF/Test.html#M000183">socket?</a> <a
+href="../IF/Test.html#M000189">stat</a> <a
+href="../IF/Test.html#M000201">sticky?</a> <a
+href="../IF/Test.html#M000184">symlink?</a> <a
+href="../IF/Test.html#M000200">writable_real?</a> <a
+href="../IF/Test.html#M000199">writable?</a> <a
+href="../IF/Test.html#M000208">zero?</a>
+</p>
+<p>
+Basic: <a href="../Rio.html#M000228">RIO::Rio#==</a> <a
+href="../Rio.html#M000229">RIO::Rio#===</a> <a
+href="../Rio.html#M000232">RIO::Rio#=~</a> <a
+href="../Rio.html#M000225">RIO::Rio#dup</a> <a
+href="../Rio.html#M000231">RIO::Rio#eql?</a> <a
+href="../Rio.html#M000230">RIO::Rio#hash</a> <a
+href="../Rio.html#M000221">RIO::Rio#initialize_copy</a> <a
+href="../Rio.html#M000226">RIO::Rio#inspect</a> <a
+href="../Rio.html#M000227">RIO::Rio#length</a> <a
+href="../Rio.html#M000220">RIO::Rio#new</a> <a
+href="../Rio.html#M000222">RIO::Rio#rio</a> <a
+href="../Rio.html#M000233">RIO::Rio#string</a> <a
+href="../Rio.html#M000223">RIO::Rio#to_s</a> <a
+href="../Rio.html#M000224">RIO::Rio#to_str</a>
+</p>
+<p>
+CSV: <a href="../IF/CSV.html#M000130">columns</a> <a
+href="../IF/CSV.html#M000129">csv</a> <a
+href="../IF/CSV.html#M000131">skipcolumns</a>
+</p>
+<p>
+YAML: <a href="../IF/YAML.html#M000171">document</a> <a
+href="../IF/YAML.html#M000168">documents</a> <a
+href="../IF/YAML.html#M000176">dump</a> <a
+href="../IF/YAML.html#M000172">getobj</a> <a
+href="../IF/YAML.html#M000173">load</a> <a
+href="../IF/YAML.html#M000170">object</a> <a
+href="../IF/YAML.html#M000166">objects</a> <a
+href="../IF/YAML.html#M000174">putobj</a> <a
+href="../IF/YAML.html#M000175">putobj!</a> <a
+href="../IF/YAML.html#M000169">skipdocuments</a> <a
+href="../IF/YAML.html#M000167">skipobjects</a> <a
+href="../IF/YAML.html#M000164">yaml</a> <a
+href="../IF/YAML.html#M000165">yaml?</a>
+</p>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

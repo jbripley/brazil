@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::RubyIO</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::RubyIO</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/rubyio_rb.html">
+                lib/rio/if/rubyio.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000008">binmode</a>&nbsp;&nbsp;
+      <a href="#M000030">close</a>&nbsp;&nbsp;
+      <a href="#M000031">close_write</a>&nbsp;&nbsp;
+      <a href="#M000010">each_byte</a>&nbsp;&nbsp;
+      <a href="#M000011">each_line</a>&nbsp;&nbsp;
+      <a href="#M000025">eof?</a>&nbsp;&nbsp;
+      <a href="#M000032">fcntl</a>&nbsp;&nbsp;
+      <a href="#M000034">fileno</a>&nbsp;&nbsp;
+      <a href="#M000009">flush</a>&nbsp;&nbsp;
+      <a href="#M000035">fsync</a>&nbsp;&nbsp;
+      <a href="#M000037">getc</a>&nbsp;&nbsp;
+      <a href="#M000004">gets</a>&nbsp;&nbsp;
+      <a href="#M000033">ioctl</a>&nbsp;&nbsp;
+      <a href="#M000026">ioh</a>&nbsp;&nbsp;
+      <a href="#M000027">ios</a>&nbsp;&nbsp;
+      <a href="#M000005">lineno</a>&nbsp;&nbsp;
+      <a href="#M000006">lineno=</a>&nbsp;&nbsp;
+      <a href="#M000028">mode</a>&nbsp;&nbsp;
+      <a href="#M000029">mode?</a>&nbsp;&nbsp;
+      <a href="#M000043">nosync</a>&nbsp;&nbsp;
+      <a href="#M000036">pid</a>&nbsp;&nbsp;
+      <a href="#M000015">print</a>&nbsp;&nbsp;
+      <a href="#M000016">print!</a>&nbsp;&nbsp;
+      <a href="#M000018">printf</a>&nbsp;&nbsp;
+      <a href="#M000017">printf!</a>&nbsp;&nbsp;
+      <a href="#M000020">putc</a>&nbsp;&nbsp;
+      <a href="#M000019">putc!</a>&nbsp;&nbsp;
+      <a href="#M000021">puts</a>&nbsp;&nbsp;
+      <a href="#M000022">puts!</a>&nbsp;&nbsp;
+      <a href="#M000013">readline</a>&nbsp;&nbsp;
+      <a href="#M000012">readlines</a>&nbsp;&nbsp;
+      <a href="#M000014">readpartial</a>&nbsp;&nbsp;
+      <a href="#M000007">recno</a>&nbsp;&nbsp;
+      <a href="#M000042">sync</a>&nbsp;&nbsp;
+      <a href="#M000044">sync?</a>&nbsp;&nbsp;
+      <a href="#M000038">to_i</a>&nbsp;&nbsp;
+      <a href="#M000039">to_io</a>&nbsp;&nbsp;
+      <a href="#M000040">tty?</a>&nbsp;&nbsp;
+      <a href="#M000041">ungetc</a>&nbsp;&nbsp;
+      <a href="#M000024">write</a>&nbsp;&nbsp;
+      <a href="#M000023">write!</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000008.html');return false;">
+          <span class="method-name">binmode</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#binmode
+</p>
+<p>
+Puts rio into binary mode. This is useful only in MS-DOS/Windows
+environments. Once a stream is in binary mode, it cannot be reset to
+nonbinary mode.
+</p>
+<p>
+Returns the Rio.
+</p>
+<pre>
+ rio('afile.exe').binmode.bytes(512).to_a # read a file in 512 byte blocks
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000030.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#close
+</p>
+<pre>
+     ario.close   =&gt; nil
+</pre>
+<p>
+Closes <em>ario</em> and flushes any pending writes to the operating
+system. The stream is unavailable for any further data operations; an
+<tt>IOError</tt> is raised if such an attempt is made. I/O streams are
+automatically closed when they are claimed by the garbage collector.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000031.html');return false;">
+          <span class="method-name">close_write</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000010.html');return false;">
+          <span class="method-name">each_byte</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#each_byte
+</p>
+<pre>
+ ario.each_byte {|byte| block }  =&gt; ario
+</pre>
+<p>
+Calls the given block once for each byte (0..255) in <em>ario</em>, passing
+the byte as an argument.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000011.html');return false;">
+          <span class="method-name">each_line</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#each_line
+</p>
+<pre>
+ ario.each_line(sep_string=$/) {|line| block }  =&gt; ario
+</pre>
+<p>
+Executes the block for every line in <em>ario</em>, where lines are
+separated by <em>sep_string</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000025.html');return false;">
+          <span class="method-name">eof?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#eof?
+</p>
+<pre>
+ ario.eof     =&gt; true or false
+</pre>
+<p>
+Returns true if <em>ario</em> is at end of file. The stream must be opened
+for reading or an <tt>IOError</tt> will be raised.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000032.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000032.html');return false;">
+          <span class="method-name">fcntl</span><span class="method-args">(integer_cmd,arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#fcntl
+</p>
+<pre>
+     ario.fcntl(integer_cmd, arg)    =&gt; integer
+</pre>
+<p>
+Provides a mechanism for issuing low-level commands to control or query
+file-oriented I/O streams. Arguments and results are platform dependent. If
+<em>arg</em> is a number, its value is passed directly. If it is a string,
+it is interpreted as a binary sequence of bytes (<tt>Array#pack</tt> might
+be a useful way to build this string). On Unix platforms, see
+<tt>fcntl(2)</tt> for details. Not implemented on all platforms.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000034.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000034.html');return false;">
+          <span class="method-name">fileno</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#fileno
+</p>
+<pre>
+     ario.fileno    =&gt; fixnum
+     ario.to_i      =&gt; fixnum
+</pre>
+<p>
+Returns an integer representing the numeric file descriptor for
+<em>ario</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000009.html');return false;">
+          <span class="method-name">flush</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#flush
+</p>
+<pre>
+ ario.flush    =&gt; ario
+</pre>
+<p>
+Flushes any buffered data within <em>ario</em> to the underlying operating
+system (note that this is Ruby internal buffering only; the OS may buffer
+the data as well).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000035.html');return false;">
+          <span class="method-name">fsync</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#fsync
+</p>
+<pre>
+     ario.fsync   =&gt; ario
+</pre>
+<p>
+Immediately writes all buffered data in <em>ario</em> to disk and return
+<em>ario</em>. Does nothing if the underlying operating system does not
+support _fsync(2)_. Note that <tt>fsync</tt> differs from using <a
+href="RubyIO.html#M000042">sync</a>. The latter ensures that data is
+flushed from Ruby&#8217;s buffers, but doesn&#8217;t not guarantee that the
+underlying operating system actually writes it to disk.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000037.html');return false;">
+          <span class="method-name">getc</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#getc
+</p>
+<pre>
+     ario.getc   =&gt; fixnum or nil
+</pre>
+<p>
+Gets the next 8-bit byte (0..255) from <em>ario</em>. Returns <tt>nil</tt>
+if called at end of file.
+</p>
+<p>
+f = File.new(&quot;testfile&quot;) f.getc #=&gt; 84 f.getc #=&gt; 104
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000004.html');return false;">
+          <span class="method-name">gets</span><span class="method-args">(sep_string=$/)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#gets
+</p>
+<p>
+Reads the next line from the Rio; lines are separated by sep_string. A
+separator of nil reads the entire contents, and a zero-length separator
+reads the input a paragraph at a time (two successive newlines in the input
+separate paragraphs).
+</p>
+<p>
+Returns nil if called at end of file.
+</p>
+<pre>
+ astring  = rio('afile.txt').gets # read the first line of afile.txt into astring
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000033.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000033.html');return false;">
+          <span class="method-name">ioctl</span><span class="method-args">(integer_cmd,arg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#ioctl
+</p>
+<pre>
+     ario.ioctl(integer_cmd, arg)    =&gt; integer
+</pre>
+<p>
+Provides a mechanism for issuing low-level commands to control or query I/O
+devices. Arguments and results are platform dependent. If <em>arg</em> is a
+number, its value is passed directly. If it is a string, it is interpreted
+as a binary sequence of bytes. On Unix platforms, see +ioctl(2)+ for
+details. Not implemented on all platforms.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000026.html');return false;">
+          <span class="method-name">ioh</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides direct access to the IO handle (as would be returned by ::IO#new)
+<b>with</b> filtering. Reading from and writing to this handle will be
+affected by such things as <a href="GrandeStream.html#M000104">gzip</a> and
+<a href="GrandeStream.html#M000101">chomp</a> if they were specified for
+the Rio.
+</p>
+<p>
+Compare this with <a href="RubyIO.html#M000027">ios</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000027.html');return false;">
+          <span class="method-name">ios</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides direct access to the IO handle (as would be returned by ::IO#new)
+Reading from and writing to this handle is <b>not</b> affected by such
+things as <a href="GrandeStream.html#M000104">gzip</a> and <a
+href="GrandeStream.html#M000101">chomp</a>.
+</p>
+<p>
+Compare this with <a href="RubyIO.html#M000026">ioh</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000005.html');return false;">
+          <span class="method-name">lineno</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#lineno
+</p>
+<p>
+Returns the current line number of a Rio.
+</p>
+<p>
+The Rio will be opened for reading if not already. lineno counts the number
+of times gets is called, rather than the number of newlines encountered
+&#8212; so lineno will only be accurate if the file is read exclusively
+with line-oriented methods (<a href="RubyIO.html#M000013">readline</a>,
+IF::GrandeStream#each_line, <a href="RubyIO.html#M000004">gets</a> etc.)
+</p>
+<p>
+See also the $. variable and <a href="RubyIO.html#M000007">recno</a>
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.lineno   #=&gt; 0
+ f.gets     #=&gt; &quot;This is line one\n&quot;
+ f.lineno   #=&gt; 1
+ f.gets     #=&gt; &quot;This is line two\n&quot;
+ f.lineno   #=&gt; 2
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000006.html');return false;">
+          <span class="method-name">lineno=</span><span class="method-args">(integer)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#lineno=
+</p>
+<pre>
+ ario.lineno = integer    =&gt; integer
+</pre>
+<p>
+Manually sets the current line number to the given value. <tt>$.</tt> is
+updated only on the next read.
+</p>
+<p>
+f = rio(&quot;testfile&quot;) f.gets #=&gt; &quot;This is line one\n&quot;
+$. #=&gt; 1 f.lineno = 1000 f.lineno #=&gt; 1000 $. # lineno of last read
+#=&gt; 1 f.gets #=&gt; &quot;This is line two\n&quot; $. # lineno of last
+read #=&gt; 1001
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000028.html');return false;">
+          <span class="method-name">mode</span><span class="method-args">(m,*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Explicitly set the mode with which a Rio will be opened.
+</p>
+<pre>
+  ario.mode('r+')   =&gt; ario
+</pre>
+<p>
+Normally one needs never open a Rio or specify its mode &#8212; the mode is
+determined by the operation the Rio is asked to perform. (i.e. <a
+href="RubyIO.html#M000015">print</a> requires write access, <a
+href="RubyIO.html#M000012">readlines</a> requires read access). However
+there are times when one wishes to be specific about the mode with which a
+Rio will be opened. Note that explicitly setting the mode overrides all of
+Rio&#8217;s internal mode logic. If a mode is specified via <a
+href="RubyIO.html#M000028">mode</a> or <a
+href="FileOrDir.html#M000117">open</a> that mode will be used. Period.
+</p>
+<p>
+Returns the Rio.
+</p>
+<p>
+See also <a href="RubyIO.html#M000029">mode?</a>
+</p>
+<p>
+If the mode is given as a String, it must be one of the values listed in
+the following table.
+</p>
+<pre>
+  Mode |  Meaning
+  -----+--------------------------------------------------------
+  &quot;r&quot;  |  Read-only, starts at beginning of file  (default mode).
+  -----+--------------------------------------------------------
+  &quot;r+&quot; |  Read-write, starts at beginning of file.
+  -----+--------------------------------------------------------
+  &quot;w&quot;  |  Write-only, truncates existing file
+       |  to zero length or creates a new file for writing.
+  -----+--------------------------------------------------------
+  &quot;w+&quot; |  Read-write, truncates existing file to zero length
+       |  or creates a new file for reading and writing.
+  -----+--------------------------------------------------------
+  &quot;a&quot;  |  Write-only, starts at end of file if file exists,
+       |  otherwise creates a new file for writing.
+  -----+--------------------------------------------------------
+  &quot;a+&quot; |  Read-write, starts at end of file if file exists,
+       |  otherwise creates a new file for reading and
+       |  writing.
+  -----+--------------------------------------------------------
+   &quot;b&quot; |  (DOS/Windows only) Binary file mode (may appear with
+       |  any of the key letters listed above).
+
+ ario = rio('afile').mode('r+').nocloseoneof # file will be opened in r+ mode
+                                            # don't want the file closed at eof
+ ario.seek(apos).gets # read the string at apos in afile
+ ario.rewind.gets # read the string at the beginning of the file
+ ario.close
+</pre>
+<p>
+TODO:
+</p>
+<ul>
+<li>Add support for integer modes
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000029.html');return false;">
+          <span class="method-name">mode?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Query a Rio&#8217;s mode
+</p>
+<pre>
+   ario.mode?      #=&gt; a mode string
+</pre>
+<p>
+See <a href="RubyIO.html#M000028">mode</a>
+</p>
+<pre>
+ ario = rio('afile')
+ ario.puts(&quot;Hello World&quot;)
+ ario.mode?      #=&gt; 'w' IF::RubyIO#puts requires write access
+
+ ario = rio('afile')
+ ario.gets
+ ario.mode?      #=&gt; 'r' IF::RubyIO#gets requires read access
+
+ ario = rio('afile').mode('w+').nocloseoneof
+ ario.gets
+ ario.mode?      #=&gt; 'w+' Set explictly
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000043.html');return false;">
+          <span class="method-name">nosync</span><span class="method-args">(arg=false,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Similar to IO#sync= false
+</p>
+<pre>
+     ario.nosync(&amp;block)   =&gt; ario
+</pre>
+<p>
+Sets the Rio so that its &#8216;sync mode&#8217; will be set to
+<tt>false</tt> when opened, or set it immediately if already open. When
+sync mode is true, all output is immediately flushed to the underlying
+operating system and is not buffered internally. Returns the rio. See also
+<a href="RubyIO.html#M000035">fsync</a>, <a
+href="RubyIO.html#M000042">sync</a>, <a
+href="RubyIO.html#M000044">sync?</a>.
+</p>
+<p>
+If a block is given behaves like <tt>ario.nosync.each(&amp;block)</tt>
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;).sync.puts(&quot;Hello World&quot;)
+ f.sync?     # =&gt; true
+ f.nosync
+ f.sync?     # =&gt; false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000036.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000036.html');return false;">
+          <span class="method-name">pid</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#pid
+</p>
+<pre>
+ ario.pid    =&gt; fixnum
+</pre>
+<p>
+Returns the process ID of a child process associated with <em>ario</em>.
+This will be set by <tt>IO::popen</tt>.
+</p>
+<pre>
+ pipe = IO.popen(&quot;-&quot;)
+ if pipe
+   $stderr.puts &quot;In parent, child pid is #{pipe.pid}&quot;
+ else
+   $stderr.puts &quot;In child, pid is #{$$}&quot;
+ end
+</pre>
+<p>
+produces:
+</p>
+<pre>
+ In child, pid is 26209
+ In parent, child pid is 26209
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000015.html');return false;">
+          <span class="method-name">print</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO::print
+</p>
+<p>
+Writes the given object(s) to the Rio. If the output record separator ($\)
+is not nil, it will be appended to the output. If no arguments are given,
+prints $_. Objects that aren&#8217;t strings will be converted by calling
+their to_s method. Returns the Rio.
+</p>
+<pre>
+ rio('f.txt').print(&quot;Hello Rio\n&quot;) # print the string to f.txt
+ rio(?-).print(&quot;Hello Rio\n&quot;) # print the string to stdout
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000016.html');return false;">
+          <span class="method-name">print!</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000015">print</a> and then closes the Rio. Returns the
+Rio.
+</p>
+<p>
+Equivalent to rio.print(*args).close
+</p>
+<pre>
+ rio('f.txt').print!(&quot;Hello Rio\n&quot;) # print the string to f.txt then close it
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000018.html');return false;">
+          <span class="method-name">printf</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#printf
+</p>
+<pre>
+ ario.printf(format_string [, obj, ...] )   =&gt; ario
+</pre>
+<p>
+Formats and writes to <em>ario</em>, converting parameters under control of
+the format string. See +Kernel#sprintf+ for details.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000017.html');return false;">
+          <span class="method-name">printf!</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000018">printf</a> and then closes the rio. Returns the
+rio.
+</p>
+<p>
+Equivalent to rio.printf(*args).close
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000020.html');return false;">
+          <span class="method-name">putc</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#putc
+</p>
+<pre>
+ ario.putc(obj)    =&gt; ario
+</pre>
+<p>
+If <em>obj</em> is <tt>Numeric</tt>, write the character whose code is
+<em>obj</em>, otherwise write the first character of the string
+representation of <em>obj</em> to <em>ario</em>.
+</p>
+<pre>
+ stdout = rio(?-)
+ stdout.putc &quot;A&quot;
+ stdout.putc 65
+</pre>
+<p>
+_produces:_
+</p>
+<pre>
+ AA
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000019.html');return false;">
+          <span class="method-name">putc!</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000020">putc</a> and then closes the rio. Returns the
+rio.
+</p>
+<p>
+Equivalent to rio.putc(*args).close
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000021.html');return false;">
+          <span class="method-name">puts</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#puts
+</p>
+<p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000015">print</a>. Writes a record separator (typically
+a newline) after any that do not already end with a newline sequence. If
+called with an array argument, writes each element on a new line. If called
+without arguments, outputs a single record separator. Returns the rio.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000022.html');return false;">
+          <span class="method-name">puts!</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000021">puts</a> and then closes the rio. Returns the
+rio.
+</p>
+<p>
+Equivalent to rio.puts(*args).close
+</p>
+<pre>
+ rio('f.txt').puts!('Hello Rio') # print the string to f.txt then close it
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000013.html');return false;">
+          <span class="method-name">readline</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#readline
+</p>
+<pre>
+ ario.readline(sep_string=$/)   =&gt; string
+</pre>
+<p>
+Reads a line as with +IO#gets+, but raises an <tt>EOFError</tt> on end of
+file.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000012.html');return false;">
+          <span class="method-name">readlines</span><span class="method-args">(*args,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#readlines
+</p>
+<p>
+Reads all of the lines in a Rio, and returns them in anArray. Lines are
+separated by the optional aSepString. The stream must be opened for reading
+or an IOerror will be raised.
+</p>
+<pre>
+ an_array = rio('afile.txt').readlines # read afile.txt into an array
+ an_array = rio('afile.txt').chomp.readlines # read afile.txt into an array with each line chomped
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000014.html');return false;">
+          <span class="method-name">readpartial</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#readpartial
+</p>
+<p>
+Reads at most maxlen bytes from the I/O stream but it blocks only if ios
+has no data immediately available. If the optional outbuf argument is
+present, it must reference a String, which will receive the data. It raises
+EOFError on end of file.
+</p>
+<p>
+readpartial is designed for streams such as pipe, socket, tty, etc. It
+blocks only when no data immediately available. This means that it blocks
+only when following all conditions hold.
+</p>
+<ul>
+<li>the buffer in the IO object is empty.
+
+</li>
+<li>the content of the stream is empty.
+
+</li>
+<li>the stream is not reached to EOF.
+
+</li>
+</ul>
+<p>
+When readpartial blocks, it waits data or EOF on the stream. If some data
+is reached, readpartial returns with the data. If EOF is reached,
+readpartial raises EOFError.
+</p>
+<p>
+When readpartial doesn’t blocks, it returns or raises immediately. If the
+buffer is not empty, it returns the data in the buffer. Otherwise if the
+stream has some content, it returns the data in the stream. Otherwise if
+the stream is reached to EOF, it raises EOFError.
+</p>
+<pre>
+   r, w = IO.pipe           #               buffer          pipe content
+   w &lt;&lt; &quot;abc&quot;               #               &quot;&quot;              &quot;abc&quot;.
+   r.readpartial(4096)      #=&gt; &quot;abc&quot;       &quot;&quot;              &quot;&quot;
+   r.readpartial(4096)      # blocks because buffer and pipe is empty.
+
+   r, w = IO.pipe           #               buffer          pipe content
+   w &lt;&lt; &quot;abc&quot;               #               &quot;&quot;              &quot;abc&quot;
+   w.close                  #               &quot;&quot;              &quot;abc&quot; EOF
+   r.readpartial(4096)      #=&gt; &quot;abc&quot;       &quot;&quot;              EOF
+   r.readpartial(4096)      # raises EOFError
+
+   r, w = IO.pipe           #               buffer          pipe content
+   w &lt;&lt; &quot;abc\ndef\n&quot;        #               &quot;&quot;              &quot;abc\ndef\n&quot;
+   r.gets                   #=&gt; &quot;abc\n&quot;     &quot;def\n&quot;         &quot;&quot;
+   w &lt;&lt; &quot;ghi\n&quot;             #               &quot;def\n&quot;         &quot;ghi\n&quot;
+   r.readpartial(4096)      #=&gt; &quot;def\n&quot;     &quot;&quot;              &quot;ghi\n&quot;
+   r.readpartial(4096)      #=&gt; &quot;ghi\n&quot;     &quot;&quot;              &quot;&quot;
+</pre>
+<p>
+Note that readpartial is nonblocking-flag insensitive. It blocks even if
+the nonblocking-flag is set.
+</p>
+<p>
+Also note that readpartial behaves similar to sysread in blocking mode. The
+behavior is identical when the buffer is empty. ios.reopen(other_IO) =&gt;
+ios ios.reopen(path, mode_str) =&gt; ios
+</p>
+<p>
+Reassociates ios with the I/O stream given in other_IO or to a new stream
+opened on path. This may dynamically change the actual class of this
+stream.
+</p>
+<pre>
+   f1 = File.new(&quot;testfile&quot;)
+   f2 = File.new(&quot;testfile&quot;)
+   f2.readlines[0]   #=&gt; &quot;This is line one\n&quot;
+   f2.reopen(f1)     #=&gt; #&lt;File:testfile&gt;
+   f2.readlines[0]   #=&gt; &quot;This is line one\n&quot;
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000007.html');return false;">
+          <span class="method-name">recno</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the current record number of a Rio. The <tt>recno</tt> is the index
+used by the grande selection methods. It represents the zero-based index of
+the last record read. Returns nil until a record has been read.
+</p>
+<p>
+see <a href="GrandeStream.html#M000074">lines</a> <a
+href="GrandeStream.html#M000075">bytes</a> and <a
+href="GrandeStream.html#M000076">records</a>
+</p>
+<p>
+To illustrate: Given a file containing three lines
+&quot;L0\n&quot;,&quot;L1\n&quot;,&quot;L2\n&quot; and a Range (0..1) Each
+of the following would fill anarray with [&quot;L0\n&quot;,
+&quot;L1\n&quot;]
+</p>
+<p>
+Given:
+</p>
+<pre>
+ anarray = []
+ range = (0..1)
+
+ all_lines = rio('afile').readlines
+ all_lines.each_with_index do |line,i|
+   anarray &lt;&lt; line if range === i
+ end
+ # anarray == [&quot;L0\n&quot;, &quot;L1\n&quot;]
+
+ anarray = rio('afile').lines[0..1] # anarray == [&quot;L0\n&quot;, &quot;L1\n&quot;]
+</pre>
+<p>
+<tt>recno</tt> counts the number of times <a
+href="GrandeStream.html#M000081">getrec</a> or <a
+href="Grande.html#M000054">each</a> is used to get a record. so
+<tt>recno</tt> will only concern parts of the file read with grande methods
+<a href="Grande.html#M000054">each</a>, <a
+href="Grande.html#M000053">[]</a>, <a
+href="GrandeStream.html#M000081">getrec</a>
+</p>
+<p>
+See also <a href="RubyIO.html#M000005">lineno</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000042.html');return false;">
+          <span class="method-name">sync</span><span class="method-args">(arg=true,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the &#8216;sync-mode&#8217; of the underlying IO using IO#sync=
+</p>
+<pre>
+     ario.sync(boolean=true,&amp;block)   =&gt; ario
+</pre>
+<p>
+Sets the Rio so that its &#8216;sync mode&#8217; will be set to
+<tt>true</tt> or <tt>false</tt> when opened, or set it immediately if
+already open. When sync mode is true, all output is immediately flushed to
+the underlying operating system and is not buffered internally. Returns the
+rio. See also <a href="RubyIO.html#M000035">fsync</a>, <a
+href="RubyIO.html#M000043">nosync</a>, <a
+href="RubyIO.html#M000044">sync?</a>.
+</p>
+<p>
+If a block is given behaves like <tt>ario.sync(arg).each(&amp;block)</tt>
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;).sync.puts(&quot;Hello World&quot;)
+ f.sync?     # =&gt; true
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000044.html');return false;">
+          <span class="method-name">sync?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Query the current &quot;sync mode&quot; with IO#sync
+</p>
+<pre>
+     ario.sync?    =&gt; true or false
+</pre>
+<p>
+Returns the current &quot;sync mode&quot; of <em>ario</em>. When sync mode
+is true, all output is immediately flushed to the underlying operating
+system and is not buffered by Ruby internally. See also <a
+href="RubyIO.html#M000035">fsync</a>, <a
+href="RubyIO.html#M000042">sync</a>, <a
+href="RubyIO.html#M000043">nosync</a>
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)
+ f.sync?   #=&gt; false
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000038.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000038.html');return false;">
+          <span class="method-name">to_i</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#to_i
+</p>
+<pre>
+  to_i()
+</pre>
+<p>
+Alias for <a href="RubyIO.html#M000034">fileno</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000039.html');return false;">
+          <span class="method-name">to_io</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#to_io
+</p>
+<pre>
+ ario.to_io -&gt; ios
+</pre>
+<p>
+Returns <em>ario</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000040.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000040.html');return false;">
+          <span class="method-name">tty?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#tty?
+</p>
+<pre>
+ ario.tty?     =&gt; true or false
+</pre>
+<p>
+Returns <tt>true</tt> if <em>ario</em> is associated with a terminal device
+(tty), <tt>false</tt> otherwise.
+</p>
+<pre>
+ rio(&quot;testfile&quot;).tty?   #=&gt; false
+ rio(&quot;/dev/tty&quot;).tty?   #=&gt; true
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000041.html');return false;">
+          <span class="method-name">ungetc</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#ungetc
+</p>
+<pre>
+ ario.ungetc(integer)   =&gt; ario
+</pre>
+<p>
+Pushes back one character (passed as a parameter) onto <em>ario</em>, such
+that a subsequent buffered read will return it. Only one character may be
+pushed back before a subsequent read operation (that is, you will be able
+to read only the last of several characters that have been pushed back).
+</p>
+<pre>
+ f = rio(&quot;testfile&quot;)        #=&gt; #&lt;Rio:testfile&gt;
+ c = f.getc                 #=&gt; 84
+ f.ungetc(c).getc           #=&gt; 84
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000024.html');return false;">
+          <span class="method-name">write</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calls IO#write
+</p>
+<pre>
+ ario.write(string)    =&gt; integer
+</pre>
+<p>
+Writes the given string to <em>ario</em>. If the argument is not a string,
+it will be converted to a string using <tt>to_s</tt>. Returns the number of
+bytes written.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="RubyIO.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('RubyIO.src/M000023.html');return false;">
+          <span class="method-name">write!</span><span class="method-args">(*argv)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes the given objects to the rio as with <a
+href="RubyIO.html#M000024">write</a> and then closes the rio.
+</p>
+<p>
+Equivalent to
+</p>
+<pre>
+ ario.write(*args)
+ ario.close
+</pre>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

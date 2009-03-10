@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::IF::CSV</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::IF::CSV</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/if/csv_rb.html">
+                lib/rio/if/csv.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000130">columns</a>&nbsp;&nbsp;
+      <a href="#M000129">csv</a>&nbsp;&nbsp;
+      <a href="#M000131">skipcolumns</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
+
+        <div class="method-heading">
+          <a href="CSV.src/M000130.html" target="Code" class="method-signature"
+            onclick="popupCode('CSV.src/M000130.html');return false;">
+          <span class="method-name">columns</span><span class="method-args">(*ranges,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Select columns from a <a href="CSV.html">CSV</a> file. See <a
+href="CSV.html#M000129">csv</a> and <a
+href="../Doc/INTRO.html">RIO::Doc::INTRO</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
+
+        <div class="method-heading">
+          <a href="CSV.src/M000129.html" target="Code" class="method-signature"
+            onclick="popupCode('CSV.src/M000129.html');return false;">
+          <span class="method-name">csv</span><span class="method-args">(field_separator=',',record_separator=nil,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Puts a Rio in <a href="CSV.html">CSV</a> mode and sets the field and record
+separators. In csv mode selecting with <a
+href="GrandeStream.html#M000076">records</a> will cause each line read to
+be parsed into a line with the <a href="CSV.html">CSV</a> standard library.
+Specifying using <a href="GrandeStream.html#M000074">lines</a> to select
+will return unparsed strings as normal.
+</p>
+<pre>
+ # copy a csv file, changing the field separator
+ rio('afile.csv').csv &gt; rio('afile_semicolons.csv').csv(';')
+</pre>
+<p>
+<a href="CSV.html">CSV</a> mode also adds two methods <a
+href="CSV.html#M000130">columns</a> and <a
+href="CSV.html#M000131">skipcolumns</a> which allows selecting columns by
+column index using Fixnums or Ranges in a way similar to how lines are
+selected.
+</p>
+<pre>
+ # iterate through every line but only get the first three columns
+ rio(&quot;afile.csv&quot;).csv.columns(0..2) { |array_of_fields| ... }
+
+ # iterate through every line but skip the columns 2 and 3 through 5
+ rio(&quot;afile.csv&quot;).csv.skipcolumns(2,3..5) { |array_of_fields| ... }
+
+ # an array containg all but the first line returning columns 5,6 and 7
+ rio(&quot;afile.csv&quot;).csv.columns(5..7).skiplines[0]
+</pre>
+<p>
+See <a href="../Doc/INTRO.html">RIO::Doc::INTRO</a> for complete
+documentation on csv mode.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
+
+        <div class="method-heading">
+          <a href="CSV.src/M000131.html" target="Code" class="method-signature"
+            onclick="popupCode('CSV.src/M000131.html');return false;">
+          <span class="method-name">skipcolumns</span><span class="method-args">(*ranges,&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reject columns from a <a href="CSV.html">CSV</a> file. See <a
+href="CSV.html#M000129">csv</a> and <a
+href="../Doc/INTRO.html">RIO::Doc::INTRO</a>.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

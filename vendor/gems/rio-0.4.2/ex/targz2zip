@@ -1,0 +1,17 @@
+#!/usr/local/bin/ruby
+
+require 'rio'
+require 'rio/argv'
+
+# Create a zip archive from a gzipped tar archive.
+# This depends on the GNU programs 'tar' and 'zip' being available in your PATH
+
+TAR='tar'
+ZIP='zip'
+
+RIO.ARGV.each { |f|
+  f.ext('.tar.gz') if f =~ /\.tar\.gz$/
+  rio(??).chdir {
+    rio(?-,"#{TAR} xvzkf #{f.abs}") | "#{ZIP} -@ #{f.abs.dirname/f.basename+'.zip'}" | ?-
+  }
+}

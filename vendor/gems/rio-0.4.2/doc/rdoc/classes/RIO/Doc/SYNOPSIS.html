@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::SYNOPSIS</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::SYNOPSIS</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/SYNOPSIS_rb.html">
+                lib/rio/doc/SYNOPSIS.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Rio - Ruby I/O Facilitator</h1>
+<p>
+fa-cil-i-tate: To make easy or easier.
+</p>
+<p>
+Rio is a facade for most of the standard ruby classes that deal with I/O;
+providing a simple, intuitive, succinct interface to the functionality
+provided by IO, File, Dir, Pathname, FileUtils, Tempfile, StringIO, OpenURI
+and others. Rio also provides an application level interface which allows
+many common I/O idioms to be expressed succinctly.
+</p>
+<h2><a href="SYNOPSIS.html">SYNOPSIS</a></h2>
+<p>
+For the following assume:
+</p>
+<pre>
+ astring = &quot;&quot;
+ anarray = []
+</pre>
+<p>
+Iterate over the .rb files in a directory.
+</p>
+<pre>
+ rio('adir').files('*.rb') { |entrio| ... }
+</pre>
+<p>
+Return an array of the .rb files in a directory.
+</p>
+<pre>
+ rio('adir').files['*.rb']
+</pre>
+<p>
+Copy the .rb files in a directory.to another directory.
+</p>
+<pre>
+ rio('adir').files('*.rb') &gt; rio('another_directory')
+</pre>
+<p>
+Iterate over the .rb files in a directory and its subdirectories.
+</p>
+<pre>
+ rio('adir').all.files('*.rb') { |entrio| ... }
+</pre>
+<p>
+Return an array of the .rb files in a directory and its subdirectories.
+</p>
+<pre>
+ rio('adir').all.files['*.rb']
+</pre>
+<p>
+Copy or append a file to a string
+</p>
+<pre>
+ rio('afile') &gt; astring      # copy
+ rio('afile') &gt;&gt; astring     # append
+</pre>
+<p>
+Copy or append a string to a file
+</p>
+<pre>
+ rio('afile') &lt; astring      # copy
+ rio('afile') &lt;&lt; astring     # append
+</pre>
+<p>
+Copy or append the lines of a file to an array
+</p>
+<pre>
+ rio('afile') &gt; anarray
+ rio('afile') &gt;&gt; anarray
+</pre>
+<p>
+Copy or append a file to another file
+</p>
+<pre>
+ rio('afile') &gt; rio('another_file')
+ rio('afile') &gt;&gt; rio('another_file')
+</pre>
+<p>
+Copy a file to a directory
+</p>
+<pre>
+ rio('adir') &lt;&lt; rio('afile')
+</pre>
+<p>
+Copy a directory to another directory
+</p>
+<pre>
+ rio('adir') &gt;&gt; rio('another_directory')
+</pre>
+<p>
+Copy a web-page to a file
+</p>
+<pre>
+ rio('http://rubydoc.org/') &gt; rio('afile')
+</pre>
+<p>
+Read a web-page into a string
+</p>
+<pre>
+ astring = rio('http://rubydoc.org/').read
+</pre>
+<p>
+Ways to get the chomped lines of a file into an array
+</p>
+<pre>
+ anarray = rio('afile').chomp[]         # subscript operator
+ rio('afile').chomp &gt; anarray           # copy-to operator
+ anarray = rio('afile').chomp.to_a      # to_a
+ anarray = rio('afile').chomp.readlines # IO#readlines
+</pre>
+<p>
+Iterate over selected lines of a file
+</p>
+<pre>
+ rio('adir').lines(0..3) { |aline| ... }       # a range of lines
+ rio('adir').lines(/re/) { |aline| ... }       # by regular expression
+ rio('adir').lines(0..3,/re/) { |aline| ... }  # or both
+</pre>
+<p>
+Return selected lines of a file as an array
+</p>
+<pre>
+ rio('adir').lines[0..3]       # a range of lines
+ rio('adir').lines[/re/]       # by regular expression
+ rio('adir').lines[0..3,/re/]  # or both
+</pre>
+<p>
+Iterate over selected chomped lines of a file
+</p>
+<pre>
+ rio('adir').chomp.lines(0..3) { |aline| ... }       # a range of lines
+ rio('adir').chomp.lines(/re/) { |aline| ... }       # by regular expression
+</pre>
+<p>
+Return selected chomped lines of a file as an array
+</p>
+<pre>
+ rio('adir').chomp[0..3]  # a range of lines
+ rio('adir').chomp[/re/]  # by regular expression
+</pre>
+<p>
+Copy a gzipped file un-gzipping it
+</p>
+<pre>
+ rio('afile.gz').gzip &gt; rio('afile')
+</pre>
+<p>
+Copy a plain file, gzipping it
+</p>
+<pre>
+ rio('afile.gz').gzip &lt; rio('afile')
+</pre>
+<p>
+Copy a file from a ftp server into a local file un-gzipping it
+</p>
+<pre>
+ rio('ftp://host/afile.gz').gzip &gt; rio('afile')
+</pre>
+<p>
+Return an array of .rb files excluding symlinks to .rb files
+</p>
+<pre>
+ rio('adir').files('*.rb').skip[:symlink?]
+</pre>
+<p>
+Put the first 10 chomped lines of a gzipped file into an array
+</p>
+<pre>
+ anarray =  rio('afile.gz').chomp.gzip[0...10]
+</pre>
+<p>
+Copy lines 0 and 3 thru 5 of a gzipped file on an ftp server to stdout
+</p>
+<pre>
+ rio('ftp://host/afile.gz').gzip.lines(0,3..5) &gt; ?-
+</pre>
+<p>
+Return an array of files in a directory and its subdirectories, without
+descending into .svn directories.
+</p>
+<pre>
+ rio('adir').norecurse(/^\.svn$/).files[]
+</pre>
+<p>
+Iterate over the non-empty, non-comment chomped lines of a file
+</p>
+<pre>
+ rio('afile').chomp.skip(:empty?,/^\s*#/) { |line| ... }
+</pre>
+<p>
+Copy the output of th ps command into an array, skipping the header line
+and the ps command entry
+</p>
+<pre>
+ rio(?-,'ps -a').skiplines(0,/ps$/) &gt; anarray
+</pre>
+<p>
+Prompt for input and return what was typed
+</p>
+<pre>
+ ans = rio(?-).print(&quot;Type Something: &quot;).chomp.gets
+</pre>
+<p>
+Change the extension of all .htm files in a directory and its
+subdirectories to .html
+</p>
+<pre>
+ rio('adir').rename.all.files('*.htm') do |htmfile|
+   htmfile.extname = '.html'
+ end
+</pre>
+<h3>SUGGESTED READING</h3>
+<ul>
+<li><a href="INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="../Rio.html">RIO::Rio</a>
+
+</li>
+<li><a href="EXAMPLES.html">RIO::Doc::EXAMPLES</a>
+
+</li>
+<li><a href="OPTIONAL.html">RIO::Doc::OPTIONAL</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

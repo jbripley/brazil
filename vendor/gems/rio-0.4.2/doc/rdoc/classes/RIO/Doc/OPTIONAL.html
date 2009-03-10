@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: RIO::Doc::OPTIONAL</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta name="revisit-after" content="5 days">
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td class="class-mod"><strong>Module</strong></td>
+          <td class="class-name-in-header">RIO::Doc::OPTIONAL</td>
+            <td rowspan="2" class="class-header-space-col"></td>
+            <td rowspan="2">
+                <a class="in-url" href="../../../files/lib/rio/doc/OPTIONAL_rb.html">
+                lib/rio/doc/OPTIONAL.rb
+                </a>
+        &nbsp;&nbsp;
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Rio - Ruby I/O Facilitator</h1>
+<p>
+Rio is a facade for most of the standard ruby classes that deal with I/O;
+providing a simple, intuitive, succinct interface to the functionality
+provided by IO, File, Dir, Pathname, FileUtils, Tempfile, StringIO, OpenURI
+and others. Rio also provides an application level interface which allows
+many common I/O idioms to be expressed succinctly.
+</p>
+<p>
+Please read the following first:
+</p>
+<ul>
+<li><a href="INTRO.html">RIO::Doc::INTRO</a>
+
+</li>
+<li><a href="SYNOPSIS.html">RIO::Doc::SYNOPSIS</a>
+
+</li>
+<li><a href="HOWTO.html">RIO::Doc::HOWTO</a>
+
+</li>
+<li><a href="../Rio.html">RIO::Rio</a>
+
+</li>
+</ul>
+<h1>Rio Optional Components</h1>
+<p>
+This document describes various optional Rio components, that must be
+explicitly &#8216;required&#8217; to be available. These are not included
+in rio.rb either because they change classes that should not be changed
+without the developers explicit permission, or because they are not of
+general enough interest.
+</p>
+<h2>to_rio</h2>
+<p>
+This option comprises 4 options
+</p>
+<ul>
+<li>Object#to_rio
+
+<pre>
+  require 'rio/to_rio/object'
+  ario = any_object.to_rio
+</pre>
+<p>
+This option adds a to_rio method to the Object class which calls the
+object&#8217;s #to_s method and passes it to the Rio constructor. Like:
+</p>
+<pre>
+  ario = rio(any_object.to_s)
+</pre>
+</li>
+<li>String#to_rio and String#/
+
+<pre>
+  require 'rio/to_rio/string'
+  ario = &quot;a/file/represented/as/a/string&quot;.to_rio
+  ario = 'strings'/'used'/'with'/'subdirectory'/'operator'
+</pre>
+<p>
+This option adds a to_rio method and the subdirectory operator
+&#8217;/&#8217; to the String class. Note that due to operator precedance
+one must use parenthesis when calling a method directly on a Rio created
+using the subdirectory operator with Strings
+</p>
+<pre>
+  array_of_first_ten_lines = ('adir'/'asubdir'/'afile').lines[0...10]
+</pre>
+</li>
+<li>Array#to_rio
+
+<pre>
+  require 'rio/to_rio/array'
+  ario = %w[an array of path components].to_rio #=&gt; rio('an/array/of/path/components')
+</pre>
+<p>
+This option adds a to_rio method to the Array class. This behaves as if
+</p>
+<pre>
+ rio(%w[an array of path components]) had been called.
+</pre>
+</li>
+<li>require &#8216;rio/to_rio/all&#8217; will make all of the above available.
+
+</li>
+</ul>
+<h2>RIO.ARGV</h2>
+<pre>
+ require 'rio/argv'
+ arguments_as_rios = RIO.ARGV
+</pre>
+<p>
+This option provides a function which converts each element of ruby&#8217;s
+ARGV into a Rio. Useful when writing a program which takes a list of files
+as its arguments
+</p>
+<h2>RIO.popen3</h2>
+<pre>
+ require 'rio/open3'
+ input,output,errput = RIO.popen3
+ RIO.popen3 { |input,output,errput| ... }
+</pre>
+<p>
+This options provides a wrapper around the Open3#popen3 call with the IO
+objects converted to Rios
+</p>
+<h2>RIO.prompt</h2>
+<pre>
+ require 'rio/prompt'
+ the_anwser = RIO.prompt('What is the answer? ')
+</pre>
+<p>
+This option provides a module function to prompt for input.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+</div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+   <p><small>Copyright &copy; 2005,2006,2007,2008 Christopher Kleckner.  <a href="http://www.gnu.org/licenses/gpl.html">All rights reserved</a>.</small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>rio (RIO::Rio)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>    <span class="ruby-comment cmt"># File lib/rio.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rio</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>,<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yields: self</span>
+76:       <span class="ruby-identifier">ario</span> = <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+77:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+78:         <span class="ruby-identifier">old_closeoncopy</span> = <span class="ruby-identifier">ario</span>.<span class="ruby-identifier">closeoncopy?</span>
+79:         <span class="ruby-keyword kw">begin</span>
+80:           <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">ario</span>.<span class="ruby-identifier">nocloseoncopy</span>
+81:         <span class="ruby-keyword kw">ensure</span>
+82:           <span class="ruby-identifier">ario</span>.<span class="ruby-identifier">reset</span>.<span class="ruby-identifier">closeoncopy</span>(<span class="ruby-identifier">old_closeoncopy</span>)
+83:         <span class="ruby-keyword kw">end</span>
+84:       <span class="ruby-keyword kw">end</span>
+85:       <span class="ruby-identifier">ario</span>
+86:     <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

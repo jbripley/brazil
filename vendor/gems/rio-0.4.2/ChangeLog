@@ -1,0 +1,3122 @@
+------------------------------------------------------------------------
+r247 | rio4ruby | 2008-11-03 10:02:56 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/all.rb
+
+test changes
+------------------------------------------------------------------------
+r245 | rio4ruby | 2008-11-03 09:24:22 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/version.rb
+
+version number changed to 0.4.2
+------------------------------------------------------------------------
+r244 | rio4ruby | 2008-11-03 09:11:28 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/rio.css
+
+more changes for release
+------------------------------------------------------------------------
+r243 | rio4ruby | 2008-11-03 09:08:57 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RIOIS
+
+Change copyright dates
+------------------------------------------------------------------------
+r242 | rio4ruby | 2008-11-03 08:59:58 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/path_parts.rb
+
+removed test that was incorrect after URI library was fixed in 1.8.7
+------------------------------------------------------------------------
+r241 | rio4ruby | 2008-11-03 08:12:35 -0800 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/riorl.rb
+
+test fix for tempfile names
+------------------------------------------------------------------------
+r240 | rio4ruby | 2008-10-28 22:31:25 -0700 (Tue, 28 Oct 2008) | 1 line
+Changed paths:
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/doc/generators/template/html/ugly.rb
+   M /trunk/rio/doc/pkg_def.rb
+   M /trunk/rio/lib/rio/abstract_method.rb
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/arycopy.rb
+   M /trunk/rio/lib/rio/assert.rb
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/callstr.rb
+   M /trunk/rio/lib/rio/const.rb
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context/autoclose.rb
+   M /trunk/rio/lib/rio/context/copying.rb
+   M /trunk/rio/lib/rio/context/cxx.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context/gzip.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context/skip.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/def.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/EXAMPLES.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INDEX.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/doc.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/exception/copy.rb
+   M /trunk/rio/lib/rio/exception/notimplemented.rb
+   M /trunk/rio/lib/rio/exception/notsupported.rb
+   M /trunk/rio/lib/rio/exception/open.rb
+   M /trunk/rio/lib/rio/exception/state.rb
+   M /trunk/rio/lib/rio/exception.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext/if.rb
+   M /trunk/rio/lib/rio/ext/mp3info.rb
+   M /trunk/rio/lib/rio/ext/splitlines.rb
+   M /trunk/rio/lib/rio/ext/yaml/doc.rb
+   M /trunk/rio/lib/rio/ext/yaml/tie.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rootdir.rb
+   M /trunk/rio/lib/rio/ext/zipfile/state.rb
+   M /trunk/rio/lib/rio/ext/zipfile/wrap.rb
+   M /trunk/rio/lib/rio/ext/zipfile.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/fs/base.rb
+   M /trunk/rio/lib/rio/fs/impl.rb
+   M /trunk/rio/lib/rio/fs/native.rb
+   M /trunk/rio/lib/rio/fs/stream.rb
+   M /trunk/rio/lib/rio/fs/url.rb
+   M /trunk/rio/lib/rio/ftp/conncache.rb
+   M /trunk/rio/lib/rio/ftp/dir.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/handle.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/internal.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+   M /trunk/rio/lib/rio/if/string.rb
+   M /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/iomode.rb
+   M /trunk/rio/lib/rio/ios/fail.rb
+   M /trunk/rio/lib/rio/ios/generic.rb
+   M /trunk/rio/lib/rio/ios/mode.rb
+   M /trunk/rio/lib/rio/ios/null.rb
+   M /trunk/rio/lib/rio/iowrap.rb
+   M /trunk/rio/lib/rio/kernel.rb
+   M /trunk/rio/lib/rio/local.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/no_warn.rb
+   M /trunk/rio/lib/rio/nullio.rb
+   M /trunk/rio/lib/rio/open3.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/piper/cp.rb
+   M /trunk/rio/lib/rio/piper.rb
+   M /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/chmap.rb
+   M /trunk/rio/lib/rio/rl/fs2url.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/scheme/aryio.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/lib/rio/scheme/null.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/stderr.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state/error.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/base.rb
+   M /trunk/rio/lib/rio/stream/duplex.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/lib/rio/symantics.rb
+   M /trunk/rio/lib/rio/to_rio/all.rb
+   M /trunk/rio/lib/rio/to_rio/array.rb
+   M /trunk/rio/lib/rio/to_rio/io.rb
+   M /trunk/rio/lib/rio/to_rio/object.rb
+   M /trunk/rio/lib/rio/to_rio/string.rb
+   M /trunk/rio/lib/rio/to_rio.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/lib/rio/util.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/misc/newheader
+   M /trunk/rio/misc/oldheader
+
+2008
+------------------------------------------------------------------------
+r237 | rio4ruby | 2008-01-10 16:17:45 -0800 (Thu, 10 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/scheme/path.rb
+
+Add full class for 1.9
+------------------------------------------------------------------------
+r236 | rio4ruby | 2007-11-28 09:26:20 -0800 (Wed, 28 Nov 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+
+doc changes
+------------------------------------------------------------------------
+r235 | rio4ruby | 2007-09-08 20:22:39 -0700 (Sat, 08 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/test/tc/symlink0.rb
+
+fixed delete-link-to-directory problem
+------------------------------------------------------------------------
+r234 | rio4ruby | 2007-09-04 15:07:25 -0700 (Tue, 04 Sep 2007) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/symlink0.rb
+
+symlink tests
+------------------------------------------------------------------------
+r233 | rio4ruby | 2007-08-28 01:58:18 -0700 (Tue, 28 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc.rb
+
+doc changes
+------------------------------------------------------------------------
+r232 | rio4ruby | 2007-08-14 10:17:34 -0700 (Tue, 14 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/rio/README
+
+added blog link to README
+------------------------------------------------------------------------
+r231 | rio4ruby | 2007-08-12 01:27:08 -0700 (Sun, 12 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/state.rb
+
+remove some comments and change build_doc script
+------------------------------------------------------------------------
+r230 | rio4ruby | 2007-08-11 10:57:12 -0700 (Sat, 11 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/state.rb
+
+remove comments:
+------------------------------------------------------------------------
+r229 | rio4ruby | 2007-08-11 08:06:09 -0700 (Sat, 11 Aug 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/grande.rb
+
+documentation correction
+------------------------------------------------------------------------
+r226 | rio4ruby | 2007-07-07 13:06:01 -0700 (Sat, 07 Jul 2007) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+
+Release 0.4.1
+------------------------------------------------------------------------
+r224 | rio4ruby | 2007-07-07 11:48:38 -0700 (Sat, 07 Jul 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/EXAMPLES.rb
+
+minor doc change
+------------------------------------------------------------------------
+r223 | rio4ruby | 2007-07-07 06:13:41 -0700 (Sat, 07 Jul 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/test/lib/temp_server.rb
+   M /trunk/rio/test/runalltests.rb
+   M /trunk/rio/test/runftptests.rb
+   M /trunk/rio/test/runhttp.rb
+
+minor test and doc changes
+------------------------------------------------------------------------
+r222 | rio4ruby | 2007-07-06 09:26:49 -0700 (Fri, 06 Jul 2007) | 1 line
+Changed paths:
+   M /trunk/rio/test/runalltests.rb
+
+added ftp tests back to all tests
+------------------------------------------------------------------------
+r221 | rio4ruby | 2007-07-06 09:18:59 -0700 (Fri, 06 Jul 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/rl/fs2url.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/test/runhttp.rb
+
+work on file paths with query chars
+------------------------------------------------------------------------
+r219 | rio4ruby | 2007-04-16 05:24:05 -0700 (Mon, 16 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/version.rb
+
+version number change
+------------------------------------------------------------------------
+r218 | rio4ruby | 2007-04-07 06:37:04 -0700 (Sat, 07 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/COPYING
+
+documentation
+------------------------------------------------------------------------
+r217 | rio4ruby | 2007-04-05 22:28:43 -0700 (Thu, 05 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/README
+
+Documentation Changes
+------------------------------------------------------------------------
+r216 | rio4ruby | 2007-04-05 21:35:13 -0700 (Thu, 05 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/test/ftp/testdef.rb
+
+Change ftp tests to use riotest ftp server
+------------------------------------------------------------------------
+r215 | rio4ruby | 2007-04-05 08:30:29 -0700 (Thu, 05 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+
+Clean up and fix FTP problems
+------------------------------------------------------------------------
+r214 | rio4ruby | 2007-04-05 08:08:17 -0700 (Thu, 05 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+
+ftp work
+------------------------------------------------------------------------
+r213 | rio4ruby | 2007-04-04 23:04:53 -0700 (Wed, 04 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/ftp/ftpfile.rb
+   A /trunk/rio/test/ftp/anon_copy_data.rb
+   M /trunk/rio/test/ftp/testdef.rb
+   M /trunk/rio/test/http/uri-meta.rb
+
+More FTP Tests
+------------------------------------------------------------------------
+r212 | rio4ruby | 2007-04-04 08:02:57 -0700 (Wed, 04 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/test/http/all.rb
+   M /trunk/rio/test/http/copy-from-http.rb
+   A /trunk/rio/test/http/uri-meta.rb
+
+URI Meta information tests
+------------------------------------------------------------------------
+r211 | rio4ruby | 2007-04-02 19:47:53 -0700 (Mon, 02 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/RELEASE_NOTES
+
+Documentation
+------------------------------------------------------------------------
+r209 | rio4ruby | 2007-04-02 16:54:32 -0700 (Mon, 02 Apr 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/doc/generators/template/html/rio.rb
+
+Prepare for release
+------------------------------------------------------------------------
+r208 | rio4ruby | 2007-03-27 22:03:59 -0700 (Tue, 27 Mar 2007) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/doc/INDEX.rb
+   A /trunk/rio/test/tc/synopsis.rb
+
+INDEX and synopsis tests
+------------------------------------------------------------------------
+r207 | rio4ruby | 2007-03-27 22:01:02 -0700 (Tue, 27 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/doc/RIOIS
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/version.rb
+
+Documentation
+------------------------------------------------------------------------
+r206 | rio4ruby | 2007-03-23 22:07:26 -0700 (Fri, 23 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/ugly.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+
+documentation changes
+------------------------------------------------------------------------
+r205 | rio4ruby | 2007-03-19 06:55:51 -0700 (Mon, 19 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+more yaml tests
+------------------------------------------------------------------------
+r204 | rio4ruby | 2007-03-18 13:50:53 -0700 (Sun, 18 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/yaml.rb
+
+Documentation
+------------------------------------------------------------------------
+r203 | rio4ruby | 2007-03-18 13:36:44 -0700 (Sun, 18 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/yaml.rb
+
+Documentation
+------------------------------------------------------------------------
+r202 | rio4ruby | 2007-03-18 13:28:41 -0700 (Sun, 18 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/yaml.rb
+
+doc changes
+------------------------------------------------------------------------
+r201 | rio4ruby | 2007-03-18 13:21:16 -0700 (Sun, 18 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+Additional yaml methods: object and document
+------------------------------------------------------------------------
+r200 | rio4ruby | 2007-03-18 12:19:25 -0700 (Sun, 18 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+Fixed yaml close on eof. bug-8550
+------------------------------------------------------------------------
+r199 | rio4ruby | 2007-03-17 08:03:56 -0700 (Sat, 17 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+
+Build Changes
+------------------------------------------------------------------------
+r198 | rio4ruby | 2007-03-17 07:57:18 -0700 (Sat, 17 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+
+Build Changes
+------------------------------------------------------------------------
+r195 | rio4ruby | 2007-03-17 07:54:14 -0700 (Sat, 17 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/pkg_def.rb
+
+Build changes
+------------------------------------------------------------------------
+r193 | rio4ruby | 2007-03-17 07:22:46 -0700 (Sat, 17 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/pkg_def.rb
+
+changed pkg_def.rb
+------------------------------------------------------------------------
+r192 | rio4ruby | 2007-03-16 08:25:15 -0700 (Fri, 16 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+
+documentation changes
+------------------------------------------------------------------------
+r191 | rio4ruby | 2007-03-16 08:13:05 -0700 (Fri, 16 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+
+documentation changes
+------------------------------------------------------------------------
+r190 | rio4ruby | 2007-03-16 07:45:33 -0700 (Fri, 16 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+
+documentation changes
+------------------------------------------------------------------------
+r189 | rio4ruby | 2007-03-16 07:25:48 -0700 (Fri, 16 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+
+documentation fixes
+------------------------------------------------------------------------
+r188 | rio4ruby | 2007-03-15 07:52:52 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+
+Documentation changes
+------------------------------------------------------------------------
+r187 | rio4ruby | 2007-03-15 07:48:14 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/Rakefile
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RIOIS
+   M /trunk/rio/doc/generators/template/html/rio.css
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/doc/generators/template/html/ugly.rb
+   M /trunk/rio/doc/pkg_def.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/ext/yaml/doc.rb
+   M /trunk/rio/lib/rio/ext/yaml/tie.rb
+   M /trunk/rio/lib/rio/open3.rb
+
+header changes
+------------------------------------------------------------------------
+r186 | rio4ruby | 2007-03-15 07:37:59 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/context/autoclose.rb
+   M /trunk/rio/lib/rio/context/copying.rb
+   M /trunk/rio/lib/rio/context/cxx.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context/gzip.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context/skip.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/doc/EXAMPLES.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext/if.rb
+   M /trunk/rio/lib/rio/ext/mp3info.rb
+   M /trunk/rio/lib/rio/ext/splitlines.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rootdir.rb
+   M /trunk/rio/lib/rio/ext/zipfile/state.rb
+   M /trunk/rio/lib/rio/ext/zipfile/wrap.rb
+   M /trunk/rio/lib/rio/ext/zipfile.rb
+   M /trunk/rio/lib/rio/fs/base.rb
+   M /trunk/rio/lib/rio/fs/impl.rb
+   M /trunk/rio/lib/rio/fs/native.rb
+   M /trunk/rio/lib/rio/fs/stream.rb
+   M /trunk/rio/lib/rio/fs/url.rb
+   M /trunk/rio/lib/rio/ftp/conncache.rb
+   M /trunk/rio/lib/rio/ftp/dir.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/internal.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+   M /trunk/rio/lib/rio/if/string.rb
+   M /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/ios/fail.rb
+   M /trunk/rio/lib/rio/ios/generic.rb
+   M /trunk/rio/lib/rio/ios/mode.rb
+   M /trunk/rio/lib/rio/ios/null.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/chmap.rb
+   M /trunk/rio/lib/rio/rl/fs2url.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+
+changed header
+------------------------------------------------------------------------
+r185 | rio4ruby | 2007-03-15 07:11:39 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/pkg_def.rb
+
+Rakefile changes
+------------------------------------------------------------------------
+r184 | rio4ruby | 2007-03-15 06:40:02 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   A /trunk/rio/doc/RIOIS
+
+minor doc change
+------------------------------------------------------------------------
+r183 | rio4ruby | 2007-03-15 06:38:48 -0700 (Thu, 15 Mar 2007) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/abstract_method.rb
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/arycopy.rb
+   M /trunk/rio/lib/rio/assert.rb
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/callstr.rb
+   M /trunk/rio/lib/rio/const.rb
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/def.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/exception/copy.rb
+   M /trunk/rio/lib/rio/exception/notimplemented.rb
+   M /trunk/rio/lib/rio/exception/notsupported.rb
+   M /trunk/rio/lib/rio/exception/open.rb
+   M /trunk/rio/lib/rio/exception/state.rb
+   M /trunk/rio/lib/rio/exception.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/handle.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/iomode.rb
+   M /trunk/rio/lib/rio/iowrap.rb
+   M /trunk/rio/lib/rio/kernel.rb
+   M /trunk/rio/lib/rio/local.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/no_warn.rb
+   M /trunk/rio/lib/rio/nullio.rb
+   M /trunk/rio/lib/rio/open3.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/piper/cp.rb
+   M /trunk/rio/lib/rio/piper.rb
+   M /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/scheme/aryio.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/lib/rio/scheme/null.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/stderr.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state/error.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/base.rb
+   M /trunk/rio/lib/rio/stream/duplex.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/lib/rio/symantics.rb
+   M /trunk/rio/lib/rio/to_rio/all.rb
+   M /trunk/rio/lib/rio/to_rio/array.rb
+   M /trunk/rio/lib/rio/to_rio/io.rb
+   M /trunk/rio/lib/rio/to_rio/object.rb
+   M /trunk/rio/lib/rio/to_rio/string.rb
+   M /trunk/rio/lib/rio/to_rio.rb
+   M /trunk/rio/lib/rio/util.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/misc/newheader
+   M /trunk/rio/misc/oldheader
+
+changed headers
+------------------------------------------------------------------------
+r182 | rio4ruby | 2006-10-14 04:54:40 -0700 (Sat, 14 Oct 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/path.rb
+
+misc changes
+
+------------------------------------------------------------------------
+r181 | rio4ruby | 2006-10-08 11:49:08 -0700 (Sun, 08 Oct 2006) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+
+small changes
+------------------------------------------------------------------------
+r180 | rio4ruby | 2006-10-05 21:08:15 -0700 (Thu, 05 Oct 2006) | 1 line
+Changed paths:
+   M /trunk/rio/README
+
+Changed README
+------------------------------------------------------------------------
+r179 | rio4ruby | 2006-09-29 12:17:03 -0700 (Fri, 29 Sep 2006) | 1 line
+Changed paths:
+   D /trunk/rio/test/srv/ftp
+
+more work on ftp tests
+------------------------------------------------------------------------
+r178 | rio4ruby | 2006-09-29 12:10:31 -0700 (Fri, 29 Sep 2006) | 1 line
+Changed paths:
+   A /trunk/rio/test/srv/ftp
+   A /trunk/rio/test/srv/ftp/riotest
+   A /trunk/rio/test/srv/ftp/riotest/ro
+   A /trunk/rio/test/srv/ftp/riotest/ro/d0
+   A /trunk/rio/test/srv/ftp/riotest/ro/d0/d1
+   A /trunk/rio/test/srv/ftp/riotest/ro/d0/d1/f2
+   A /trunk/rio/test/srv/ftp/riotest/ro/d0/f1
+   A /trunk/rio/test/srv/ftp/riotest/ro/f0
+   A /trunk/rio/test/srv/ftp/riotest/rw
+
+more work on ftp tests
+------------------------------------------------------------------------
+r177 | rio4ruby | 2006-09-29 12:00:32 -0700 (Fri, 29 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/ftp/anon_misc.rb
+   M /trunk/rio/test/ftp/anon_write.rb
+   M /trunk/rio/test/ftp/testdef.rb
+
+make ftp tests a little more portable
+------------------------------------------------------------------------
+r176 | rio4ruby | 2006-09-29 06:29:03 -0700 (Fri, 29 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/ftp/testdef.rb
+   M /trunk/rio/test/runtests.rb
+
+ease testing
+------------------------------------------------------------------------
+r175 | rio4ruby | 2006-09-17 08:57:52 -0700 (Sun, 17 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/http/copy-from-http.rb
+   A /trunk/rio/test/lib
+   A /trunk/rio/test/lib/temp_server.rb
+   M /trunk/rio/test/runalltests.rb
+   M /trunk/rio/test/runhttp.rb
+
+use webrick to test http
+------------------------------------------------------------------------
+r174 | rio4ruby | 2006-09-15 11:41:39 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+
+rakefile change to remove http log
+------------------------------------------------------------------------
+r173 | rio4ruby | 2006-09-15 11:37:45 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   A /trunk/rio/test/runhttp.rb
+
+use webrick to test http
+------------------------------------------------------------------------
+r172 | rio4ruby | 2006-09-15 11:36:42 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/http/copy-from-http.rb
+
+Use different port for http tests
+------------------------------------------------------------------------
+r171 | rio4ruby | 2006-09-15 06:54:50 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   A /trunk/rio/test/srv
+   A /trunk/rio/test/srv/www
+   A /trunk/rio/test/srv/www/htdocs
+   A /trunk/rio/test/srv/www/htdocs/riotest
+   A /trunk/rio/test/srv/www/htdocs/riotest/dir
+   A /trunk/rio/test/srv/www/htdocs/riotest/dir/index.html
+   A /trunk/rio/test/srv/www/htdocs/riotest/hw.html
+   A /trunk/rio/test/srv/www/htdocs/riotest/lines.txt.gz
+
+restructure http testing code
+------------------------------------------------------------------------
+r170 | rio4ruby | 2006-09-15 06:44:45 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   D /trunk/rio/test/http/htdocs
+
+restructure http testing code
+------------------------------------------------------------------------
+r169 | rio4ruby | 2006-09-15 02:03:30 -0700 (Fri, 15 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/http/htdocs/riotest/hw.html
+
+test change
+------------------------------------------------------------------------
+r168 | rio4ruby | 2006-09-14 06:12:46 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/http/copy-from-http.rb
+
+made host more variable in http tests
+------------------------------------------------------------------------
+r167 | rio4ruby | 2006-09-14 05:57:53 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/test/http/copy-from-http.rb
+
+fixed problem ungzipping documents served from an http server
+------------------------------------------------------------------------
+r166 | rio4ruby | 2006-09-14 04:49:42 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   A /trunk/rio/test/http/copy-from-http.rb (from /trunk/rio/test/tc/copy-from-http.rb:165)
+   D /trunk/rio/test/tc/copy-from-http.rb
+
+more extensive http tests
+------------------------------------------------------------------------
+r165 | rio4ruby | 2006-09-14 04:48:57 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   A /trunk/rio/test/http
+   A /trunk/rio/test/http/all.rb
+   A /trunk/rio/test/http/htdocs
+   A /trunk/rio/test/http/htdocs/riotest
+   A /trunk/rio/test/http/htdocs/riotest/dir
+   A /trunk/rio/test/http/htdocs/riotest/dir/index.html
+   A /trunk/rio/test/http/htdocs/riotest/hw.html
+   A /trunk/rio/test/http/htdocs/riotest/lines.txt.gz
+   M /trunk/rio/test/runhttptests.rb
+   M /trunk/rio/test/tc/copy-from-http.rb
+
+more extensive http tests
+------------------------------------------------------------------------
+r164 | rio4ruby | 2006-09-14 03:05:15 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/riorl.rb
+
+make test cass riorl work with 1.8.4 and 1.8.5
+------------------------------------------------------------------------
+r163 | rio4ruby | 2006-09-14 02:24:28 -0700 (Thu, 14 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/riorl.rb
+
+changed test case riorl for ruby 1.8.5
+------------------------------------------------------------------------
+r162 | rio4ruby | 2006-09-11 09:18:25 -0700 (Mon, 11 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/yaml.rb
+
+documentation changes
+------------------------------------------------------------------------
+r161 | rio4ruby | 2006-09-11 08:27:34 -0700 (Mon, 11 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+
+minor changes
+------------------------------------------------------------------------
+r160 | rio4ruby | 2006-09-11 07:37:11 -0700 (Mon, 11 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/rio.css
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+
+documentation changes
+------------------------------------------------------------------------
+r159 | rio4ruby | 2006-09-11 06:19:10 -0700 (Mon, 11 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/rio.css
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/kernel.rb
+
+misc minor changes
+------------------------------------------------------------------------
+r158 | rio4ruby | 2006-09-11 04:59:46 -0700 (Mon, 11 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/test/tc/dir_iter.rb
+
+minor changes
+------------------------------------------------------------------------
+r157 | rio4ruby | 2006-09-08 04:40:48 -0700 (Fri, 08 Sep 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/test/tc/path_parts.rb
+   M /trunk/rio/test/tc/rename.rb
+   M /trunk/rio/test/tc/rlparts.ans.yml
+   M /trunk/rio/test/tc/splitpath.rb
+
+fixed dirname errors for linux systems
+------------------------------------------------------------------------
+r156 | rio4ruby | 2006-08-22 06:37:54 -0700 (Tue, 22 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/test/tc/path_parts.rb
+   M /trunk/rio/test/tc/rlparts.ans.yml
+
+fixed dirname with spaces and changed dirname of //h/
+------------------------------------------------------------------------
+r155 | rio4ruby | 2006-08-18 07:56:20 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/build_doc.rb
+   A /trunk/rio/doc/generators/template/html/rio.css
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   A /trunk/rio/doc/generators/template/html/ugly.rb
+
+documentation fixes
+------------------------------------------------------------------------
+r154 | rio4ruby | 2006-08-18 07:05:01 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   D /trunk/rio/doc/patched_rdoc
+
+remove dead code
+------------------------------------------------------------------------
+r153 | rio4ruby | 2006-08-18 06:49:30 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/build_doc.rb
+
+clean up build_doc.rb
+------------------------------------------------------------------------
+r152 | rio4ruby | 2006-08-18 06:36:46 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/test/tc/ext.rb
+
+build for windows fixed and a few additional tests
+------------------------------------------------------------------------
+r151 | rio4ruby | 2006-08-18 05:12:25 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   D /trunk/rio/lib/rio/impl/path.rb
+
+removed dead code
+------------------------------------------------------------------------
+r150 | rio4ruby | 2006-08-18 05:08:38 -0700 (Fri, 18 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   A /trunk/rio/doc/pkg_def.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/impl/path.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/expand_path.rb
+   M /trunk/rio/test/tc/path_parts.rb
+   M /trunk/rio/test/tc/skiplines.rb
+   A /trunk/rio/test/tc/truncate.rb
+
+Documentation, Tests and clean up
+------------------------------------------------------------------------
+r149 | rio4ruby | 2006-08-06 11:12:12 -0700 (Sun, 06 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/test/tc/clone.rb
+
+tests and docs
+------------------------------------------------------------------------
+r148 | rio4ruby | 2006-08-06 10:49:23 -0700 (Sun, 06 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/test/ftp/testdef.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/empty.rb
+   M /trunk/rio/test/tc/gzip.rb
+
+patch for gzip mswin gzip each_line problem
+------------------------------------------------------------------------
+r147 | rio4ruby | 2006-08-06 08:38:21 -0700 (Sun, 06 Aug 2006) | 1 line
+Changed paths:
+   M /trunk/rio/ex/findinruby
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/test/tc/path_parts.rb
+   M /trunk/rio/test/tc/splitpath.rb
+
+documentation and moved a couple of methods
+------------------------------------------------------------------------
+r146 | rio4ruby | 2006-07-21 11:25:17 -0700 (Fri, 21 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/test/tc/path_parts.rb
+
+documentation changes
+------------------------------------------------------------------------
+r145 | rio4ruby | 2006-07-21 10:22:00 -0700 (Fri, 21 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/noqae.rb
+   A /trunk/rio/test/tc/path_parts.rb
+   A /trunk/rio/test/tc/rlparts.ans.yml
+
+improved path support, with many many more tests
+------------------------------------------------------------------------
+r144 | rio4ruby | 2006-07-20 07:22:11 -0700 (Thu, 20 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/rl/withpath.rb
+
+changed the definition of a root path to include c:/ paths
+------------------------------------------------------------------------
+r143 | rio4ruby | 2006-07-20 06:48:45 -0700 (Thu, 20 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/test/tc/copy-from-http.rb
+
+more work on path issues
+------------------------------------------------------------------------
+r142 | rio4ruby | 2006-07-19 03:50:55 -0700 (Wed, 19 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+
+more work on path - basename/filename
+------------------------------------------------------------------------
+r141 | rio4ruby | 2006-07-16 10:29:01 -0700 (Sun, 16 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ftp/conncache.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+
+reinstituted delaying connection for ftp Rios
+------------------------------------------------------------------------
+r140 | rio4ruby | 2006-07-16 09:18:06 -0700 (Sun, 16 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+
+added super to initialize_copy for RLs
+------------------------------------------------------------------------
+r139 | rio4ruby | 2006-07-16 09:06:36 -0700 (Sun, 16 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/ftp/conncache.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+
+minor changes to ftp and comments
+------------------------------------------------------------------------
+r138 | rio4ruby | 2006-07-10 11:23:28 -0700 (Mon, 10 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/clone.rb (from /trunk/rio/test/tc/methods.rb:137)
+   M /trunk/rio/test/tc/line_record_row.rb
+   D /trunk/rio/test/tc/methods.rb
+
+minor test change
+------------------------------------------------------------------------
+r137 | rio4ruby | 2006-07-08 12:15:17 -0700 (Sat, 08 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/fs/impl.rb
+   M /trunk/rio/test/bin/list_dir.rb
+   M /trunk/rio/test/runtests.rb
+   M /trunk/rio/test/tc/expand_path.rb
+   M /trunk/rio/test/tc/gzip.rb
+   M /trunk/rio/test/tc/programs_util.rb
+
+test changes for mswin and changed rm to use File#delete instad of FileUtil#rm
+------------------------------------------------------------------------
+r136 | rio4ruby | 2006-07-07 06:00:13 -0700 (Fri, 07 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   D /trunk/rio/rio.gemspec
+
+rake changes
+------------------------------------------------------------------------
+r135 | rio4ruby | 2006-07-07 04:39:08 -0700 (Fri, 07 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/doc/patched_rdoc/rdoc/generators/html_generator.rb
+   M /trunk/rio/lib/rio/doc/EXAMPLES.rb
+   M /trunk/rio/lib/rio/exception/notimplemented.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/rubyio.rb
+   M /trunk/rio/lib/rio/tempdir.rb
+   M /trunk/rio/lib/rio/to_rio/array.rb
+   M /trunk/rio/lib/rio/to_rio/io.rb
+   M /trunk/rio/lib/rio/to_rio/object.rb
+   M /trunk/rio/lib/rio/to_rio/string.rb
+   M /trunk/rio/rio.gemspec
+   M /trunk/rio/setup.rb
+
+doc and comment changes
+------------------------------------------------------------------------
+r134 | rio4ruby | 2006-07-03 07:01:22 -0700 (Mon, 03 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/lib/rio/doc/EXAMPLES.rb
+   A /trunk/rio/lib/rio/if/rubyio.rb (from /trunk/rio/lib/rio/if/stream.rb:133)
+   D /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if.rb
+
+Comment changes and rename if/stream.rb to if/rubio.rb
+------------------------------------------------------------------------
+r133 | rio4ruby | 2006-07-02 10:05:51 -0700 (Sun, 02 Jul 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/abstract_method.rb
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/arycopy.rb
+   M /trunk/rio/lib/rio/assert.rb
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/callstr.rb
+   M /trunk/rio/lib/rio/const.rb
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context/autoclose.rb
+   M /trunk/rio/lib/rio/context/copying.rb
+   M /trunk/rio/lib/rio/context/cxx.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context/gzip.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context/skip.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/def.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/doc.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/exception/copy.rb
+   M /trunk/rio/lib/rio/exception/notimplemented.rb
+   M /trunk/rio/lib/rio/exception/notsupported.rb
+   M /trunk/rio/lib/rio/exception/open.rb
+   M /trunk/rio/lib/rio/exception/state.rb
+   M /trunk/rio/lib/rio/exception.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext/if.rb
+   M /trunk/rio/lib/rio/ext/mp3info.rb
+   M /trunk/rio/lib/rio/ext/splitlines.rb
+   M /trunk/rio/lib/rio/ext/yaml/doc.rb
+   M /trunk/rio/lib/rio/ext/yaml/tie.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rootdir.rb
+   M /trunk/rio/lib/rio/ext/zipfile/state.rb
+   M /trunk/rio/lib/rio/ext/zipfile/wrap.rb
+   M /trunk/rio/lib/rio/ext/zipfile.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/fs/base.rb
+   M /trunk/rio/lib/rio/fs/impl.rb
+   M /trunk/rio/lib/rio/fs/native.rb
+   M /trunk/rio/lib/rio/fs/stream.rb
+   M /trunk/rio/lib/rio/fs/url.rb
+   M /trunk/rio/lib/rio/ftp/conncache.rb
+   M /trunk/rio/lib/rio/ftp/dir.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/handle.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/internal.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if/string.rb
+   M /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/impl/path.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/iomode.rb
+   M /trunk/rio/lib/rio/ios/fail.rb
+   M /trunk/rio/lib/rio/ios/generic.rb
+   M /trunk/rio/lib/rio/ios/mode.rb
+   M /trunk/rio/lib/rio/ios/null.rb
+   M /trunk/rio/lib/rio/iowrap.rb
+   M /trunk/rio/lib/rio/kernel.rb
+   M /trunk/rio/lib/rio/local.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/no_warn.rb
+   M /trunk/rio/lib/rio/nullio.rb
+   M /trunk/rio/lib/rio/open3.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/piper/cp.rb
+   M /trunk/rio/lib/rio/piper.rb
+   M /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/chmap.rb
+   M /trunk/rio/lib/rio/rl/fs2url.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/scheme/aryio.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/lib/rio/scheme/null.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/stderr.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state/error.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/base.rb
+   M /trunk/rio/lib/rio/stream/duplex.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/lib/rio/symantics.rb
+   M /trunk/rio/lib/rio/to_rio/all.rb
+   M /trunk/rio/lib/rio/to_rio/array.rb
+   M /trunk/rio/lib/rio/to_rio/io.rb
+   M /trunk/rio/lib/rio/to_rio/object.rb
+   M /trunk/rio/lib/rio/to_rio/string.rb
+   M /trunk/rio/lib/rio/to_rio.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/lib/rio/util.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/misc/newheader
+   M /trunk/rio/misc/oldheader
+
+changed file header
+------------------------------------------------------------------------
+r132 | rio4ruby | 2006-06-30 08:42:51 -0700 (Fri, 30 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/doc/patched_rdoc/rdoc/generators/html_generator.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/rio.gemspec
+
+build changes
+------------------------------------------------------------------------
+r131 | rio4ruby | 2006-06-30 04:07:26 -0700 (Fri, 30 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/open3.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state.rb
+
+comment changes
+------------------------------------------------------------------------
+r130 | rio4ruby | 2006-06-30 03:53:05 -0700 (Fri, 30 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+
+change in Rakefile
+------------------------------------------------------------------------
+r129 | rio4ruby | 2006-06-30 03:50:31 -0700 (Fri, 30 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/skip.rb
+
+more skip tests
+------------------------------------------------------------------------
+r128 | rio4ruby | 2006-06-30 03:41:23 -0700 (Fri, 30 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/doc/patched_rdoc/rdoc/generators/html_generator.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/test/tc/skip.rb
+
+documentation changes
+------------------------------------------------------------------------
+r127 | rio4ruby | 2006-06-29 06:57:45 -0700 (Thu, 29 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/ex/findruby
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/likeio.rb
+
+minor test changes
+------------------------------------------------------------------------
+r126 | rio4ruby | 2006-06-25 09:33:03 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/entrysel.rb
+
+pass clone of rio to proc selector
+------------------------------------------------------------------------
+r125 | rio4ruby | 2006-06-25 09:32:11 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/string.rb
+
+documentation changes
+------------------------------------------------------------------------
+r124 | rio4ruby | 2006-06-25 09:32:00 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/path.rb
+
+documentation changes
+------------------------------------------------------------------------
+r123 | rio4ruby | 2006-06-25 09:31:15 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/grande.rb
+
+documentation changes
+------------------------------------------------------------------------
+r122 | rio4ruby | 2006-06-25 09:29:58 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ios/mode.rb
+   M /trunk/rio/lib/rio/ios/null.rb
+
+documentation changes
+------------------------------------------------------------------------
+r121 | rio4ruby | 2006-06-25 09:29:38 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ios/generic.rb
+
+documentation changes
+------------------------------------------------------------------------
+r120 | rio4ruby | 2006-06-25 09:29:23 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ios/fail.rb
+
+documentation changes
+------------------------------------------------------------------------
+r119 | rio4ruby | 2006-06-25 09:26:52 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+
+document change
+------------------------------------------------------------------------
+r118 | rio4ruby | 2006-06-25 08:52:39 -0700 (Sun, 25 Jun 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/grande.rb
+
+single return fix
+------------------------------------------------------------------------
+r117 | rio4ruby | 2006-05-30 23:12:43 -0700 (Tue, 30 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   A /trunk/rio/doc/patched_rdoc
+   A /trunk/rio/doc/patched_rdoc/rdoc
+   A /trunk/rio/doc/patched_rdoc/rdoc/generators
+   A /trunk/rio/doc/patched_rdoc/rdoc/generators/html_generator.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/doc.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio.rb
+
+changed documentation structure
+------------------------------------------------------------------------
+r116 | rio4ruby | 2006-05-24 02:36:53 -0700 (Wed, 24 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/ex/findruby
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/line_record_row.rb
+
+added Rio#line Rio#record and Rio#row
+------------------------------------------------------------------------
+r115 | rio4ruby | 2006-05-23 09:21:05 -0700 (Tue, 23 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/build_doc.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+added back yaml documentation and tests
+------------------------------------------------------------------------
+r114 | rio4ruby | 2006-05-23 08:54:23 -0700 (Tue, 23 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/copy-dir-samevar.rb
+
+Added additional test
+------------------------------------------------------------------------
+r113 | rio4ruby | 2006-05-23 08:45:57 -0700 (Tue, 23 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/copy-dir-samevar.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+added test copy-dir-samevar
+------------------------------------------------------------------------
+r112 | rio4ruby | 2006-05-23 08:06:31 -0700 (Tue, 23 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/test/tc/closeoncopy.rb
+
+changed how cx is set for files when iterating a dir. also added closeoncopy to the list of cx vars bequeathed
+------------------------------------------------------------------------
+r111 | rio4ruby | 2006-05-22 05:29:05 -0700 (Mon, 22 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/ex/catcsv.rb
+   M /trunk/rio/lib/rio/prompt.rb
+
+added ex/catcsv.rb and RIO::promptd
+------------------------------------------------------------------------
+r110 | rio4ruby | 2006-05-19 23:47:57 -0700 (Fri, 19 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/ext/mp3info.rb
+   M /trunk/rio/lib/rio/prompt.rb
+
+mp3 extension work
+------------------------------------------------------------------------
+r109 | rio4ruby | 2006-05-19 12:40:51 -0700 (Fri, 19 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/ext/mp3info.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/fs2url.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+
+added handling for mp3 files and fixed some filesystem path handling problems
+------------------------------------------------------------------------
+r108 | rio4ruby | 2006-05-17 20:50:05 -0700 (Wed, 17 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   A /trunk/rio/lib/rio/ext/yaml
+   A /trunk/rio/lib/rio/ext/yaml/doc.rb
+   A /trunk/rio/lib/rio/ext/yaml/tie.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/state.rb
+
+Work on YAML mode
+------------------------------------------------------------------------
+r107 | rio4ruby | 2006-05-15 19:28:53 -0700 (Mon, 15 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/test/tc/split.rb
+   M /trunk/rio/test/tc/splitlines.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+split splitlines splitpath tests
+------------------------------------------------------------------------
+r106 | rio4ruby | 2006-05-14 20:18:20 -0700 (Sun, 14 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/split.rb
+   A /trunk/rio/test/tc/splitlines.rb
+   M /trunk/rio/test/tc/splitpath.rb
+
+fixes for splitline
+------------------------------------------------------------------------
+r105 | rio4ruby | 2006-05-14 18:59:16 -0700 (Sun, 14 May 2006) | 1 line
+Changed paths:
+   D /trunk/rio/test/tc/split.rb
+   A /trunk/rio/test/tc/splitpath.rb (from /trunk/rio/test/tc/split.rb:103)
+
+renamed test/tc/split.rb to test/tc/splitpath.rb
+------------------------------------------------------------------------
+r104 | rio4ruby | 2006-05-14 18:57:02 -0700 (Sun, 14 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   A /trunk/rio/lib/rio/rl/chmap.rb
+   A /trunk/rio/lib/rio/rl/fs2url.rb
+
+Code cleanup
+------------------------------------------------------------------------
+r103 | rio4ruby | 2006-05-14 17:51:20 -0700 (Sun, 14 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   A /trunk/rio/lib/rio/ext/splitlines.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ext/zipfile/wrap.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/base.rb
+   M /trunk/rio/test/tc/base2.rb
+   M /trunk/rio/test/tc/split.rb
+
+added splitlines method and changed split method
+------------------------------------------------------------------------
+r102 | rio4ruby | 2006-05-14 02:06:53 -0700 (Sun, 14 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/test/tc/abs.rb
+   M /trunk/rio/test/tc/base2.rb
+   M /trunk/rio/test/tc/split.rb
+
+Changed files back to be URI based. Extended URI::FILE
+------------------------------------------------------------------------
+r101 | rio4ruby | 2006-05-13 10:49:56 -0700 (Sat, 13 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/exception/notimplemented.rb
+   A /trunk/rio/lib/rio/ext/if.rb
+   M /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/test/tc/abs.rb
+
+Before rewriting all path classes
+------------------------------------------------------------------------
+r100 | rio4ruby | 2006-05-12 09:46:33 -0700 (Fri, 12 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/ftp/testdef.rb
+
+Changed home directory for ftp tests
+------------------------------------------------------------------------
+r99 | rio4ruby | 2006-05-11 08:36:38 -0700 (Thu, 11 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   A /trunk/rio/lib/rio/ext/zipfile/rootdir.rb
+   A /trunk/rio/lib/rio/ext/zipfile/state.rb
+   A /trunk/rio/lib/rio/ext/zipfile/wrap.rb
+   M /trunk/rio/lib/rio/ext/zipfile.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+
+ZipFile support
+------------------------------------------------------------------------
+r98 | rio4ruby | 2006-05-09 16:36:10 -0700 (Tue, 09 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/state.rb
+
+Fixed problem wiith skip with arguments before lines()
+------------------------------------------------------------------------
+r97 | rio4ruby | 2006-05-08 12:50:52 -0700 (Mon, 08 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/ext/zipfile
+   A /trunk/rio/lib/rio/ext/zipfile/fs.rb
+   A /trunk/rio/lib/rio/ext/zipfile/rl.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   A /trunk/rio/lib/rio/rl/withpath.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/base2.rb
+
+Fixed broken abs method, work on zipfile support
+------------------------------------------------------------------------
+r96 | rio4ruby | 2006-05-06 08:12:27 -0700 (Sat, 06 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/iomode.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/test/ftp/anon_special.rb
+   M /trunk/rio/test/ftp/anon_write.rb
+   M /trunk/rio/test/ftp/ftp2ftp.rb
+   M /trunk/rio/test/ftp/testdef.rb
+
+Fixed FTP tests for mswin32
+------------------------------------------------------------------------
+r95 | rio4ruby | 2006-05-06 02:58:09 -0700 (Sat, 06 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/doc/EXAMPLES.rb (from /trunk/rio/lib/rio/doc/MISC.rb:83)
+   D /trunk/rio/lib/rio/doc/MISC.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/misc/changeheader.rb
+
+renamed MISC -> EXAMPLES
+------------------------------------------------------------------------
+r93 | rio4ruby | 2006-05-05 10:43:56 -0700 (Fri, 05 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/factory.rb
+
+Prepare for release
+------------------------------------------------------------------------
+r92 | rio4ruby | 2006-05-05 09:54:55 -0700 (Fri, 05 May 2006) | 1 line
+Changed paths:
+   D /trunk/rio/lib/rio/arrayio.rb
+   D /trunk/rio/lib/rio/ftp/conn.rb
+   D /trunk/rio/lib/rio/ftp/impl.rb
+   D /trunk/rio/lib/rio/ftp/ioh.rb
+   D /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+
+removed dead files
+------------------------------------------------------------------------
+r91 | rio4ruby | 2006-05-05 09:35:54 -0700 (Fri, 05 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/fs/base.rb
+   M /trunk/rio/lib/rio/fs/impl.rb
+   M /trunk/rio/lib/rio/fs/native.rb
+   A /trunk/rio/lib/rio/ftp/conncache.rb
+   A /trunk/rio/lib/rio/ftp/dir.rb
+   M /trunk/rio/lib/rio/ftp/fs.rb
+   A /trunk/rio/lib/rio/ftp/ftpfile.rb
+   M /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/test/ftp/all.rb
+   M /trunk/rio/test/ftp/anon_misc.rb
+   M /trunk/rio/test/ftp/anon_read.rb
+   A /trunk/rio/test/ftp/anon_special.rb
+   M /trunk/rio/test/ftp/initftpfiles.rb
+   M /trunk/rio/test/tc/copy-from-http.rb
+
+Refactored ftp code and more ftp tests
+------------------------------------------------------------------------
+r90 | rio4ruby | 2006-05-02 05:32:44 -0700 (Tue, 02 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/test/ftp/anon_misc.rb
+   M /trunk/rio/test/ftp/anon_read.rb
+   M /trunk/rio/test/ftp/anon_write.rb
+   M /trunk/rio/test/ftp/ftp2ftp.rb
+   D /trunk/rio/test/ftp/test.rb
+   A /trunk/rio/test/ftp/testdef.rb (from /trunk/rio/test/ftp/test.rb:84)
+
+renamed test/ftp/test.rb to test/ftp/testdev.rb
+------------------------------------------------------------------------
+r89 | rio4ruby | 2006-05-02 05:27:04 -0700 (Tue, 02 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/rio.gemspec
+   D /trunk/rio/rioinstall.rb
+   D /trunk/rio/test/1.rb
+   D /trunk/rio/test/once.rb
+
+cleanup
+------------------------------------------------------------------------
+r88 | rio4ruby | 2006-05-02 04:38:43 -0700 (Tue, 02 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   A /trunk/rio/lib/rio/no_warn.rb
+   M /trunk/rio/lib/rio.rb
+
+added code to supress some of the 'void context' warnings
+------------------------------------------------------------------------
+r87 | rio4ruby | 2006-05-01 20:57:00 -0700 (Mon, 01 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ftp/conn.rb
+   M /trunk/rio/lib/rio/ftp/ioh.rb
+   M /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+
+fixed some ftp problems
+------------------------------------------------------------------------
+r86 | rio4ruby | 2006-05-01 18:36:04 -0700 (Mon, 01 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/test/tc/csv2.rb
+
+Changed CSV to no longer extend arrays and strings
+------------------------------------------------------------------------
+r85 | rio4ruby | 2006-05-01 16:57:24 -0700 (Mon, 01 May 2006) | 1 line
+Changed paths:
+   A /trunk/rio/lib/rio/context/autoclose.rb (from /trunk/rio/lib/rio/context/closeoneof.rb:83)
+   D /trunk/rio/lib/rio/context/closeoneof.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/test/tc/gzip.rb
+   M /trunk/rio/test/tc/tempfile.rb
+
+tempfile work
+------------------------------------------------------------------------
+r84 | rio4ruby | 2006-05-01 13:59:27 -0700 (Mon, 01 May 2006) | 1 line
+Changed paths:
+   M /trunk/rio/lib/rio/cp.rb
+   A /trunk/rio/lib/rio/fs/stream.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/base.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/test/ftp/test.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/gzip.rb
+
+Fixed problem with strio not having an fs, added gzip tests
+------------------------------------------------------------------------
+r83 | rio4ruby | 2006-04-08 09:02:17 -0700 (Sat, 08 Apr 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/test/ftp/anon_misc.rb
+   M /trunk/rio/test/ftp/ftp2ftp.rb
+
+ftp tests
+
+------------------------------------------------------------------------
+r82 | rio4ruby | 2006-04-08 08:23:44 -0700 (Sat, 08 Apr 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/ex/tonl
+   M /trunk/rio/test/ftp/test.rb
+   M /trunk/rio/test/runftptests.rb
+   M /trunk/rio/test/runtests.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/tonl.rb
+
+ftp tests and tonl simplification
+
+------------------------------------------------------------------------
+r81 | rio4ruby | 2006-04-07 14:14:20 -0700 (Fri, 07 Apr 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/ftp/impl.rb
+
+added ftp/impl.rb
+
+------------------------------------------------------------------------
+r80 | rio4ruby | 2006-04-07 14:07:38 -0700 (Fri, 07 Apr 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/ftp/fs.rb
+
+added ftp/fs.rb
+
+------------------------------------------------------------------------
+r79 | rio4ruby | 2006-03-30 00:24:47 -0700 (Thu, 30 Mar 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/test/runhttptests.rb
+   A /trunk/rio/test/tc/copy-from-http.rb
+   M /trunk/rio/test/tc/copy-from.rb
+
+Moved http tests from general tests
+
+------------------------------------------------------------------------
+r78 | rio4ruby | 2006-03-26 03:55:45 -0700 (Sun, 26 Mar 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/test/bin
+   A /trunk/rio/test/bin/count_lines.rb
+   A /trunk/rio/test/bin/find_lines.rb
+   A /trunk/rio/test/bin/list_dir.rb
+
+added test/bin programs
+
+------------------------------------------------------------------------
+r77 | rio4ruby | 2006-03-26 03:54:17 -0700 (Sun, 26 Mar 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/test/tc/cmdpipe.rb
+   M /trunk/rio/test/tc/piper.rb
+   A /trunk/rio/test/tc/programs_util.rb
+
+added test/bin
+
+------------------------------------------------------------------------
+r76 | rio4ruby | 2006-03-20 18:20:35 -0700 (Mon, 20 Mar 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/ftp/conn.rb
+   M /trunk/rio/lib/rio/ftp.rb
+
+fixed bug 3303 regarding mtime for ftp rios
+
+------------------------------------------------------------------------
+r75 | rio4ruby | 2006-03-20 17:54:09 -0700 (Mon, 20 Mar 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/ftp/conn.rb
+   M /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/null.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/stderr.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/test/ftp/anon_misc.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/files_select.rb
+
+Now IOH is returned by RL schemes~
+
+------------------------------------------------------------------------
+r74 | rio4ruby | 2006-03-17 13:09:58 -0700 (Fri, 17 Mar 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/ftp/all.rb
+   A /trunk/rio/test/ftp/anon_misc.rb
+   A /trunk/rio/test/ftp/anon_read.rb
+   A /trunk/rio/test/ftp/anon_write.rb
+   D /trunk/rio/test/ftp/miscanon.rb
+   D /trunk/rio/test/ftp/readanon.rb
+   D /trunk/rio/test/ftp/writeanon.rb
+
+renamed ftp tests
+
+------------------------------------------------------------------------
+r73 | rio4ruby | 2006-03-16 14:28:47 -0700 (Thu, 16 Mar 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/rioinstall.rb
+
+rioinstall.rb added
+
+------------------------------------------------------------------------
+r72 | rio4ruby | 2006-03-16 14:27:37 -0700 (Thu, 16 Mar 2006) | 2 lines
+Changed paths:
+   D /trunk/rio/RUNME.1st.rb
+   A /trunk/rio/build_doc.rb
+   A /trunk/rio/lib/rio/callstr.rb
+   A /trunk/rio/lib/rio/const.rb
+   A /trunk/rio/lib/rio/def.rb
+   A /trunk/rio/lib/rio/fs/base.rb
+   A /trunk/rio/lib/rio/fs/impl.rb
+   A /trunk/rio/lib/rio/fs/url.rb
+   A /trunk/rio/lib/rio/nullio.rb
+   D /trunk/rio/lib/rio/record.rb
+   A /trunk/rio/lib/rio/to_rio/io.rb
+   A /trunk/rio/test/ftp
+   A /trunk/rio/test/ftp/all.rb
+   A /trunk/rio/test/ftp/ftp2ftp.rb
+   A /trunk/rio/test/ftp/initftpfiles.rb
+   A /trunk/rio/test/ftp/miscanon.rb
+   A /trunk/rio/test/ftp/readanon.rb
+   A /trunk/rio/test/ftp/test.rb
+   A /trunk/rio/test/ftp/writeanon.rb
+   A /trunk/rio/test/runalltests.rb
+   A /trunk/rio/test/runftptests.rb
+   A /trunk/rio/test/tc/emptyriodir.rb
+   A /trunk/rio/test/tc/entsel.rb
+
+ftp and misc
+
+------------------------------------------------------------------------
+r71 | rio4ruby | 2006-03-16 14:14:51 -0700 (Thu, 16 Mar 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/doc/generators/template/html/rio.rb
+   M /trunk/rio/ex/findruby
+   M /trunk/rio/ex/prompt.rb
+   M /trunk/rio/ex/riocat
+   M /trunk/rio/ex/rioprompt.rb
+   M /trunk/rio/lib/rio/abstract_method.rb
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/arrayio.rb
+   M /trunk/rio/lib/rio/arycopy.rb
+   M /trunk/rio/lib/rio/assert.rb
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context/closeoneof.rb
+   M /trunk/rio/lib/rio/context/copying.rb
+   M /trunk/rio/lib/rio/context/cxx.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context/gzip.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context/skip.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/MISC.rb
+   M /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/doc.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/exception/copy.rb
+   M /trunk/rio/lib/rio/exception/notsupported.rb
+   M /trunk/rio/lib/rio/exception/open.rb
+   M /trunk/rio/lib/rio/exception/state.rb
+   M /trunk/rio/lib/rio/exception.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext/zipfile.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/fs/native.rb
+   M /trunk/rio/lib/rio/ftp/conn.rb
+   M /trunk/rio/lib/rio/ftp/ioh.rb
+   M /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/handle.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/file.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/internal.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if/string.rb
+   M /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/impl/path.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/iomode.rb
+   M /trunk/rio/lib/rio/ios/fail.rb
+   M /trunk/rio/lib/rio/ios/generic.rb
+   M /trunk/rio/lib/rio/ios/mode.rb
+   M /trunk/rio/lib/rio/ios/null.rb
+   M /trunk/rio/lib/rio/iowrap.rb
+   M /trunk/rio/lib/rio/kernel.rb
+   M /trunk/rio/lib/rio/local.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/open3.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/piper/cp.rb
+   M /trunk/rio/lib/rio/piper.rb
+   M /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/aryio.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/fd.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/lib/rio/scheme/null.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/stderr.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/state/error.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/base.rb
+   M /trunk/rio/lib/rio/stream/duplex.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/lib/rio/symantics.rb
+   M /trunk/rio/lib/rio/to_rio/all.rb
+   M /trunk/rio/lib/rio/to_rio/array.rb
+   M /trunk/rio/lib/rio/to_rio/object.rb
+   M /trunk/rio/lib/rio/to_rio/string.rb
+   M /trunk/rio/lib/rio/to_rio.rb
+   M /trunk/rio/lib/rio/uri/file.rb
+   M /trunk/rio/lib/rio/util.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/misc/newheader
+   M /trunk/rio/misc/oldheader
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/rename.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+Many updates
+
+------------------------------------------------------------------------
+r70 | rio4ruby | 2006-01-04 19:51:17 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/ios/fail.rb
+   A /trunk/rio/lib/rio/ios/generic.rb
+   A /trunk/rio/lib/rio/ios/mode.rb
+
+added various missing files
+
+------------------------------------------------------------------------
+r69 | rio4ruby | 2006-01-04 19:48:31 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/exception/notsupported.rb
+
+exception/notsupported.rb added
+
+------------------------------------------------------------------------
+r68 | rio4ruby | 2006-01-04 19:44:47 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/ios
+   A /trunk/rio/lib/rio/ios/null.rb
+
+ios/null.rb added
+
+------------------------------------------------------------------------
+r67 | rio4ruby | 2006-01-04 19:38:11 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/iowrap.rb
+
+added iowrap.rb
+
+------------------------------------------------------------------------
+r66 | rio4ruby | 2006-01-04 19:35:42 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/ext/zipfile.rb
+
+added zipfile.rb
+
+------------------------------------------------------------------------
+r65 | rio4ruby | 2006-01-04 19:28:40 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   D /trunk/rio/ex/tolf
+   A /trunk/rio/ex/tonl
+   A /trunk/rio/lib/rio/fs
+   A /trunk/rio/lib/rio/fs/native.rb
+   A /trunk/rio/lib/rio/to_rio
+   A /trunk/rio/lib/rio/to_rio/all.rb
+   A /trunk/rio/lib/rio/to_rio/array.rb
+   A /trunk/rio/lib/rio/to_rio/object.rb
+   A /trunk/rio/lib/rio/to_rio/string.rb
+
+add more files
+
+------------------------------------------------------------------------
+r64 | rio4ruby | 2006-01-04 19:24:12 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/doc/OPTIONAL.rb
+   A /trunk/rio/lib/rio/scheme/null.rb
+   A /trunk/rio/test/tc/empty.rb
+   A /trunk/rio/test/tc/io_each_byte.rb
+   A /trunk/rio/test/tc/io_read.rb
+   A /trunk/rio/test/tc/iometh.rb
+   A /trunk/rio/test/tc/likeio.rb
+   A /trunk/rio/test/tc/null.rb
+   A /trunk/rio/test/tc/pid.rb
+   A /trunk/rio/test/tc/readline.rb
+
+add files
+
+------------------------------------------------------------------------
+r63 | rio4ruby | 2006-01-04 19:20:07 -0800 (Wed, 04 Jan 2006) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/ex/riocat
+   M /trunk/rio/ex/riogunzip
+   M /trunk/rio/ex/rioprompt.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_entry.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/kernel.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/ops/symlink.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/path.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/copy.rb
+   M /trunk/rio/test/tc/get.rb
+   M /trunk/rio/test/tc/getrec.rb
+   M /trunk/rio/test/tc/methods.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+Overdue update
+
+------------------------------------------------------------------------
+r62 | rio4ruby | 2005-11-25 20:06:39 -0800 (Fri, 25 Nov 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/RUNME.1st.rb
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/ftp.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   A /trunk/rio/lib/rio/util.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/rio.gemspec
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/cd1.rb
+   M /trunk/rio/test/tc/clearsel.rb
+   M /trunk/rio/test/tc/copy-from.rb
+   M /trunk/rio/test/tc/copy-to.rb
+   M /trunk/rio/test/tc/copyarray.rb
+   M /trunk/rio/test/tc/copydir.rb
+   M /trunk/rio/test/tc/copydirlines.rb
+   M /trunk/rio/test/tc/copynonex.rb
+   M /trunk/rio/test/tc/csv.rb
+   M /trunk/rio/test/tc/dir.rb
+   M /trunk/rio/test/tc/dir_iter.rb
+   M /trunk/rio/test/tc/dirautoclose.rb
+   M /trunk/rio/test/tc/dirent.rb
+   M /trunk/rio/test/tc/dirss.rb
+   M /trunk/rio/test/tc/each.rb
+   M /trunk/rio/test/tc/each_break.rb
+   M /trunk/rio/test/tc/edf.rb
+   M /trunk/rio/test/tc/entary.rb
+   M /trunk/rio/test/tc/expand_path.rb
+   M /trunk/rio/test/tc/ext.rb
+   M /trunk/rio/test/tc/fileno.rb
+   M /trunk/rio/test/tc/lineno.rb
+   M /trunk/rio/test/tc/methods.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/nolines.rb
+   M /trunk/rio/test/tc/noqae.rb
+   M /trunk/rio/test/tc/pa.rb
+   M /trunk/rio/test/tc/pathop.rb
+   M /trunk/rio/test/tc/paths.rb
+   M /trunk/rio/test/tc/qae.rb
+   M /trunk/rio/test/tc/qae_riovar.rb
+   M /trunk/rio/test/tc/records.rb
+   M /trunk/rio/test/tc/rename.rb
+   M /trunk/rio/test/tc/rename_assign.rb
+   M /trunk/rio/test/tc/riorl.rb
+   M /trunk/rio/test/tc/selnosel.rb
+   M /trunk/rio/test/tc/sub.rb
+   M /trunk/rio/test/tc/symlink.rb
+   M /trunk/rio/test/tc/symlink0.rb
+   M /trunk/rio/test/tc/symlink1.rb
+   M /trunk/rio/test/tc/temp.rb
+   M /trunk/rio/test/tc/tempdir.rb
+   M /trunk/rio/test/tc/tempfile.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+prepare for release
+
+------------------------------------------------------------------------
+r61 | rio4ruby | 2005-11-23 22:18:56 -0800 (Wed, 23 Nov 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/ex/targz2zip
+   A /trunk/rio/lib/rio/piper
+   A /trunk/rio/lib/rio/piper/cp.rb
+   A /trunk/rio/test/tc/base.rb
+   A /trunk/rio/test/tc/cmdpipe.rb
+   A /trunk/rio/test/tc/dir_iter.rb
+   A /trunk/rio/test/tc/get.rb
+   A /trunk/rio/test/tc/piper.rb
+   A /trunk/rio/test/tc/route.rb
+   A /trunk/rio/test/tc/split.rb
+
+Tests for 0.3.6
+
+------------------------------------------------------------------------
+r60 | rio4ruby | 2005-11-23 22:14:47 -0800 (Wed, 23 Nov 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/RUNME.1st.rb
+   M /trunk/rio/Rakefile
+   M /trunk/rio/doc/ANNOUNCE
+   D /trunk/rio/doc/README_MSWIN32.txt
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/ex/findinruby
+   M /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/ops/stream/write.rb
+   M /trunk/rio/lib/rio/ops/stream.rb
+   M /trunk/rio/lib/rio/path/reset.rb
+   M /trunk/rio/lib/rio/path.rb
+   A /trunk/rio/lib/rio/piper.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   A /trunk/rio/lib/rio/rl/pathmethods.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   A /trunk/rio/lib/rio/scheme/cmdpipe.rb
+   M /trunk/rio/lib/rio/scheme/ftp.rb
+   M /trunk/rio/lib/rio/scheme/http.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/duplex.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   A /trunk/rio/rio.gemspec
+   A /trunk/rio/test/gem_runtests.rb
+   D /trunk/rio/test/mswin32.rb
+   M /trunk/rio/test/runtests.rb
+   D /trunk/rio/test/runtests_gem.rb
+   M /trunk/rio/test/tc/abs.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/copydir.rb
+   M /trunk/rio/test/tc/create.rb
+   M /trunk/rio/test/tc/each_break.rb
+   M /trunk/rio/test/tc/expand_path.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/noqae.rb
+   M /trunk/rio/test/tc/overload.rb
+   M /trunk/rio/test/tc/riorl.rb
+   M /trunk/rio/test/tc/skip.rb
+   M /trunk/rio/test/tc/temp.rb
+   M /trunk/rio/test/tc/testcase.rb
+   M /trunk/rio/test/tc/yaml.rb
+
+Catch Up
+
+------------------------------------------------------------------------
+r59 | rio4ruby | 2005-09-12 22:18:07 -0700 (Mon, 12 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/if/yaml.rb
+
+yaml documentation
+
+------------------------------------------------------------------------
+r58 | rio4ruby | 2005-09-12 21:50:22 -0700 (Mon, 12 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/state.rb
+
+yaml and yaml documentation
+
+------------------------------------------------------------------------
+r57 | rio4ruby | 2005-09-10 21:01:13 -0700 (Sat, 10 Sep 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/context/copying.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   A /trunk/rio/lib/rio/ext/yaml.rb
+   M /trunk/rio/lib/rio/ext.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/filter/gzip.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   A /trunk/rio/lib/rio/if/yaml.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/ioh.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/file.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/output.rb
+   M /trunk/rio/lib/rio/rectype.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/csv.rb
+   M /trunk/rio/test/tc/csv2.rb
+   M /trunk/rio/test/tc/csv_columns.rb
+   A /trunk/rio/test/tc/yaml.rb
+
+yaml support
+
+------------------------------------------------------------------------
+r56 | rio4ruby | 2005-09-06 16:50:10 -0700 (Tue, 06 Sep 2005) | 2 lines
+Changed paths:
+   D /trunk/rio/lib/rio/if/methods.rb
+
+Removed dead code
+
+------------------------------------------------------------------------
+r55 | rio4ruby | 2005-09-06 16:48:54 -0700 (Tue, 06 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/test/tc/temp.rb
+   M /trunk/rio/test/tc/tempdir.rb
+
+Prepare for Release
+
+------------------------------------------------------------------------
+r54 | rio4ruby | 2005-09-06 15:32:42 -0700 (Tue, 06 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/Rakefile
+
+Rakefile modified
+
+------------------------------------------------------------------------
+r53 | rio4ruby | 2005-09-06 15:27:32 -0700 (Tue, 06 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/base.rb
+   A /trunk/rio/lib/rio/construct.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/grande_stream.rb
+   M /trunk/rio/lib/rio/if/methods.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if/test.rb
+   M /trunk/rio/lib/rio/impl/path.rb
+   A /trunk/rio/lib/rio/ops/construct.rb
+   M /trunk/rio/lib/rio/ops/create.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/skip.rb
+   A /trunk/rio/test/tc/skiplines.rb
+
+skip() tests and new constructor methods
+
+------------------------------------------------------------------------
+r52 | rio4ruby | 2005-09-05 13:32:17 -0700 (Mon, 05 Sep 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/lib/rio/context/skip.rb
+   D /trunk/rio/lib/rio/cxdir.rb
+   A /trunk/rio/lib/rio/if/grande_entry.rb
+   A /trunk/rio/lib/rio/if/grande_stream.rb
+   A /trunk/rio/test/tc/copysymlink.rb
+   A /trunk/rio/test/tc/selnosel.rb
+   A /trunk/rio/test/tc/skip.rb
+
+skip
+
+------------------------------------------------------------------------
+r51 | rio4ruby | 2005-09-05 13:26:27 -0700 (Mon, 05 Sep 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context/stream.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/MISC.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/entrysel.rb
+   M /trunk/rio/lib/rio/file.rb
+   M /trunk/rio/lib/rio/filter/closeoneof.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/methods.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/if/stream.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/match.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/either.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/ops/stream/read.rb
+   M /trunk/rio/lib/rio/rl/builder.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/misc/addsrcheaders.rb
+   M /trunk/rio/misc/mktoc.rb
+   M /trunk/rio/test/mswin32.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/copy-from.rb
+   M /trunk/rio/test/tc/copy-to.rb
+   M /trunk/rio/test/tc/copydir.rb
+   M /trunk/rio/test/tc/csv.rb
+   M /trunk/rio/test/tc/csv2.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/nolines.rb
+   M /trunk/rio/test/tc/noqae.rb
+   M /trunk/rio/test/tc/overload.rb
+   M /trunk/rio/test/tc/riorl.rb
+   M /trunk/rio/test/tc/symlink.rb
+   M /trunk/rio/test/tc/symlink0.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+many changes
+
+------------------------------------------------------------------------
+r50 | rio4ruby | 2005-08-26 12:59:22 -0700 (Fri, 26 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/test/runtests_gem.rb
+
+Documented rubygems installation
+
+------------------------------------------------------------------------
+r49 | rio4ruby | 2005-08-26 12:04:54 -0700 (Fri, 26 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/ex/colx.rb
+   M /trunk/rio/ex/passwd_report.rb
+   M /trunk/rio/ex/riocat
+   M /trunk/rio/ex/riogunzip
+   M /trunk/rio/ex/riogzip
+   A /trunk/rio/ex/rioprompt.rb
+   M /trunk/rio/lib/rio/arycopy.rb
+   D /trunk/rio/lib/rio/context/chomp.rb
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/cp.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   D /trunk/rio/lib/rio/filter/chomp.rb
+   A /trunk/rio/lib/rio/filter.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   A /trunk/rio/lib/rio/prompt.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/copy.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/overload.rb
+
+Documentation, removed copy, added (copy|append)_(to|from), changed + and =~ to use to_str
+
+------------------------------------------------------------------------
+r48 | rio4ruby | 2005-08-19 16:59:55 -0700 (Fri, 19 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   A /trunk/rio/ex/passwd_report.rb
+   M /trunk/rio/lib/rio/version.rb
+
+Prepare for release
+
+------------------------------------------------------------------------
+r47 | rio4ruby | 2005-08-19 15:56:59 -0700 (Fri, 19 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/ex/colx.rb
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/base.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/ext/csv.rb
+   M /trunk/rio/lib/rio/factory.rb
+   A /trunk/rio/lib/rio/if/csv.rb
+   M /trunk/rio/lib/rio/if/dir.rb
+   M /trunk/rio/lib/rio/if/fileordir.rb
+   M /trunk/rio/lib/rio/if/grande.rb
+   M /trunk/rio/lib/rio/if/internal.rb
+   M /trunk/rio/lib/rio/if/methods.rb
+   A /trunk/rio/lib/rio/if/string.rb
+   A /trunk/rio/lib/rio/if/temp.rb
+   M /trunk/rio/lib/rio/if.rb
+   M /trunk/rio/lib/rio/scheme/temp.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/copy-from.rb
+   A /trunk/rio/test/tc/csv2.rb
+   A /trunk/rio/test/tc/csv_columns.rb
+   A /trunk/rio/test/tc/csvutil.rb
+   M /trunk/rio/test/tc/ext.rb
+   M /trunk/rio/test/tc/methods.rb
+   M /trunk/rio/test/tc/tempfile.rb
+
+CSV support and documentation for same
+
+------------------------------------------------------------------------
+r46 | rio4ruby | 2005-08-16 10:57:52 -0700 (Tue, 16 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+
+ANNOUNCE & RELEASE_NOTES
+
+------------------------------------------------------------------------
+r45 | rio4ruby | 2005-08-16 10:53:15 -0700 (Tue, 16 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/doc/RELEASE_NOTES
+   M /trunk/rio/lib/rio/state.rb
+
+ANNOUNCE and RELEASE_NOTES
+
+------------------------------------------------------------------------
+r44 | rio4ruby | 2005-08-15 14:55:07 -0700 (Mon, 15 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/constructor.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+
+Tempfile and Tempdir documentation
+
+------------------------------------------------------------------------
+r43 | rio4ruby | 2005-08-15 14:40:22 -0700 (Mon, 15 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/ex/findinruby
+   M /trunk/rio/ex/findruby
+   M /trunk/rio/lib/rio/argv.rb
+   M /trunk/rio/lib/rio/context/dir.rb
+   M /trunk/rio/lib/rio/context.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/grande.rb
+   M /trunk/rio/lib/rio/matchrecord.rb
+   M /trunk/rio/lib/rio/ops/dir.rb
+   M /trunk/rio/lib/rio/ops/stream/input.rb
+   M /trunk/rio/lib/rio/rl/base.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   A /trunk/rio/lib/rio/scheme/temp.rb
+   D /trunk/rio/lib/rio/scheme/tempdir.rb
+   D /trunk/rio/lib/rio/scheme/tempfile.rb
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/lib/rio.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/copylines.rb
+   M /trunk/rio/test/tc/riorl.rb
+   A /trunk/rio/test/tc/temp.rb
+   A /trunk/rio/test/tc/tempdir.rb
+
+Added tempdirs and changed tempfiles
+
+------------------------------------------------------------------------
+r42 | rio4ruby | 2005-08-11 10:46:36 -0700 (Thu, 11 Aug 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/doc/ANNOUNCE
+   M /trunk/rio/lib/rio/dir.rb
+   M /trunk/rio/lib/rio/factory.rb
+   A /trunk/rio/lib/rio/scheme/tempdir.rb
+   A /trunk/rio/lib/rio/tempdir.rb
+   M /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/riorl.rb
+   A /trunk/rio/test/tc/tempfile.rb
+
+tempdir support
+
+------------------------------------------------------------------------
+r41 | rio4ruby | 2005-08-10 18:31:43 -0700 (Wed, 10 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/factory.rb
+   M /trunk/rio/lib/rio/scheme/path.rb
+   M /trunk/rio/lib/rio/scheme/tempfile.rb
+   M /trunk/rio/lib/rio/state.rb
+   M /trunk/rio/lib/rio/stream.rb
+   M /trunk/rio/test/tc/all.rb
+
+Fix in tempfile
+
+------------------------------------------------------------------------
+r40 | rio4ruby | 2005-08-08 09:54:49 -0700 (Mon, 08 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/context/methods.rb
+   M /trunk/rio/lib/rio/doc/HOWTO.rb
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/stream/open.rb
+
+Changed noclose to noautoclose, and documentation
+
+------------------------------------------------------------------------
+r39 | rio4ruby | 2005-08-07 16:20:21 -0700 (Sun, 07 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/lib/rio/doc/INTRO.rb
+
+Documentation
+
+------------------------------------------------------------------------
+r38 | rio4ruby | 2005-08-07 14:48:23 -0700 (Sun, 07 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   M /trunk/rio/lib/rio/if/basic.rb
+   M /trunk/rio/lib/rio/if/path.rb
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/ioi.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   M /trunk/rio/lib/rio/rl/uri.rb
+   M /trunk/rio/lib/rio/scheme/cmdio.rb
+   M /trunk/rio/lib/rio/scheme/stdio.rb
+   M /trunk/rio/lib/rio/scheme/strio.rb
+   M /trunk/rio/lib/rio/scheme/sysio.rb
+   M /trunk/rio/lib/rio/scheme/tcp.rb
+   M /trunk/rio/lib/rio/scheme/tempfile.rb
+
+reworked the way base paths are handled
+
+------------------------------------------------------------------------
+r37 | rio4ruby | 2005-08-06 09:14:29 -0700 (Sat, 06 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/README
+   M /trunk/rio/doc/RELEASE_NOTES
+
+Changed references to buildrdoc to RUNME.1st
+
+------------------------------------------------------------------------
+r36 | rio4ruby | 2005-08-06 08:52:49 -0700 (Sat, 06 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/version.rb
+   M /trunk/rio/test/runtests.rb
+   A /trunk/rio/test/runtests_gem.rb
+   M /trunk/rio/test/tc/abs.rb
+   M /trunk/rio/test/tc/all.rb
+   M /trunk/rio/test/tc/cd1.rb
+   M /trunk/rio/test/tc/clearsel.rb
+   M /trunk/rio/test/tc/closeoncopy.rb
+   M /trunk/rio/test/tc/closeoneof.rb
+   M /trunk/rio/test/tc/copy-from.rb
+   M /trunk/rio/test/tc/copy-to.rb
+   M /trunk/rio/test/tc/copy.rb
+   M /trunk/rio/test/tc/copyarray.rb
+   M /trunk/rio/test/tc/copydest.rb
+   M /trunk/rio/test/tc/copydir.rb
+   M /trunk/rio/test/tc/copydirlines.rb
+   M /trunk/rio/test/tc/copylines.rb
+   M /trunk/rio/test/tc/copynonex.rb
+   M /trunk/rio/test/tc/create.rb
+   M /trunk/rio/test/tc/csv.rb
+   M /trunk/rio/test/tc/dir.rb
+   M /trunk/rio/test/tc/dirautoclose.rb
+   M /trunk/rio/test/tc/dirent.rb
+   M /trunk/rio/test/tc/dirss.rb
+   M /trunk/rio/test/tc/each.rb
+   M /trunk/rio/test/tc/each_break.rb
+   M /trunk/rio/test/tc/edf.rb
+   M /trunk/rio/test/tc/entary.rb
+   M /trunk/rio/test/tc/eq.rb
+   M /trunk/rio/test/tc/expand_path.rb
+   M /trunk/rio/test/tc/ext.rb
+   M /trunk/rio/test/tc/fileno.rb
+   M /trunk/rio/test/tc/getrec.rb
+   M /trunk/rio/test/tc/lineno.rb
+   M /trunk/rio/test/tc/lines.rb
+   M /trunk/rio/test/tc/methods.rb
+   M /trunk/rio/test/tc/misc.rb
+   M /trunk/rio/test/tc/nolines.rb
+   M /trunk/rio/test/tc/noqae.rb
+   M /trunk/rio/test/tc/once.rb
+   M /trunk/rio/test/tc/overload.rb
+   M /trunk/rio/test/tc/pa.rb
+   M /trunk/rio/test/tc/pathop.rb
+   M /trunk/rio/test/tc/paths.rb
+   M /trunk/rio/test/tc/qae.rb
+   M /trunk/rio/test/tc/qae_riovar.rb
+   M /trunk/rio/test/tc/records.rb
+   M /trunk/rio/test/tc/rename.rb
+   M /trunk/rio/test/tc/rename_assign.rb
+   M /trunk/rio/test/tc/sub.rb
+   M /trunk/rio/test/tc/symlink.rb
+   M /trunk/rio/test/tc/symlink0.rb
+   M /trunk/rio/test/tc/symlink1.rb
+   M /trunk/rio/test/tc/testcase.rb
+
+Changed test cases to run alone
+
+------------------------------------------------------------------------
+r35 | rio4ruby | 2005-08-05 09:19:23 -0700 (Fri, 05 Aug 2005) | 2 lines
+Changed paths:
+   D /trunk/rio/README_MSWIN32.txt
+   D /trunk/rio/RELEASE_NOTES
+   A /trunk/rio/doc/README_MSWIN32.txt
+   A /trunk/rio/doc/RELEASE_NOTES
+
+Moved some files
+
+------------------------------------------------------------------------
+r34 | rio4ruby | 2005-08-05 09:09:49 -0700 (Fri, 05 Aug 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/README_MSWIN32.txt
+   M /trunk/rio/Rakefile
+   M /trunk/rio/lib/rio/ops/path.rb
+   M /trunk/rio/lib/rio/rl/path.rb
+   A /trunk/rio/test/mswin32.rb
+
+Partial crippled support for mswin32 paths
+
+------------------------------------------------------------------------
+r33 | rio4ruby | 2005-08-04 19:17:06 -0700 (Thu, 04 Aug 2005) | 2 lines
+Changed paths:
+   M /trunk/rio/Rakefile
+
+Minor change to Rakefile
+
+------------------------------------------------------------------------
+r32 | rio4ruby | 2005-08-01 16:10:08 -0700 (Mon, 01 Aug 2005) | 2 lines
+Changed paths:
+   A /trunk/rio/RELEASE_NOTES
+
+Added RELEASE_NOTES
+
+------------------------------------------------------------------------
+r27 | rio4ruby | 2005-08-01 14:57:59 -0700 (Mon, 01 Aug 2005) | 2 lines
+Changed paths:
+   A /trunk/rio
+   A /trunk/rio/COPYING
+   A /trunk/rio/README
+   A /trunk/rio/RUNME.1st.rb
+   A /trunk/rio/Rakefile
+   A /trunk/rio/doc
+   A /trunk/rio/doc/generators
+   A /trunk/rio/doc/generators/template
+   A /trunk/rio/doc/generators/template/html
+   A /trunk/rio/doc/generators/template/html/rio.rb
+   A /trunk/rio/doc/rfc1738.txt
+   A /trunk/rio/doc/rfc959.txt
+   A /trunk/rio/ex
+   A /trunk/rio/ex/colx.rb
+   A /trunk/rio/ex/findinruby
+   A /trunk/rio/ex/findruby
+   A /trunk/rio/ex/prompt.rb
+   A /trunk/rio/ex/rgb.txt.gz
+   A /trunk/rio/ex/riocat
+   A /trunk/rio/ex/riogunzip
+   A /trunk/rio/ex/riogzip
+   A /trunk/rio/ex/tolf
+   A /trunk/rio/lib
+   A /trunk/rio/lib/rio
+   A /trunk/rio/lib/rio/abstract_method.rb
+   A /trunk/rio/lib/rio/argv.rb
+   A /trunk/rio/lib/rio/arrayio.rb
+   A /trunk/rio/lib/rio/arycopy.rb
+   A /trunk/rio/lib/rio/assert.rb
+   A /trunk/rio/lib/rio/base.rb
+   A /trunk/rio/lib/rio/constructor.rb
+   A /trunk/rio/lib/rio/context
+   A /trunk/rio/lib/rio/context/chomp.rb
+   A /trunk/rio/lib/rio/context/closeoneof.rb
+   A /trunk/rio/lib/rio/context/cxx.rb
+   A /trunk/rio/lib/rio/context/dir.rb
+   A /trunk/rio/lib/rio/context/gzip.rb
+   A /trunk/rio/lib/rio/context/methods.rb
+   A /trunk/rio/lib/rio/context/stream.rb
+   A /trunk/rio/lib/rio/context.rb
+   A /trunk/rio/lib/rio/cp.rb
+   A /trunk/rio/lib/rio/cxdir.rb
+   A /trunk/rio/lib/rio/dir.rb
+   A /trunk/rio/lib/rio/doc
+   A /trunk/rio/lib/rio/doc/HOWTO.rb
+   A /trunk/rio/lib/rio/doc/INTRO.rb
+   A /trunk/rio/lib/rio/doc/MISC.rb
+   A /trunk/rio/lib/rio/doc/SYNOPSIS.rb
+   A /trunk/rio/lib/rio/doc.rb
+   A /trunk/rio/lib/rio/entrysel.rb
+   A /trunk/rio/lib/rio/exception
+   A /trunk/rio/lib/rio/exception/copy.rb
+   A /trunk/rio/lib/rio/exception/open.rb
+   A /trunk/rio/lib/rio/exception/state.rb
+   A /trunk/rio/lib/rio/exception.rb
+   A /trunk/rio/lib/rio/ext
+   A /trunk/rio/lib/rio/ext/csv.rb
+   A /trunk/rio/lib/rio/ext.rb
+   A /trunk/rio/lib/rio/factory.rb
+   A /trunk/rio/lib/rio/file.rb
+   A /trunk/rio/lib/rio/filter
+   A /trunk/rio/lib/rio/filter/chomp.rb
+   A /trunk/rio/lib/rio/filter/closeoneof.rb
+   A /trunk/rio/lib/rio/filter/gzip.rb
+   A /trunk/rio/lib/rio/ftp
+   A /trunk/rio/lib/rio/ftp/conn.rb
+   A /trunk/rio/lib/rio/ftp/ioh.rb
+   A /trunk/rio/lib/rio/ftp.rb
+   A /trunk/rio/lib/rio/grande.rb
+   A /trunk/rio/lib/rio/handle.rb
+   A /trunk/rio/lib/rio/if
+   A /trunk/rio/lib/rio/if/basic.rb
+   A /trunk/rio/lib/rio/if/dir.rb
+   A /trunk/rio/lib/rio/if/file.rb
+   A /trunk/rio/lib/rio/if/fileordir.rb
+   A /trunk/rio/lib/rio/if/grande.rb
+   A /trunk/rio/lib/rio/if/internal.rb
+   A /trunk/rio/lib/rio/if/methods.rb
+   A /trunk/rio/lib/rio/if/path.rb
+   A /trunk/rio/lib/rio/if/stream.rb
+   A /trunk/rio/lib/rio/if/test.rb
+   A /trunk/rio/lib/rio/if.rb
+   A /trunk/rio/lib/rio/impl
+   A /trunk/rio/lib/rio/impl/path.rb
+   A /trunk/rio/lib/rio/ioh.rb
+   A /trunk/rio/lib/rio/iomode.rb
+   A /trunk/rio/lib/rio/kernel.rb
+   A /trunk/rio/lib/rio/local.rb
+   A /trunk/rio/lib/rio/match.rb
+   A /trunk/rio/lib/rio/matchrecord.rb
+   A /trunk/rio/lib/rio/open3.rb
+   A /trunk/rio/lib/rio/ops
+   A /trunk/rio/lib/rio/ops/create.rb
+   A /trunk/rio/lib/rio/ops/dir.rb
+   A /trunk/rio/lib/rio/ops/either.rb
+   A /trunk/rio/lib/rio/ops/file.rb
+   A /trunk/rio/lib/rio/ops/path.rb
+   A /trunk/rio/lib/rio/ops/stream
+   A /trunk/rio/lib/rio/ops/stream/input.rb
+   A /trunk/rio/lib/rio/ops/stream/output.rb
+   A /trunk/rio/lib/rio/ops/stream/read.rb
+   A /trunk/rio/lib/rio/ops/stream/write.rb
+   A /trunk/rio/lib/rio/ops/stream.rb
+   A /trunk/rio/lib/rio/ops/symlink.rb
+   A /trunk/rio/lib/rio/path
+   A /trunk/rio/lib/rio/path/reset.rb
+   A /trunk/rio/lib/rio/path.rb
+   A /trunk/rio/lib/rio/record.rb
+   A /trunk/rio/lib/rio/rectype.rb
+   A /trunk/rio/lib/rio/rl
+   A /trunk/rio/lib/rio/rl/base.rb
+   A /trunk/rio/lib/rio/rl/builder.rb
+   A /trunk/rio/lib/rio/rl/ioi.rb
+   A /trunk/rio/lib/rio/rl/path.rb
+   A /trunk/rio/lib/rio/rl/uri.rb
+   A /trunk/rio/lib/rio/scheme
+   A /trunk/rio/lib/rio/scheme/aryio.rb
+   A /trunk/rio/lib/rio/scheme/cmdio.rb
+   A /trunk/rio/lib/rio/scheme/fd.rb
+   A /trunk/rio/lib/rio/scheme/ftp.rb
+   A /trunk/rio/lib/rio/scheme/http.rb
+   A /trunk/rio/lib/rio/scheme/path.rb
+   A /trunk/rio/lib/rio/scheme/stderr.rb
+   A /trunk/rio/lib/rio/scheme/stdio.rb
+   A /trunk/rio/lib/rio/scheme/strio.rb
+   A /trunk/rio/lib/rio/scheme/sysio.rb
+   A /trunk/rio/lib/rio/scheme/tcp.rb
+   A /trunk/rio/lib/rio/scheme/tempfile.rb
+   A /trunk/rio/lib/rio/state
+   A /trunk/rio/lib/rio/state/error.rb
+   A /trunk/rio/lib/rio/state.rb
+   A /trunk/rio/lib/rio/stream
+   A /trunk/rio/lib/rio/stream/base.rb
+   A /trunk/rio/lib/rio/stream/duplex.rb
+   A /trunk/rio/lib/rio/stream/open.rb
+   A /trunk/rio/lib/rio/stream.rb
+   A /trunk/rio/lib/rio/symantics.rb
+   A /trunk/rio/lib/rio/to_rio.rb
+   A /trunk/rio/lib/rio/uri
+   A /trunk/rio/lib/rio/uri/file.rb
+   A /trunk/rio/lib/rio/version.rb
+   A /trunk/rio/lib/rio.rb
+   A /trunk/rio/misc
+   A /trunk/rio/misc/addsrcheaders.rb
+   A /trunk/rio/misc/changeheader.rb
+   A /trunk/rio/misc/filegpl.txt
+   A /trunk/rio/misc/geninfo.txt
+   A /trunk/rio/misc/mktoc.rb
+   A /trunk/rio/misc/newheader
+   A /trunk/rio/misc/oldheader
+   A /trunk/rio/setup.rb
+   A /trunk/rio/test
+   A /trunk/rio/test/1.rb
+   A /trunk/rio/test/once.rb
+   A /trunk/rio/test/runtests.rb
+   A /trunk/rio/test/tc
+   A /trunk/rio/test/tc/abs.rb
+   A /trunk/rio/test/tc/all.rb
+   A /trunk/rio/test/tc/cd1.rb
+   A /trunk/rio/test/tc/clearsel.rb
+   A /trunk/rio/test/tc/closeoncopy.rb
+   A /trunk/rio/test/tc/closeoneof.rb
+   A /trunk/rio/test/tc/copy-from.rb
+   A /trunk/rio/test/tc/copy-to.rb
+   A /trunk/rio/test/tc/copy.rb
+   A /trunk/rio/test/tc/copyarray.rb
+   A /trunk/rio/test/tc/copydest.rb
+   A /trunk/rio/test/tc/copydir.rb
+   A /trunk/rio/test/tc/copydirlines.rb
+   A /trunk/rio/test/tc/copylines.rb
+   A /trunk/rio/test/tc/copynonex.rb
+   A /trunk/rio/test/tc/create.rb
+   A /trunk/rio/test/tc/csv.rb
+   A /trunk/rio/test/tc/dir.rb
+   A /trunk/rio/test/tc/dirautoclose.rb
+   A /trunk/rio/test/tc/dirent.rb
+   A /trunk/rio/test/tc/dirss.rb
+   A /trunk/rio/test/tc/each.rb
+   A /trunk/rio/test/tc/each_break.rb
+   A /trunk/rio/test/tc/edf.rb
+   A /trunk/rio/test/tc/entary.rb
+   A /trunk/rio/test/tc/eq.rb
+   A /trunk/rio/test/tc/expand_path.rb
+   A /trunk/rio/test/tc/ext.rb
+   A /trunk/rio/test/tc/fileno.rb
+   A /trunk/rio/test/tc/getrec.rb
+   A /trunk/rio/test/tc/lineno.rb
+   A /trunk/rio/test/tc/lines.rb
+   A /trunk/rio/test/tc/methods.rb
+   A /trunk/rio/test/tc/misc.rb
+   A /trunk/rio/test/tc/nolines.rb
+   A /trunk/rio/test/tc/noqae.rb
+   A /trunk/rio/test/tc/once.rb
+   A /trunk/rio/test/tc/overload.rb
+   A /trunk/rio/test/tc/pa.rb
+   A /trunk/rio/test/tc/pathop.rb
+   A /trunk/rio/test/tc/paths.rb
+   A /trunk/rio/test/tc/qae.rb
+   A /trunk/rio/test/tc/qae_riovar.rb
+   A /trunk/rio/test/tc/records.rb
+   A /trunk/rio/test/tc/rename.rb
+   A /trunk/rio/test/tc/rename_assign.rb
+   A /trunk/rio/test/tc/sub.rb
+   A /trunk/rio/test/tc/symlink.rb
+   A /trunk/rio/test/tc/symlink0.rb
+   A /trunk/rio/test/tc/symlink1.rb
+   A /trunk/rio/test/tc/testcase.rb
+
+Initial revision
+
+------------------------------------------------------------------------
