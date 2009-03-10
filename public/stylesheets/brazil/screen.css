@@ -2,8 +2,11 @@ body {
   font-family: "Myriad Pro", "Lucida Grande", Helvetica, Tahoma, Arial, Sans-serif;
 }
 
-.box {
+.box, fieldset {
   position: relative;
+
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.496094);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.496094)
 }
 
 a:hover {
@@ -27,7 +30,6 @@ a:hover {
   border:1px solid #ccc;
   text-decoration:none;
   -moz-border-radius: 4px;
-  -khtml-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
@@ -84,7 +86,6 @@ a:hover {
   border:1px solid #C6D880;
   background:#E6EFC2;color:#264409;
   -moz-border-radius: 4px;
-  -khtml-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   text-decoration:none;
@@ -115,14 +116,13 @@ fieldset > a.form_close {
   padding:5px;
 
   -moz-border-radius: 10px;
-  -khtml-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 
   font-size: 100%;
 
-  -webkit-box-shadow: rgba(0, 0, 0, 0.496094) 2px 2px 2px;
-  box-shadow: rgba(0, 0, 0, 0.496094) 2px 2px 2px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.496094);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.496094);
 }
 
 #brazil-release {

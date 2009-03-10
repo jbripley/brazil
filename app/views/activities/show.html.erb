@@ -6,7 +6,7 @@
 <%= render :partial => "shared/activity", :locals => {:activity => @activity} %>
 <div id="changes" class="span-13 border">
   <% unless @activity.changes.empty? %>
-    <%= render :partial => "changes/change", :collection => @activity.changes %>
+    <%= render :partial => "changes/change", :collection => @activity.changes.all %>
   <% else %>
     &nbsp;
   <% end %>
