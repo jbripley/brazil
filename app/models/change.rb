@@ -15,12 +15,7 @@ class Change < ActiveRecord::Base
   def use_sql(sql, db_username, db_password)
     case state
     when STATE_EXECUTED
-      begin
-        db_instance_dev.execute_sql(sql, db_username, db_password, activity.schema)
-      rescue Brazil::DBException => exception
-        errors.add(:sql, "not executed: #{exception.to_s}")
-        return false
-      end
+      db_instance_dev.execute_sql(sql, db_username, db_password, activity.schema)
     when STATE_SAVED
       unless db_instance_dev.check_db_credentials(db_username, db_password, activity.schema)
         errors.add_to_base("You don't have the Database credentials to save this change")
@@ -31,6 +26,9 @@ class Change < ActiveRecord::Base
     end
 
     return true
+  rescue Brazil::DBException => exception
+    errors.add(:sql, "not executed: #{exception.to_s}")
+    return false
   end
 
   def to_s

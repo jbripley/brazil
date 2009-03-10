@@ -5,8 +5,8 @@ body {
 .box, fieldset, table {
   position: relative;
 
-  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.496094);
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.496094)
+  -webkit-box-shadow: 0.2em 0.2em 0.6em rgba(0, 0, 0, 0.3);
+  box-shadow: 0.2em 0.2em 0.6em rgba(0, 0, 0, 0.3);
 }
 
 a:hover {
@@ -121,8 +121,8 @@ fieldset > a.form_close {
 
   font-size: 100%;
 
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.496094);
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.496094);
+  -webkit-box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.4);
+  box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.4);
 }
 
 #brazil-release {
@@ -191,5 +191,5 @@ div.fieldWithErrors input, div.fieldWithErrors textarea {
 pre {
   overflow: auto;
 	overflow-Y: hidden; /*--Hides vertical scroll created by IE--*/
-  background: #DDD;
+  background: #EEE;
 }

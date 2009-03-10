@@ -147,6 +147,10 @@ class Version < ActiveRecord::Base
   end
 
   def init_vc(vc_password, vc_username)
+    if activity.app.vc_path.blank?
+      raise Brazil::VersionControlException, "the application must have an Version Control Path set"
+    end
+
     version_repos_path = "#{::AppConfig.vc_uri}/#{activity.app.vc_path}"
     vc = Brazil::VersionControl.new(::AppConfig.vc_type, version_repos_path, vc_username, vc_password)
     unless vc.valid_credentials?
