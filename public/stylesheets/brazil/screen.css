@@ -2,7 +2,7 @@ body {
   font-family: "Myriad Pro", "Lucida Grande", Helvetica, Tahoma, Arial, Sans-serif;
 }
 
-.box, fieldset {
+.box, fieldset, table {
   position: relative;
 
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.496094);
