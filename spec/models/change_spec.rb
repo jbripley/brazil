@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Change do 
+describe Change do
   before(:each) do
     @valid_attributes = {
         :id => 125,
@@ -8,7 +8,7 @@ describe Change do
         :state => Change::STATE_EXECUTED,
         :dba => "dba1@example.com",
         :developer => "developer1@example.com",
-        :activity_id => 124    
+        :activity_id => 124
     }
 
     db_instance = mock_model(DbInstance)
@@ -22,54 +22,43 @@ describe Change do
 
     DbInstance.stub!(:find_all_by_id).and_return(mock_db_instances)
 
+    @activity = mock_model(Activity)
+    @activity.stub!(:development?).and_return(true)
+
     @change = Change.new(@valid_attributes)
+    @change.stub!(:activity).and_return(@activity)
   end
 
   describe "when saving an change" do
     it "should be a valid version instance given valid attributes" do
-      activity = mock_model(Activity)   
-      activity.should_receive(:development?).and_return(false)
-      @change.stub!(:activity).and_return(activity)
+      time_now = Time.now
+      Time.stub!(:now).and_return(time_now)
+      @activity.should_receive(:update_attribute).with(:updated_at, time_now)
 
       @change.should be_valid
+      @change.save.should be_true
     end
 
     it "should belong to an activity in the wrong state" do
-      activity = mock_model(Activity)
-      activity.should_receive(:development?).and_return(false)
-      @change.stub!(:activity).and_return(activity)
+      @activity.stub!(:development?).and_return(false)
 
       errors = mock(ActiveRecord::Errors, :null_object => true)
       errors.should_receive(:add_to_base)
       @change.stub!(:errors).and_return(errors)
+      @change.save.should be_false
     end
 
-    it "should mark the activity it belongs to as updated" do
-      activity = mock_model(Activity)
-      activity.stub!(:valid?).and_return(true)
-      activity.should_receive(:development?).and_return(false)
-      @change.stub!(:activity).and_return(activity)
-    end
+    it "should not be a valid email when not a suggested change" do
+      time_now = Time.now
+      Time.stub!(:now).and_return(time_now)
+      @activity.should_receive(:update_attribute).with(:updated_at, time_now)
 
-    it "should check an invalid email" do
-      activity = mock_model(Activity)
-      activity.stub!(:valid?).and_return(true)
-      activity.should_receive(:development?).and_return(false)
-      @change.stub!(:activity).and_return(activity)
-
-      @change.valid_email?('_dcew32432ew-_)+_(_)**!').should be_false
-    end
-
-    it "should not be a valid email when not a suggested change" do   
       @change.stub!(:dba).and_return('_dcew32432ew-_)+_(_)**!')
 
       errors = mock(ActiveRecord::Errors, :null_object => true)
       errors.should_receive(:add)
       @change.stub!(:errors).and_return(errors)
-    end
-
-    after(:each) do
-      @change.save
+      @change.save.should be_true
     end
   end
 
@@ -147,10 +136,6 @@ describe Change do
     end
 
     it "should be in an unknown change state" do
-      activity = mock_model(Activity)
-      activity.should_receive(:development?).and_return(false)
-      @change.stub!(:activity).and_return(activity)
-
       @change.stub!(:state).and_return('UNKNOWN')
 
       lambda { @change.use_sql(@sql, @db_username, @db_password) }.should raise_error(Brazil::UnknowStateException)
@@ -175,12 +160,12 @@ describe Change do
       activity.should_receive(:db_instances).and_return([])
       @change.stub!(:activity).and_return(activity)
 
-      lambda { @change.send(:db_instance_dev) }.should raise_error(Brazil::NoDBInstanceException)   
+      lambda { @change.send(:db_instance_dev) }.should raise_error(Brazil::NoDBInstanceException)
     end
 
     after(:each) do
 
     end
   end
-  
+
 end

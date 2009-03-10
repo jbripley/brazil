@@ -10,7 +10,7 @@ describe ChangeSuggestionsController do
 
     @activities = mock(Array)
     @activities.stub!(:find).and_return(@activity)
-    @app.stub!(:activities).and_return(@activities)    
+    @app.stub!(:activities).and_return(@activities)
   end
 
   describe "handling GET /change_suggetions/new" do
@@ -59,13 +59,17 @@ describe ChangeSuggestionsController do
   describe "handling POST /change_suggestions" do
 
     before(:each) do
+#      @activity = Activity.find(params[:activity_id])
+#      @change = @activity.changes.build(params[:change])
+#      @change.state = Change::STATE_SUGGESTED
+
       @change = mock_model(Change, :to_param => "1")
-      @change.stub!(:sql).and_return('')
+#      @change.stub!(:sql).and_return('')
       @change.should_receive(:state=).with(Change::STATE_SUGGESTED)
 
       @changes = mock(Array)
       @changes.stub!(:build).and_return(@change)
-      
+
       @activity.stub!(:changes).and_return(@changes)
 
       Activity.stub!(:find).with("2").and_return(@activity)
@@ -82,7 +86,7 @@ describe ChangeSuggestionsController do
       end
 
       it "should create a new change" do
-        @changes.stub!(:build).should_receive(:build).with({}).and_return(@change)
+        @changes.should_receive(:build).with({}).and_return(@change)
         do_post
       end
 
