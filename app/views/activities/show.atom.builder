@@ -2,7 +2,7 @@ atom_feed do |feed|
   feed.title "Brazil: #{@activity}"
   feed.icon '/favicon.ico'
   feed.updated @activity.updated_at
-  for change in @activity.changes
+  @activity.changes.all.each do |change|
     feed.entry(change, :url=> app_activity_change_path(@activity.app, @activity, change)) do |entry|
       entry.title "[#{change.state}] #{truncate_words change.sql, 12}"
       entry.content :type => 'xhtml' do |xhtml|

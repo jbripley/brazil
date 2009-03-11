@@ -188,10 +188,8 @@ class VersionsController < ApplicationController
       return
     end
 
-    @version.destroy
-
     respond_to do |format|
-      if @version.errors.empty?
+      if @version.destroy
         format.html do
           flash[:notice] = "Version '#{@version}' successfully deleted"
           if @activity.versions.count == 0

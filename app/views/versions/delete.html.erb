@@ -28,6 +28,7 @@
   </div>
 
   <% form_for(@version, :url => app_activity_version_path(@activity.app, @activity, @version), :html => {:method => :delete}) do |f| %>
+    <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <%= f.submit 'Delete Version' %>
     <%= f.submit 'Cancel', :id => 'version_delete_cancel', :name => 'version_delete_cancel' %>
   <% end %>

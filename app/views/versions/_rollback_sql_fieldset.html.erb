@@ -1,6 +1,6 @@
 <fieldset>
   <legend>Rollback SQL - Execute on <%=h version.db_instance_test %></legend>
-  <pre class="brush:sql"><%= create_rollback_sql(version) %></pre>
+  <pre class="brush:sql"><%=h create_rollback_sql(version) %></pre>
 
   <% form_for(version, :url => rollback_app_activity_version_path(activity.app, activity, version)) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>

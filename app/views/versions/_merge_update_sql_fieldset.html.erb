@@ -1,6 +1,6 @@
 <fieldset>
   <legend>Update SQL - Merge to dev</legend>
-  <pre class="brush: sql"><%= create_update_sql(version) %></pre>
+  <pre class="brush: sql"><%=h create_update_sql(version) %></pre>
 
   <% form_for(version, :url => merge_app_activity_version_path(version.activity.app, version.activity, version)) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>

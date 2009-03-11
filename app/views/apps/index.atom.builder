@@ -5,7 +5,7 @@ atom_feed do |feed|
     author.name 'Brazil'
   end
   feed.updated @apps.last.updated_at
-  for app in @apps
+  @apps.each do |app|
     feed.entry(app) do |entry|
       entry.title app
       entry.content :type => 'xhtml' do |xhtml|

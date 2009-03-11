@@ -1,5 +1,5 @@
 <fieldset id="edit_app_fieldset">
-  <legend>Editing App <%= @app %></legend>
+  <legend>Editing App <%=h @app %></legend>
   <% form_for(@app, :url => app_path(@app)) do |f| %>
     <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
     <%= render :partial => 'form', :locals => {:f => f} %>

@@ -1,8 +1,8 @@
 atom_feed do |feed|
   feed.title "Brazil: Versions for #{@version.activity}"
   feed.icon '/favicon.ico'
-  feed.updated @version.updated_at
-  for version in @versions
+  feed.updated @version.activity.updated_at
+  @versions.each do |version|
     feed.entry(version, :url=> app_activity_version_path(version.activity.app, version.activity, version)) do |entry|
       entry.title "[#{version.state}] #{version}"
       entry.content :type => 'xhtml' do |xhtml|
@@ -32,7 +32,7 @@ atom_feed do |feed|
           p.text! version.schema_version
         end
 
-        for db_instance in version.db_instances
+        version.db_instances.each do |db_instance|
           xhtml.p do |p|
             p.b "#{db_instance.db_env.capitalize} Database"
             p.text! db_instance.to_s
@@ -40,7 +40,7 @@ atom_feed do |feed|
         end
       end # entry.content
 
-      for change in @version.activity.changes
+      version.activity.changes.each do |change|
         entry.author do |author|
           author.email change.dba
           author.name email_to_realname(change.dba)

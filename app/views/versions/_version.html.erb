@@ -14,7 +14,7 @@
 
     <div class="info span-4">
       <% version.db_instances.each do |db_instance| %>
-      <span class="db"><strong><%=h db_instance.db_env.capitalize %> Database</strong> <%=h db_instance %></span>
+      <span class="db"><strong><%=h db_instance.db_env.capitalize %> DB</strong> <%=h db_instance %></span>
       <% end %>
       <span><strong>Schema</strong> <%=h version.schema %></span>
     </div>

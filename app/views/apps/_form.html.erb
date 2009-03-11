@@ -5,5 +5,5 @@
 </p>
 <p>
   <%= f.label :vc_path, 'Version Control Path (ex. /app_name/trunk/db)' %><br />
-  <span><%= vc_uri %></span> <%= f.text_field :vc_path, :class => 'span-5' %>
+  <span><%=h vc_uri %></span> <%= f.text_field :vc_path, :class => 'span-5' %>
 </p>

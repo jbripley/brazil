@@ -180,7 +180,7 @@ class Version < ActiveRecord::Base
 
   def check_version_destroy_state
     unless created?
-      errors.add(:state, "You can only delete version in state '#{Version::STATE_CREATED}'. This version is in state '#{state}'")
+      errors.add_to_base("You can only delete versions in state '#{Version::STATE_CREATED}', this version is in state '#{state}'.")
       false
     end
   end
