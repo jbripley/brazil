@@ -2,11 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/activities/show.html.erb" do
   include ActivitiesHelper
-  
+
   before(:each) do
     @app = mock_model(App)
     assigns[:app] = @app
-    
+
     @activity = mock_model(Activity)
     @activity.stub!(:name).and_return("Activity 1 Development")
     @activity.stub!(:description).and_return("MyString")
@@ -22,7 +22,7 @@ describe "/activities/show.html.erb" do
     @activity.stub!(:db_instances).and_return([db_instance_dev])
 
     @activity.should_receive(:app).at_least(:once).and_return(@app)
-    
+
     @change = mock_model(Change)
     @change.stub!(:id).and_return(nil)
     @change.stub!(:new_record?).and_return(true)
@@ -30,15 +30,16 @@ describe "/activities/show.html.erb" do
     @change.stub!(:dba).and_return('')
     @change.stub!(:developer).and_return('')
     @change.stub!(:activity).and_return(@activity)
-    
+
     errors = mock(Hash)
     errors.stub!(:count).and_return(0)
     @change.stub!(:errors).and_return(errors)
 
     changes = mock(Array)
+    changes.should_receive(:all).and_return(changes)
     changes.should_receive(:empty?).and_return(true)
     @activity.stub!(:changes).and_return(changes)
-    
+
     assigns[:change] = @change
     assigns[:activity] = @activity
   end
