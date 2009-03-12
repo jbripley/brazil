@@ -3,7 +3,7 @@ class AppsController < ApplicationController
   # GET /apps.xml
   # GET /apps.atom
   def index
-    @apps = App.all
+    @apps = App.all(:order => 'name ASC')
     @app = App.new
 
     respond_to do |format|

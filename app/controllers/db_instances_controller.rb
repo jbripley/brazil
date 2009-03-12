@@ -2,7 +2,7 @@ class DbInstancesController < ApplicationController
   # GET /db_instances
   # GET /db_instances.xml
   def index
-    @db_instances = DbInstance.find(:all)
+    @db_instances = DbInstance.all(:order => 'db_env ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,7 +61,7 @@ class DbInstancesController < ApplicationController
 
     respond_to do |format|
       if @db_instance.update_attributes(params[:db_instance])
-        flash[:notice] = 'Datanase instance was successfully updated.'
+        flash[:notice] = 'Database instance was successfully updated.'
         format.html { redirect_to db_instances_path }
         format.xml  { head :ok }
       else

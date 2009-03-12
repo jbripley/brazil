@@ -3,6 +3,7 @@ require 'brazil/schema_revision'
 class DbInstance < ActiveRecord::Base
   ENV_DEV = 'dev'
   ENV_TEST = 'test'
+  ENV_PROD = 'prod'
 
   TYPE_MYSQL = 'MySQL'
   TYPE_ODBC = 'ODBC'
@@ -15,7 +16,7 @@ class DbInstance < ActiveRecord::Base
   named_scope :env_dev, :conditions => {:db_env => ENV_DEV}
 
   def self.db_environments
-    [ENV_DEV, ENV_TEST]
+    [ENV_DEV, ENV_TEST, ENV_PROD]
   end
 
   def self.db_types
@@ -83,13 +84,14 @@ class DbInstance < ActiveRecord::Base
     db_connection = nil
     begin
       db_connection = db_connection(username, password, schema)
-      return true
     rescue DBI::DatabaseError => exception
       logger.warn("DB Credentials were not correct, #{username}@#{schema}")
       return false
     ensure
       db_connection.disconnect if db_connection
     end
+
+    return true
   end
 
   private
