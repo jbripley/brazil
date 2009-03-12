@@ -1,6 +1,8 @@
 # Brazil
 Brazil is a tool to track schema changes to database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported databases (currently MySQL, Oracle and PostgreSQL).
 
+New features or bugs can be reported to the Brazil's [issue tracker](http://jbripley.lighthouseapp.com/projects/26712-brazil/overview) in Lighthouse.
+
 # Install
 To setup Brazil you need to follow these steps:
 
@@ -10,7 +12,7 @@ To setup Brazil you need to follow these steps:
 4. Setup version control configuration in config/config.yml, by following the Version Control section.
 
 ## Requirements
-Brazil requires Ruby on Rails 2.2.2, Ruby DBI and Subversion binding for Ruby. Ruby DBI DBD drivers and their dependencies are required for any deploy database you want to use.
+Brazil requires Ruby on Rails 2.2.2, Ruby DBI, RIO and Subversion binding for Ruby. Ruby DBI DBD drivers and their dependencies are required for any deploy database you want to use.
 
 Module sqlite3-ruby is required to use the default database configuration.
 
