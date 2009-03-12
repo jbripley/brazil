@@ -6,7 +6,7 @@
       <th>Port</th>
       <th>Environment</th>
       <th>Type</th>
-      <th colspan="3">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -17,9 +17,13 @@
     <td><%=h db_instance.port %></td>
     <td><%=h db_instance.db_env %></td>
     <td><%=h db_instance.db_type %></td>
-    <td><%= link_to 'Show', db_instance %></td>
-    <td><%= link_to 'Edit', edit_db_instance_path(db_instance) %></td>
-    <td><%= link_to 'Delete', db_instance, {:confirm => 'Are you sure?', :method => :delete} %></td>
+    <td>
+      <ul class="actions">
+        <li class="destroy"><%= link_to 'Delete', delete_db_instance_path(db_instance) %></li>
+        <li><%= link_to 'Show', db_instance_path(db_instance) %></li>
+        <li><%= link_to 'Edit', edit_db_instance_path(db_instance) %></li>
+      </ul>
+    </td>
   </tr>
 <% end %>
   <tr>

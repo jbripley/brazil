@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :db_instances
+  map.resources :db_instances, :member => {:delete => :get}
 
   map.resources :apps, :except => [:destroy] do |apps|
     apps.resources :activities, :except => [:destroy] do |activities|

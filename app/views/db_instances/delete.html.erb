@@ -1,0 +1,32 @@
+<fieldset>
+  <legend>Delete Database Instance</legend>
+
+  <h3>Are you sure you want to delete this Database Instance?</h3>
+  <hr class="space" />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Alias</th>
+        <th>Host</th>
+        <th>Port</th>
+        <th>Environment</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+
+    <tr class="db_instance <%=h @db_instance.db_env %>">
+      <td><%=h @db_instance.db_alias %></td>
+      <td><%=h @db_instance.host %></td>
+      <td><%=h @db_instance.port %></td>
+      <td><%=h @db_instance.db_env %></td>
+      <td><%=h @db_instance.db_type %></td>
+    </tr>
+  </table>
+
+  <% form_for(@db_instance, :url => db_instance_path(@db_instance), :html => {:method => :delete}) do |f| %>
+    <%= render :partial => 'shared/form_error', :locals => {:f => f} %>
+    <%= f.submit 'Delete Database Instance' %>
+    <%= f.submit 'Cancel', :id => 'db_instance_delete_cancel', :name => 'db_instance_delete_cancel' %>
+  <% end %>
+</fieldset>

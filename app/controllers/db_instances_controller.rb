@@ -2,7 +2,7 @@ class DbInstancesController < ApplicationController
   # GET /db_instances
   # GET /db_instances.xml
   def index
-    @db_instances = DbInstance.all(:order => 'db_env ASC')
+    @db_instances = DbInstance.all(:order => 'db_env, db_alias ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -71,15 +71,32 @@ class DbInstancesController < ApplicationController
     end
   end
 
+  # GET /db_instances/1/delete
+  def delete
+    @db_instance = DbInstance.find(params[:id])
+  end
+
   # DELETE /db_instances/1
   # DELETE /db_instances/1.xml
   def destroy
     @db_instance = DbInstance.find(params[:id])
-    @db_instance.destroy
+
+    if params[:db_instance_delete_cancel]
+      redirect_to db_instances_path
+      return
+    end
 
     respond_to do |format|
-      format.html { redirect_to(db_instances_url) }
-      format.xml  { head :ok }
+      if @db_instance.destroy
+        format.html do
+          flash[:notice] = "Database Instance '#{@db_instance}' successfully deleted"
+          redirect_to db_instances_path
+        end
+        format.xml  { head :ok }
+      else
+        format.html { render :action => 'delete' }
+        format.xml  { render :xml => @db_instance.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
