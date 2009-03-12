@@ -1,0 +1,29 @@
+<table>
+  <thead>
+  <tr>
+    <th>Alias</th>
+    <th>Host</th>
+    <th>Port</th>
+    <th>Environment</th>
+    <th>Type</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <% db_instances.each do |db_instance| %>
+    <tr class="db_instance <%= h db_instance.db_env %> <%= cycle 'odd', 'even' %>">
+      <td><%= h db_instance.db_alias %></td>
+      <td><%= h db_instance.host %></td>
+      <td><%= h db_instance.port %></td>
+      <td><%= h db_instance.db_env %></td>
+      <td><%= h db_instance.db_type %></td>
+      <td>
+        <ul class="actions">
+          <li class="destroy"><%= link_to 'Delete', delete_db_instance_path(db_instance) %></li>
+          <li><%= link_to 'Show', db_instance_path(db_instance) %></li>
+          <li><%= link_to 'Edit', edit_db_instance_path(db_instance) %></li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>

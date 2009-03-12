@@ -32,3 +32,10 @@ test_2:
   db_env: test
   db_type: MySQL
 
+prod_1:
+  id: 6
+  db_alias: 'Production 2'
+  host: prod1.db.example.com
+  port: 3409
+  db_env: prod
+  db_type: MySQL

@@ -23,7 +23,7 @@ describe DbInstancesController do
     end
 
     it "should find all db_instances" do
-      DbInstance.should_receive(:all).with(:order => 'db_env ASC').and_return([@db_instance])
+      DbInstance.should_receive(:all).with(:order => 'db_env, db_alias').and_return([@db_instance])
       do_get
     end
 

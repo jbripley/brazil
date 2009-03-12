@@ -1,36 +1,11 @@
-<table>
-  <thead>
-    <tr>
-      <th>Alias</th>
-      <th>Host</th>
-      <th>Port</th>
-      <th>Environment</th>
-      <th>Type</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+<ul class="actions">
+  <li><%= link_to 'New database instance', new_db_instance_path %></li>
+</ul>
 
-<% @db_instances.each do |db_instance| %>
-  <tr class="db_instance <%=h db_instance.db_env %> <%= cycle 'odd', 'even' %>">
-    <td><%=h db_instance.db_alias %></td>
-    <td><%=h db_instance.host %></td>
-    <td><%=h db_instance.port %></td>
-    <td><%=h db_instance.db_env %></td>
-    <td><%=h db_instance.db_type %></td>
-    <td>
-      <ul class="actions">
-        <li class="destroy"><%= link_to 'Delete', delete_db_instance_path(db_instance) %></li>
-        <li><%= link_to 'Show', db_instance_path(db_instance) %></li>
-        <li><%= link_to 'Edit', edit_db_instance_path(db_instance) %></li>
-      </ul>
-    </td>
-  </tr>
+<h2>Database Instances - Development & Test</h2>
+<%= render :partial => 'table', :locals => {:db_instances => @db_instances} %>
+
+<% unless @db_instances_prod.empty? %>
+  <h2>Database Instances - Production</h2>
+  <%= render :partial => 'table', :locals => {:db_instances => @db_instances_prod} %>
 <% end %>
-  <tr>
-    <td colspan="8">
-      <ul class="actions">
-        <li><%= link_to 'New database instance', new_db_instance_path %></li>
-      </ul>
-    </td>
-  </tr>
-</table>

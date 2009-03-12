@@ -2,7 +2,8 @@ class DbInstancesController < ApplicationController
   # GET /db_instances
   # GET /db_instances.xml
   def index
-    @db_instances = DbInstance.all(:order => 'db_env, db_alias ASC')
+    @db_instances = DbInstance.all(:order => 'db_env, db_alias', :conditions => {:db_env => [DbInstance::ENV_DEV, DbInstance::ENV_TEST]})
+    @db_instances_prod = DbInstance.all(:order => 'db_env, db_alias', :conditions => {:db_env => DbInstance::ENV_PROD})
 
     respond_to do |format|
       format.html # index.html.erb
