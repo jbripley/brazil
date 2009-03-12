@@ -1,7 +1,7 @@
 # Brazil
 Brazil is a tool to track schema changes to database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported databases (currently MySQL, Oracle and PostgreSQL).
 
-New features or bugs can be reported to the Brazil's [issue tracker](http://jbripley.lighthouseapp.com/projects/26712-brazil/overview) in Lighthouse.
+New features or bugs can be reported to Brazil's [issue tracker](http://jbripley.lighthouseapp.com/projects/26712-brazil/overview) in Lighthouse.
 
 # Install
 To setup Brazil you need to follow these steps:
