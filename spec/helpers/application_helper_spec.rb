@@ -67,7 +67,7 @@ describe ApplicationHelper do
 
       params = {:id => 1}
       helper.stub!(:params).and_return(params)
-      helper.should_receive(:formatted_apps_path).with({:format=>"atom", :id => params[:id]})
+      helper.should_receive(:apps_path).with({:format=>"atom", :id => params[:id]})
 
       helper.atom_feed_tag
     end
@@ -79,7 +79,7 @@ describe ApplicationHelper do
 
       params = {:app_id => 1}
       helper.stub!(:params).and_return(params)
-      helper.should_receive(:formatted_app_activities_path).with({:format=>"atom", :app_id => params[:app_id]})
+      helper.should_receive(:app_activities_path).with({:format=>"atom", :app_id => params[:app_id]})
 
       helper.atom_feed_tag
     end
@@ -91,7 +91,7 @@ describe ApplicationHelper do
 
       params = {:app_id => 1, :id => 2}
       helper.stub!(:params).and_return(params)
-      helper.should_receive(:formatted_app_activity_path).with({:format=>"atom", :app_id => params[:app_id], :id => params[:id]})
+      helper.should_receive(:app_activity_path).with({:format=>"atom", :app_id => params[:app_id], :id => params[:id]})
 
       helper.atom_feed_tag
     end
@@ -103,7 +103,7 @@ describe ApplicationHelper do
 
       params = {:id => 2}
       helper.stub!(:params).and_return(params)
-      helper.should_receive(:formatted_app_activity_versions_path).with({:format=>"atom", :id => params[:id]})
+      helper.should_receive(:app_activity_versions_path).with({:format=>"atom", :id => params[:id]})
 
       helper.atom_feed_tag
     end

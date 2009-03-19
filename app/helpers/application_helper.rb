@@ -10,7 +10,7 @@ module ApplicationHelper
     end
     title
   end
-  
+
   def activity_link_to(activity)
     case activity.state
     when Activity::STATE_DEVELOPMENT
@@ -24,24 +24,24 @@ module ApplicationHelper
       link_to activity, app_activities_path(activity.app)
     end
   end
-  
+
   def brazil_release
     "#{AppConfig.release_version} (#{AppConfig.release_name})"
   end
-  
+
   def atom_feed_tag
     case "#{controller.controller_name}-#{controller.action_name}"
     when 'apps-index'
-      auto_discovery_link_tag :atom, formatted_apps_path(:id => params[:id], :format => 'atom'), {:title => "Apps"}    
+      auto_discovery_link_tag :atom, apps_path(:id => params[:id], :format => 'atom'), {:title => "Apps"}
     when 'activities-index'
-      auto_discovery_link_tag :atom, formatted_app_activities_path(:app_id => params[:app_id], :format => 'atom'), {:title => "Activities"}
+      auto_discovery_link_tag :atom, app_activities_path(:app_id => params[:app_id], :format => 'atom'), {:title => "Activities"}
     when 'activities-show'
-      auto_discovery_link_tag :atom, formatted_app_activity_path(:app_id => params[:app_id], :id => params[:id], :format => 'atom'), {:title => "Activity Changes"}
+      auto_discovery_link_tag :atom, app_activity_path(:app_id => params[:app_id], :id => params[:id], :format => 'atom'), {:title => "Activity Changes"}
     when 'versions-index'
-      auto_discovery_link_tag :atom, formatted_app_activity_versions_path(:id => params[:id], :format => 'atom'), {:title => "Activity Versions"}
-    end    
+      auto_discovery_link_tag :atom, app_activity_versions_path(:id => params[:id], :format => 'atom'), {:title => "Activity Versions"}
+    end
   end
-  
+
   def truncate_words(text, length = 30, end_string = '…')
     words = text.split
     words[0...length].join(' ') + (words.length > length ? end_string : '')
