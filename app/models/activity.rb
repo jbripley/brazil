@@ -13,6 +13,8 @@ class Activity < ActiveRecord::Base
   validates_associated :db_instances
   validates_presence_of :name, :schema
 
+  # FIXME: Add before_save check state
+
   named_scope :latest, lambda { |limit| {:order => 'updated_at DESC', :limit => limit} }
 
   def development!
