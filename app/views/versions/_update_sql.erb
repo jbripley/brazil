@@ -5,7 +5,7 @@
 <%= version.update_sql.strip %>
 -- End version update
 <% if version.create_schema_version %>
-CREATE TABLE schema_versions (
+CREATE TABLE <%= version.schema %>.schema_versions (
 major int NOT NULL,
 minor int NOT NULL,
 patch int NOT NULL,
@@ -14,4 +14,4 @@ description varchar(255),
 PRIMARY KEY (major, minor, patch)
 ) /*! ENGINE = innodb DEFAULT CHARSET = utf8 */;
 <% end %>
-INSERT INTO schema_versions(major, minor, patch, created, description) VALUES(<%= sql_escape(version.schema_revision.major) %>, <%= sql_escape(version.schema_revision.minor) %>, <%= sql_escape(version.schema_revision.patch) %>, <%= Time.now.to_i %>, <%= sql_escape(version.activity.description) %>);
+INSERT INTO <%= version.schema %>.schema_versions(major, minor, patch, created, description) VALUES(<%= sql_escape(version.schema_revision.major) %>, <%= sql_escape(version.schema_revision.minor) %>, <%= sql_escape(version.schema_revision.patch) %>, <%= Time.now.to_i %>, <%= sql_escape(version.activity.description) %>);
