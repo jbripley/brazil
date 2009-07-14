@@ -69,7 +69,7 @@ class DbInstance < ActiveRecord::Base
       db_connection = db_connection(username, password, schema)
       latest_version_row = db_connection.select_one("SELECT * FROM #{schema}.schema_versions ORDER BY major, minor, patch DESC")
       if latest_version_row
-        schema_version = Brazil::SchemaRevision.new(latest_version_row['major'], latest_version_row['minor'], latest_version_row['patch']).next.to_s
+        schema_version = Brazil::SchemaRevision.new(latest_version_row['MAJOR'], latest_version_row['MINOR'], latest_version_row['PATCH']).next.to_s
       end
     rescue DBI::DatabaseError => exception
       # No schema_versions table found, return no schema version
