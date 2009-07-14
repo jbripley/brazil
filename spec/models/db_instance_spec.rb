@@ -85,9 +85,9 @@ describe DbInstance do
 
     it "should find a schema version" do
       latest_version_row = mock(DBI::Row)
-      latest_version_row.stub!(:[]).with('major').and_return('3')
-      latest_version_row.stub!(:[]).with('minor').and_return('14')
-      latest_version_row.stub!(:[]).with('patch').and_return('2')
+      latest_version_row.stub!(:[]).with('MAJOR').and_return('3')
+      latest_version_row.stub!(:[]).with('MINOR').and_return('14')
+      latest_version_row.stub!(:[]).with('PATCH').and_return('2')
 
       @dbi_handle.stub!(:select_one).with("SELECT * FROM #{@schema}.schema_versions ORDER BY major, minor, patch DESC").and_return(latest_version_row)
       setup_handle(@dbi_handle)
