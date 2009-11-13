@@ -67,7 +67,7 @@ class DbInstance < ActiveRecord::Base
 
     begin
       db_connection = db_connection(username, password, schema)
-      latest_version_row = db_connection.select_one("SELECT * FROM #{schema}.schema_versions ORDER BY major, minor, patch DESC")
+      latest_version_row = db_connection.select_one("SELECT MAJOR,MINOR,PATCH FROM #{schema}.schema_versions ORDER BY major DESC, minor DESC, patch DESC")
       if latest_version_row
         schema_version = Brazil::SchemaRevision.new(latest_version_row['MAJOR'], latest_version_row['MINOR'], latest_version_row['PATCH']).next.to_s
       end

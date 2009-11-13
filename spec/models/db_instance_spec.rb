@@ -89,7 +89,7 @@ describe DbInstance do
       latest_version_row.stub!(:[]).with('MINOR').and_return('14')
       latest_version_row.stub!(:[]).with('PATCH').and_return('2')
 
-      @dbi_handle.stub!(:select_one).with("SELECT * FROM #{@schema}.schema_versions ORDER BY major, minor, patch DESC").and_return(latest_version_row)
+      @dbi_handle.stub!(:select_one).with("SELECT MAJOR,MINOR,PATCH FROM #{schema}.schema_versions ORDER BY major DESC, minor DESC, patch DESC").and_return(latest_version_row)
       setup_handle(@dbi_handle)
 
       @db_instance.find_next_schema_version(@username, @password, @schema).should eql('3_14_3')
