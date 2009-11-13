@@ -1,7 +1,7 @@
 # Brazil
 Brazil is a tool to track schema changes to database instances. It is implemented in Ruby on Rails and support deployment of changes to Ruby DBI supported databases (currently MySQL, Oracle and PostgreSQL).
 
-New features or bugs can be reported to Brazil's [issue tracker](http://jbripley.lighthouseapp.com/projects/26712-brazil/overview) in Lighthouse.
+New features or bugs can be reported to Brazil's [issue tracker](http://github.com/jbripley/brazil/issues) on github.
 
 # Install
 To setup Brazil you need to follow these steps:
@@ -39,7 +39,7 @@ You can setup a example database with some example Database Instances, Apps, Act
 # Version Control
 Brazil enables you to check in the generated update and rollback SQL for each Version you make. There are three configuration values in config/config.yml that need to be setup for this to work:
 
-1. vc_type needs to be set to your version control of choice, currently only Subversion (svn) is supported.
+1. vc_type needs to be set to your version control of choice, currently only Subversion is supported, with the value set to `svn`.
 2. vc_uri needs to be set your version control repository root. In the case of subversion, something like http://example.com/svn.
 3. vc_dir needs to be a, writable by brazil, directory that is used to checkout working copies.
 
@@ -51,14 +51,20 @@ Brazil allows for Changes to be tracked in each App by a named Activity. Changes
 The collected Changes to an Activity can then be turned into Versions and deployed to one or several test database instance / schema pairs. A Version can be marked as deployed when it's been confirmed to have been deployed to the production system.
 
 ## Example: App FooBar
-You have an application called `FooBar` which is in the subversion module `http://example.com/svn/foobar/trunk`, that you want to do some database schema changes to.As a first step you create an application named `FooBar`, with the `Version Control Path` set to `/foobar/trunk`.
+You have an application called `FooBar` which is in the subversion module `http://example.com/svn/foobar/trunk`, that you want to do some database schema changes to.
 
-Your database changes for `FooBar` are connected to a `Change Request` numbered 4711 and are related to the schema `baz`. So you create a new activity in `FooBar` called `CR4711`, which uses `Development Database` Dev1 and will update the `baz` database schema.
+First you need change your config.yml to contain the config value `vc_uri` set to `http://example.com/svn`. Any changes to this file requires that you restart brazil to take effect.
 
-You then start to enter the SQL updates for the change request as changes in the `CR4711` activity. When you've entered all your changes, you create a version of all those changes, to deploy to your test database and later on, you production database.
+In brazil, create an application named `FooBar`, with the `Version Control Path` set to `/foobar/trunk`.
+
+Since your database changes for `FooBar` are connected to a `Change Request` numbered 4711 and related to the database schema `baz`, you create a new Activity in `FooBar` called `CR4711`, which uses a `Development Database` and will update the `baz` database schema.
+
+You can then start to enter the SQL updates, by creating new Changes in the `CR4711` Activity. Each Change should (preferably) contain one database (SQL) statement each.
+
+When you've entered all your Changes into an Activity, you must create a version of that Activity, to be able to deploy them to your test database and later on, you production database.
 
 # Third Party
-Brazil uses the following third party libraries:
+Brazil includes the following third party libraries:
 
 * Blueprint CSS
 * jQuery, jQuery UI, jQuery Scroll Follow, jQuery Form
@@ -66,7 +72,6 @@ Brazil uses the following third party libraries:
 * Crummy
 * Footnotes
 * Twotiny Icon Set
-* resource_controller
 
 # Contributors
 The following people have made contributions to Brazil. Please let me know if I've missed anyone.
@@ -74,6 +79,7 @@ The following people have made contributions to Brazil. Please let me know if I'
 * Conny Dahlgren
 * Mattias Hising
 * Christer Utterberg
+* Urban Edlund
 
 # License
-Copyright (c) 2008 Joakim Bodin, MIT License.
+Copyright (c) 2008, 2009 Joakim Bodin, MIT License.
